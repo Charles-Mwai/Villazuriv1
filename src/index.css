@@ -1,0 +1,86 @@
+:root {
+  /* Color Palette */
+  --color-primary: #0A2342;
+  /* Deep Ocean Blue */
+  --color-secondary: #FFFFFF;
+  /* Crisp White */
+  --color-accent: #D4AF37;
+  /* Gold/Sand */
+  --color-text-dark: #1A1A1A;
+  --color-text-light: #F9F9F9;
+  --color-bg-light: #F5F5F5;
+
+  /* Typography */
+  --font-heading: 'Playfair Display', serif;
+  --font-body: 'Inter', sans-serif;
+
+  /* Spacing */
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 32px;
+  --spacing-xl: 64px;
+
+  /* Transitions */
+  --transition-fast: 0.3s ease;
+  --transition-slow: 0.8s ease-in-out;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--color-text-dark);
+  background-color: var(--color-bg-light);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading);
+  font-weight: 400;
+  /* Luxury often uses lighter weights for headings */
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: opacity var(--transition-fast);
+}
+
+ul {
+  list-style: none;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* Utilities */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-md);
+}
+
+.luxury-text {
+  font-family: var(--font-heading);
+  letter-spacing: 0.05em;
+}
+
+.section-padding {
+  padding: var(--spacing-xl) 0;
+}
