@@ -1,93 +1,90 @@
+/* Navbar.css - Mobile First Design */
+
 .navbar {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     z-index: 1000;
-    transition: all var(--transition-fast);
-    padding: var(--spacing-lg) 0;
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    padding: 20px 0;
     color: #fff;
 }
 
+/* Scrolled State */
 .navbar.scrolled {
     background-color: var(--color-primary);
-    padding: var(--spacing-sm) 0;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    padding: 12px 0;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
 }
 
 .navbar-container {
     display: grid;
     grid-template-columns: 1fr auto 1fr;
     align-items: center;
+    padding: 0 20px;
 }
 
 .logo {
     font-family: var(--font-heading);
-    font-size: 1.8rem;
+    font-size: 1.4rem;
+    /* Smaller on mobile */
     font-weight: 500;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.15em;
     text-transform: uppercase;
     z-index: 1001;
     position: relative;
     text-align: center;
+    color: #fff;
+    text-decoration: none;
 }
 
 .book-button {
     justify-self: end;
     font-family: var(--font-body);
-    font-size: 0.85rem;
+    font-size: 0.75rem;
+    /* Compact for mobile */
+    font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.1em;
     color: #fff;
     background-color: transparent;
     cursor: pointer;
-    border: 1px solid rgba(255, 255, 255, 0.8);
-    padding: 8px 20px;
-    transition: all var(--transition-fast);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    padding: 6px 14px;
+    transition: all 0.3s ease;
     z-index: 1001;
 }
 
 .book-button:hover {
     background-color: #fff;
     color: var(--color-primary);
+    border-color: #fff;
 }
 
-/* Update Menu Trigger alignment */
+/* Custom Hamburger Menu Trigger */
 .custom-hamburger {
     justify-self: start;
-}
-
-/* Custom Hamburger */
-.custom-hamburger {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    width: 32px;
-    height: 18px;
-    /* Height determines spacing between lines */
+    width: 26px;
+    /* Slightly more compact */
+    height: 14px;
     cursor: pointer;
     z-index: 1001;
-    transition: opacity var(--transition-fast);
-}
-
-.custom-hamburger:hover {
-    opacity: 0.8;
+    transition: transform 0.3s ease;
 }
 
 .custom-hamburger span {
     display: block;
     width: 100%;
-    height: 2px;
-    /* Thin lines */
+    height: 1.5px;
     background-color: #fff;
     transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
-/* Optional: Animate hamburger to X when open if desired, but overlay has its own close X */
-/* keeping it simple as per screenshot which is the closed state */
-
-
-/* Full Screen Overlay */
+/* Full Screen Overlay Menu */
 .menu-overlay {
     position: fixed;
     top: 0;
@@ -102,7 +99,8 @@
     align-items: center;
     opacity: 0;
     visibility: hidden;
-    transition: opacity 0.5s ease, visibility 0.5s ease;
+    transition: opacity 0.5s cubic-bezier(0.19, 1, 0.22, 1), visibility 0.5s;
+    padding: 40px;
 }
 
 .menu-overlay.active {
@@ -112,11 +110,16 @@
 
 .overlay-close {
     position: absolute;
-    top: var(--spacing-lg);
-    right: var(--spacing-lg);
+    top: 30px;
+    right: 20px;
     cursor: pointer;
-    padding: var(--spacing-sm);
-    transition: transform 0.3s ease;
+    width: 44px;
+    /* Larger touch target for mobile */
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.4s ease;
 }
 
 .overlay-close:hover {
@@ -126,13 +129,14 @@
 .overlay-links {
     list-style: none;
     text-align: center;
+    width: 100%;
 }
 
 .overlay-links li {
-    margin: var(--spacing-md) 0;
+    margin: 25px 0;
     opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.5s ease, transform 0.5s ease;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
 .menu-overlay.active .overlay-links li {
@@ -140,29 +144,31 @@
     transform: translateY(0);
 }
 
-/* Stagger animation delays for links */
-.menu-overlay.active .overlay-links li:nth-child(1) {
+/* Link Stagger Delay */
+.overlay-links li:nth-child(1) {
     transition-delay: 0.1s;
 }
 
-.menu-overlay.active .overlay-links li:nth-child(2) {
+.overlay-links li:nth-child(2) {
     transition-delay: 0.2s;
 }
 
-.menu-overlay.active .overlay-links li:nth-child(3) {
+.overlay-links li:nth-child(3) {
     transition-delay: 0.3s;
 }
 
-.menu-overlay.active .overlay-links li:nth-child(4) {
+.overlay-links li:nth-child(4) {
     transition-delay: 0.4s;
 }
 
 .overlay-links a {
     font-family: var(--font-heading);
-    font-size: 3rem;
+    font-size: 2.2rem;
+    /* Balanced for mobile */
     color: #fff;
     text-decoration: none;
     position: relative;
+    letter-spacing: 0.05em;
     transition: color 0.3s ease;
 }
 
@@ -170,32 +176,53 @@
     color: var(--color-accent);
 }
 
-.overlay-links a::after {
-    content: '';
-    position: absolute;
-    width: 0;
-    height: 2px;
-    bottom: -5px;
-    left: 50%;
-    background-color: var(--color-accent);
-    transition: width 0.3s ease, left 0.3s ease;
-}
+/* Desktop Overrides */
+@media (min-width: 992px) {
+    .navbar {
+        padding: 40px 0;
+    }
 
-.overlay-links a:hover::after {
-    width: 100%;
-    left: 0;
-}
+    .navbar.scrolled {
+        padding: 15px 0;
+    }
 
-/* Desktop Logic */
-@media (min-width: 768px) {
-    .menu-text {
-        display: block;
+    .logo {
+        font-size: 2rem;
+    }
+
+    .book-button {
+        font-size: 0.85rem;
+        padding: 10px 24px;
+        letter-spacing: 0.15em;
+    }
+
+    .custom-hamburger {
+        width: 32px;
+        height: 18px;
+    }
+
+    .overlay-links a {
+        font-size: 4rem;
+        /* Bold, luxury look on desktop */
+    }
+
+    .overlay-links li {
+        margin: 35px 0;
     }
 
     .overlay-close {
-        top: 40px;
-        /* Adjust based on navbar height */
-        right: max(var(--spacing-md), 50% - 600px + var(--spacing-md));
-        /* Align with container */
+        top: 50px;
+        right: 50px;
+    }
+}
+
+/* Small Device Adjustments */
+@media (max-width: 360px) {
+    .logo {
+        font-size: 1.2rem;
+    }
+
+    .overlay-links a {
+        font-size: 1.8rem;
     }
 }
