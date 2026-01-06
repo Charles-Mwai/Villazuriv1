@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
+import { useBooking } from '../context/BookingContext';
 import './Navbar.css';
 
 import BookingModal from './BookingModal';
@@ -8,7 +9,7 @@ import BookingModal from './BookingModal';
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
-    const [isBookingOpen, setIsBookingOpen] = useState(false);
+    const { isBookingOpen, openBooking, closeBooking } = useBooking();
 
     useEffect(() => {
         const handleScroll = () => {
@@ -24,7 +25,7 @@ const Navbar = () => {
 
     const handleBookingClick = (e) => {
         e.preventDefault();
-        setIsBookingOpen(true);
+        openBooking();
     };
 
     return (
@@ -55,7 +56,7 @@ const Navbar = () => {
                 </ul>
             </div>
 
-            <BookingModal isOpen={isBookingOpen} onClose={() => setIsBookingOpen(false)} />
+            <BookingModal isOpen={isBookingOpen} onClose={closeBooking} />
         </>
     );
 };

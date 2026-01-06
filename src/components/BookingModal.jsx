@@ -100,7 +100,7 @@ const BookingModal = ({ isOpen, onClose }) => {
                 const createdBooking = await createBooking(bookingData);
 
                 console.log('Booking created:', createdBooking);
-                alert(`Thank you for your booking request!\n\nBooking ID: ${createdBooking.id}\nEstimated Total: $${totalCost.toLocaleString()}\n\nWe will contact you shortly to confirm your reservation.`);
+                alert(`Thank you for your booking request!\n\nBooking ID: ${createdBooking.id}\nTotal: $${totalCost.toLocaleString()}\n\nWe will contact you shortly to confirm your reservation.`);
 
                 // Reset form and close
                 setFormData({
@@ -282,7 +282,7 @@ const BookingModal = ({ isOpen, onClose }) => {
 
                     {totalCost > 0 && (
                         <div className="total-cost-display">
-                            <span>Estimated Total:</span>
+                            <span>Total:</span>
                             <span className="cost-amount">${totalCost.toLocaleString()}</span>
                         </div>
                     )}

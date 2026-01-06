@@ -1,26 +1,30 @@
-/* CustomCalendar.css */
+/* CustomCalendar.css - Mobile First */
 
 .custom-calendar-container {
     background-color: #fff;
     border-radius: 8px;
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
-    padding: 20px;
-    width: 340px;
+    padding: 15px;
+    width: 100%;
+    /* Full width within parent on mobile */
+    max-width: 320px;
     position: absolute;
     top: 100%;
-    /* Position below the input */
-    left: 0;
-    z-index: 2001;
+    left: 50%;
+    transform: translateX(-50%);
+    /* Center on relative to input on mobile */
+    z-index: 3001;
     font-family: var(--font-body);
     animation: fadeIn 0.2s ease-out;
     border: 1px solid #eee;
+    margin-top: 10px;
 }
 
 .calendar-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     padding: 0 5px;
 }
 
@@ -31,9 +35,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 5px;
+    padding: 8px;
     border-radius: 50%;
     transition: background-color 0.2s;
+    color: #555;
 }
 
 .nav-btn:hover {
@@ -42,8 +47,8 @@
 
 .month-year-display {
     display: flex;
-    gap: 15px;
-    font-size: 1rem;
+    gap: 10px;
+    font-size: 0.95rem;
     font-weight: 500;
     color: #333;
 }
@@ -52,81 +57,99 @@
 .year-label {
     display: flex;
     align-items: center;
-    gap: 5px;
+    gap: 4px;
     cursor: pointer;
-}
-
-.dropdown-chevron {
-    color: #666;
 }
 
 .calendar-days-header {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    margin-bottom: 15px;
+    margin-bottom: 10px;
 }
 
 .day-name {
     text-align: center;
-    font-size: 0.85rem;
-    color: #333;
+    font-size: 0.75rem;
+    color: #999;
     font-weight: 500;
+    text-transform: uppercase;
 }
 
 .calendar-grid {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    row-gap: 10px;
+    row-gap: 5px;
+    column-gap: 2px;
 }
 
 .calendar-cell {
-    height: 40px;
-    width: 40px;
+    height: 38px;
+    width: 38px;
     display: flex;
     align-items: center;
     justify-content: center;
     margin: 0 auto;
     cursor: pointer;
-    border-radius: 50%;
-    font-size: 0.9rem;
+    border-radius: 4px;
+    /* More modern rounded square look */
+    font-size: 0.85rem;
     color: #333;
     transition: all 0.2s;
+    position: relative;
 }
 
 .calendar-cell.prev,
 .calendar-cell.next {
-    color: #ccc;
+    color: #ddd;
 }
 
-.calendar-cell:hover:not(.selected) {
+.calendar-cell:hover:not(.selected):not(.booked) {
     background-color: #f7f7f7;
+    color: var(--color-primary);
 }
 
 .calendar-cell.selected {
-    background-color: #f2f2f2;
-    /* Light circle */
-    color: #000;
-    border: 1px solid #ddd;
+    background-color: var(--color-primary);
+    color: #fff;
 }
 
-/* If the screenshot shows a filled circle for selected, update here */
-/* Screenshot looked like a light gray circle */
-.calendar-cell.selected {
-    background-color: #eee;
-}
-
-/* Today style if needed */
 .calendar-cell.today {
-    font-weight: bold;
-}
-/* Booked dates styling */
-.calendar-cell.booked {
-    background-color: #f0f0f0;
-    color: #ccc;
-    cursor: not-allowed !important;
-    text-decoration: line-through;
+    font-weight: 700;
 }
 
-.calendar-cell.booked:hover {
-    background-color: #f0f0f0 !important;
+.calendar-cell.today::after {
+    content: '';
+    position: absolute;
+    bottom: 4px;
+    width: 4px;
+    height: 4px;
+    background-color: var(--color-primary);
+    border-radius: 50%;
+}
+
+.calendar-cell.selected.today::after {
+    background-color: #fff;
+}
+
+.calendar-cell.booked {
+    color: #eee;
+    cursor: not-allowed !important;
+    background-color: #fafafa;
+}
+
+/* Tablet & Desktop */
+@media (min-width: 768px) {
+    .custom-calendar-container {
+        width: 340px;
+        max-width: none;
+        padding: 20px;
+        left: 0;
+        transform: none;
+    }
+
+    .calendar-cell {
+        height: 42px;
+        width: 42px;
+        font-size: 0.9rem;
+    }
 }

@@ -1,4 +1,4 @@
-/* BookingModal.css */
+/* BookingModal.css - Mobile First */
 
 .booking-modal-overlay {
     position: fixed;
@@ -6,26 +6,33 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(255, 255, 255, 0.98);
-    /* Mostly opaque white/very light */
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Dark semi-transparent */
+    backdrop-filter: blur(8px);
+    /* Blur background for premium feel */
+    -webkit-backdrop-filter: blur(8px);
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 2000;
-    padding: var(--spacing-md);
+    /* Center on mobile too for better viewing */
+    z-index: 3000;
+    padding: 20px;
     animation: fadeIn 0.3s ease-out forwards;
 }
 
 .booking-modal-content {
-    background-color: transparent;
+    background-color: #fff;
+    /* White background for the form itself */
     width: 100%;
-    max-width: 800px;
-    /* Wider for the 2-column layout */
-    padding: var(--spacing-lg);
+    padding: 40px 25px;
     position: relative;
+    max-width: 500px;
+    /* Narrower on mobile for better look */
+    border-radius: 16px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+    animation: slideUp 0.4s ease-out forwards;
     max-height: 90vh;
     overflow-y: auto;
-    animation: slideUp 0.4s ease-out forwards;
 }
 
 /* Header & Close Icon */
@@ -33,7 +40,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-bottom: 40px;
+    margin-bottom: 30px;
 }
 
 .modal-close-icon {
@@ -41,43 +48,35 @@
     border: none;
     cursor: pointer;
     color: #555;
-    /* Light grey/black */
     margin-bottom: 10px;
     transition: transform 0.2s;
-    font-weight: 100;
-}
-
-.modal-close-icon:hover {
-    color: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .modal-title {
     font-family: var(--font-body);
-    /* Looks like a clean sans-serif or maybe serif in screenshot, using body for now or heading */
     color: #1a1a1a;
-    /* Dark text */
     text-align: center;
-    font-size: 2rem;
+    font-size: 1.6rem;
     font-weight: 300;
-    /* Thin look */
     letter-spacing: 0.05em;
+    text-transform: uppercase;
 }
 
 /* Form Layout */
 .booking-form {
     display: flex;
     flex-direction: column;
-    gap: 30px;
+    gap: 25px;
 }
 
 .form-row {
     display: flex;
-    gap: 40px;
-    /* Wider gap between columns */
-}
-
-.half-width {
-    flex: 1;
+    flex-direction: column;
+    /* Stacked on mobile */
+    gap: 25px;
 }
 
 .form-group {
@@ -87,21 +86,19 @@
 
 label {
     font-family: var(--font-body);
-    font-size: 0.9rem;
-    color: #666;
-    margin-bottom: 10px;
+    font-size: 0.85rem;
+    color: #888;
+    margin-bottom: 8px;
     font-weight: 400;
     letter-spacing: 0.02em;
 }
 
 /* Inputs - Underlined Style */
-/* Inputs - Underlined Style */
 .underlined-input {
     width: 100%;
-    padding: 10px 0;
-    /* Padding top/bottom, no sides */
+    padding: 12px 0;
     border: none;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid #eee;
     background-color: transparent;
     font-family: var(--font-body);
     font-size: 1rem;
@@ -112,40 +109,9 @@ label {
     -webkit-appearance: none;
 }
 
-/* Custom Select/Input Wrapper for Icons */
-.custom-select-wrapper {
-    position: relative;
-    display: flex;
-    align-items: center;
-}
-
-.custom-select-icon {
-    position: absolute;
-    right: 0;
-    pointer-events: none;
-    /* Let clicks pass through to input */
-    color: #000;
-}
-
-/* Hide default calendar icon in Chrome/Safari/Edge */
-input[type="date"]::-webkit-calendar-picker-indicator {
-    background: transparent;
-    bottom: 0;
-    color: transparent;
-    cursor: pointer;
-    height: auto;
-    left: 0;
-    position: absolute;
-    right: 0;
-    top: 0;
-    width: auto;
-    z-index: 1;
-    /* Make it cover the input to trigger picker */
-}
-
 .underlined-input:focus {
     outline: none;
-    border-bottom-color: #000;
+    border-bottom-color: var(--color-primary);
 }
 
 .underlined-input::placeholder {
@@ -156,81 +122,159 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     color: #ccc;
 }
 
-option {
-    color: #000;
+/* Custom Select Icon */
+.custom-select-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.custom-select-icon {
+    position: absolute;
+    right: 0;
+    pointer-events: none;
+    color: #999;
 }
 
 /* Checkbox Style for "Flexible" */
 .checkbox-group {
     display: flex;
-    gap: 20px;
+    gap: 30px;
     align-items: center;
-    padding-top: 10px;
-    /* Align with inputs */
+    padding-top: 5px;
 }
 
 .checkbox-option {
     display: flex;
     align-items: center;
     cursor: pointer;
-    gap: 10px;
-    font-size: 0.95rem;
-    color: #666;
+    gap: 12px;
+    font-size: 0.9rem;
+    color: #555;
 }
 
 .custom-checkbox {
-    width: 20px;
-    height: 20px;
+    width: 22px;
+    height: 22px;
     border: 1px solid #ddd;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: border-color 0.2s;
+    transition: all 0.2s;
     background-color: #fff;
+    border-radius: 2px;
 }
 
 .custom-checkbox.checked {
-    border-color: #999;
+    border-color: var(--color-primary);
+    background-color: var(--color-primary);
 }
 
 .checkmark {
-    width: 10px;
-    height: 10px;
-    background-color: #555;
-    /* In the screenshot it's a check, but a square fill is also fine. Let's try CSS checkmark */
+    width: 8px;
+    height: 8px;
+    background-color: #fff;
+}
+
+/* Total Cost Display */
+.total-cost-display {
+    margin-top: 10px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 4px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: var(--font-body);
+}
+
+.total-cost-display span:first-child {
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.cost-amount {
+    font-size: 1.4rem;
+    color: var(--color-primary);
+    font-weight: 500;
+}
+
+/* Error Message */
+.error-message {
+    color: #d9534f;
+    font-size: 0.85rem;
+    text-align: center;
+    background: #fdf7f7;
+    padding: 10px;
+    border-radius: 4px;
 }
 
 /* Button */
 .form-actions {
     display: flex;
     justify-content: center;
-    margin-top: 20px;
-    border-top: 1px solid transparent;
-    /* Placeholder to match screenshot 'line' if needed */
+    margin-top: 10px;
 }
 
 .submit-booking-btn {
-    background: transparent;
-    color: #666;
+    width: 100%;
+    /* Full width on mobile */
+    background: var(--color-primary);
+    color: #fff;
     border: none;
-    border-bottom: 1px solid transparent;
-    /* The screenshot has a line under CONTINUE? Or is it a button? 
-       Actually looking closely at "CONTINUE", it usually has a border top and bottom or it's just text.
-       Let's style it as a clean minimal button with a border bottom that appears on hover or static.
-    */
-    border: 1px solid #ddd;
-    padding: 12px 40px;
+    padding: 16px;
     font-family: var(--font-body);
     font-size: 0.9rem;
+    font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.2em;
     cursor: pointer;
     transition: all 0.3s ease;
+    border-radius: 4px;
 }
 
-.submit-booking-btn:hover {
-    border-color: #000;
-    color: #000;
+.submit-booking-btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+@media (min-width: 768px) {
+    .booking-modal-overlay {
+        padding: 40px;
+    }
+
+    .booking-modal-content {
+        max-width: 750px;
+        /* Restored elegant wider layout for desktop */
+        padding: 60px;
+        border-radius: 12px;
+    }
+
+    .modal-title {
+        font-size: 2.2rem;
+    }
+
+    .form-row {
+        flex-direction: row;
+        gap: 40px;
+    }
+
+    .half-width {
+        flex: 1;
+    }
+
+    .submit-booking-btn {
+        width: auto;
+        padding: 14px 60px;
+        background: transparent;
+        color: var(--color-primary);
+        border: 1px solid var(--color-primary);
+    }
+
+    .submit-booking-btn:hover {
+        background-color: var(--color-primary);
+        color: #fff;
+    }
 }
 
 /* Animations */
@@ -247,27 +291,11 @@ option {
 @keyframes slideUp {
     from {
         opacity: 0;
-        transform: translateY(20px);
+        transform: translateY(30px);
     }
 
     to {
         opacity: 1;
         transform: translateY(0);
-    }
-}
-
-/* Mobile Responsiveness */
-@media (max-width: 600px) {
-    .form-row {
-        flex-direction: column;
-        gap: 30px;
-    }
-
-    .modal-title {
-        font-size: 1.5rem;
-    }
-
-    .booking-modal-content {
-        padding: var(--spacing-md);
     }
 }

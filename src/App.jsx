@@ -1,5 +1,5 @@
-import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { BookingProvider } from './context/BookingContext';
 
 // Public pages
 import Navbar from './components/Navbar';
@@ -33,33 +33,35 @@ const PublicLayout = () => (
 
 function App() {
     return (
-        <BrowserRouter>
-            <Routes>
-                {/* Public routes */}
-                <Route path="/" element={<PublicLayout />} />
-                <Route path="/gallery" element={<FullGallery />} />
+        <BookingProvider>
+            <BrowserRouter>
+                <Routes>
+                    {/* Public routes */}
+                    <Route path="/" element={<PublicLayout />} />
+                    <Route path="/gallery" element={<FullGallery />} />
 
-                {/* Admin routes */}
-                <Route path="/admin/login" element={<Login />} />
-                <Route
-                    path="/admin"
-                    element={
-                        <ProtectedRoute>
-                            <AdminLayout />
-                        </ProtectedRoute>
-                    }
-                >
-                    <Route index element={<Navigate to="/admin/dashboard" replace />} />
-                    <Route path="dashboard" element={<Dashboard />} />
-                    <Route path="bookings" element={<BookingsList />} />
-                    <Route path="bookings/:id" element={<BookingDetail />} />
-                    <Route path="calendar" element={<CalendarView />} />
-                </Route>
+                    {/* Admin routes */}
+                    <Route path="/admin/login" element={<Login />} />
+                    <Route
+                        path="/admin"
+                        element={
+                            <ProtectedRoute>
+                                <AdminLayout />
+                            </ProtectedRoute>
+                        }
+                    >
+                        <Route index element={<Navigate to="/admin/dashboard" replace />} />
+                        <Route path="dashboard" element={<Dashboard />} />
+                        <Route path="bookings" element={<BookingsList />} />
+                        <Route path="bookings/:id" element={<BookingDetail />} />
+                        <Route path="calendar" element={<CalendarView />} />
+                    </Route>
 
-                {/* Catch all */}
-                <Route path="*" element={<Navigate to="/" replace />} />
-            </Routes>
-        </BrowserRouter>
+                    {/* Catch all */}
+                    <Route path="*" element={<Navigate to="/" replace />} />
+                </Routes>
+            </BrowserRouter>
+        </BookingProvider>
     );
 }
 
