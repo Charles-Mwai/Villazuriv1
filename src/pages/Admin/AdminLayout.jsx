@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, Outlet, useNavigate, useLocation } from 'react-router-dom';
-import { LogOut, LayoutDashboard, Calendar, List, Search, Bell, Settings, User } from 'lucide-react';
+import { LogOut, LayoutDashboard, Calendar, List, Search, Bell, Settings, User, Home } from 'lucide-react';
 import './AdminLayout.css';
 
 const AdminLayout = () => {
@@ -25,8 +25,8 @@ const AdminLayout = () => {
         <div className="admin-layout">
             <aside className="admin-sidebar">
                 <div className="sidebar-header">
-                    <h2 className="sidebar-title">Velonic</h2>
-                    <p className="sidebar-subtitle">Main</p>
+                    <h2 className="sidebar-title">VillaZuri</h2>
+                    <p className="sidebar-subtitle">Admin</p>
                 </div>
 
                 <nav className="sidebar-nav">
@@ -68,13 +68,20 @@ const AdminLayout = () => {
                         </div>
                     </div>
                     <div className="topbar-right">
+                        <button
+                            className="topbar-item home-button"
+                            onClick={() => navigate('/')}
+                            title="Go to Main Page"
+                        >
+                            <Home size={20} />
+                        </button>
                         <div className="topbar-item"><Bell size={20} /></div>
                         <div className="topbar-item"><Settings size={20} /></div>
                         <div className="topbar-profile">
                             <div className="profile-img">
                                 <User size={20} />
                             </div>
-                            <span className="profile-name">Thomson</span>
+                            <span className="profile-name">Admin</span>
                         </div>
                     </div>
                 </header>
@@ -83,7 +90,7 @@ const AdminLayout = () => {
                     <div className="breadcrumb-area">
                         <h2 className="page-title">Welcome!</h2>
                         <div className="breadcrumbs">
-                            <span>Velonic</span> &rsaquo; <span>Dashboards</span> &rsaquo; <span>Welcome!</span>
+                            <span>VillaZuri</span> &rsaquo; <span>Admin</span> &rsaquo; <span>Dashboard</span>
                         </div>
                     </div>
                     <Outlet />

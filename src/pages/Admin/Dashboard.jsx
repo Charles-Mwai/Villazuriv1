@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getBookingStats, getAllBookings } from '../../services/adminService';
-import { Calendar, DollarSign, Users, Clock } from 'lucide-react';
+import { Calendar, DollarSign, Users, List } from 'lucide-react';
 import './Dashboard.css';
 
 const Dashboard = () => {
@@ -42,47 +42,47 @@ const Dashboard = () => {
             </div>
 
             <div className="stats-grid">
-                <div className="stat-card stat-pink">
-                    <div className="stat-content">
-                        <p className="stat-label">DAILY VISITS</p>
-                        <p className="stat-value">8,652</p>
-                        <p className="stat-sub">2.97% Since last month</p>
-                    </div>
-                    <div className="stat-icon">
-                        <Calendar size={32} />
-                    </div>
-                </div>
-
                 <div className="stat-card stat-purple">
                     <div className="stat-content">
-                        <p className="stat-label">REVENUE</p>
-                        <p className="stat-value">${stats?.totalRevenue?.toLocaleString() || '9,254.62'}</p>
-                        <p className="stat-sub">18.25% Since last month</p>
-                    </div>
-                    <div className="stat-icon">
-                        <DollarSign size={32} />
-                    </div>
-                </div>
-
-                <div className="stat-card stat-blue">
-                    <div className="stat-content">
-                        <p className="stat-label">ORDERS</p>
-                        <p className="stat-value">{stats?.total || '753'}</p>
-                        <p className="stat-sub">-5.75% Since last month</p>
+                        <p className="stat-label">TOTAL BOOKINGS</p>
+                        <p className="stat-value">{stats?.total || '0'}</p>
+                        <p className="stat-sub">Active bookings</p>
                     </div>
                     <div className="stat-icon">
                         <List size={32} />
                     </div>
                 </div>
 
+                <div className="stat-card stat-blue">
+                    <div className="stat-content">
+                        <p className="stat-label">TOTAL REVENUE</p>
+                        <p className="stat-value">${stats?.totalRevenue?.toLocaleString() || '0'}</p>
+                        <p className="stat-sub">All time earnings</p>
+                    </div>
+                    <div className="stat-icon">
+                        <DollarSign size={32} />
+                    </div>
+                </div>
+
                 <div className="stat-card stat-cyan">
                     <div className="stat-content">
-                        <p className="stat-label">USERS</p>
-                        <p className="stat-value">63,154</p>
-                        <p className="stat-sub">8.21% Since last month</p>
+                        <p className="stat-label">CONFIRMED</p>
+                        <p className="stat-value">{stats?.confirmed || '0'}</p>
+                        <p className="stat-sub">Confirmed bookings</p>
                     </div>
                     <div className="stat-icon">
                         <Users size={32} />
+                    </div>
+                </div>
+
+                <div className="stat-card stat-pink">
+                    <div className="stat-content">
+                        <p className="stat-label">PENDING</p>
+                        <p className="stat-value">{stats?.pending || '0'}</p>
+                        <p className="stat-sub">Awaiting confirmation</p>
+                    </div>
+                    <div className="stat-icon">
+                        <Calendar size={32} />
                     </div>
                 </div>
             </div>
