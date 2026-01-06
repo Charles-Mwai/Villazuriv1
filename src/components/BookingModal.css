@@ -1,0 +1,273 @@
+/* BookingModal.css */
+
+.booking-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(255, 255, 255, 0.98);
+    /* Mostly opaque white/very light */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+    padding: var(--spacing-md);
+    animation: fadeIn 0.3s ease-out forwards;
+}
+
+.booking-modal-content {
+    background-color: transparent;
+    width: 100%;
+    max-width: 800px;
+    /* Wider for the 2-column layout */
+    padding: var(--spacing-lg);
+    position: relative;
+    max-height: 90vh;
+    overflow-y: auto;
+    animation: slideUp 0.4s ease-out forwards;
+}
+
+/* Header & Close Icon */
+.modal-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.modal-close-icon {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #555;
+    /* Light grey/black */
+    margin-bottom: 10px;
+    transition: transform 0.2s;
+    font-weight: 100;
+}
+
+.modal-close-icon:hover {
+    color: #000;
+}
+
+.modal-title {
+    font-family: var(--font-body);
+    /* Looks like a clean sans-serif or maybe serif in screenshot, using body for now or heading */
+    color: #1a1a1a;
+    /* Dark text */
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 300;
+    /* Thin look */
+    letter-spacing: 0.05em;
+}
+
+/* Form Layout */
+.booking-form {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.form-row {
+    display: flex;
+    gap: 40px;
+    /* Wider gap between columns */
+}
+
+.half-width {
+    flex: 1;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 10px;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+}
+
+/* Inputs - Underlined Style */
+/* Inputs - Underlined Style */
+.underlined-input {
+    width: 100%;
+    padding: 10px 0;
+    /* Padding top/bottom, no sides */
+    border: none;
+    border-bottom: 1px solid #ddd;
+    background-color: transparent;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    color: #000;
+    border-radius: 0;
+    transition: border-color 0.3s;
+    appearance: none;
+    -webkit-appearance: none;
+}
+
+/* Custom Select/Input Wrapper for Icons */
+.custom-select-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.custom-select-icon {
+    position: absolute;
+    right: 0;
+    pointer-events: none;
+    /* Let clicks pass through to input */
+    color: #000;
+}
+
+/* Hide default calendar icon in Chrome/Safari/Edge */
+input[type="date"]::-webkit-calendar-picker-indicator {
+    background: transparent;
+    bottom: 0;
+    color: transparent;
+    cursor: pointer;
+    height: auto;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: auto;
+    z-index: 1;
+    /* Make it cover the input to trigger picker */
+}
+
+.underlined-input:focus {
+    outline: none;
+    border-bottom-color: #000;
+}
+
+.underlined-input::placeholder {
+    color: #ccc;
+}
+
+.underlined-input.is-placeholder {
+    color: #ccc;
+}
+
+option {
+    color: #000;
+}
+
+/* Checkbox Style for "Flexible" */
+.checkbox-group {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    padding-top: 10px;
+    /* Align with inputs */
+}
+
+.checkbox-option {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    gap: 10px;
+    font-size: 0.95rem;
+    color: #666;
+}
+
+.custom-checkbox {
+    width: 20px;
+    height: 20px;
+    border: 1px solid #ddd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: border-color 0.2s;
+    background-color: #fff;
+}
+
+.custom-checkbox.checked {
+    border-color: #999;
+}
+
+.checkmark {
+    width: 10px;
+    height: 10px;
+    background-color: #555;
+    /* In the screenshot it's a check, but a square fill is also fine. Let's try CSS checkmark */
+}
+
+/* Button */
+.form-actions {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    border-top: 1px solid transparent;
+    /* Placeholder to match screenshot 'line' if needed */
+}
+
+.submit-booking-btn {
+    background: transparent;
+    color: #666;
+    border: none;
+    border-bottom: 1px solid transparent;
+    /* The screenshot has a line under CONTINUE? Or is it a button? 
+       Actually looking closely at "CONTINUE", it usually has a border top and bottom or it's just text.
+       Let's style it as a clean minimal button with a border bottom that appears on hover or static.
+    */
+    border: 1px solid #ddd;
+    padding: 12px 40px;
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.submit-booking-btn:hover {
+    border-color: #000;
+    color: #000;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 600px) {
+    .form-row {
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    .modal-title {
+        font-size: 1.5rem;
+    }
+
+    .booking-modal-content {
+        padding: var(--spacing-md);
+    }
+}

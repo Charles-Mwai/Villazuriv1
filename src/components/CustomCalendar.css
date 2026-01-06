@@ -1,0 +1,121 @@
+/* CustomCalendar.css */
+
+.custom-calendar-container {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+    padding: 20px;
+    width: 340px;
+    position: absolute;
+    top: 100%;
+    /* Position below the input */
+    left: 0;
+    z-index: 2001;
+    font-family: var(--font-body);
+    animation: fadeIn 0.2s ease-out;
+    border: 1px solid #eee;
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 0 5px;
+}
+
+.nav-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+    border-radius: 50%;
+    transition: background-color 0.2s;
+}
+
+.nav-btn:hover {
+    background-color: #f5f5f5;
+}
+
+.month-year-display {
+    display: flex;
+    gap: 15px;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #333;
+}
+
+.month-label,
+.year-label {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+}
+
+.dropdown-chevron {
+    color: #666;
+}
+
+.calendar-days-header {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    margin-bottom: 15px;
+}
+
+.day-name {
+    text-align: center;
+    font-size: 0.85rem;
+    color: #333;
+    font-weight: 500;
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    row-gap: 10px;
+}
+
+.calendar-cell {
+    height: 40px;
+    width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    cursor: pointer;
+    border-radius: 50%;
+    font-size: 0.9rem;
+    color: #333;
+    transition: all 0.2s;
+}
+
+.calendar-cell.prev,
+.calendar-cell.next {
+    color: #ccc;
+}
+
+.calendar-cell:hover:not(.selected) {
+    background-color: #f7f7f7;
+}
+
+.calendar-cell.selected {
+    background-color: #f2f2f2;
+    /* Light circle */
+    color: #000;
+    border: 1px solid #ddd;
+}
+
+/* If the screenshot shows a filled circle for selected, update here */
+/* Screenshot looked like a light gray circle */
+.calendar-cell.selected {
+    background-color: #eee;
+}
+
+/* Today style if needed */
+.calendar-cell.today {
+    font-weight: bold;
+}
