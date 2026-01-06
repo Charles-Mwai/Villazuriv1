@@ -1,0 +1,33 @@
+.status-badge {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 3px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: capitalize;
+}
+
+.status-pending {
+    background-color: #fef5e4;
+    color: #f1b44c;
+}
+
+.status-confirmed {
+    background-color: #dff5ff;
+    color: #39afd1;
+}
+
+.status-paid {
+    background-color: #d4f8e8;
+    color: #10c469;
+}
+
+.status-cancelled {
+    background-color: #ffe5e5;
+    color: #f1556c;
+}
+
+.status-default {
+    background-color: #f1f3fa;
+    color: #6c757d;
+}

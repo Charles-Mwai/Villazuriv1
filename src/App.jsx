@@ -1,21 +1,65 @@
 import React from 'react';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+
+// Public pages
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import Experience from './components/Experience';
 import VillaDetails from './components/VillaDetails';
-import Gallery from './components/Gallery';
+import MarqueeGallery from './components/MarqueeGallery';
+import FullGallery from './pages/Public/FullGallery';
 import Footer from './components/Footer';
+
+// Admin pages
+import Login from './pages/Admin/Login';
+import AdminLayout from './pages/Admin/AdminLayout';
+import Dashboard from './pages/Admin/Dashboard';
+import BookingsList from './pages/Admin/BookingsList';
+import BookingDetail from './pages/Admin/BookingDetail';
+import CalendarView from './pages/Admin/CalendarView';
+import ProtectedRoute from './components/Admin/ProtectedRoute';
+
+// Public landing page layout
+const PublicLayout = () => (
+    <>
+        <Navbar />
+        <Hero />
+        <Experience />
+        <VillaDetails />
+        <MarqueeGallery />
+        <Footer />
+    </>
+);
 
 function App() {
     return (
-        <div className="app">
-            <Navbar />
-            <Hero />
-            <Experience />
-            <VillaDetails />
-            <Gallery />
-            <Footer />
-        </div>
+        <BrowserRouter>
+            <Routes>
+                {/* Public routes */}
+                <Route path="/" element={<PublicLayout />} />
+                <Route path="/gallery" element={<FullGallery />} />
+
+                {/* Admin routes */}
+                <Route path="/admin/login" element={<Login />} />
+                <Route
+                    path="/admin"
+                    element={
+                        <ProtectedRoute>
+                            <AdminLayout />
+                        </ProtectedRoute>
+                    }
+                >
+                    <Route index element={<Navigate to="/admin/dashboard" replace />} />
+                    <Route path="dashboard" element={<Dashboard />} />
+                    <Route path="bookings" element={<BookingsList />} />
+                    <Route path="bookings/:id" element={<BookingDetail />} />
+                    <Route path="calendar" element={<CalendarView />} />
+                </Route>
+
+                {/* Catch all */}
+                <Route path="*" element={<Navigate to="/" replace />} />
+            </Routes>
+        </BrowserRouter>
     );
 }
 

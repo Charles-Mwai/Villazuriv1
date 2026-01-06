@@ -4,11 +4,13 @@ import './BookingModal.css';
 
 import CustomCalendar from './CustomCalendar';
 import { calculateTotalCost, validateBookingDates } from '../utils/bookingLogic';
+import { checkAvailability, createBooking } from '../services/bookingService';
 
 const BookingModal = ({ isOpen, onClose }) => {
     const [calendarOpen, setCalendarOpen] = useState(false);
     const [totalCost, setTotalCost] = useState(0);
     const [error, setError] = useState('');
+    const [submitting, setSubmitting] = useState(false);
     const [formData, setFormData] = useState({
         arrivalDate: '',
         nights: '',
@@ -44,11 +46,12 @@ const BookingModal = ({ isOpen, onClose }) => {
         setError('');
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
+        setError('');
 
         // Basic validation
-        if (!formData.arrivalDate || !formData.nights) {
+        if (!formData.arrivalDate || !formData.nights || !formData.phone || !formData.email) {
             setError("Please fill in all required fields");
             return;
         }
@@ -65,11 +68,61 @@ const BookingModal = ({ isOpen, onClose }) => {
                 setError(validation.error);
                 return;
             }
-        }
 
-        console.log('Booking Request:', { ...formData, totalCost });
-        alert(`Thank you for your inquiry. Estimated Total: $${totalCost.toLocaleString()}`);
-        onClose();
+            try {
+                setSubmitting(true);
+
+                // Check availability against real bookings
+                const { available } = await checkAvailability(
+                    start.toISOString().split('T')[0],
+                    end.toISOString().split('T')[0]
+                );
+
+                if (!available) {
+                    setError("Sorry, these dates are not available. Please select different dates.");
+                    setSubmitting(false);
+                    return;
+                }
+
+                // Create booking in database
+                const bookingData = {
+                    checkIn: start.toISOString().split('T')[0],
+                    checkOut: end.toISOString().split('T')[0],
+                    nights: nights,
+                    guests: parseInt(formData.guests) || 1,
+                    guestName: formData.name || 'Guest',
+                    guestEmail: formData.email,
+                    guestPhone: formData.phone,
+                    datesFlexible: formData.flexible === 'yes',
+                    totalCost: totalCost
+                };
+
+                const createdBooking = await createBooking(bookingData);
+
+                console.log('Booking created:', createdBooking);
+                alert(`Thank you for your booking request!\n\nBooking ID: ${createdBooking.id}\nEstimated Total: $${totalCost.toLocaleString()}\n\nWe will contact you shortly to confirm your reservation.`);
+
+                // Reset form and close
+                setFormData({
+                    arrivalDate: '',
+                    nights: '',
+                    flexible: '',
+                    guests: '',
+                    name: '',
+                    email: '',
+                    phone: ''
+                });
+                setTotalCost(0);
+                onClose();
+            } catch (error) {
+                console.error('Booking error:', error);
+                setError("Failed to create booking. Please try again or contact us directly.");
+            } finally {
+                setSubmitting(false);
+            }
+        } else {
+            setError("For stays of 30+ nights, please contact us directly.");
+        }
     };
 
     const handleFlexibleChange = (value) => {
@@ -237,8 +290,8 @@ const BookingModal = ({ isOpen, onClose }) => {
                     {error && <div className="error-message">{error}</div>}
 
                     <div className="form-actions">
-                        <button type="submit" className="submit-booking-btn">
-                            CONTINUE
+                        <button type="submit" className="submit-booking-btn" disabled={submitting}>
+                            {submitting ? 'PROCESSING...' : 'CONTINUE'}
                         </button>
                     </div>
                 </form>

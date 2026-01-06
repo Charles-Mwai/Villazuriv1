@@ -1,15 +1,35 @@
 import React, { useState, useEffect } from 'react';
 import { ChevronLeft, ChevronRight, ChevronDown } from 'lucide-react';
+import { getAllBookedDates } from '../services/bookingService';
 import './CustomCalendar.css';
 
 const CustomCalendar = ({ selectedDate, onDateSelect, onClose }) => {
     const [currentDate, setCurrentDate] = useState(new Date());
+    const [bookedDates, setBookedDates] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         if (selectedDate) {
             setCurrentDate(new Date(selectedDate));
         }
     }, [selectedDate]);
+
+    // Fetch booked dates from Supabase
+    useEffect(() => {
+        const fetchBookedDates = async () => {
+            try {
+                setLoading(true);
+                const dates = await getAllBookedDates();
+                setBookedDates(dates);
+            } catch (error) {
+                console.error('Failed to fetch booked dates:', error);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchBookedDates();
+    }, []);
 
     const getDaysInMonth = (date) => {
         const year = date.getFullYear();
@@ -84,7 +104,17 @@ const CustomCalendar = ({ selectedDate, onDateSelect, onClose }) => {
         setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 1));
     };
 
+    const isDateBooked = (date) => {
+        const dateStr = date.toISOString().split('T')[0];
+        return bookedDates.includes(dateStr);
+    };
+
     const handleDateClick = (dayObj) => {
+        // Don't allow selection of booked dates
+        if (isDateBooked(dayObj.date)) {
+            return;
+        }
+
         // Format to YYYY-MM-DD for consistency with input type="date"
         const offsetDate = new Date(dayObj.date.getTime() - (dayObj.date.getTimezoneOffset() * 60000));
         const formattedDate = offsetDate.toISOString().split('T')[0];
@@ -135,17 +165,22 @@ const CustomCalendar = ({ selectedDate, onDateSelect, onClose }) => {
             </div>
 
             <div className="calendar-grid">
-                {generateCalendarDays().map((dayObj, index) => (
-                    <div
-                        key={index}
-                        className={`calendar-cell ${dayObj.type} 
-                                   ${isSelected(dayObj.date) ? 'selected' : ''} 
-                                   ${isToday(dayObj.date) ? 'today' : ''}`}
-                        onClick={() => handleDateClick(dayObj)}
-                    >
-                        <span>{dayObj.day}</span>
-                    </div>
-                ))}
+                {generateCalendarDays().map((dayObj, index) => {
+                    const isBooked = isDateBooked(dayObj.date);
+                    return (
+                        <div
+                            key={index}
+                            className={`calendar-cell ${dayObj.type} 
+                                       ${isSelected(dayObj.date) ? 'selected' : ''} 
+                                       ${isToday(dayObj.date) ? 'today' : ''}
+                                       ${isBooked ? 'booked' : ''}`}
+                            onClick={() => !isBooked && handleDateClick(dayObj)}
+                            style={{ cursor: isBooked ? 'not-allowed' : 'pointer' }}
+                        >
+                            <span>{dayObj.day}</span>
+                        </div>
+                    );
+                })}
             </div>
         </div>
     );

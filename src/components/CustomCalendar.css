@@ -119,3 +119,14 @@
 .calendar-cell.today {
     font-weight: bold;
 }
+/* Booked dates styling */
+.calendar-cell.booked {
+    background-color: #f0f0f0;
+    color: #ccc;
+    cursor: not-allowed !important;
+    text-decoration: line-through;
+}
+
+.calendar-cell.booked:hover {
+    background-color: #f0f0f0 !important;
+}

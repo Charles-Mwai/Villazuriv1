@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import './Navbar.css';
 
@@ -36,7 +37,7 @@ const Navbar = () => {
                         <span></span>
                     </div>
 
-                    <a href="#" className="logo">VillaZuri</a>
+                    <Link to="/" className="logo">VillaZuri</Link>
 
                     <button className="book-button" onClick={handleBookingClick}>BOOK</button>
                 </div>
@@ -49,7 +50,7 @@ const Navbar = () => {
                 <ul className="overlay-links">
                     <li><a href="#villa" onClick={toggleMenu}>The Villa</a></li>
                     <li><a href="#experience" onClick={toggleMenu}>Experience</a></li>
-                    <li><a href="#gallery" onClick={toggleMenu}>Gallery</a></li>
+                    <li><Link to="/gallery" onClick={toggleMenu}>Gallery</Link></li>
                     <li><a href="#contact" onClick={toggleMenu}>Contact</a></li>
                 </ul>
             </div>
