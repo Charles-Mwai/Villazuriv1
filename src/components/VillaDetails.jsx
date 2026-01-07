@@ -16,7 +16,7 @@ const VillaDetails = () => {
                         <h3>Elegant Interiors</h3>
                         <p>
                             Awake to the sound of the ocean in our masterfully designed suites.
-                            Detailed with locally sourced Lamu furniture and high-end linens,
+                            Detailed with locally sourced furniture and high-end linens,
                             every room frames the turquoise horizon.
                         </p>
                     </RevealOnScroll>
