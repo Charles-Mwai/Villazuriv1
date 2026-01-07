@@ -12,6 +12,7 @@ import FullGallery from './pages/Public/FullGallery';
 import Checkout from './pages/Public/Checkout';
 import Footer from './components/Footer';
 import WatamuFeature from './components/WatamuFeature';
+import Blog from './pages/Public/Blog';
 
 // Admin pages
 import Login from './pages/Admin/Login';
@@ -43,6 +44,7 @@ function App() {
                     <Route path="/" element={<PublicLayout />} />
                     <Route path="/gallery" element={<FullGallery />} />
                     <Route path="/watamu" element={<Watamu />} />
+                    <Route path="/blog" element={<Blog />} />
                     <Route path="/checkout" element={<Checkout />} />
 
                     {/* Admin routes */}

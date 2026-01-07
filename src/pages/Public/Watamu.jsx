@@ -15,9 +15,10 @@ const Watamu = () => {
             <Navbar />
 
             <section className="watamu-hero">
-                <div className="hero-text-content">
 
-                    <p>Watamu is a tranquil coastal haven where turquoise waters, pristine beaches, and rich marine life come together to create the perfect getaway.</p>
+                <div className="hero-bottom-left">
+                    <h3>Beach & Marine Life</h3>
+                    <p>peaceful tropical escape with white-sand beaches, warm turquoise waters, and unforgettable ocean experiences.</p>
                 </div>
             </section>
 

@@ -1,14 +1,59 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './SectionStyles.css';
 import RevealOnScroll from './RevealOnScroll';
 
+const interiorImages = [
+    '/Interior pics/IMG_5508-cmpr.jpg',
+    '/Interior pics/IMG_5509-cmpr.jpg',
+    '/Interior pics/IMG_5510-cmpr.jpg',
+    '/Interior pics/IMG_5511-cmpr.jpg',
+    '/Interior pics/IMG_5512-cmpr.jpg',
+    '/Interior pics/IMG_5514-cmpr.jpg',
+    '/Interior pics/IMG_5515-cmpr.jpg',
+    '/Interior pics/IMG_5517-cmpr.jpg',
+    '/Interior pics/IMG_5518-cmpr.jpg'
+];
+
+const exteriorImages = [
+    '/Exterior pics/IMG_3822-cmpr.jpg',
+    '/Exterior pics/IMG_3827-cmpr.jpg',
+    '/Exterior pics/IMG_5485-cmpr.jpg',
+    '/Exterior pics/IMG_5487-cmpr.jpg',
+    '/Exterior pics/IMG_5488-cmpr.jpg',
+    '/Exterior pics/IMG_5489-cmpr.jpg'
+];
+
 const VillaDetails = () => {
+    const [currentImageIndex, setCurrentImageIndex] = useState(0);
+    const [currentExteriorIndex, setCurrentExteriorIndex] = useState(0);
+
+    const nextImage = () => {
+        setCurrentImageIndex((prevIndex) => (prevIndex + 1) % interiorImages.length);
+    };
+
+    const nextExteriorImage = () => {
+        setCurrentExteriorIndex((prevIndex) => (prevIndex + 1) % exteriorImages.length);
+    };
+
     return (
         <section id="villa" className="villa-details">
             <div className="grid-row">
-                <div className="grid-image">
+                <div className="grid-image carousel-container">
                     <RevealOnScroll>
-                        <img src="/villa pics/IMG_5556-cmpr.jpg" alt="Luxury Master Bedroom" />
+                        <img
+                            src={interiorImages[currentImageIndex]}
+                            alt={`Elegant Interior ${currentImageIndex + 1}`}
+                            className="carousel-image"
+                        />
+                        <button
+                            className="carousel-arrow"
+                            onClick={nextImage}
+                            aria-label="Next image"
+                        >
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                <path d="M5 12h14M12 5l7 7-7 7" />
+                            </svg>
+                        </button>
                     </RevealOnScroll>
                 </div>
                 <div className="grid-content">
@@ -24,9 +69,22 @@ const VillaDetails = () => {
             </div>
 
             <div className="grid-row reverse">
-                <div className="grid-image">
+                <div className="grid-image carousel-container">
                     <RevealOnScroll>
-                        <img src="/villa pics/IMG_3819.jpg" alt="Infinity Pool" />
+                        <img
+                            src={exteriorImages[currentExteriorIndex]}
+                            alt={`Exterior Oasis ${currentExteriorIndex + 1}`}
+                            className="carousel-image"
+                        />
+                        <button
+                            className="carousel-arrow"
+                            onClick={nextExteriorImage}
+                            aria-label="Next image"
+                        >
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                <path d="M5 12h14M12 5l7 7-7 7" />
+                            </svg>
+                        </button>
                     </RevealOnScroll>
                 </div>
                 <div className="grid-content">
