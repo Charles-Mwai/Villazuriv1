@@ -49,7 +49,7 @@ const Navbar = () => {
                     <X size={32} color="#fff" />
                 </div>
                 <ul className="overlay-links">
-                    <li><a href="#villa" onClick={toggleMenu}>The Villa</a></li>
+
                     <li><a href="#experience" onClick={toggleMenu}>Experience</a></li>
                     <li><Link to="/gallery" onClick={toggleMenu}>Gallery</Link></li>
                     <li><Link to="/watamu" onClick={toggleMenu}>Watamu</Link></li>
