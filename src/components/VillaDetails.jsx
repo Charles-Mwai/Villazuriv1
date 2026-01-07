@@ -33,7 +33,7 @@ const VillaDetails = () => {
                     <RevealOnScroll>
                         <h3>Your Private Oasis</h3>
                         <p>
-                            The centerpiece of VillaZuri is your private infinity pool,
+                            The centerpiece of VillaZuri is your Swimming Pool,
                             seemingly merging with the Indian Ocean. Relax on the sun deck
                             with a cocktail in hand, surrounded by lush tropical gardens.
                         </p>

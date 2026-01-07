@@ -11,6 +11,7 @@ import Watamu from './pages/Public/Watamu';
 import FullGallery from './pages/Public/FullGallery';
 import Checkout from './pages/Public/Checkout';
 import Footer from './components/Footer';
+import WatamuFeature from './components/WatamuFeature';
 
 // Admin pages
 import Login from './pages/Admin/Login';
@@ -28,6 +29,7 @@ const PublicLayout = () => (
         <Hero />
         <Experience />
         <VillaDetails />
+        <WatamuFeature />
         <Footer />
     </>
 );
