@@ -7,7 +7,9 @@ import Hero from './components/Hero';
 import Experience from './components/Experience';
 import VillaDetails from './components/VillaDetails';
 import MarqueeGallery from './components/MarqueeGallery';
+import Watamu from './pages/Public/Watamu';
 import FullGallery from './pages/Public/FullGallery';
+import Checkout from './pages/Public/Checkout';
 import Footer from './components/Footer';
 
 // Admin pages
@@ -26,7 +28,6 @@ const PublicLayout = () => (
         <Hero />
         <Experience />
         <VillaDetails />
-        <MarqueeGallery />
         <Footer />
     </>
 );
@@ -39,6 +40,8 @@ function App() {
                     {/* Public routes */}
                     <Route path="/" element={<PublicLayout />} />
                     <Route path="/gallery" element={<FullGallery />} />
+                    <Route path="/watamu" element={<Watamu />} />
+                    <Route path="/checkout" element={<Checkout />} />
 
                     {/* Admin routes */}
                     <Route path="/admin/login" element={<Login />} />

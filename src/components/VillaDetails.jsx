@@ -1,7 +1,5 @@
 import React from 'react';
 import './SectionStyles.css';
-import bedroomImg from '../assets/bedroom.png';
-import poolImg from '../assets/pool.png';
 import RevealOnScroll from './RevealOnScroll';
 
 const VillaDetails = () => {
@@ -10,7 +8,7 @@ const VillaDetails = () => {
             <div className="grid-row">
                 <div className="grid-image">
                     <RevealOnScroll>
-                        <img src={bedroomImg} alt="Luxury Master Bedroom" />
+                        <img src="/villa pics/IMG_5556-cmpr.jpg" alt="Luxury Master Bedroom" />
                     </RevealOnScroll>
                 </div>
                 <div className="grid-content">
@@ -28,7 +26,7 @@ const VillaDetails = () => {
             <div className="grid-row reverse">
                 <div className="grid-image">
                     <RevealOnScroll>
-                        <img src={poolImg} alt="Infinity Pool" />
+                        <img src="/villa pics/IMG_3819.jpg" alt="Infinity Pool" />
                     </RevealOnScroll>
                 </div>
                 <div className="grid-content">
