@@ -215,18 +215,22 @@ const BookingModal = ({ isOpen, onClose }) => {
                     <div className="form-row">
                         <div className="form-group half-width">
                             <label htmlFor="guests">Number of People</label>
-                            <select
-                                id="guests"
-                                name="guests"
-                                value={formData.guests}
-                                onChange={handleChange}
-                                className={`underlined-input ${!formData.guests ? 'is-placeholder' : ''}`}
-                            >
-                                <option value="" disabled>Please select</option>
-                                {Array.from({ length: 15 }, (_, i) => i + 1).map(num => (
-                                    <option key={num} value={num}>{num}</option>
-                                ))}
-                            </select>
+                            <div className="custom-select-wrapper">
+                                <select
+                                    id="guests"
+                                    name="guests"
+                                    value={formData.guests}
+                                    onChange={handleChange}
+                                    className={`underlined-input ${!formData.guests ? 'is-placeholder' : ''}`}
+                                    style={{ cursor: 'pointer' }}
+                                >
+                                    <option value="" disabled>Please select</option>
+                                    {Array.from({ length: 15 }, (_, i) => i + 1).map(num => (
+                                        <option key={num} value={num}>{num}</option>
+                                    ))}
+                                </select>
+                                <ChevronDown className="custom-select-icon" size={20} strokeWidth={1.5} />
+                            </div>
                         </div>
 
                         <div className="form-group half-width">

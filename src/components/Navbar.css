@@ -217,12 +217,26 @@
 }
 
 /* Small Device Adjustments */
-@media (max-width: 360px) {
-    .logo {
-        font-size: 1rem;
-    }
+.overlay-links a {
+    font-size: 1.2rem;
+}
+}
 
-    .overlay-links a {
-        font-size: 1.2rem;
-    }
+.overlay-book-btn {
+    background: transparent;
+    border: 1px solid #fff;
+    color: #fff;
+    padding: 12px 30px;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    cursor: pointer;
+    font-family: var(--font-heading);
+    transition: all 0.3s ease;
+    margin-top: 10px;
+}
+
+.overlay-book-btn:hover {
+    background: #fff;
+    color: var(--color-primary);
 }

@@ -24,14 +24,16 @@
     background-color: #fff;
     /* White background for the form itself */
     width: 100%;
-    padding: 40px 25px;
+    padding: 20px 20px;
+    /* Reduced vertical padding for mobile */
     position: relative;
     max-width: 500px;
     /* Narrower on mobile for better look */
     border-radius: 16px;
     box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
     animation: slideUp 0.4s ease-out forwards;
-    max-height: 90vh;
+    max-height: 95vh;
+    /* Slightly more height */
     overflow-y: auto;
 }
 
@@ -127,6 +129,7 @@ label {
     position: relative;
     display: flex;
     align-items: center;
+    width: 100%;
 }
 
 .custom-select-icon {

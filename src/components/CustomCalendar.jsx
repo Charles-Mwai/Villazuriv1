@@ -7,12 +7,25 @@ const CustomCalendar = ({ selectedDate, onDateSelect, onClose }) => {
     const [currentDate, setCurrentDate] = useState(new Date());
     const [bookedDates, setBookedDates] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [showMonthDropdown, setShowMonthDropdown] = useState(false);
+    const [showYearDropdown, setShowYearDropdown] = useState(false);
 
     useEffect(() => {
         if (selectedDate) {
             setCurrentDate(new Date(selectedDate));
         }
     }, [selectedDate]);
+
+    // Close dropdowns when clicking outside
+    useEffect(() => {
+        const handleClickOutside = () => {
+            setShowMonthDropdown(false);
+            setShowYearDropdown(false);
+        };
+
+        window.addEventListener('click', handleClickOutside);
+        return () => window.removeEventListener('click', handleClickOutside);
+    }, []);
 
     // Fetch booked dates from Supabase
     useEffect(() => {
@@ -36,11 +49,6 @@ const CustomCalendar = ({ selectedDate, onDateSelect, onClose }) => {
         const month = date.getMonth();
         const days = new Date(year, month + 1, 0).getDate();
         const firstDay = new Date(year, month, 1).getDay(); // 0 = Sunday
-        // Adjust for Monday start if needed, but screenshot shows Mon start? 
-        // Screenshot shows Mon Tue Wed Thu Fri Sat Sun.
-        // JS getDay(): 0=Sun, 1=Mon...
-        // So we need to shift.
-
         return { days, firstDay };
     };
 
@@ -53,6 +61,8 @@ const CustomCalendar = ({ selectedDate, onDateSelect, onClose }) => {
         "January", "February", "March", "April", "May", "June",
         "July", "August", "September", "October", "November", "December"
     ];
+
+    const years = Array.from({ length: 11 }, (_, i) => 2026 + i);
 
     const generateCalendarDays = () => {
         const { days, firstDay } = getDaysInMonth(currentDate);
@@ -104,6 +114,16 @@ const CustomCalendar = ({ selectedDate, onDateSelect, onClose }) => {
         setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 1));
     };
 
+    const handleMonthSelect = (monthIndex) => {
+        setCurrentDate(new Date(currentDate.getFullYear(), monthIndex, 1));
+        setShowMonthDropdown(false);
+    };
+
+    const handleYearSelect = (year) => {
+        setCurrentDate(new Date(year, currentDate.getMonth(), 1));
+        setShowYearDropdown(false);
+    };
+
     const isDateBooked = (date) => {
         const dateStr = date.toISOString().split('T')[0];
         return bookedDates.includes(dateStr);
@@ -145,12 +165,63 @@ const CustomCalendar = ({ selectedDate, onDateSelect, onClose }) => {
                 </button>
 
                 <div className="month-year-display">
-                    <span className="month-label">
-                        {months[currentDate.getMonth()]} <ChevronDown size={14} className="dropdown-chevron" />
-                    </span>
-                    <span className="year-label">
-                        {currentDate.getFullYear()} <ChevronDown size={14} className="dropdown-chevron" />
-                    </span>
+                    <div className="dropdown-container">
+                        <span
+                            className="month-label"
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                setShowMonthDropdown(!showMonthDropdown);
+                                setShowYearDropdown(false);
+                            }}
+                        >
+                            {months[currentDate.getMonth()]} <ChevronDown size={14} className={`dropdown-chevron ${showMonthDropdown ? 'rotate' : ''}`} />
+                        </span>
+                        {showMonthDropdown && (
+                            <div className="dropdown-menu month-dropdown">
+                                {months.map((month, index) => (
+                                    <div
+                                        key={month}
+                                        className={`dropdown-item ${currentDate.getMonth() === index ? 'active' : ''}`}
+                                        onClick={(e) => {
+                                            e.stopPropagation();
+                                            handleMonthSelect(index);
+                                        }}
+                                    >
+                                        {month}
+                                    </div>
+                                ))}
+                            </div>
+                        )}
+                    </div>
+
+                    <div className="dropdown-container">
+                        <span
+                            className="year-label"
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                setShowYearDropdown(!showYearDropdown);
+                                setShowMonthDropdown(false);
+                            }}
+                        >
+                            {currentDate.getFullYear()} <ChevronDown size={14} className={`dropdown-chevron ${showYearDropdown ? 'rotate' : ''}`} />
+                        </span>
+                        {showYearDropdown && (
+                            <div className="dropdown-menu year-dropdown">
+                                {years.map((year) => (
+                                    <div
+                                        key={year}
+                                        className={`dropdown-item ${currentDate.getFullYear() === year ? 'active' : ''}`}
+                                        onClick={(e) => {
+                                            e.stopPropagation();
+                                            handleYearSelect(year);
+                                        }}
+                                    >
+                                        {year}
+                                    </div>
+                                ))}
+                            </div>
+                        )}
+                    </div>
                 </div>
 
                 <button className="nav-btn" onClick={handleNextMonth}>

@@ -28,6 +28,12 @@ const Navbar = () => {
         openBooking();
     };
 
+    const handleOverlayBooking = (e) => {
+        e.preventDefault();
+        toggleMenu();
+        openBooking();
+    };
+
     return (
         <>
             <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
@@ -49,12 +55,11 @@ const Navbar = () => {
                     <X size={32} color="#fff" />
                 </div>
                 <ul className="overlay-links">
-
                     <li><a href="#experience" onClick={toggleMenu}>Experience</a></li>
                     <li><Link to="/gallery" onClick={toggleMenu}>Gallery</Link></li>
                     <li><Link to="/watamu" onClick={toggleMenu}>Watamu</Link></li>
                     <li><Link to="/blog" onClick={toggleMenu}>Blog</Link></li>
-                    <li><a href="#contact" onClick={toggleMenu}>Contact</a></li>
+                    <li><button className="overlay-book-btn" onClick={handleOverlayBooking}>Book Your Stay</button></li>
                 </ul>
             </div>
 
