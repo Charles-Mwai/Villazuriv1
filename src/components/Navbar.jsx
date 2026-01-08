@@ -36,9 +36,9 @@ const Navbar = () => {
 
     return (
         <>
-            <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
+            <nav className={`navbar ${scrolled ? 'scrolled' : ''} ${isOpen ? 'menu-open' : ''}`}>
                 <div className="container navbar-container">
-                    <div className="menu-trigger custom-hamburger" onClick={toggleMenu}>
+                    <div className={`menu-trigger custom-hamburger ${isOpen ? 'active' : ''}`} onClick={toggleMenu}>
                         <span></span>
                         <span></span>
                         <span></span>
@@ -51,11 +51,8 @@ const Navbar = () => {
             </nav>
 
             <div className={`menu-overlay ${isOpen ? 'active' : ''}`}>
-                <button className="overlay-close" onClick={toggleMenu} aria-label="Close menu">
-                    <X size={32} color="#fff" />
-                </button>
                 <ul className="overlay-links">
-                    <li><a href="#" onClick={(e) => { e.preventDefault(); window.scrollTo(0, 0); toggleMenu(); }}>Home</a></li>
+                    <li><Link to="/" onClick={() => { window.scrollTo(0, 0); toggleMenu(); }}>Home</Link></li>
                     <li><a href="#experience" onClick={toggleMenu}>Experience</a></li>
                     <li><Link to="/gallery" onClick={toggleMenu}>Gallery</Link></li>
                     <li><Link to="/watamu" onClick={toggleMenu}>Watamu</Link></li>

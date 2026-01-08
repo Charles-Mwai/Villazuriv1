@@ -18,6 +18,21 @@
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
 }
 
+/* Menu Open State */
+.navbar.menu-open {
+    z-index: 3000;
+    /* Higher than menu-overlay */
+    background: transparent !important;
+    box-shadow: none !important;
+}
+
+.navbar.menu-open .logo,
+.navbar.menu-open .book-button {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
 .navbar-container {
     display: grid;
     grid-template-columns: 1fr auto 1fr;
@@ -68,12 +83,12 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    width: 26px;
-    /* Slightly more compact */
-    height: 14px;
+    width: 28px;
+    height: 16px;
     cursor: pointer;
-    z-index: 1001;
-    transition: transform 0.3s ease;
+    z-index: 2001;
+    /* Above overlay */
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
 .custom-hamburger span {
@@ -81,7 +96,35 @@
     width: 100%;
     height: 1.5px;
     background-color: #fff;
-    transition: transform 0.3s ease, opacity 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    transform-origin: center;
+}
+
+/* Hover Effect - Staggered width */
+.custom-hamburger:not(.active):hover span:nth-child(1) {
+    width: 70%;
+}
+
+.custom-hamburger:not(.active):hover span:nth-child(2) {
+    width: 100%;
+}
+
+.custom-hamburger:not(.active):hover span:nth-child(3) {
+    width: 85%;
+}
+
+/* Active Morph to X */
+.custom-hamburger.active span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+}
+
+.custom-hamburger.active span:nth-child(2) {
+    opacity: 0;
+    transform: translateX(-10px);
+}
+
+.custom-hamburger.active span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
 }
 
 /* Full Screen Overlay Menu */
@@ -106,28 +149,6 @@
 .menu-overlay.active {
     opacity: 1;
     visibility: visible;
-}
-
-.overlay-close {
-    position: absolute;
-    top: 30px;
-    right: 20px;
-    cursor: pointer;
-    width: 44px;
-    /* Larger touch target for mobile */
-    height: 44px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: transform 0.4s ease;
-    z-index: 10;
-    background: transparent;
-    border: none;
-    padding: 0;
-}
-
-.overlay-close:hover {
-    transform: rotate(90deg);
 }
 
 .overlay-links {
@@ -208,8 +229,16 @@
     }
 
     .custom-hamburger {
-        width: 32px;
-        height: 18px;
+        width: 36px;
+        height: 22px;
+    }
+
+    .custom-hamburger.active span:nth-child(1) {
+        transform: translateY(10px) rotate(45deg);
+    }
+
+    .custom-hamburger.active span:nth-child(3) {
+        transform: translateY(-10px) rotate(-45deg);
     }
 
     .overlay-links a,
@@ -222,10 +251,6 @@
         margin: 35px 0;
     }
 
-    .overlay-close {
-        top: 50px;
-        right: 50px;
-    }
 }
 
 /* Small Device Adjustments */

@@ -10,6 +10,8 @@
 /* Sidebar & Tabs */
 .gallery-sidebar {
     width: 100%;
+    order: 2;
+    /* Move to bottom on mobile */
 }
 
 .tabs-nav {
@@ -95,21 +97,40 @@
     font-size: 0.8rem;
     font-weight: 400;
     letter-spacing: 0.25em;
-    /* Very wide spacing */
     cursor: pointer;
-    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+    transition: color 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
     min-width: 180px;
     text-align: center;
+    z-index: 1;
+}
+
+.book-link-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    background: #1a1a1a;
+    z-index: -1;
+    transition: width 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
 .book-link-btn:hover {
-    background: #1a1a1a;
     color: #fff;
+}
+
+.book-link-btn:hover::before {
+    width: 100%;
 }
 
 /* Main Content */
 .gallery-main-content {
     width: 100%;
+    order: 1;
+    /* Move to top on mobile */
 }
 
 /* Masonry Grid Adjustments for Split Layout */
@@ -130,8 +151,14 @@
     .gallery-sidebar {
         position: sticky;
         top: 120px;
-        /* Below navbar */
         height: auto;
+        order: 1;
+        /* Reset for desktop */
+    }
+
+    .gallery-main-content {
+        order: 2;
+        /* Reset for desktop */
     }
 }
 
