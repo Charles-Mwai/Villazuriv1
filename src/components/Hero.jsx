@@ -33,8 +33,8 @@ const Hero = () => {
             <div className="hero-overlay"></div>
             <div className="container hero-content">
                 <h1 className="hero-title">Your Private Coastal Sanctuary</h1>
-                <p className="hero-subtitle">Welcome to Villa Zuri</p>
-                <Link to="/gallery" className="cta-button">Explore The Villa</Link>
+                <p className="hero-subtitle">Welcome to Watamu</p>
+                <Link to="/gallery" className="cta-button">Explore</Link>
             </div>
         </section>
     );

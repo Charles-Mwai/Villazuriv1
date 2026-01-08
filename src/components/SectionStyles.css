@@ -234,8 +234,17 @@
 .feature-item h4 {
     font-family: var(--font-heading);
     font-size: 1rem;
-    margin-bottom: var(--spacing-sm);
+    margin-bottom: var(--spacing-xs);
     color: var(--color-primary);
+}
+
+.feature-description {
+    font-size: 0.85rem;
+    color: #666;
+    line-height: 1.5;
+    font-weight: 300;
+    max-width: 250px;
+    margin: 0 auto;
 }
 
 @media (min-width: 1024px) {

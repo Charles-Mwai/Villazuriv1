@@ -21,10 +21,26 @@ const outdoorImages = [
 ];
 
 const activities = [
-    { title: 'Dolphin Watching', image: '/Activities/WhatsApp Image 2026-01-08 at 12.54.00.jpeg' },
-    { title: 'Dhow Cruise', image: '/Activities/WhatsApp Image 2026-01-08 at 12.56.02.jpeg' },
-    { title: 'Dining', image: '/Activities/WhatsApp Image 2026-01-08 at 13.00.13.jpeg' },
-    { title: 'Marine Park', image: '/Activities/WhatsApp Image 2026-01-08 at 13.00.14.jpeg' }
+    {
+        title: 'Dolphin Watching',
+        image: '/Activities/WhatsApp Image 2026-01-08 at 12.54.00.jpeg',
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+    },
+    {
+        title: 'Dhow Cruise',
+        image: '/Activities/WhatsApp Image 2026-01-08 at 12.56.02.jpeg',
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+    },
+    {
+        title: 'Dining',
+        image: '/Activities/WhatsApp Image 2026-01-08 at 13.00.13.jpeg',
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+    },
+    {
+        title: 'Marine Park',
+        image: '/Activities/WhatsApp Image 2026-01-08 at 13.00.14.jpeg',
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+    }
 ];
 
 const VillaDetails = () => {
@@ -149,6 +165,7 @@ const VillaDetails = () => {
                                     <img src={item.image} alt={item.title} className="feature-image" />
                                 </div>
                                 <h4>{item.title}</h4>
+                                <p className="feature-description">{item.description}</p>
                             </div>
                         ))}
                     </div>
