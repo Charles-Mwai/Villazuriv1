@@ -19,7 +19,11 @@ const runTests = () => {
 
     // Peak Test (Dec 20 - Dec 22 = 2 nights @ 600 = 1200)
     const peakCost = calculateTotalCost('2026-12-20', '2026-12-22');
-    logTest("Peak (2 nights)", peakCost, 1200);
+    logTest("Peak (Dec) (2 nights)", peakCost, 1200);
+
+    // New Peak Test (July 1 - July 4 = 3 nights @ 600 = 1800)
+    const newPeakCost = calculateTotalCost('2026-07-01', '2026-07-04');
+    logTest("Peak (July) (3 nights)", newPeakCost, 1800);
 
     // Crossover Test (Sept 29 - Oct 2 = 3 nights) -> 29-30 (Off), 30-1 (Off), 1-2 (Peak)
     // Wait: Sept 30 is Off-Peak. Oct 1 is Peak.

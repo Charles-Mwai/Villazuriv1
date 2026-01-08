@@ -150,49 +150,40 @@
 
 
 
-.hero-bottom-left {
-    position: absolute;
-    bottom: 60px;
-    left: 60px;
-    text-align: left;
-    max-width: 400px;
+.hero-center-content {
+    text-align: center;
+    max-width: 800px;
     z-index: 10;
+    padding: 0 20px;
 }
 
-.hero-bottom-left h3 {
+.hero-center-content h3 {
     font-family: var(--font-heading);
-    font-size: 1.8rem;
+    font-size: 3rem;
     color: #fff;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
-    margin-bottom: 1rem;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    letter-spacing: 0.1em;
+    margin-bottom: 1.5rem;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
 }
 
-.hero-bottom-left p {
+.hero-center-content p {
     font-family: var(--font-body);
-    font-size: 1rem;
+    font-size: 1.2rem;
     color: #eee;
-    margin: 0;
-    /* Override global .watamu-hero p margin: 0 auto */
-    margin-right: 0;
-    margin-left: 0;
-    max-width: 100%;
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
-    line-height: 1.5;
+    margin: 0 auto;
+    max-width: 600px;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
+    line-height: 1.6;
+    font-weight: 300;
 }
 
 @media (max-width: 768px) {
-    .hero-bottom-left {
-        position: relative;
-        bottom: auto;
-        left: auto;
-        margin-top: 40px;
-        text-align: center;
-        padding: 0 20px;
+    .hero-center-content h3 {
+        font-size: 2rem;
     }
 
-    .hero-bottom-left p {
-        margin: 0 auto;
+    .hero-center-content p {
+        font-size: 1rem;
     }
 }

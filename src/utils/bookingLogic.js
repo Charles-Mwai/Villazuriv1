@@ -2,8 +2,8 @@
  * Villa Zuri Booking Logic
  * 
  * Seasons:
- * - Off-Peak: Feb 1 - Sept 30 ($400/night)
- * - Peak: Oct 1 - Jan 31 ($600/night)
+ * - Off-Peak: Feb 1 - May 31, Sept 1 - Sept 30 ($400/night)
+ * - Peak: June 1 - Aug 31, Oct 1 - Jan 31 ($600/night)
  */
 
 const RATES = {
@@ -46,8 +46,8 @@ export const checkAvailability = (startDate, endDate, existingBookings = []) => 
  */
 const isPeakSeason = (date) => {
     const month = date.getMonth(); // 0-indexed (Jan=0, Dec=11)
-    // Peak: Oct(9), Nov(10), Dec(11), Jan(0)
-    return month >= 9 || month === 0;
+    // Peak: June(5), July(6), August(7) AND Oct(9), Nov(10), Dec(11), Jan(0)
+    return (month >= 5 && month <= 7) || month >= 9 || month === 0;
 };
 
 /**

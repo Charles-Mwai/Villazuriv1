@@ -16,7 +16,7 @@ const Watamu = () => {
 
             <section className="watamu-hero">
 
-                <div className="hero-bottom-left">
+                <div className="hero-center-content">
                     <h3>Beach & Marine Life</h3>
                     <p>peaceful tropical escape with white-sand beaches, warm turquoise waters, and unforgettable ocean experiences.</p>
                 </div>
@@ -26,8 +26,8 @@ const Watamu = () => {
                 <RevealOnScroll>
                     <div className="watamu-full-image">
                         <img
-                            src="/villa pics/watamu-beach-chiara.jpg"
-                            alt="Watamu Beach Coastline"
+                            src="/aerial-view-of-a-tropical-coast-ocean-scenery-sur-2026-01-07-01-19-52-utc.jpg"
+                            alt="Watamu Beach Aerial View"
                         />
                     </div>
                 </RevealOnScroll>
