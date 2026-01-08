@@ -3,30 +3,21 @@ import './SectionStyles.css';
 import RevealOnScroll from './RevealOnScroll';
 
 const interiorImages = [
-    '/Interior pics/IMG_5508-cmpr.jpg',
-    '/Interior pics/IMG_5509-cmpr.jpg',
-    '/Interior pics/IMG_5510-cmpr.jpg',
-    '/Interior pics/IMG_5511-cmpr.jpg',
-    '/Interior pics/IMG_5512-cmpr.jpg',
-    '/Interior pics/IMG_5514-cmpr.jpg',
-    '/Interior pics/IMG_5515-cmpr.jpg',
-    '/Interior pics/IMG_5517-cmpr.jpg',
-    '/Interior pics/IMG_5518-cmpr.jpg'
+    '/Interior pics/IMG_5518-cmpr.jpg',
+    '/Interior pics/IMG_5535.JPG',
+    '/Interior pics/IMG_5507.JPG'
 ];
 
 const exteriorImages = [
-    '/Exterior pics/IMG_3822-cmpr.jpg',
-    '/Exterior pics/IMG_3827-cmpr.jpg',
-    '/Exterior pics/IMG_5485-cmpr.jpg',
-    '/Exterior pics/IMG_5487-cmpr.jpg',
-    '/Exterior pics/IMG_5488-cmpr.jpg',
-    '/Exterior pics/IMG_5489-cmpr.jpg'
+    '/villa pics/IMG_5541-cmpr.jpg',
+    '/villa pics/IMG_5487-cmpr.jpg',
+    '/Exterior pics/IMG_3827-cmpr.jpg'
 ];
 
 const outdoorImages = [
-    '/IMG_5552-cmpr.jpg',
-    '/WhatsApp Image 2026-01-08 at 11.36.24.jpeg',
-    '/WhatsApp Image 2026-01-08 at 11.36.25.jpeg'
+    '/WhatsApp Image 2026-01-08 at 12.18.55.jpg',
+    '/WhatsApp Image 2026-01-08 at 12.18.55.jpeg',
+    '/IMG_5552-cmpr.jpg'
 ];
 
 const VillaDetails = () => {
@@ -69,7 +60,7 @@ const VillaDetails = () => {
                 </div>
                 <div className="grid-content">
                     <RevealOnScroll>
-                        <h3>Elegant Interiors</h3>
+                        <h3>Living</h3>
                         <p>
                             Awake to the sound of the ocean in our masterfully designed suites.
                             Detailed with locally sourced furniture and high-end linens,
@@ -100,7 +91,7 @@ const VillaDetails = () => {
                 </div>
                 <div className="grid-content">
                     <RevealOnScroll>
-                        <h3>Your Private Oasis</h3>
+                        <h3>Play</h3>
                         <p>
                             The centerpiece of Villa Zuri is your Swimming Pool,
                             seemingly merging with the Indian Ocean. Relax on the sun deck
@@ -115,7 +106,7 @@ const VillaDetails = () => {
                     <RevealOnScroll>
                         <img
                             src={outdoorImages[currentOutdoorIndex]}
-                            alt={`Outdoors ${currentOutdoorIndex + 1}`}
+                            alt={`Relaxation ${currentOutdoorIndex + 1}`}
                             className="carousel-image"
                         />
                         <button
@@ -131,11 +122,11 @@ const VillaDetails = () => {
                 </div>
                 <div className="grid-content">
                     <RevealOnScroll>
-                        <h3>Outdoors</h3>
+                        <h3>Relaxation</h3>
                         <p>
                             Experience the harmony of nature and luxury. Our outdoor spaces are designed to provide
                             the perfect balance of relaxation and adventure. Whether you wish to bask in the sun
-                            or enjoy a quiet evening breeze, the outdoors await you.
+                            or enjoy a quiet evening breeze, the Relaxation await you.
                         </p>
                     </RevealOnScroll>
                 </div>

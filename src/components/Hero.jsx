@@ -8,7 +8,7 @@ const Hero = () => {
     const images = [
         "/villa pics/IMG_5490-cmpr.jpg",
         "/villa pics/IMG_5491-cmpr.jpg",
-        "/villa pics/IMG_5492-cmpr.jpg",
+        "/IMG_5522.JPG",
         "/villa pics/IMG_5541-cmpr.jpg",
         "/villa pics/WhatsApp Image 2026-01-07 at 13.16.51.jpg"
     ];
