@@ -26,12 +26,14 @@
 /* Grid Layout for Villa Details */
 .villa-details {
     width: 100%;
+    background-color: #fff;
 }
 
 .grid-row {
     display: flex;
     flex-direction: column;
     /* Default to column for mobile */
+    margin-bottom: var(--spacing-xl);
 }
 
 /* Base styles / Mobile Defaults */

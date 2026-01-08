@@ -51,10 +51,11 @@ const Navbar = () => {
             </nav>
 
             <div className={`menu-overlay ${isOpen ? 'active' : ''}`}>
-                <div className="overlay-close" onClick={toggleMenu}>
+                <button className="overlay-close" onClick={toggleMenu} aria-label="Close menu">
                     <X size={32} color="#fff" />
-                </div>
+                </button>
                 <ul className="overlay-links">
+                    <li><a href="#" onClick={(e) => { e.preventDefault(); window.scrollTo(0, 0); toggleMenu(); }}>Home</a></li>
                     <li><a href="#experience" onClick={toggleMenu}>Experience</a></li>
                     <li><Link to="/gallery" onClick={toggleMenu}>Gallery</Link></li>
                     <li><Link to="/watamu" onClick={toggleMenu}>Watamu</Link></li>

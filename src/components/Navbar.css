@@ -120,6 +120,10 @@
     align-items: center;
     justify-content: center;
     transition: transform 0.4s ease;
+    z-index: 10;
+    background: transparent;
+    border: none;
+    padding: 0;
 }
 
 .overlay-close:hover {
@@ -161,18 +165,25 @@
     transition-delay: 0.4s;
 }
 
-.overlay-links a {
+.overlay-links a,
+.overlay-book-btn {
     font-family: var(--font-heading);
-    font-size: 1.5rem;
-    /* Balanced for mobile */
+    font-size: 1.8rem;
+    /* Increased for mobile */
     color: #fff;
     text-decoration: none;
     position: relative;
     letter-spacing: 0.05em;
     transition: color 0.3s ease;
+    background: transparent;
+    border: none;
+    padding: 0;
+    text-transform: none;
+    cursor: pointer;
 }
 
-.overlay-links a:hover {
+.overlay-links a:hover,
+.overlay-book-btn:hover {
     color: var(--color-accent);
 }
 
@@ -201,8 +212,9 @@
         height: 18px;
     }
 
-    .overlay-links a {
-        font-size: 2rem;
+    .overlay-links a,
+    .overlay-book-btn {
+        font-size: 2.5rem;
         /* Bold, luxury look on desktop */
     }
 
@@ -217,26 +229,10 @@
 }
 
 /* Small Device Adjustments */
-.overlay-links a {
-    font-size: 1.2rem;
-}
-}
+@media (max-width: 480px) {
 
-.overlay-book-btn {
-    background: transparent;
-    border: 1px solid #fff;
-    color: #fff;
-    padding: 12px 30px;
-    font-size: 1.2rem;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    cursor: pointer;
-    font-family: var(--font-heading);
-    transition: all 0.3s ease;
-    margin-top: 10px;
-}
-
-.overlay-book-btn:hover {
-    background: #fff;
-    color: var(--color-primary);
+    .overlay-links a,
+    .overlay-book-btn {
+        font-size: 1.5rem;
+    }
 }

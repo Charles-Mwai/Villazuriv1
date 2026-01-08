@@ -141,7 +141,7 @@ const VillaDetails = () => {
 
             <div className="features-section">
                 <div className="container">
-                    <h3 className="activities-subheading">What to do while you stay with us</h3>
+                    <h3 className="activities-subheading">Things to do while you stay with us</h3>
                     <div className="features-grid">
                         {activities.map((item, index) => (
                             <div key={index} className="feature-item">
