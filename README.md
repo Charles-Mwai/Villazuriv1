@@ -1,6 +1,6 @@
-# VillaZuri
+# Villa Zuri
 
-**VillaZuri** is a premium, single-property luxury booking platform designed to offer a seamless and visually immersive experience for guests seeking a private coastal escape.
+**Villa Zuri** is a premium, single-property luxury booking platform designed to offer a seamless and visually immersive experience for guests seeking a private coastal escape.
 
 Inspired by the high-end boutique aesthetic of *Alfajiri Villas*, this project focuses on minimalism, elegance, and mobile-first performance.
 

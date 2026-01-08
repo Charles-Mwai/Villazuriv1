@@ -44,7 +44,7 @@ const Navbar = () => {
                         <span></span>
                     </div>
 
-                    <Link to="/" className="logo">VillaZuri</Link>
+                    <Link to="/" className="logo">Villa Zuri</Link>
 
                     <button className="book-button" onClick={handleBookingClick}>BOOK</button>
                 </div>

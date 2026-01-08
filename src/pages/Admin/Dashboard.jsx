@@ -38,7 +38,7 @@ const Dashboard = () => {
         <div className="dashboard-page">
             <div className="dashboard-header">
                 <h1>Dashboard</h1>
-                <p>Welcome to the VillaZuri admin panel</p>
+                <p>Welcome to the Villa Zuri admin panel</p>
             </div>
 
             <div className="stats-grid">

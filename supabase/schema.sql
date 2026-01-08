@@ -1,4 +1,4 @@
--- VillaZuri Booking System Database Schema
+-- Villa Zuri Booking System Database Schema
 -- Run this SQL in your Supabase SQL Editor
 
 -- Create bookings table
@@ -69,5 +69,5 @@ SELECT
 FROM bookings
 WHERE status IN ('confirmed', 'paid');
 
-COMMENT ON TABLE bookings IS 'Stores all booking information for VillaZuri';
+COMMENT ON TABLE bookings IS 'Stores all booking information for Villa Zuri';
 COMMENT ON COLUMN bookings.status IS 'Booking status: pending (awaiting payment), confirmed (payment received), paid (archived), cancelled';

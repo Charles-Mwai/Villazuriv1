@@ -1,5 +1,5 @@
 /**
- * VillaZuri Booking Logic
+ * Villa Zuri Booking Logic
  * 
  * Seasons:
  * - Off-Peak: Feb 1 - Sept 30 ($400/night)

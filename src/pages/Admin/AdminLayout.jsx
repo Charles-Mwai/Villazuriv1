@@ -25,7 +25,7 @@ const AdminLayout = () => {
         <div className="admin-layout">
             <aside className="admin-sidebar">
                 <div className="sidebar-header">
-                    <h2 className="sidebar-title">VillaZuri</h2>
+                    <h2 className="sidebar-title">Villa Zuri</h2>
                     <p className="sidebar-subtitle">Admin</p>
                 </div>
 
@@ -90,7 +90,7 @@ const AdminLayout = () => {
                     <div className="breadcrumb-area">
                         <h2 className="page-title">Welcome!</h2>
                         <div className="breadcrumbs">
-                            <span>VillaZuri</span> &rsaquo; <span>Admin</span> &rsaquo; <span>Dashboard</span>
+                            <span>Villa Zuri</span> &rsaquo; <span>Admin</span> &rsaquo; <span>Dashboard</span>
                         </div>
                     </div>
                     <Outlet />

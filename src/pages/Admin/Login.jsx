@@ -30,7 +30,7 @@ const Login = () => {
     return (
         <div className="login-container">
             <div className="login-card">
-                <h1 className="login-title">VillaZuri Admin</h1>
+                <h1 className="login-title">Villa Zuri Admin</h1>
                 <p className="login-subtitle">Enter password to access dashboard</p>
 
                 <form onSubmit={handleSubmit} className="login-form">

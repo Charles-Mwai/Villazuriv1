@@ -147,7 +147,7 @@ const LocationMap = ({ center, zoom = 14 }) => {
             zoom={zoom}
             options={options}
         >
-            <Marker position={center} title="VillaZuri" />
+            <Marker position={center} title="Villa Zuri" />
         </GoogleMap>
     );
 };

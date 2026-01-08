@@ -38,7 +38,7 @@ const Watamu = () => {
                             <div className="location-details">
                                 <h2>Finding Your Way</h2>
                                 <p className="location-intro">
-                                    Nestled along the pristine shores, VillaZuri is perfectly positioned
+                                    Nestled along the pristine shores, Villa Zuri is perfectly positioned
                                     to offer both seclusion and accessibility.
                                 </p>
                                 <div className="directions-info">
