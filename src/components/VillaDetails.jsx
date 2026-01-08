@@ -20,6 +20,13 @@ const outdoorImages = [
     '/IMG_5552-cmpr.jpg'
 ];
 
+const activities = [
+    { title: 'Dolphin Watching', image: '/Activities/WhatsApp Image 2026-01-08 at 12.54.00.jpeg' },
+    { title: 'Dhow Cruise', image: '/Activities/WhatsApp Image 2026-01-08 at 12.56.02.jpeg' },
+    { title: 'Dining', image: '/Activities/WhatsApp Image 2026-01-08 at 13.00.13.jpeg' },
+    { title: 'Marine Park', image: '/Activities/WhatsApp Image 2026-01-08 at 13.00.14.jpeg' }
+];
+
 const VillaDetails = () => {
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
     const [currentExteriorIndex, setCurrentExteriorIndex] = useState(0);
@@ -129,6 +136,22 @@ const VillaDetails = () => {
                             or enjoy a quiet evening breeze, the Relaxation await you.
                         </p>
                     </RevealOnScroll>
+                </div>
+            </div>
+
+            <div className="features-section">
+                <div className="container">
+                    <h3 className="activities-subheading">What to do while you stay with us</h3>
+                    <div className="features-grid">
+                        {activities.map((item, index) => (
+                            <div key={index} className="feature-item">
+                                <div className="feature-image-wrapper">
+                                    <img src={item.image} alt={item.title} className="feature-image" />
+                                </div>
+                                <h4>{item.title}</h4>
+                            </div>
+                        ))}
+                    </div>
                 </div>
             </div>
         </section>
