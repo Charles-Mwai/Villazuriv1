@@ -14,6 +14,33 @@ const FullGallery = () => {
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
     const { openBooking } = useBooking();
 
+    // Swipe handlers
+    const [touchStart, setTouchStart] = useState(null);
+    const [touchEnd, setTouchEnd] = useState(null);
+
+    // the required distance between touchStart and touchEnd to be considered a swipe
+    const minSwipeDistance = 50;
+
+    const onTouchStart = (e) => {
+        setTouchEnd(null); // otherwise the swipe is fired even with very small hacks
+        setTouchStart(e.targetTouches[0].clientX);
+    };
+
+    const onTouchMove = (e) => setTouchEnd(e.targetTouches[0].clientX);
+
+    const onTouchEnd = () => {
+        if (!touchStart || !touchEnd) return;
+        const distance = touchStart - touchEnd;
+        const isLeftSwipe = distance > minSwipeDistance;
+        const isRightSwipe = distance < -minSwipeDistance;
+
+        if (isLeftSwipe) {
+            nextImage();
+        } else if (isRightSwipe) {
+            prevImage();
+        }
+    };
+
     useEffect(() => {
         const masonryImages = [
             { src: 'IMG_3819.jpg', size: 'big' },       // 2x2 Feature
@@ -181,11 +208,18 @@ const FullGallery = () => {
                         <ChevronLeft size={40} />
                     </button>
 
-                    <div className="lightbox-content" onClick={(e) => e.stopPropagation()}>
+                    <div
+                        className="lightbox-content"
+                        onClick={(e) => e.stopPropagation()}
+                        onTouchStart={onTouchStart}
+                        onTouchMove={onTouchMove}
+                        onTouchEnd={onTouchEnd}
+                    >
                         <img
                             src={`/Bento Grid/${images[currentImageIndex].src}`}
                             alt="Villa bento view"
                             className="lightbox-main-img"
+                            draggable="false"
                         />
                         <div className="lightbox-footer">
                             <span className="image-counter">{currentImageIndex + 1} / {images.length}</span>

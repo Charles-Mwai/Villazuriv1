@@ -25,22 +25,22 @@ const activities = [
     {
         title: 'Dolphin Watching',
         image: '/Activities/WhatsApp Image 2026-01-08 at 12.54.00.jpeg',
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+        description: 'Watch playful dolphins glide through Watamu’s warm waters.'
     },
     {
         title: 'Dhow Cruise',
         image: '/Activities/WhatsApp Image 2026-01-08 at 12.56.02.jpeg',
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+        description: 'Sail at sunset on a traditional dhow along Watamu’s calm waters'
     },
     {
         title: 'Dining',
         image: '/Activities/WhatsApp Image 2026-01-08 at 13.00.13.jpeg',
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+        description: 'Enjoy fresh seafood and Swahili flavors at Watamu’s beachfront restaurants'
     },
     {
         title: 'Marine Park',
         image: '/Activities/WhatsApp Image 2026-01-08 at 13.00.14.jpeg',
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+        description: 'Explore vibrant coral reefs and marine life in Watamu Marine Park'
     }
 ];
 
@@ -71,16 +71,17 @@ const VillaDetails = () => {
                             alt={`Elegant Interior ${currentImageIndex + 1}`}
                             className="carousel-image"
                         />
-                        <button
-                            className="carousel-arrow"
-                            onClick={nextImage}
-                            aria-label="Next image"
-                        >
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                                <path d="M5 12h14M12 5l7 7-7 7" />
-                            </svg>
-                        </button>
                     </RevealOnScroll>
+                    <button
+                        className="carousel-arrow"
+                        onClick={nextImage}
+                        aria-label="Next image"
+                        type="button"
+                    >
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                            <path d="M5 12h14M12 5l7 7-7 7" />
+                        </svg>
+                    </button>
                 </div>
                 <div className="grid-content">
                     <RevealOnScroll>
@@ -102,16 +103,17 @@ const VillaDetails = () => {
                             alt={`Exterior Oasis ${currentExteriorIndex + 1}`}
                             className="carousel-image"
                         />
-                        <button
-                            className="carousel-arrow"
-                            onClick={nextExteriorImage}
-                            aria-label="Next image"
-                        >
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                                <path d="M5 12h14M12 5l7 7-7 7" />
-                            </svg>
-                        </button>
                     </RevealOnScroll>
+                    <button
+                        className="carousel-arrow"
+                        onClick={nextExteriorImage}
+                        aria-label="Next image"
+                        type="button"
+                    >
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                            <path d="M5 12h14M12 5l7 7-7 7" />
+                        </svg>
+                    </button>
                 </div>
                 <div className="grid-content">
                     <RevealOnScroll>
@@ -133,16 +135,17 @@ const VillaDetails = () => {
                             alt={`Relaxation ${currentOutdoorIndex + 1}`}
                             className="carousel-image"
                         />
-                        <button
-                            className="carousel-arrow"
-                            onClick={nextOutdoorImage}
-                            aria-label="Next image"
-                        >
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                                <path d="M5 12h14M12 5l7 7-7 7" />
-                            </svg>
-                        </button>
                     </RevealOnScroll>
+                    <button
+                        className="carousel-arrow"
+                        onClick={nextOutdoorImage}
+                        aria-label="Next image"
+                        type="button"
+                    >
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                            <path d="M5 12h14M12 5l7 7-7 7" />
+                        </svg>
+                    </button>
                 </div>
                 <div className="grid-content">
                     <RevealOnScroll>
