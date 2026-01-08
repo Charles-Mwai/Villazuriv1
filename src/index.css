@@ -11,8 +11,8 @@
   --color-bg-light: #F5F5F5;
 
   /* Typography */
-  --font-heading: 'Original Surfer', sans-serif;
-  --font-body: 'Original Surfer', sans-serif;
+  --font-heading: 'Times New Roman', Times, serif;
+  --font-body: 'Gotham', 'Montserrat', sans-serif;
 
   /* Spacing */
   --spacing-sm: 8px;
