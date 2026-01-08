@@ -44,10 +44,10 @@ CREATE INDEX IF NOT EXISTS idx_bookings_created_at ON bookings(created_at DESC);
 -- Enable Row Level Security
 ALTER TABLE bookings ENABLE ROW LEVEL SECURITY;
 
--- Policy: Anyone can view confirmed/paid bookings (for availability checking)
-CREATE POLICY "Public can view confirmed bookings" ON bookings
+-- Policy: Anyone can view bookings by status (for availability checking and returning created IDs)
+CREATE POLICY "Public can view bookings by status" ON bookings
   FOR SELECT
-  USING (status IN ('confirmed', 'paid'));
+  USING (status IN ('pending', 'confirmed', 'paid'));
 
 -- Policy: Anyone can insert bookings (for now, will add auth later)
 CREATE POLICY "Anyone can create pending bookings" ON bookings

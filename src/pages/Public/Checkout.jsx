@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { CreditCard, Lock, CheckCircle } from 'lucide-react';
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
+import { sendBookingConfirmation } from '../../services/emailService';
 import './Checkout.css';
 
 const Checkout = () => {
@@ -10,6 +11,7 @@ const Checkout = () => {
     const navigate = useNavigate();
     const [processing, setProcessing] = useState(false);
     const [completed, setCompleted] = useState(false);
+    const [emailStatus, setEmailStatus] = useState('idle'); // idle, sending, sent, failed
 
     // Dummy state for payment form
     const [paymentData, setPaymentData] = useState({
@@ -41,9 +43,24 @@ const Checkout = () => {
         setProcessing(true);
 
         // Simulate payment processing delay
-        setTimeout(() => {
+        setTimeout(async () => {
             setProcessing(false);
             setCompleted(true);
+
+            // Send confirmation email
+            console.log('Payment successful, sending confirmation email...');
+            setEmailStatus('sending');
+            try {
+                const result = await sendBookingConfirmation(bookingData, totalCost);
+                if (result.success) {
+                    setEmailStatus('sent');
+                } else {
+                    setEmailStatus('failed');
+                }
+            } catch (error) {
+                console.error('Auto-email notification failed:', error);
+                setEmailStatus('failed');
+            }
         }, 2000);
     };
 
