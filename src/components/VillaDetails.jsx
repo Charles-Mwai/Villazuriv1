@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import './SectionStyles.css';
 import RevealOnScroll from './RevealOnScroll';
 
@@ -165,6 +166,7 @@ const VillaDetails = () => {
                                     <img src={item.image} alt={item.title} className="feature-image" />
                                 </div>
                                 <h4>{item.title}</h4>
+                                <Link to="/blog" className="activity-link">Read More</Link>
                                 <p className="feature-description">{item.description}</p>
                             </div>
                         ))}

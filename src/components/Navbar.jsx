@@ -59,7 +59,7 @@ const Navbar = () => {
                     <li><a href="#experience" onClick={toggleMenu}>Experience</a></li>
                     <li><Link to="/gallery" onClick={toggleMenu}>Gallery</Link></li>
                     <li><Link to="/watamu" onClick={toggleMenu}>Watamu</Link></li>
-                    <li><Link to="/blog" onClick={toggleMenu}>Blog</Link></li>
+                    <li><Link to="/blog" onClick={toggleMenu}>Activities</Link></li>
                     <li><button className="overlay-book-btn" onClick={handleOverlayBooking}>Book Your Stay</button></li>
                 </ul>
             </div>

@@ -18,14 +18,14 @@ const FullGallery = () => {
         const masonryImages = [
             { src: 'IMG_3819.jpg', size: 'big' },       // 2x2 Feature
             { src: 'IMG_5485-cmpr.jpg', size: 'tall' }, // 1x2 Vertical
-            { src: 'IMG_5503-cmpr.jpg', size: 'normal' },
+            { src: 'IMG_5503-cmpr.jpeg', size: 'normal' },
             { src: 'IMG_5507.jpg', size: 'wide' },      // 2x1 Horizontal
-            { src: 'IMG_5514-cmpr.jpg', size: 'normal' },
+            { src: 'IMG_5514-cmpr.jpeg', size: 'normal' },
             { src: 'IMG_5518.jpg', size: 'tall' },
-            { src: 'IMG_5525-cmpr.jpg', size: 'normal' },
+            { src: 'IMG_5525-cmpr.jpeg', size: 'normal' },
             { src: 'IMG_5535.jpg', size: 'wide' },
             { src: 'IMG_5539.jpg', size: 'normal' },
-            { src: 'IMG_5545-cmpr.jpg', size: 'big' },  // 2x2 Feature
+            { src: 'IMG_5545-cmpr.jpeg', size: 'big' },  // 2x2 Feature
             { src: 'IMG_5565.jpg', size: 'tall' },
             { src: 'WhatsApp Image 2026-01-07 at 13.16.51 (1).jpg', size: 'wide' }
         ];
