@@ -3,7 +3,7 @@ import { ChevronLeft, ChevronRight, ChevronDown } from 'lucide-react';
 import { getAllBookedDates } from '../services/bookingService';
 import './CustomCalendar.css';
 
-const CustomCalendar = ({ selectedDate, onDateSelect, onClose }) => {
+const CustomCalendar = ({ selectedDate, onDateSelect, onClose, nights }) => {
     const [currentDate, setCurrentDate] = useState(new Date());
     const [bookedDates, setBookedDates] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -157,6 +157,36 @@ const CustomCalendar = ({ selectedDate, onDateSelect, onClose }) => {
             date.getFullYear() === today.getFullYear();
     };
 
+    const getRangeClass = (date) => {
+        if (!selectedDate || !nights || nights === '30+') return '';
+
+        const start = new Date(selectedDate);
+        start.setHours(0, 0, 0, 0);
+        const nightsCount = parseInt(nights);
+        const end = new Date(start);
+        end.setDate(start.getDate() + nightsCount);
+
+        const current = new Date(date);
+        current.setHours(0, 0, 0, 0);
+
+        const isBooked = isDateBooked(current);
+        let rangeClass = '';
+
+        if (current.getTime() === start.getTime()) {
+            rangeClass = 'range-start';
+        } else if (current.getTime() === end.getTime()) {
+            rangeClass = 'range-end';
+        } else if (current > start && current < end) {
+            rangeClass = 'range-mid';
+        }
+
+        if (rangeClass && isBooked) {
+            rangeClass += ' range-conflict';
+        }
+
+        return rangeClass;
+    };
+
     return (
         <div className="custom-calendar-container" onClick={(e) => e.stopPropagation()}>
             <div className="calendar-header">
@@ -244,7 +274,8 @@ const CustomCalendar = ({ selectedDate, onDateSelect, onClose }) => {
                             className={`calendar-cell ${dayObj.type} 
                                        ${isSelected(dayObj.date) ? 'selected' : ''} 
                                        ${isToday(dayObj.date) ? 'today' : ''}
-                                       ${isBooked ? 'booked' : ''}`}
+                                       ${isBooked ? 'booked' : ''}
+                                       ${getRangeClass(dayObj.date)}`}
                             onClick={() => !isBooked && handleDateClick(dayObj)}
                             style={{ cursor: isBooked ? 'not-allowed' : 'pointer' }}
                         >

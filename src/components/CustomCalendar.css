@@ -137,6 +137,38 @@
     background-color: #fafafa;
 }
 
+/* Range Highlighting */
+.calendar-cell.range-mid {
+    background-color: rgba(10, 35, 66, 0.1);
+    /* Light version of primary */
+    color: var(--color-primary);
+    border-radius: 0;
+}
+
+.calendar-cell.range-start {
+    background-color: var(--color-primary);
+    color: #fff !important;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.calendar-cell.range-end {
+    background-color: var(--color-primary);
+    color: #fff !important;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.calendar-cell.range-conflict {
+    background-color: #fee2e2 !important;
+    color: #ef4444 !important;
+}
+
+.calendar-cell.range-conflict.booked {
+    background-color: #fca5a5 !important;
+    color: #fff !important;
+}
+
 /* Tablet & Desktop */
 /* Tablet & Desktop */
 @media (min-width: 768px) {

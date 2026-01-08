@@ -13,6 +13,8 @@ const BookingModal = ({ isOpen, onClose }) => {
     const [totalCost, setTotalCost] = useState(0);
     const [error, setError] = useState('');
     const [submitting, setSubmitting] = useState(false);
+    const [isValidating, setIsValidating] = useState(false);
+    const [isAvailable, setIsAvailable] = useState(true);
     const [formData, setFormData] = useState({
         arrivalDate: '',
         nights: '',
@@ -24,17 +26,44 @@ const BookingModal = ({ isOpen, onClose }) => {
     });
 
     useEffect(() => {
-        if (formData.arrivalDate && formData.nights && formData.nights !== '30+') {
-            const start = new Date(formData.arrivalDate);
-            const nights = parseInt(formData.nights);
-            const end = new Date(start);
-            end.setDate(start.getDate() + nights);
+        const updateCostAndValidate = async () => {
+            if (formData.arrivalDate && formData.nights && formData.nights !== '30+') {
+                const start = new Date(formData.arrivalDate);
+                const nightsCount = parseInt(formData.nights);
+                const end = new Date(start);
+                end.setDate(start.getDate() + nightsCount);
 
-            const cost = calculateTotalCost(start, end);
-            setTotalCost(cost);
-        } else {
-            setTotalCost(0);
-        }
+                // Update Cost
+                const cost = calculateTotalCost(start, end);
+                setTotalCost(cost);
+
+                // Validate Availability
+                try {
+                    setIsValidating(true);
+                    setError('');
+                    const { available } = await checkAvailability(
+                        start.toISOString().split('T')[0],
+                        end.toISOString().split('T')[0]
+                    );
+                    setIsAvailable(available);
+                    if (!available) {
+                        setError("Sorry, these dates are not available. Please select different dates.");
+                    }
+                } catch (err) {
+                    console.error("Availability check failed:", err);
+                    setIsAvailable(false);
+                    setError("Unable to verify availability at this time. Please try again later.");
+                } finally {
+                    setIsValidating(false);
+                }
+            } else {
+                setTotalCost(0);
+                setIsAvailable(true);
+                setError('');
+            }
+        };
+
+        updateCostAndValidate();
     }, [formData.arrivalDate, formData.nights]);
 
     if (!isOpen) return null;
@@ -74,50 +103,32 @@ const BookingModal = ({ isOpen, onClose }) => {
             try {
                 setSubmitting(true);
 
-                let createdBooking;
+                // Re-verify availability one last time before creating
+                const { available } = await checkAvailability(
+                    start.toISOString().split('T')[0],
+                    end.toISOString().split('T')[0]
+                );
 
-                try {
-                    // Check availablity - wrap in try/catch to fallback to dummy if backend fails
-                    const { available } = await checkAvailability(
-                        start.toISOString().split('T')[0],
-                        end.toISOString().split('T')[0]
-                    );
-
-                    if (!available) {
-                        setError("Sorry, these dates are not available. Please select different dates.");
-                        setSubmitting(false);
-                        return;
-                    }
-
-                    // Create booking in database
-                    const bookingData = {
-                        checkIn: start.toISOString().split('T')[0],
-                        checkOut: end.toISOString().split('T')[0],
-                        nights: nights,
-                        guests: parseInt(formData.guests) || 1,
-                        guestName: formData.name || 'Guest',
-                        guestEmail: formData.email,
-                        guestPhone: formData.phone,
-                        datesFlexible: formData.flexible === 'yes',
-                        totalCost: totalCost
-                    };
-
-                    createdBooking = await createBooking(bookingData);
-                } catch (apiError) {
-                    console.warn("Backend unavailable, using dummy data:", apiError);
-                    // Dummy fallback
-                    createdBooking = {
-                        id: 'DEMO-' + Date.now(),
-                        check_in: start.toISOString().split('T')[0],
-                        check_out: end.toISOString().split('T')[0],
-                        nights: nights,
-                        guests: parseInt(formData.guests) || 1,
-                        guest_name: formData.name || 'Guest',
-                        guest_email: formData.email,
-                        total_cost: totalCost,
-                        status: 'pending'
-                    };
+                if (!available) {
+                    setError("Sorry, these dates are no longer available. Please select different dates.");
+                    setSubmitting(false);
+                    return;
                 }
+
+                // Create booking in database
+                const bookingData = {
+                    checkIn: start.toISOString().split('T')[0],
+                    checkOut: end.toISOString().split('T')[0],
+                    nights: nights,
+                    guests: parseInt(formData.guests) || 1,
+                    guestName: formData.name || 'Guest',
+                    guestEmail: formData.email,
+                    guestPhone: formData.phone,
+                    datesFlexible: formData.flexible === 'yes',
+                    totalCost: totalCost
+                };
+
+                const createdBooking = await createBooking(bookingData);
 
                 console.log('Booking processed:', createdBooking);
 
@@ -185,6 +196,7 @@ const BookingModal = ({ isOpen, onClose }) => {
                             {calendarOpen && (
                                 <CustomCalendar
                                     selectedDate={formData.arrivalDate}
+                                    nights={formData.nights}
                                     onDateSelect={(date) => {
                                         setFormData(prev => ({ ...prev, arrivalDate: date }));
                                     }}
@@ -310,8 +322,12 @@ const BookingModal = ({ isOpen, onClose }) => {
                     {error && <div className="error-message">{error}</div>}
 
                     <div className="form-actions">
-                        <button type="submit" className="submit-booking-btn" disabled={submitting}>
-                            {submitting ? 'PROCESSING...' : 'CONTINUE'}
+                        <button
+                            type="submit"
+                            className="submit-booking-btn"
+                            disabled={submitting || isValidating || !isAvailable}
+                        >
+                            {submitting ? 'PROCESSING...' : isValidating ? 'CHECKING...' : 'CONTINUE'}
                         </button>
                     </div>
                 </form>
