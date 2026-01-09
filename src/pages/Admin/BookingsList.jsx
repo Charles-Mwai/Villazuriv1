@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getAllBookings } from '../../services/adminService';
+import { getAllBookings, deleteBooking } from '../../services/adminService';
+import { Trash2 } from 'lucide-react';
 import StatusBadge from '../../components/Admin/StatusBadge';
 import './BookingsList.css';
 
@@ -43,6 +44,24 @@ const BookingsList = () => {
             month: 'short',
             day: 'numeric'
         });
+    };
+
+    const handleDeleteBooking = async (bookingId, guestName, e) => {
+        e.stopPropagation(); // Prevent navigation to booking detail
+
+        if (window.confirm(`Are you sure you want to delete the booking for ${guestName}? This action cannot be undone.`)) {
+            try {
+                await deleteBooking(bookingId);
+
+                // Refresh bookings list after deletion
+                await fetchBookings();
+
+                alert('Booking deleted successfully');
+            } catch (error) {
+                console.error('Failed to delete booking:', error);
+                alert('Failed to delete booking. Please try again.');
+            }
+        }
     };
 
     return (
@@ -98,26 +117,35 @@ const BookingsList = () => {
                                 <th>Total</th>
                                 <th>Status</th>
                                 <th>Created</th>
+                                <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
                             {bookings.map(booking => (
                                 <tr
                                     key={booking.id}
-                                    onClick={() => navigate(`/admin/bookings/${booking.id}`)}
                                     className="booking-row"
                                 >
-                                    <td className="guest-name">{booking.guest_name}</td>
-                                    <td className="guest-email">{booking.guest_email}</td>
-                                    <td>{formatDate(booking.check_in)}</td>
-                                    <td>{formatDate(booking.check_out)}</td>
-                                    <td>{booking.nights}</td>
-                                    <td>{booking.guests}</td>
-                                    <td className="total-cost">${booking.total_cost.toLocaleString()}</td>
-                                    <td>
+                                    <td className="guest-name" onClick={() => navigate(`/admin/bookings/${booking.id}`)}>{booking.guest_name}</td>
+                                    <td className="guest-email" onClick={() => navigate(`/admin/bookings/${booking.id}`)} data-label="Email">{booking.guest_email}</td>
+                                    <td onClick={() => navigate(`/admin/bookings/${booking.id}`)} data-label="Check-in">{formatDate(booking.check_in)}</td>
+                                    <td onClick={() => navigate(`/admin/bookings/${booking.id}`)} data-label="Check-out">{formatDate(booking.check_out)}</td>
+                                    <td onClick={() => navigate(`/admin/bookings/${booking.id}`)} data-label="Nights">{booking.nights}</td>
+                                    <td onClick={() => navigate(`/admin/bookings/${booking.id}`)} data-label="Guests">{booking.guests}</td>
+                                    <td className="total-cost" onClick={() => navigate(`/admin/bookings/${booking.id}`)} data-label="Total">${booking.total_cost.toLocaleString()}</td>
+                                    <td onClick={() => navigate(`/admin/bookings/${booking.id}`)} data-label="Status">
                                         <StatusBadge status={booking.status} />
                                     </td>
-                                    <td className="created-date">{formatDate(booking.created_at)}</td>
+                                    <td className="created-date" onClick={() => navigate(`/admin/bookings/${booking.id}`)} data-label="Created">{formatDate(booking.created_at)}</td>
+                                    <td data-label="Actions">
+                                        <button
+                                            className="delete-btn-table"
+                                            onClick={(e) => handleDeleteBooking(booking.id, booking.guest_name, e)}
+                                            title="Delete booking"
+                                        >
+                                            <Trash2 size={16} />
+                                        </button>
+                                    </td>
                                 </tr>
                             ))}
                         </tbody>

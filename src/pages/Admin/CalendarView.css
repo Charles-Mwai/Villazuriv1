@@ -1,79 +1,113 @@
+/* ========================================
+   CALENDAR VIEW - LUXURY THEME
+   ======================================== */
+
+:root {
+    --villa-ocean-blue: #0A2342;
+    --villa-gold: #D4AF37;
+    --villa-white: #FFFFFF;
+    --villa-light-bg: #F5F5F5;
+    --villa-text-dark: #1A1A1A;
+    --villa-text-light: #6B7280;
+    --villa-border: #E5E7EB;
+    --villa-success: #10B981;
+    --villa-warning: #F59E0B;
+    --villa-pending: #3B82F6;
+}
+
 .calendar-view-page {
-    max-width: 800px;
+    max-width: 900px;
     margin: 0 auto;
 }
 
+/* ========================================
+   CALENDAR HEADER
+   ======================================== */
+
 .calendar-header h1 {
-    font-family: var(--font-heading);
-    font-size: 1.8rem;
-    color: #313a46;
-    margin-bottom: 5px;
-    font-weight: 600;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 2rem;
+    color: var(--villa-text-dark);
+    margin-bottom: 8px;
+    font-weight: 400;
+    letter-spacing: 0.02em;
 }
 
 .calendar-header p {
-    color: #98a6ad;
-    margin-bottom: 25px;
+    color: var(--villa-text-light);
+    margin-bottom: 32px;
     font-size: 0.95rem;
 }
+
+/* ========================================
+   CALENDAR CONTROLS
+   ======================================== */
 
 .calendar-controls {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 20px;
-    margin-bottom: 25px;
+    gap: 24px;
+    margin-bottom: 28px;
 }
 
 .month-nav-btn {
-    background: white;
-    border: 1px solid #e3eaef;
-    border-radius: 4px;
-    padding: 8px;
+    background: var(--villa-white);
+    border: 2px solid var(--villa-border);
+    border-radius: 8px;
+    padding: 10px;
     cursor: pointer;
     display: flex;
     align-items: center;
-    transition: all 0.2s;
-    color: #6c757d;
+    transition: all 0.3s ease;
+    color: var(--villa-ocean-blue);
 }
 
 .month-nav-btn:hover {
-    border-color: #727cf5;
-    color: #727cf5;
-    background-color: #fafbfe;
+    border-color: var(--villa-gold);
+    background-color: rgba(212, 175, 55, 0.05);
+    transform: scale(1.05);
 }
 
 .current-month {
-    font-family: var(--font-heading);
-    font-size: 1.3rem;
-    color: #313a46;
-    min-width: 220px;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 1.5rem;
+    color: var(--villa-ocean-blue);
+    min-width: 240px;
     text-align: center;
     font-weight: 600;
+    letter-spacing: 0.03em;
 }
 
+/* ========================================
+   CALENDAR GRID
+   ======================================== */
+
 .calendar-container {
-    background: white;
-    padding: 25px;
-    border-radius: 6px;
-    box-shadow: 0 0 35px 0 rgba(154, 161, 171, 0.15);
-    margin-bottom: 20px;
+    background: var(--villa-white);
+    padding: 32px;
+    border-radius: 12px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.03);
+    margin-bottom: 24px;
+    border: 1px solid var(--villa-border);
 }
 
 .calendar-weekdays {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     gap: 8px;
-    margin-bottom: 12px;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--villa-border);
 }
 
 .weekday-label {
     text-align: center;
     font-size: 0.75rem;
-    font-weight: 600;
-    color: #6c757d;
+    font-weight: 700;
+    color: var(--villa-ocean-blue);
     text-transform: uppercase;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.08em;
     padding: 8px;
 }
 
@@ -84,134 +118,233 @@
 }
 
 .calendar-day {
-    aspect-ratio: 1.2;
-    border: 1px solid #f1f3fa;
-    border-radius: 4px;
+    aspect-ratio: 1.1;
+    border: 1px solid var(--villa-border);
+    border-radius: 8px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    padding: 8px 4px;
+    padding: 10px 6px;
     position: relative;
-    background: white;
-    transition: all 0.2s;
+    background: var(--villa-white);
+    transition: all 0.3s ease;
 }
 
 .calendar-day:hover {
-    border-color: #727cf5;
-    background-color: #fafbfe;
+    border-color: var(--villa-gold);
+    background-color: rgba(212, 175, 55, 0.05);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(10, 35, 66, 0.08);
 }
 
 .calendar-day.prev,
 .calendar-day.next {
-    opacity: 0.3;
+    opacity: 0.25;
+    background: var(--villa-light-bg);
 }
 
 .calendar-day.has-bookings {
-    background-color: #fafbfe;
-    border-color: #e3eaef;
+    background-color: rgba(10, 35, 66, 0.03);
+    border-color: var(--villa-ocean-blue);
+    border-width: 2px;
 }
 
 .day-number {
-    font-size: 0.85rem;
+    font-size: 0.9rem;
     font-weight: 600;
-    color: #313a46;
-    margin-bottom: 4px;
+    color: var(--villa-text-dark);
+    margin-bottom: 6px;
 }
 
 .bookings-indicator {
     display: flex;
     flex-wrap: wrap;
-    gap: 3px;
+    gap: 4px;
     justify-content: center;
+    margin-top: auto;
 }
 
 .booking-dot {
-    width: 6px;
-    height: 6px;
+    width: 8px;
+    height: 8px;
     border-radius: 50%;
     cursor: pointer;
-    transition: transform 0.2s;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.5);
 }
 
 .booking-dot:hover {
-    transform: scale(1.8);
+    transform: scale(2);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
 .booking-dot.status-pending {
-    background-color: #f1b44c;
+    background-color: var(--villa-warning);
 }
 
 .booking-dot.status-confirmed {
-    background-color: #39afd1;
+    background-color: var(--villa-pending);
 }
 
 .booking-dot.status-paid {
-    background-color: #10c469;
+    background-color: var(--villa-success);
 }
 
+/* ========================================
+   CALENDAR LEGEND
+   ======================================== */
+
 .calendar-legend {
-    background: white;
-    padding: 20px;
-    border-radius: 6px;
-    box-shadow: 0 0 35px 0 rgba(154, 161, 171, 0.15);
+    background: var(--villa-white);
+    padding: 24px 32px;
+    border-radius: 12px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.03);
+    border: 1px solid var(--villa-border);
 }
 
 .calendar-legend h3 {
-    font-family: var(--font-heading);
-    font-size: 1rem;
-    color: #313a46;
-    margin-bottom: 15px;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 1.125rem;
+    color: var(--villa-text-dark);
+    margin-bottom: 16px;
     font-weight: 600;
+    letter-spacing: 0.02em;
 }
 
 .legend-items {
     display: flex;
-    gap: 20px;
+    gap: 24px;
     flex-wrap: wrap;
 }
 
 .legend-item {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 10px;
 }
 
 .legend-dot {
-    width: 12px;
-    height: 12px;
+    width: 14px;
+    height: 14px;
     border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.5);
 }
 
 .legend-dot.status-pending {
-    background-color: #f1b44c;
+    background-color: var(--villa-warning);
 }
 
 .legend-dot.status-confirmed {
-    background-color: #39afd1;
+    background-color: var(--villa-pending);
 }
 
 .legend-dot.status-paid {
-    background-color: #10c469;
+    background-color: var(--villa-success);
 }
 
 .legend-item span {
-    font-size: 0.85rem;
-    color: #6c757d;
+    font-size: 0.875rem;
+    color: var(--villa-text-dark);
+    font-weight: 500;
 }
+
+/* ========================================
+   LOADING STATE
+   ======================================== */
 
 .loading-state {
-    background: white;
-    padding: 50px 20px;
-    border-radius: 6px;
+    background: var(--villa-white);
+    padding: 80px 20px;
+    border-radius: 12px;
     text-align: center;
-    color: #98a6ad;
-    box-shadow: 0 0 35px 0 rgba(154, 161, 171, 0.15);
+    color: var(--villa-text-light);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    border: 1px solid var(--villa-border);
 }
 
+/* ========================================
+   RESPONSIVE DESIGN
+   ======================================== */
+
 @media (max-width: 900px) {
+    .calendar-container {
+        padding: 24px;
+    }
+
     .calendar-days-grid {
         gap: 6px;
+    }
+
+    .calendar-day {
+        padding: 8px 4px;
+    }
+
+    .day-number {
+        font-size: 0.8rem;
+    }
+
+    .booking-dot {
+        width: 6px;
+        height: 6px;
+    }
+
+    .current-month {
+        font-size: 1.25rem;
+        min-width: 200px;
+    }
+}
+
+@media (max-width: 600px) {
+    .calendar-view-page {
+        padding: 0;
+    }
+
+    .calendar-header {
+        padding: 0;
+    }
+
+    .calendar-header h1 {
+        font-size: 1.5rem;
+    }
+
+    .calendar-header p {
+        font-size: 0.875rem;
+        margin-bottom: 24px;
+    }
+
+    .calendar-container {
+        padding: 16px;
+        border-radius: 0;
+    }
+
+    .current-month {
+        font-size: 1.125rem;
+        min-width: 180px;
+    }
+
+    .calendar-controls {
+        gap: 16px;
+        margin-bottom: 20px;
+    }
+
+    .month-nav-btn {
+        padding: 8px;
+    }
+
+    .calendar-weekdays {
+        gap: 4px;
+        margin-bottom: 12px;
+        padding-bottom: 8px;
+    }
+
+    .weekday-label {
+        font-size: 0.7rem;
+        padding: 6px 2px;
+    }
+
+    .calendar-days-grid {
+        gap: 4px;
     }
 
     .calendar-day {
@@ -220,29 +353,154 @@
 
     .day-number {
         font-size: 0.75rem;
+        margin-bottom: 4px;
     }
 
     .booking-dot {
         width: 5px;
         height: 5px;
     }
+
+    .calendar-legend {
+        padding: 20px;
+        border-radius: 0;
+    }
+
+    .calendar-legend h3 {
+        font-size: 1rem;
+        margin-bottom: 12px;
+    }
+
+    .legend-items {
+        gap: 16px;
+    }
+
+    .legend-dot {
+        width: 12px;
+        height: 12px;
+    }
+
+    .legend-item span {
+        font-size: 0.8rem;
+    }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 480px) {
+    .calendar-header h1 {
+        font-size: 1.25rem;
+    }
+
+    .calendar-header p {
+        font-size: 0.8rem;
+        margin-bottom: 20px;
+    }
+
     .calendar-container {
-        padding: 15px;
+        padding: 12px;
     }
 
     .current-month {
-        font-size: 1.1rem;
-        min-width: 180px;
+        font-size: 1rem;
+        min-width: 160px;
+    }
+
+    .calendar-controls {
+        gap: 12px;
+        margin-bottom: 16px;
+    }
+
+    .month-nav-btn {
+        padding: 6px;
+    }
+
+    .month-nav-btn svg {
+        width: 18px;
+        height: 18px;
+    }
+
+    .weekday-label {
+        font-size: 0.65rem;
+        padding: 4px 2px;
     }
 
     .calendar-days-grid {
-        gap: 4px;
+        gap: 3px;
+    }
+
+    .calendar-day {
+        padding: 5px 2px;
+        border-radius: 6px;
     }
 
     .day-number {
         font-size: 0.7rem;
+        margin-bottom: 3px;
+    }
+
+    .bookings-indicator {
+        gap: 3px;
+    }
+
+    .booking-dot {
+        width: 4px;
+        height: 4px;
+    }
+
+    .calendar-legend {
+        padding: 16px;
+    }
+
+    .calendar-legend h3 {
+        font-size: 0.95rem;
+        margin-bottom: 10px;
+    }
+
+    .legend-items {
+        gap: 12px;
+        justify-content: space-around;
+    }
+
+    .legend-item {
+        gap: 8px;
+    }
+
+    .legend-dot {
+        width: 10px;
+        height: 10px;
+    }
+
+    .legend-item span {
+        font-size: 0.75rem;
+    }
+}
+
+@media (max-width: 375px) {
+    .calendar-header h1 {
+        font-size: 1.125rem;
+    }
+
+    .current-month {
+        font-size: 0.95rem;
+        min-width: 140px;
+    }
+
+    .calendar-container {
+        padding: 10px;
+    }
+
+    .weekday-label {
+        font-size: 0.6rem;
+    }
+
+    .day-number {
+        font-size: 0.65rem;
+    }
+
+    .calendar-legend {
+        padding: 14px;
+    }
+
+    .legend-items {
+        gap: 10px;
     }
 }

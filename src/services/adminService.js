@@ -99,26 +99,66 @@ export const deleteBooking = async (bookingId) => {
 };
 
 /**
- * Get booking statistics
+ * Get booking statistics with enhanced metrics
  * @returns {Promise<Object>}
  */
 export const getBookingStats = async () => {
     try {
         const { data, error } = await supabase
             .from('bookings')
-            .select('status, total_cost');
+            .select('*');
 
         if (error) throw error;
+
+        // Basic stats
+        const paidBookings = data.filter(b => b.status === 'paid');
+        const confirmedBookings = data.filter(b => b.status === 'confirmed');
+        const activeBookings = [...paidBookings, ...confirmedBookings];
+
+        // Calculate average booking value
+        const avgBookingValue = activeBookings.length > 0
+            ? activeBookings.reduce((sum, b) => sum + parseFloat(b.total_cost), 0) / activeBookings.length
+            : 0;
+
+        // Calculate occupancy rate for next 30 days
+        const today = new Date();
+        const next30Days = new Date(today);
+        next30Days.setDate(today.getDate() + 30);
+
+        const bookedNights = activeBookings.filter(b => {
+            const checkIn = new Date(b.check_in);
+            const checkOut = new Date(b.check_out);
+            return checkIn <= next30Days && checkOut >= today;
+        }).reduce((sum, b) => {
+            const checkIn = new Date(b.check_in);
+            const checkOut = new Date(b.check_out);
+            const start = checkIn > today ? checkIn : today;
+            const end = checkOut < next30Days ? checkOut : next30Days;
+            const nights = Math.ceil((end - start) / (1000 * 60 * 60 * 24));
+            return sum + Math.max(0, nights);
+        }, 0);
+
+        const occupancyRate = (bookedNights / 30) * 100;
+
+        // Count upcoming check-ins (next 7 days)
+        const next7Days = new Date(today);
+        next7Days.setDate(today.getDate() + 7);
+
+        const upcomingCheckIns = activeBookings.filter(b => {
+            const checkIn = new Date(b.check_in);
+            return checkIn >= today && checkIn <= next7Days;
+        }).length;
 
         const stats = {
             total: data.length,
             pending: data.filter(b => b.status === 'pending').length,
-            confirmed: data.filter(b => b.status === 'confirmed').length,
-            paid: data.filter(b => b.status === 'paid').length,
+            confirmed: confirmedBookings.length,
+            paid: paidBookings.length,
             cancelled: data.filter(b => b.status === 'cancelled').length,
-            totalRevenue: data
-                .filter(b => b.status === 'paid')
-                .reduce((sum, b) => sum + parseFloat(b.total_cost), 0)
+            totalRevenue: paidBookings.reduce((sum, b) => sum + parseFloat(b.total_cost), 0),
+            avgBookingValue: Math.round(avgBookingValue),
+            occupancyRate: Math.round(occupancyRate),
+            upcomingCheckIns
         };
 
         return stats;

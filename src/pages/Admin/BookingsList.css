@@ -1,104 +1,155 @@
+/* ========================================
+   BOOKINGS LIST - LUXURY THEME
+   ======================================== */
+
+:root {
+    --villa-ocean-blue: #0A2342;
+    --villa-gold: #D4AF37;
+    --villa-white: #FFFFFF;
+    --villa-light-bg: #F5F5F5;
+    --villa-text-dark: #1A1A1A;
+    --villa-text-light: #6B7280;
+    --villa-border: #E5E7EB;
+    --villa-success: #10B981;
+    --villa-warning: #F59E0B;
+    --villa-pending: #3B82F6;
+}
+
 .bookings-page {
     max-width: 1400px;
 }
 
+/* ========================================
+   PAGE HEADER
+   ======================================== */
+
 .page-header h1 {
-    font-family: var(--font-heading);
-    font-size: 1.8rem;
-    color: #313a46;
-    margin-bottom: 5px;
-    font-weight: 600;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 2rem;
+    color: var(--villa-text-dark);
+    margin-bottom: 8px;
+    font-weight: 400;
+    letter-spacing: 0.02em;
 }
 
 .page-header p {
-    color: #98a6ad;
-    margin-bottom: 25px;
+    color: var(--villa-text-light);
+    margin-bottom: 32px;
     font-size: 0.95rem;
 }
 
+/* ========================================
+   CONTROLS & FILTERS
+   ======================================== */
+
 .bookings-controls {
     display: flex;
-    gap: 15px;
-    margin-bottom: 25px;
+    gap: 16px;
+    margin-bottom: 28px;
     flex-wrap: wrap;
+    align-items: center;
 }
 
 .search-box {
     flex: 1;
-    min-width: 250px;
+    min-width: 280px;
 }
 
 .search-input {
     width: 100%;
-    padding: 10px 15px;
-    border: 1px solid #e3eaef;
-    border-radius: 4px;
-    font-family: var(--font-body);
+    padding: 12px 16px;
+    border: 2px solid var(--villa-border);
+    border-radius: 8px;
+    font-family: inherit;
     font-size: 0.9rem;
-    transition: all 0.2s;
-    background: white;
+    transition: all 0.3s ease;
+    background: var(--villa-white);
 }
 
 .search-input:focus {
     outline: none;
-    border-color: #727cf5;
-    box-shadow: 0 0 0 2px rgba(114, 124, 245, 0.1);
+    border-color: var(--villa-gold);
+    box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
+}
+
+.search-input::placeholder {
+    color: var(--villa-text-light);
 }
 
 .status-filters {
     display: flex;
-    gap: 8px;
+    gap: 10px;
     flex-wrap: wrap;
 }
 
 .filter-btn {
-    padding: 10px 18px;
-    border: 1px solid #e3eaef;
-    background: white;
-    border-radius: 4px;
-    font-family: var(--font-body);
-    font-size: 0.85rem;
+    padding: 10px 20px;
+    border: 2px solid var(--villa-border);
+    background: var(--villa-white);
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 0.875rem;
     cursor: pointer;
-    transition: all 0.2s;
-    font-weight: 500;
-    color: #6c757d;
+    transition: all 0.3s ease;
+    font-weight: 600;
+    color: var(--villa-text-dark);
+    letter-spacing: 0.02em;
 }
 
 .filter-btn:hover {
-    border-color: #727cf5;
-    color: #727cf5;
+    border-color: var(--villa-gold);
+    background: rgba(212, 175, 55, 0.05);
+    transform: translateY(-1px);
 }
 
 .filter-btn.active {
-    background: #727cf5;
-    color: white;
-    border-color: #727cf5;
+    background: var(--villa-ocean-blue);
+    color: var(--villa-white);
+    border-color: var(--villa-ocean-blue);
+    box-shadow: 0 4px 8px rgba(10, 35, 66, 0.2);
 }
 
+/* ========================================
+   ERROR & LOADING STATES
+   ======================================== */
+
 .error-banner {
-    background-color: #ffc5c5;
-    color: #f1556c;
-    padding: 12px;
-    border-radius: 4px;
-    margin-bottom: 15px;
-    border-left: 3px solid #f1556c;
+    background-color: rgba(239, 68, 68, 0.1);
+    color: #DC2626;
+    padding: 16px 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    border-left: 4px solid #DC2626;
+    font-weight: 500;
 }
 
 .loading-state,
 .empty-state {
-    background: white;
-    padding: 50px 20px;
-    border-radius: 6px;
+    background: var(--villa-white);
+    padding: 80px 20px;
+    border-radius: 12px;
     text-align: center;
-    color: #98a6ad;
-    box-shadow: 0 0 35px 0 rgba(154, 161, 171, 0.15);
+    color: var(--villa-text-light);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    border: 1px solid var(--villa-border);
 }
 
+.empty-state p {
+    font-size: 1.125rem;
+    color: var(--villa-text-dark);
+    font-weight: 500;
+}
+
+/* ========================================
+   BOOKINGS TABLE
+   ======================================== */
+
 .bookings-table-container {
-    background: white;
-    border-radius: 6px;
+    background: var(--villa-white);
+    border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0 0 35px 0 rgba(154, 161, 171, 0.15);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.03);
+    border: 1px solid var(--villa-border);
 }
 
 .bookings-table {
@@ -107,71 +158,114 @@
 }
 
 .bookings-table thead {
-    background-color: #f1f3fa;
+    background: linear-gradient(135deg, var(--villa-ocean-blue) 0%, #0d2d52 100%);
 }
 
 .bookings-table th {
-    padding: 15px;
+    padding: 16px 20px;
     text-align: left;
-    font-family: var(--font-body);
-    font-weight: 600;
-    font-size: 0.8rem;
-    color: #6c757d;
+    font-family: inherit;
+    font-weight: 700;
+    font-size: 0.75rem;
+    color: var(--villa-white);
     text-transform: uppercase;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.08em;
 }
 
 .bookings-table tbody tr {
-    border-bottom: 1px solid #f1f3fa;
+    border-bottom: 1px solid var(--villa-border);
     cursor: pointer;
-    transition: all 0.2s;
+    transition: all 0.3s ease;
 }
 
 .bookings-table tbody tr:hover {
-    background-color: #fafbfe;
+    background-color: rgba(212, 175, 55, 0.05);
+    border-left: 3px solid var(--villa-gold);
+}
+
+.bookings-table tbody tr:last-child {
+    border-bottom: none;
 }
 
 .bookings-table td {
-    padding: 15px;
-    font-family: var(--font-body);
+    padding: 18px 20px;
+    font-family: inherit;
     font-size: 0.875rem;
-    color: #313a46;
+    color: var(--villa-text-dark);
 }
 
 .guest-name {
-    font-weight: 600;
-    color: #313a46;
+    font-weight: 700;
+    color: var(--villa-ocean-blue);
+    font-size: 0.95rem;
 }
 
 .guest-email {
-    color: #98a6ad;
+    color: var(--villa-text-light);
     font-size: 0.85rem;
 }
 
 .total-cost {
-    font-weight: 600;
-    color: #10c469;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: 700;
+    color: var(--villa-gold);
+    font-size: 1rem;
 }
 
 .created-date {
-    color: #98a6ad;
+    color: var(--villa-text-light);
     font-size: 0.85rem;
 }
 
-.bookings-footer {
-    margin-top: 15px;
-    padding: 12px;
-    background: white;
-    border-radius: 4px;
-    text-align: center;
-    color: #98a6ad;
-    font-size: 0.85rem;
-    box-shadow: 0 0 35px 0 rgba(154, 161, 171, 0.15);
+.delete-btn-table {
+    background: none;
+    border: 1px solid var(--villa-border);
+    color: var(--villa-text-light);
+    padding: 8px;
+    border-radius: 6px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
 }
+
+.delete-btn-table:hover {
+    background: rgba(239, 68, 68, 0.1);
+    border-color: #EF4444;
+    color: #EF4444;
+    transform: scale(1.1);
+}
+
+/* ========================================
+   FOOTER
+   ======================================== */
+
+.bookings-footer {
+    margin-top: 20px;
+    padding: 16px 24px;
+    background: var(--villa-white);
+    border-radius: 8px;
+    text-align: center;
+    color: var(--villa-text-light);
+    font-size: 0.875rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    border: 1px solid var(--villa-border);
+    font-weight: 500;
+}
+
+.bookings-footer p {
+    margin: 0;
+}
+
+/* ========================================
+   RESPONSIVE DESIGN
+   ======================================== */
 
 @media (max-width: 1200px) {
     .bookings-table-container {
         overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
     }
 
     .bookings-table {
@@ -180,11 +274,207 @@
 }
 
 @media (max-width: 768px) {
+    .page-header h1 {
+        font-size: 1.5rem;
+    }
+
+    .page-header p {
+        font-size: 0.875rem;
+        margin-bottom: 24px;
+    }
+
     .bookings-controls {
         flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
     }
 
     .search-box {
         width: 100%;
+        min-width: 100%;
+    }
+
+    .search-input {
+        padding: 10px 14px;
+        font-size: 0.875rem;
+    }
+
+    .status-filters {
+        width: 100%;
+        gap: 8px;
+    }
+
+    .filter-btn {
+        flex: 1;
+        min-width: 0;
+        padding: 10px 12px;
+        font-size: 0.8rem;
+        white-space: nowrap;
+    }
+
+    .bookings-table th,
+    .bookings-table td {
+        padding: 12px 14px;
+        font-size: 0.8rem;
+    }
+
+    .guest-name {
+        font-size: 0.875rem;
+    }
+
+    .total-cost {
+        font-size: 0.9rem;
+    }
+
+    .delete-btn-table {
+        padding: 6px;
+    }
+
+    .delete-btn-table svg {
+        width: 14px;
+        height: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .page-header {
+        padding: 0;
+    }
+
+    .page-header h1 {
+        font-size: 1.25rem;
+    }
+
+    .page-header p {
+        font-size: 0.8rem;
+        margin-bottom: 20px;
+    }
+
+    .bookings-controls {
+        gap: 10px;
+        margin-bottom: 20px;
+    }
+
+    .search-input {
+        padding: 10px 12px;
+        font-size: 0.85rem;
+    }
+
+    .status-filters {
+        gap: 6px;
+    }
+
+    .filter-btn {
+        padding: 8px 8px;
+        font-size: 0.7rem;
+        border-width: 1px;
+    }
+
+    /* Switch to card layout on very small screens */
+    .bookings-table-container {
+        background: transparent;
+        box-shadow: none;
+        border: none;
+        padding: 0;
+    }
+
+    .bookings-table {
+        display: block;
+        min-width: 100%;
+    }
+
+    .bookings-table thead {
+        display: none;
+    }
+
+    .bookings-table tbody {
+        display: block;
+    }
+
+    .bookings-table tbody tr {
+        display: block;
+        background: var(--villa-white);
+        margin-bottom: 12px;
+        border-radius: 8px;
+        border: 1px solid var(--villa-border);
+        padding: 16px;
+        border-left: 3px solid var(--villa-ocean-blue);
+    }
+
+    .bookings-table tbody tr:hover {
+        border-left-color: var(--villa-gold);
+    }
+
+    .bookings-table td {
+        display: block;
+        padding: 6px 0;
+        text-align: left;
+        border: none;
+    }
+
+    .bookings-table td::before {
+        content: attr(data-label);
+        font-weight: 700;
+        font-size: 0.7rem;
+        color: var(--villa-text-light);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        display: block;
+        margin-bottom: 4px;
+    }
+
+    .guest-name {
+        font-size: 1rem;
+        margin-bottom: 8px;
+    }
+
+    .guest-name::before {
+        display: none;
+    }
+
+    .guest-email {
+        font-size: 0.85rem;
+        margin-bottom: 12px;
+        padding-bottom: 12px;
+        border-bottom: 1px solid var(--villa-border);
+    }
+
+    .total-cost {
+        font-size: 1.125rem;
+        margin-top: 8px;
+    }
+
+    .delete-btn-table {
+        margin-top: 12px;
+        width: 100%;
+        padding: 10px;
+        justify-content: center;
+        gap: 8px;
+    }
+
+    .delete-btn-table::after {
+        content: 'Delete Booking';
+        font-size: 0.85rem;
+        font-weight: 600;
+    }
+
+    .bookings-footer {
+        padding: 12px 16px;
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 375px) {
+    .page-header h1 {
+        font-size: 1.125rem;
+    }
+
+    .filter-btn {
+        padding: 8px 6px;
+        font-size: 0.65rem;
+    }
+
+    .bookings-table tbody tr {
+        padding: 14px;
     }
 }

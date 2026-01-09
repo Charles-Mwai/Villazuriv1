@@ -1,15 +1,33 @@
+/* ========================================
+   VILLA ZURI ADMIN LAYOUT - LUXURY THEME
+   ======================================== */
+
+:root {
+    --villa-ocean-blue: #0A2342;
+    --villa-gold: #D4AF37;
+    --villa-white: #FFFFFF;
+    --villa-light-bg: #F5F5F5;
+    --villa-text-dark: #1A1A1A;
+    --villa-text-light: #6B7280;
+    --villa-border: #E5E7EB;
+}
+
 .admin-layout {
     display: flex;
     min-height: 100vh;
-    background-color: #f3f4f7;
-    color: #313a46;
-    font-family: 'Inter', sans-serif;
+    background-color: var(--villa-light-bg);
+    color: var(--villa-text-dark);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
+
+/* ========================================
+   SIDEBAR
+   ======================================== */
 
 .admin-sidebar {
     width: 260px;
-    background: #313a46;
-    color: #98a6ad;
+    background: var(--villa-ocean-blue);
+    color: rgba(255, 255, 255, 0.7);
     display: flex;
     flex-direction: column;
     position: fixed;
@@ -17,108 +35,166 @@
     left: 0;
     top: 0;
     z-index: 1000;
+    box-shadow: 4px 0 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
 }
 
 .sidebar-header {
-    padding: 20px 24px;
-    height: 70px;
+    padding: 24px;
+    height: 80px;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+}
+
+.sidebar-header::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 24px;
+    right: 24px;
+    height: 2px;
+    background: var(--villa-gold);
 }
 
 .sidebar-title {
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: #fff;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: var(--villa-white);
     margin-bottom: 4px;
+    letter-spacing: 0.03em;
 }
 
 .sidebar-subtitle {
     font-size: 0.7rem;
-    font-weight: 700;
+    font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: 0.1em;
-    opacity: 0.5;
+    letter-spacing: 0.15em;
+    opacity: 0.6;
+    color: var(--villa-gold);
+}
+
+.mobile-close-btn {
+    display: none;
+    background: none;
+    border: none;
+    color: var(--villa-white);
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 6px;
+    transition: background 0.2s;
+}
+
+.mobile-close-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
 }
 
 .sidebar-nav {
     flex: 1;
-    padding: 15px 0;
+    padding: 20px 0;
 }
 
 .nav-item {
     display: flex;
     align-items: center;
-    gap: 12px;
-    padding: 12px 24px;
-    color: #98a6ad;
+    gap: 14px;
+    padding: 14px 24px;
+    color: rgba(255, 255, 255, 0.7);
     text-decoration: none;
-    transition: all 0.2s;
+    transition: all 0.3s ease;
     font-size: 0.9rem;
     font-weight: 500;
+    border-left: 3px solid transparent;
+    background: none;
+    border-top: none;
+    border-right: none;
+    border-bottom: none;
+    width: 100%;
+    cursor: pointer;
+    font-family: inherit;
 }
 
 .nav-item:hover {
-    color: #fff;
+    color: var(--villa-white);
     background: rgba(255, 255, 255, 0.05);
+    border-left-color: var(--villa-gold);
 }
 
 .nav-item.active {
-    color: #fff;
-    background: #36404a;
+    color: var(--villa-white);
+    background: rgba(212, 175, 55, 0.15);
+    border-left-color: var(--villa-gold);
 }
 
-.nav-item.active span {
-    color: #727cf5;
+.nav-item.active svg {
+    color: var(--villa-gold);
 }
 
 .badge {
     margin-left: auto;
-    background: #727cf5;
-    color: #fff;
+    background: var(--villa-gold);
+    color: var(--villa-ocean-blue);
     font-size: 0.7rem;
-    padding: 2px 6px;
-    border-radius: 4px;
+    padding: 3px 8px;
+    border-radius: 12px;
+    font-weight: 700;
 }
 
 .sidebar-footer {
     padding: 20px 24px;
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .logout-button {
     background: none;
-    border: none;
-    color: #98a6ad;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: rgba(255, 255, 255, 0.7);
     display: flex;
     align-items: center;
     gap: 12px;
     cursor: pointer;
     font-size: 0.9rem;
-    padding: 10px 0;
+    padding: 12px 16px;
     width: 100%;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    font-weight: 500;
 }
 
 .logout-button:hover {
-    color: #fff;
+    color: var(--villa-white);
+    background: rgba(255, 255, 255, 0.05);
+    border-color: var(--villa-gold);
 }
+
+/* ========================================
+   MAIN CONTENT WRAPPER
+   ======================================== */
 
 .admin-main-wrapper {
     margin-left: 260px;
     flex: 1;
     display: flex;
     flex-direction: column;
+    min-height: 100vh;
 }
+
+/* ========================================
+   TOPBAR
+   ======================================== */
 
 .admin-topbar {
     height: 70px;
-    background: #fff;
+    background: var(--villa-white);
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 24px;
-    box-shadow: 0 0 35px 0 rgba(154, 161, 171, 0.15);
+    padding: 0 32px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    border-bottom: 1px solid var(--villa-border);
 }
 
 .topbar-left {
@@ -130,8 +206,16 @@
 .mobile-menu-btn {
     background: none;
     border: none;
-    color: #313a46;
+    color: var(--villa-text-dark);
     cursor: pointer;
+    display: none;
+    padding: 8px;
+    border-radius: 6px;
+    transition: background 0.2s;
+}
+
+.mobile-menu-btn:hover {
+    background: var(--villa-light-bg);
 }
 
 .topbar-search {
@@ -142,105 +226,232 @@
 
 .search-icon {
     position: absolute;
-    left: 12px;
-    color: #98a6ad;
+    left: 14px;
+    color: var(--villa-text-light);
 }
 
 .topbar-search input {
-    background: #f1f3fa;
-    border: none;
-    padding: 8px 12px 8px 36px;
-    border-radius: 20px;
-    width: 200px;
-    font-size: 0.85rem;
+    background: var(--villa-light-bg);
+    border: 1px solid var(--villa-border);
+    padding: 10px 14px 10px 42px;
+    border-radius: 8px;
+    width: 280px;
+    font-size: 0.875rem;
+    transition: all 0.3s ease;
+}
+
+.topbar-search input:focus {
+    outline: none;
+    border-color: var(--villa-gold);
+    background: var(--villa-white);
 }
 
 .topbar-right {
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: 16px;
 }
 
 .topbar-item {
-    color: #6c757d;
+    color: var(--villa-text-light);
     cursor: pointer;
+    padding: 8px;
+    border-radius: 6px;
+    transition: all 0.2s;
+}
+
+.topbar-item:hover {
+    color: var(--villa-ocean-blue);
+    background: var(--villa-light-bg);
 }
 
 .home-button {
     background: none;
     border: none;
-    padding: 8px;
-    border-radius: 4px;
-    transition: all 0.2s;
-}
-
-.home-button:hover {
-    background: #f1f3fa;
-    color: #667eea;
 }
 
 .topbar-profile {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
     cursor: pointer;
-    padding: 5px 10px;
-    border-radius: 4px;
+    padding: 6px 12px;
+    border-radius: 8px;
+    transition: background 0.2s;
 }
 
 .topbar-profile:hover {
-    background: #f1f3fa;
+    background: var(--villa-light-bg);
 }
 
 .profile-img {
-    width: 32px;
-    height: 32px;
-    background: #727cf5;
+    width: 36px;
+    height: 36px;
+    background: linear-gradient(135deg, var(--villa-ocean-blue) 0%, #0d2d52 100%);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #fff;
+    color: var(--villa-white);
+    border: 2px solid var(--villa-gold);
 }
 
 .profile-name {
-    font-size: 0.85rem;
+    font-size: 0.875rem;
     font-weight: 600;
-    color: #6c757d;
+    color: var(--villa-text-dark);
 }
 
+/* ========================================
+   MAIN CONTENT AREA
+   ======================================== */
+
 .admin-main {
-    padding: 24px;
+    padding: 32px;
+    flex: 1;
 }
 
 .breadcrumb-area {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 24px;
+    margin-bottom: 28px;
 }
 
 .page-title {
-    font-size: 1.15rem;
-    font-weight: 700;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: var(--villa-text-dark);
+    letter-spacing: 0.02em;
 }
 
 .breadcrumbs {
     font-size: 0.8rem;
-    color: #98a6ad;
+    color: var(--villa-text-light);
 }
 
 .breadcrumbs span {
-    margin: 0 5px;
+    margin: 0 6px;
 }
 
+.breadcrumbs span:first-child {
+    margin-left: 0;
+}
+
+/* ========================================
+   RESPONSIVE DESIGN
+   ======================================== */
+
+/* Mobile Menu Overlay */
+.mobile-menu-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+    z-index: 999;
+}
+
+/* Tablet and below (992px) */
 @media (max-width: 992px) {
     .admin-sidebar {
-        width: 0;
-        overflow: hidden;
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+    }
+
+    .admin-sidebar.mobile-open {
+        transform: translateX(0);
+    }
+
+    .mobile-menu-overlay {
+        display: block;
+    }
+
+    .mobile-close-btn {
+        display: block;
     }
 
     .admin-main-wrapper {
         margin-left: 0;
+    }
+
+    .mobile-menu-btn {
+        display: flex;
+    }
+
+    .topbar-search {
+        display: none;
+    }
+
+    .admin-main {
+        padding: 24px 20px;
+    }
+
+    .admin-topbar {
+        padding: 0 20px;
+    }
+}
+
+/* Mobile (768px and below) */
+@media (max-width: 768px) {
+    .admin-topbar {
+        height: 60px;
+        padding: 0 16px;
+    }
+
+    .topbar-right {
+        gap: 12px;
+    }
+
+    .topbar-item:not(.home-button) {
+        display: none;
+    }
+
+    .profile-name {
+        display: none;
+    }
+
+    .profile-img {
+        width: 32px;
+        height: 32px;
+    }
+
+    .admin-main {
+        padding: 20px 16px;
+    }
+
+    .breadcrumb-area {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+        margin-bottom: 20px;
+    }
+
+    .page-title {
+        font-size: 1.25rem;
+    }
+
+    .breadcrumbs {
+        font-size: 0.75rem;
+    }
+}
+
+/* Small mobile (480px and below) */
+@media (max-width: 480px) {
+    .admin-topbar {
+        height: 56px;
+        padding: 0 12px;
+    }
+
+    .admin-main {
+        padding: 16px 12px;
+    }
+
+    .page-title {
+        font-size: 1.125rem;
     }
 }

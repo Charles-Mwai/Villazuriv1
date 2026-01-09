@@ -1,32 +1,69 @@
+/* ========================================
+   VILLA ZURI ADMIN DASHBOARD - LUXURY THEME
+   ======================================== */
+
+:root {
+    --villa-ocean-blue: #0A2342;
+    --villa-gold: #D4AF37;
+    --villa-white: #FFFFFF;
+    --villa-light-bg: #F5F5F5;
+    --villa-text-dark: #1A1A1A;
+    --villa-text-light: #6B7280;
+    --villa-border: #E5E7EB;
+    --villa-success: #10B981;
+    --villa-warning: #F59E0B;
+    --villa-pending: #3B82F6;
+}
+
 .dashboard-page {
     max-width: 100%;
-    padding: 20px 0;
+    padding: 0;
 }
+
+/* ========================================
+   DASHBOARD HEADER
+   ======================================== */
 
 .dashboard-header {
     margin-bottom: 32px;
-    padding: 24px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    border-radius: 16px;
+    padding: 32px 40px;
+    background: linear-gradient(135deg, var(--villa-ocean-blue) 0%, #0d2d52 100%);
+    border-radius: 0;
     color: white;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.dashboard-header::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--villa-gold);
 }
 
 .dashboard-header h1 {
-    font-size: 2rem;
-    font-weight: 700;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 2.25rem;
+    font-weight: 400;
     margin-bottom: 8px;
-    background: linear-gradient(135deg, #ffffff 0%, #f0f0f0 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    letter-spacing: 0.02em;
+    color: var(--villa-white);
 }
 
 .dashboard-header p {
-    font-size: 1rem;
-    opacity: 0.9;
+    font-size: 0.95rem;
+    opacity: 0.85;
     margin: 0;
+    font-weight: 300;
+    letter-spacing: 0.05em;
 }
+
+/* ========================================
+   STATS GRID
+   ======================================== */
 
 .stats-grid {
     display: grid;
@@ -35,25 +72,16 @@
     margin-bottom: 40px;
 }
 
-@media (max-width: 768px) {
-    .stats-grid {
-        grid-template-columns: 1fr;
-        gap: 16px;
-        margin-bottom: 24px;
-    }
-}
-
 .stat-card {
-    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
-    border-radius: 16px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08), 0 2px 8px rgba(0, 0, 0, 0.04);
+    background: var(--villa-white);
+    border-radius: 12px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.03);
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 28px;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    border: 1px solid rgba(255, 255, 255, 0.8);
-    color: #2d3748;
+    padding: 28px 32px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid var(--villa-border);
     min-height: 140px;
     position: relative;
     overflow: hidden;
@@ -65,39 +93,47 @@
     top: 0;
     left: 0;
     right: 0;
-    height: 4px;
-    background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+    height: 3px;
+    background: var(--villa-ocean-blue);
 }
 
-.stat-card.stat-pink::before {
-    background: linear-gradient(90deg, #ff6b9d 0%, #c44569 100%);
+.stat-card.stat-revenue::before {
+    background: var(--villa-gold);
 }
 
-.stat-card.stat-purple::before {
-    background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+.stat-card.stat-occupancy::before {
+    background: var(--villa-ocean-blue);
 }
 
-.stat-card.stat-blue::before {
-    background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
+.stat-card.stat-confirmed::before {
+    background: var(--villa-success);
 }
 
-.stat-card.stat-cyan::before {
-    background: linear-gradient(90deg, #43e97b 0%, #38f9d7 100%);
+.stat-card.stat-pending::before {
+    background: var(--villa-warning);
+}
+
+.stat-card.stat-upcoming::before {
+    background: var(--villa-pending);
+}
+
+.stat-card.stat-average::before {
+    background: var(--villa-ocean-blue);
 }
 
 .stat-card:hover {
-    transform: translateY(-8px) scale(1.02);
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15), 0 8px 24px rgba(0, 0, 0, 0.1);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(10, 35, 66, 0.12), 0 4px 8px rgba(0, 0, 0, 0.06);
+    border-color: var(--villa-gold);
 }
 
 .stat-content {
     flex: 1;
-    z-index: 1;
 }
 
 .stat-label {
-    font-size: 0.8rem;
-    color: #718096;
+    font-size: 0.75rem;
+    color: var(--villa-text-light);
     text-transform: uppercase;
     letter-spacing: 0.1em;
     margin-bottom: 12px;
@@ -105,197 +141,314 @@
 }
 
 .stat-value {
-    font-size: 2rem;
-    font-weight: 700;
-    color: #1a202c;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 2.25rem;
+    font-weight: 600;
+    color: var(--villa-text-dark);
     margin-bottom: 8px;
     line-height: 1;
 }
 
 .stat-sub {
-    font-size: 0.75rem;
-    color: #68d391;
-    font-weight: 500;
-}
-
-.stat-sub:before {
-    content: '↗';
-    margin-right: 4px;
-}
-
-.stat-card.stat-blue .stat-sub,
-.stat-card.stat-purple .stat-sub {
-    color: #4299e1;
-}
-
-.stat-card.stat-pink .stat-sub {
-    color: #ed64a6;
+    font-size: 0.8rem;
+    color: var(--villa-text-light);
+    font-weight: 400;
 }
 
 .stat-icon {
     width: 64px;
     height: 64px;
-    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+    background: linear-gradient(135deg, rgba(10, 35, 66, 0.06) 0%, rgba(10, 35, 66, 0.03) 100%);
     border-radius: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
-    border: 1px solid rgba(102, 126, 234, 0.2);
-    z-index: 1;
+    border: 1px solid rgba(10, 35, 66, 0.08);
 }
 
-.stat-card.stat-pink .stat-icon {
-    background: linear-gradient(135deg, rgba(255, 107, 157, 0.1) 0%, rgba(196, 69, 105, 0.1) 100%);
-    border-color: rgba(255, 107, 157, 0.2);
-}
-
-.stat-card.stat-blue .stat-icon {
-    background: linear-gradient(135deg, rgba(79, 172, 254, 0.1) 0%, rgba(0, 242, 254, 0.1) 100%);
-    border-color: rgba(79, 172, 254, 0.2);
-}
-
-.stat-card.stat-cyan .stat-icon {
-    background: linear-gradient(135deg, rgba(67, 233, 123, 0.1) 0%, rgba(56, 249, 215, 0.1) 100%);
-    border-color: rgba(67, 233, 123, 0.2);
+.stat-card.stat-revenue .stat-icon {
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.1) 0%, rgba(212, 175, 55, 0.05) 100%);
+    border-color: rgba(212, 175, 55, 0.2);
 }
 
 .stat-icon svg {
-    color: #667eea;
+    color: var(--villa-ocean-blue);
 }
 
-.stat-card.stat-pink .stat-icon svg {
-    color: #ff6b9d;
+.stat-card.stat-revenue .stat-icon svg {
+    color: var(--villa-gold);
 }
 
-.stat-card.stat-blue .stat-icon svg {
-    color: #4facfe;
+.stat-card.stat-confirmed .stat-icon svg {
+    color: var(--villa-success);
 }
 
-.stat-card.stat-cyan .stat-icon svg {
-    color: #43e97b;
+.stat-card.stat-pending .stat-icon svg {
+    color: var(--villa-warning);
 }
+
+.stat-card.stat-upcoming .stat-icon svg {
+    color: var(--villa-pending);
+}
+
+/* ========================================
+   RECENT BOOKINGS SECTION
+   ======================================== */
 
 .dashboard-section {
-    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
-    padding: 32px;
-    border-radius: 16px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08), 0 2px 8px rgba(0, 0, 0, 0.04);
-    border: 1px solid rgba(255, 255, 255, 0.8);
+    background: var(--villa-white);
+    padding: 32px 40px;
+    border-radius: 12px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.03);
+    border: 1px solid var(--villa-border);
 }
 
 .section-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 24px;
+    margin-bottom: 28px;
     padding-bottom: 20px;
-    border-bottom: 2px solid #e2e8f0;
+    border-bottom: 2px solid var(--villa-border);
+    position: relative;
+}
+
+.section-header::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 80px;
+    height: 2px;
+    background: var(--villa-gold);
 }
 
 .section-header h2 {
-    font-size: 1.25rem;
-    color: #1a202c;
-    font-weight: 700;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 1.5rem;
+    color: var(--villa-text-dark);
+    font-weight: 400;
     margin: 0;
+    letter-spacing: 0.02em;
 }
 
 .view-all-btn {
-    padding: 10px 20px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 10px 24px;
+    background: var(--villa-ocean-blue);
     color: white;
-    border: none;
-    border-radius: 8px;
-    font-size: 0.85rem;
+    border: 2px solid var(--villa-ocean-blue);
+    border-radius: 6px;
+    font-size: 0.875rem;
     cursor: pointer;
-    font-weight: 600;
+    font-weight: 500;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+    letter-spacing: 0.03em;
 }
 
 .view-all-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(102, 126, 234, 0.4);
+    background: transparent;
+    color: var(--villa-ocean-blue);
+    border-color: var(--villa-gold);
 }
+
+/* ========================================
+   BOOKING CARDS
+   ======================================== */
 
 .recent-bookings-list {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 12px;
 }
 
 .booking-card {
-    padding: 20px;
-    background: #ffffff;
-    border-radius: 12px;
+    padding: 24px;
+    background: var(--villa-white);
+    border-radius: 8px;
     cursor: pointer;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    border: 1px solid #e2e8f0;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    border: 1px solid var(--villa-border);
+    border-left: 3px solid transparent;
 }
 
 .booking-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
-    border-color: #667eea;
+    transform: translateX(4px);
+    box-shadow: 0 4px 12px rgba(10, 35, 66, 0.08);
+    border-left-color: var(--villa-gold);
+    background: #FAFAFA;
 }
 
 .booking-card-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 12px;
+    margin-bottom: 16px;
 }
 
 .booking-card-header h3 {
-    font-size: 1rem;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 1.125rem;
     font-weight: 600;
-    color: #1a202c;
+    color: var(--villa-text-dark);
     margin: 0;
+}
+
+.booking-card-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.delete-booking-btn {
+    background: none;
+    border: 1px solid var(--villa-border);
+    color: var(--villa-text-light);
+    padding: 8px;
+    border-radius: 6px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    opacity: 0;
+}
+
+.booking-card:hover .delete-booking-btn {
+    opacity: 1;
+}
+
+.delete-booking-btn:hover {
+    background: rgba(239, 68, 68, 0.1);
+    border-color: #EF4444;
+    color: #EF4444;
+    transform: scale(1.1);
+}
+
+.status-badge {
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.status-badge.status-confirmed,
+.status-badge.status-paid {
+    background: rgba(16, 185, 129, 0.1);
+    color: var(--villa-success);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.status-badge.status-pending {
+    background: rgba(59, 130, 246, 0.1);
+    color: var(--villa-pending);
+    border: 1px solid rgba(59, 130, 246, 0.3);
+}
+
+.status-badge.status-cancelled {
+    background: rgba(239, 68, 68, 0.1);
+    color: #EF4444;
+    border: 1px solid rgba(239, 68, 68, 0.3);
 }
 
 .booking-card-details {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    color: #718096;
-    font-size: 0.875rem;
+    align-items: flex-end;
+}
+
+.booking-info {
+    flex: 1;
+}
+
+.booking-dates {
+    font-size: 0.9rem;
+    color: var(--villa-text-dark);
+    margin-bottom: 6px;
+    font-weight: 500;
+}
+
+.booking-meta {
+    font-size: 0.8rem;
+    color: var(--villa-text-light);
+    margin: 0;
 }
 
 .booking-cost {
+    font-family: 'Times New Roman', Times, serif;
     font-weight: 700;
-    color: #38a169;
-    font-size: 1rem;
+    color: var(--villa-gold);
+    font-size: 1.25rem;
 }
+
+/* ========================================
+   EMPTY & LOADING STATES
+   ======================================== */
 
 .empty-state {
     text-align: center;
-    padding: 60px 20px;
-    color: #a0aec0;
-    font-size: 1rem;
+    padding: 80px 20px;
+    color: var(--villa-text-light);
+}
+
+.empty-icon {
+    color: var(--villa-border);
+    margin-bottom: 16px;
 }
 
 .empty-state p {
-    margin: 0;
-    font-style: italic;
+    margin: 0 0 8px 0;
+    font-size: 1.125rem;
+    color: var(--villa-text-dark);
+    font-weight: 500;
+}
+
+.empty-subtitle {
+    font-size: 0.875rem;
+    color: var(--villa-text-light);
 }
 
 .loading-state {
-    padding: 100px;
+    padding: 120px 20px;
     text-align: center;
-    color: #98a6ad;
+    color: var(--villa-text-light);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
 }
 
-/* Mobile-first responsive design */
-@media (max-width: 1024px) {
-    .dashboard-page {
-        padding: 16px 0;
-    }
+.loading-spinner {
+    width: 48px;
+    height: 48px;
+    border: 4px solid var(--villa-border);
+    border-top-color: var(--villa-gold);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
 
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.loading-state p {
+    margin: 0;
+    font-size: 1rem;
+}
+
+/* ========================================
+   RESPONSIVE DESIGN - MOBILE FIRST
+   ======================================== */
+
+/* Tablet (768px and below) */
+@media (max-width: 768px) {
     .dashboard-header {
+        padding: 24px 20px;
         margin-bottom: 24px;
-        padding: 20px;
-        border-radius: 12px;
     }
 
     .dashboard-header h1 {
@@ -303,16 +456,22 @@
     }
 
     .dashboard-header p {
-        font-size: 0.9rem;
+        font-size: 0.875rem;
+    }
+
+    .stats-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+        margin-bottom: 32px;
     }
 
     .stat-card {
         padding: 24px;
-        min-height: 120px;
+        min-height: 110px;
     }
 
     .stat-value {
-        font-size: 1.75rem;
+        font-size: 2rem;
     }
 
     .stat-icon {
@@ -320,148 +479,232 @@
         height: 56px;
     }
 
-    .dashboard-section {
-        padding: 24px;
-        border-radius: 12px;
-    }
-
-    .section-header h2 {
-        font-size: 1.1rem;
-    }
-
-    .view-all-btn {
-        padding: 8px 16px;
-        font-size: 0.8rem;
-    }
-
-    .booking-card {
-        padding: 16px;
-    }
-}
-
-@media (max-width: 768px) {
-    .dashboard-page {
-        padding: 12px 0;
-    }
-
-    .dashboard-header {
-        margin-bottom: 20px;
-        padding: 16px;
-    }
-
-    .dashboard-header h1 {
-        font-size: 1.5rem;
-        margin-bottom: 6px;
-    }
-
-    .dashboard-header p {
-        font-size: 0.85rem;
-    }
-
-    .stats-grid {
-        grid-template-columns: 1fr;
-        gap: 16px;
-        margin-bottom: 24px;
-    }
-
-    .stat-card {
-        padding: 20px;
-        min-height: 100px;
-        flex-direction: column;
-        text-align: center;
-        gap: 16px;
-    }
-
-    .stat-content {
-        order: 2;
-    }
-
-    .stat-icon {
-        order: 1;
-        width: 48px;
-        height: 48px;
-    }
-
-    .stat-value {
-        font-size: 1.5rem;
+    .stat-icon svg {
+        width: 24px;
+        height: 24px;
     }
 
     .dashboard-section {
-        padding: 20px;
+        padding: 24px 20px;
     }
 
     .section-header {
         flex-direction: column;
         align-items: flex-start;
-        gap: 12px;
-        margin-bottom: 16px;
-        padding-bottom: 16px;
+        gap: 16px;
+        margin-bottom: 20px;
     }
 
     .section-header h2 {
-        font-size: 1rem;
+        font-size: 1.25rem;
     }
 
     .view-all-btn {
-        align-self: flex-end;
-        padding: 8px 12px;
+        align-self: stretch;
+        width: 100%;
+        padding: 12px 24px;
+    }
+
+    .booking-card {
+        padding: 18px 20px;
+    }
+
+    /* Make delete button always visible on mobile for better UX */
+    .delete-booking-btn {
+        opacity: 1;
+    }
+
+    .booking-card-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .booking-card-actions {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .booking-card-details {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .booking-cost {
+        font-size: 1.125rem;
+    }
+
+    .empty-state {
+        padding: 60px 20px;
+    }
+}
+
+/* Mobile (480px and below) */
+@media (max-width: 480px) {
+    .dashboard-header {
+        padding: 20px 16px;
+        border-radius: 0;
+        margin-bottom: 20px;
+    }
+
+    .dashboard-header h1 {
+        font-size: 1.5rem;
+    }
+
+    .dashboard-header p {
+        font-size: 0.8rem;
+    }
+
+    .stats-grid {
+        gap: 12px;
+        margin-bottom: 24px;
+    }
+
+    .stat-card {
+        padding: 20px 18px;
+        min-height: 100px;
+    }
+
+    .stat-label {
+        font-size: 0.7rem;
+        margin-bottom: 10px;
+    }
+
+    .stat-value {
+        font-size: 1.75rem;
+        margin-bottom: 6px;
+    }
+
+    .stat-sub {
         font-size: 0.75rem;
+    }
+
+    .stat-icon {
+        width: 48px;
+        height: 48px;
+    }
+
+    .stat-icon svg {
+        width: 22px;
+        height: 22px;
+    }
+
+    .dashboard-section {
+        padding: 20px 16px;
+        border-radius: 0;
+    }
+
+    .section-header {
+        gap: 12px;
+        margin-bottom: 16px;
+        padding-bottom: 12px;
+    }
+
+    .section-header h2 {
+        font-size: 1.125rem;
+    }
+
+    .view-all-btn {
+        padding: 10px 20px;
+        font-size: 0.8rem;
+    }
+
+    .booking-card {
+        padding: 16px;
+        border-radius: 8px;
+    }
+
+    .booking-card-header h3 {
+        font-size: 1rem;
+    }
+
+    .status-badge {
+        padding: 5px 12px;
+        font-size: 0.7rem;
+    }
+
+    .delete-booking-btn {
+        padding: 6px;
+    }
+
+    .delete-booking-btn svg {
+        width: 14px;
+        height: 14px;
+    }
+
+    .booking-dates {
+        font-size: 0.85rem;
+    }
+
+    .booking-meta {
+        font-size: 0.75rem;
+    }
+
+    .booking-cost {
+        font-size: 1rem;
+    }
+
+    .empty-state {
+        padding: 50px 16px;
+    }
+
+    .empty-icon {
+        width: 40px;
+        height: 40px;
+    }
+
+    .empty-state p {
+        font-size: 1rem;
+    }
+
+    .empty-subtitle {
+        font-size: 0.8rem;
+    }
+}
+
+/* Extra small mobile (375px and below) */
+@media (max-width: 375px) {
+    .dashboard-header h1 {
+        font-size: 1.375rem;
+    }
+
+    .stat-card {
+        padding: 18px 16px;
+    }
+
+    .stat-value {
+        font-size: 1.625rem;
+    }
+
+    .stat-label {
+        font-size: 0.65rem;
     }
 
     .booking-card {
         padding: 14px;
     }
 
-    .booking-card-header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 8px;
-        margin-bottom: 8px;
+    .booking-card-header h3 {
+        font-size: 0.95rem;
     }
 
-    .booking-card-details {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 4px;
-    }
-
-    .empty-state {
-        padding: 40px 16px;
+    .booking-dates {
+        font-size: 0.8rem;
     }
 }
 
-@media (max-width: 480px) {
+/* Large Desktop (1440px and above) */
+@media (min-width: 1440px) {
+    .stats-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
     .dashboard-header {
-        margin-bottom: 16px;
-        padding: 12px;
-        border-radius: 8px;
-    }
-
-    .dashboard-header h1 {
-        font-size: 1.25rem;
-    }
-
-    .stat-card {
-        padding: 16px;
-        border-radius: 12px;
-    }
-
-    .stat-value {
-        font-size: 1.25rem;
-    }
-
-    .stat-icon {
-        width: 40px;
-        height: 40px;
+        padding: 40px 48px;
     }
 
     .dashboard-section {
-        padding: 16px;
-        border-radius: 8px;
-    }
-
-    .booking-card {
-        padding: 12px;
-        border-radius: 8px;
+        padding: 36px 48px;
     }
 }
