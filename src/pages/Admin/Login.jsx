@@ -8,23 +8,39 @@ const Login = () => {
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         setError('');
         setLoading(true);
 
-        const adminPassword = import.meta.env.VITE_ADMIN_PASSWORD;
+        try {
+            // Call backend verification endpoint
+            const response = await fetch('/api/verify-admin', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ password }),
+            });
 
-        if (password === adminPassword) {
-            localStorage.setItem('admin_authenticated', 'true');
-            localStorage.setItem('admin_login_time', new Date().getTime().toString());
-            navigate('/admin/dashboard');
-        } else {
-            setError('Invalid password');
+            const data = await response.json();
+
+            if (data.valid) {
+                // Store authentication state
+                localStorage.setItem('admin_authenticated', 'true');
+                localStorage.setItem('admin_login_time', new Date().getTime().toString());
+                navigate('/admin/dashboard');
+            } else {
+                setError(data.error || 'Invalid password');
+                setPassword('');
+            }
+        } catch (error) {
+            console.error('Login error:', error);
+            setError('Unable to verify credentials. Please try again.');
             setPassword('');
+        } finally {
+            setLoading(false);
         }
-
-        setLoading(false);
     };
 
     return (
