@@ -80,7 +80,7 @@ const ExperiencePage = () => {
                             </div>
                         </RevealOnScroll>
                         <div className="split-image">
-                            <img src="/experience-service.png" alt="Private dining on the beach" />
+                            <img src="/IMG_5515-cmpr.jpg" alt="Private dining on the beach" />
                         </div>
                     </div>
                 </section>

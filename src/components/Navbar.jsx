@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import { useBooking } from '../context/BookingContext';
 import './Navbar.css';
@@ -10,6 +10,7 @@ const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
     const { isBookingOpen, openBooking, closeBooking } = useBooking();
+    const navigate = useNavigate();
 
     useEffect(() => {
         const handleScroll = () => {
@@ -22,6 +23,12 @@ const Navbar = () => {
     }, []);
 
     const toggleMenu = () => setIsOpen(!isOpen);
+
+    const handleHomeClick = () => {
+        navigate('/');
+        window.scrollTo(0, 0);
+        toggleMenu();
+    };
 
     const handleBookingClick = (e) => {
         e.preventDefault();
@@ -44,7 +51,7 @@ const Navbar = () => {
                         <span></span>
                     </div>
 
-                    <Link to="/" className="logo">Villa Zuri</Link>
+                    <Link to="/" className="logo" onClick={() => window.scrollTo(0, 0)}>Villa Zuri</Link>
 
                     <button className="book-button" onClick={handleBookingClick}>BOOK</button>
                 </div>
@@ -52,7 +59,7 @@ const Navbar = () => {
 
             <div className={`menu-overlay ${isOpen ? 'active' : ''}`}>
                 <ul className="overlay-links">
-                    <li><Link to="/" onClick={() => { window.scrollTo(0, 0); toggleMenu(); }}>Home</Link></li>
+                    <li><button className="overlay-home-btn" onClick={handleHomeClick}>Home</button></li>
                     <li><Link to="/experience" onClick={toggleMenu}>Experience</Link></li>
                     <li><Link to="/gallery" onClick={toggleMenu}>Gallery</Link></li>
                     <li><Link to="/watamu" onClick={toggleMenu}>Watamu</Link></li>

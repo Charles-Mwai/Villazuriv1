@@ -11,8 +11,10 @@ import FullGallery from './pages/Public/FullGallery';
 import Checkout from './pages/Public/Checkout';
 import Footer from './components/Footer';
 import WatamuFeature from './components/WatamuFeature';
+
 import Blog from './pages/Public/Blog';
 import ExperiencePage from './pages/Public/ExperiencePage';
+import ExperienceTeaser from './components/ExperienceTeaser';
 
 // Admin pages
 import Login from './pages/Admin/Login';
@@ -29,6 +31,7 @@ const PublicLayout = () => (
         <Navbar />
         <Hero />
         <VillaDetails />
+        <ExperienceTeaser />
         <WatamuFeature />
         <Footer />
     </>

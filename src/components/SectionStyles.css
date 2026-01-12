@@ -197,6 +197,12 @@
     margin-top: var(--spacing-md);
 }
 
+@media (max-width: 480px) {
+    .features-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
 .activities-subheading {
     font-size: 1.75rem;
     font-family: var(--font-heading);

@@ -208,6 +208,25 @@
     color: var(--color-accent);
 }
 
+.overlay-home-btn {
+    font-family: var(--font-heading);
+    font-size: 1.8rem;
+    color: #fff;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    padding: 10px 30px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+.overlay-home-btn:hover {
+    background-color: #fff;
+    color: var(--color-primary);
+    border-color: #fff;
+}
+
 /* Desktop Overrides */
 @media (min-width: 992px) {
     .navbar {
