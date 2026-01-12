@@ -4,7 +4,6 @@ import { BookingProvider } from './context/BookingContext';
 // Public pages
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
-import Experience from './components/Experience';
 import VillaDetails from './components/VillaDetails';
 import MarqueeGallery from './components/MarqueeGallery';
 import Watamu from './pages/Public/Watamu';
@@ -13,6 +12,7 @@ import Checkout from './pages/Public/Checkout';
 import Footer from './components/Footer';
 import WatamuFeature from './components/WatamuFeature';
 import Blog from './pages/Public/Blog';
+import ExperiencePage from './pages/Public/ExperiencePage';
 
 // Admin pages
 import Login from './pages/Admin/Login';
@@ -28,7 +28,6 @@ const PublicLayout = () => (
     <>
         <Navbar />
         <Hero />
-        <Experience />
         <VillaDetails />
         <WatamuFeature />
         <Footer />
@@ -44,6 +43,7 @@ function App() {
                     <Route path="/" element={<PublicLayout />} />
                     <Route path="/gallery" element={<FullGallery />} />
                     <Route path="/watamu" element={<Watamu />} />
+                    <Route path="/experience" element={<ExperiencePage />} />
                     <Route path="/blog" element={<Blog />} />
                     <Route path="/checkout" element={<Checkout />} />
 

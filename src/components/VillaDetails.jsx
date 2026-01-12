@@ -24,22 +24,22 @@ const outdoorImages = [
 const activities = [
     {
         title: 'Dolphin Watching',
-        image: '/Activities/WhatsApp Image 2026-01-08 at 12.54.00.jpeg',
+        image: '/Activities/activity-1.jpg',
         description: 'Watch playful dolphins glide through Watamu’s warm waters.'
     },
     {
         title: 'Dhow Cruise',
-        image: '/Activities/WhatsApp Image 2026-01-08 at 12.56.02.jpeg',
+        image: '/Activities/activity-2.jpg',
         description: 'Sail at sunset on a traditional dhow along Watamu’s calm waters'
     },
     {
         title: 'Dining',
-        image: '/Activities/WhatsApp Image 2026-01-08 at 13.00.13.jpeg',
+        image: '/Activities/activity-3.jpg',
         description: 'Enjoy fresh seafood and Swahili flavors at Watamu’s beachfront restaurants'
     },
     {
         title: 'Marine Park',
-        image: '/Activities/WhatsApp Image 2026-01-08 at 13.00.14.jpeg',
+        image: '/Activities/activity-4.jpg',
         description: 'Explore vibrant coral reefs and marine life in Watamu Marine Park'
     }
 ];

@@ -53,7 +53,7 @@ const Navbar = () => {
             <div className={`menu-overlay ${isOpen ? 'active' : ''}`}>
                 <ul className="overlay-links">
                     <li><Link to="/" onClick={() => { window.scrollTo(0, 0); toggleMenu(); }}>Home</Link></li>
-                    <li><a href="#experience" onClick={toggleMenu}>Experience</a></li>
+                    <li><Link to="/experience" onClick={toggleMenu}>Experience</Link></li>
                     <li><Link to="/gallery" onClick={toggleMenu}>Gallery</Link></li>
                     <li><Link to="/watamu" onClick={toggleMenu}>Watamu</Link></li>
                     <li><Link to="/blog" onClick={toggleMenu}>Activities</Link></li>
