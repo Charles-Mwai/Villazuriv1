@@ -3,7 +3,6 @@ import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
 import RevealOnScroll from '../../components/RevealOnScroll';
 import './Watamu.css';
-import LocationMap from '../../components/LocationMap';
 
 const Watamu = () => {
     useEffect(() => {
@@ -11,58 +10,61 @@ const Watamu = () => {
     }, []);
 
     return (
-        <div className="watamu-page">
+        <div className="watamu-page-redesign">
             <Navbar />
 
-            <section className="watamu-hero">
+            <div className="watamu-container-redesign">
+                {/* Header Section */}
+                <header className="watamu-header">
+                    <h1>Read all about Watamu Life</h1>
+                </header>
 
-                <div className="hero-center-content">
-                    <h3>Beach & Marine Life</h3>
-                    <p>peaceful tropical escape with white-sand beaches, warm turquoise waters, and unforgettable ocean experiences.</p>
-                </div>
-            </section>
+                {/* Slideshow Placeholder */}
+                <section className="watamu-hero-image" style={{ backgroundImage: `url("/beautiful-view-of-the-caribbean-beach-during-summe-2026-01-07-23-50-25-utc.jpg")` }}>
+                    {/* Image is background, content removed as per design preference (clean image) or add minimal text if needed */}
+                </section>
 
-            <div className="watamu-content container">
-                <RevealOnScroll>
-                    <div className="watamu-full-image">
-                        <img
-                            src="/aerial-view-of-a-tropical-coast-ocean-scenery-sur-2026-01-07-01-19-52-utc.jpg"
-                            alt="Watamu Beach Aerial View"
-                        />
-                    </div>
-                </RevealOnScroll>
+                {/* Main Content Section */}
+                <section className="watamu-text-content">
+                    <RevealOnScroll>
+                        <h2>Villazuri, Watamu — Where Coastal Luxury Meets Endless Experiences</h2>
+                        <p>
+                            Set along Kenya’s Indian Ocean coastline, Villazuri is a refined retreat in the heart of Watamu, offering privacy, comfort, and effortless access to one of the coast’s most enchanting destinations. Surrounded by natural beauty, Swahili heritage, and the soothing rhythm of the ocean, it’s the perfect place to unwind while staying close to unforgettable experiences.
+                        </p>
+                        <p>
+                            From vibrant coral reefs in Watamu Marine National Park to relaxed days on Watamu Beach and Turtle Bay, the sea is always within reach. Enjoy world-class snorkeling and diving, sunset dhow cruises, or ocean adventures like deep-sea fishing, kayaking, paddleboarding, and kite surfing.
+                        </p>
+                        <p>
+                            Beyond the shoreline, explore the tranquil mangroves of Mida Creek, the rich wildlife of Arabuko-Sokoke Forest, and the timeless history of the Gede Ruins. Discover local markets, coastal cuisine, and conservation experiences, from turtle releases to private boat trips to secluded sandbanks.
+                        </p>
+                        <p>
+                            Villazuri is more than a villa — it’s your gateway to Watamu, where luxury, nature, and authentic coastal experiences come together to create lasting memories.
+                        </p>
+                    </RevealOnScroll>
+                </section>
 
-                <RevealOnScroll>
-                    <div className="location-section">
-                        <div className="location-grid">
-                            <div className="location-details">
-                                <h2>Finding Your Way</h2>
-                                <p className="location-intro">
-                                    Nestled along the pristine shores, Villa Zuri is perfectly positioned
-                                    to offer both seclusion and accessibility.
-                                </p>
-                                <div className="directions-info">
-                                    <h3>Directions</h3>
-                                    <p>
-                                        We are located adjacent to the renowned Papa Remo Village.
-                                        From Malindi Airport, take the main coastal road south towards Watamu.
-                                        Turn left at the Gede Ruins junction and follow the signs for Papa Remo Beach.
-                                    </p>
-                                    <p>
-                                        Our concierge can arrange private transfers for a seamless arrival experience.
-                                    </p>
-                                </div>
+                {/* Read More Stories Section */}
+                <section className="watamu-stories-section">
+                    <RevealOnScroll>
+                        <h3>Read more stories</h3>
+                        <div className="stories-grid">
+                            <div className="story-card">
+                                <div className="story-placeholder-image"></div>
+                                <h4>Watamu Living</h4>
                             </div>
-                            <div className="location-map-frame">
-                                <LocationMap
-                                    center={{ lat: -3.366, lng: 40.016 }}
-                                    zoom={15}
-                                />
+                            <div className="story-card">
+                                <div className="story-placeholder-image"></div>
+                                <h4>Solo Tripping</h4>
+                            </div>
+                            <div className="story-card">
+                                <div className="story-placeholder-image"></div>
+                                <h4>Dining Experience</h4>
                             </div>
                         </div>
-                    </div>
-                </RevealOnScroll>
+                    </RevealOnScroll>
+                </section>
             </div>
+
             <Footer />
         </div>
     );

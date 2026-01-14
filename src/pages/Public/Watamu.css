@@ -1,189 +1,134 @@
-.watamu-page {
+/* Watamu Page Redesign Styles */
+.watamu-page-redesign {
     width: 100%;
     min-height: 100vh;
-    display: flex;
-    flex-direction: column;
+    background-color: #fff;
+    color: #333;
+    padding-top: 100px;
+    /* Space for fixed navbar */
 }
 
-.watamu-container {
-    flex: 1;
-    padding-top: 80px;
-    /* Accounts for Navbar */
+.watamu-container-redesign {
+    max-width: 1000px;
+    /* Constrain width for a cleaner look */
+    margin: 0 auto;
+    padding: 0 20px 80px;
 }
 
-.watamu-hero {
+/* Header */
+.watamu-header {
+    margin-bottom: 40px;
+    text-align: left;
+    /* Explicitly left aligned */
+}
+
+.watamu-header h1 {
+    font-family: var(--font-body);
+    /* Using body font for a cleaner, less "hero" look if desired, or use heading */
+    font-size: 1.5rem;
+    /* Average size */
+    font-weight: 400;
+    color: #333;
+    margin: 0;
+}
+
+/* Slideshow / Hero Image */
+.watamu-hero-image {
+    width: 100%;
     height: 100vh;
     /* Full screen height */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url("/villa pics/IMG_3827.jpg");
     background-size: cover;
     background-position: center;
-    text-align: center;
-    color: #fff;
+    background-repeat: no-repeat;
+    margin-bottom: 60px;
     position: relative;
-}
-
-
-
-
-
-
-
-.watamu-image-section {
-    width: 100%;
-    height: auto;
-    overflow: hidden;
-}
-
-.watamu-image-section img {
-    width: 100%;
-    height: auto;
-    display: block;
-    object-fit: cover;
-}
-
-.watamu-full-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-    transition: transform 1.2s cubic-bezier(0.165, 0.84, 0.44, 1);
-}
-
-.watamu-full-image:hover img {
-    transform: scale(1.03);
-}
-
-/* Location Section */
-.location-section {
-    padding: 80px 0;
-    margin-top: 40px;
-    border-top: 1px solid #f0f0f0;
-}
-
-.location-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 40px;
-}
-
-.location-details h2 {
-    font-family: var(--font-heading);
-    font-size: 2.5rem;
-    color: var(--color-primary);
-    margin-bottom: 20px;
-    letter-spacing: -0.02em;
-}
-
-.location-intro {
-    font-family: var(--font-body);
-    font-size: 1.1rem;
-    line-height: 1.6;
-    color: #444;
-    margin-bottom: 40px;
-    font-weight: 300;
-}
-
-.directions-info h3 {
-    font-family: var(--font-heading);
-    font-size: 0.9rem;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: #888;
-    margin-bottom: 15px;
-}
-
-.directions-info p {
-    font-family: var(--font-body);
-    font-weight: 300;
-    color: #333;
-    line-height: 1.8;
-    margin-bottom: 20px;
-}
-
-.location-map-frame {
-    width: 100%;
-    height: 400px;
-    background: #eee;
-    overflow: hidden;
-    border-radius: 4px;
-    /* Minimal radius */
-}
-
-.location-map-frame iframe {
-    filter: grayscale(100%) contrast(1.1);
-    /* Editorial B&W look map */
-    transition: filter 0.5s ease;
-}
-
-.location-map-frame:hover iframe {
-    filter: grayscale(0%);
-    /* Color on hover */
-}
-
-@media (min-width: 900px) {
-    .location-grid {
-        grid-template-columns: 1fr 1.5fr;
-        /* Text narrower than map */
-        gap: 80px;
-        align-items: center;
-    }
-
-    .location-details {
-        padding-right: 20px;
-    }
-}
-
-.watamu-content {
-    padding: var(--spacing-xl) 0;
-    width: 100%;
-}
-
-.watamu-text-block {
-    max-width: 800px;
-    margin: 0 auto 60px auto;
-    text-align: center;
-    padding: 0 20px;
-}
-
-
-
-.hero-center-content {
-    text-align: center;
-    max-width: 800px;
-    z-index: 10;
-    padding: 0 20px;
-}
-
-.hero-center-content h3 {
-    font-family: var(--font-heading);
-    font-size: 3rem;
-    color: #fff;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    margin-bottom: 1.5rem;
-    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
-}
-
-.hero-center-content p {
-    font-family: var(--font-body);
-    font-size: 1.2rem;
-    color: #eee;
-    margin: 0 auto;
-    max-width: 600px;
-    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
-    line-height: 1.6;
-    font-weight: 300;
+    /* Optional: Add slight overlay if text is added later */
 }
 
 @media (max-width: 768px) {
-    .hero-center-content h3 {
-        font-size: 2rem;
+    .watamu-hero-image {
+        height: 100dvh;
+        min-height: 500px;
+    }
+}
+
+/* Text Content */
+.watamu-text-content {
+    max-width: 800px;
+    /* margin: 0 auto 60px;  Removed centering margin to align left if needed, or keep centered? The image shows text column. */
+    margin-bottom: 80px;
+}
+
+.watamu-text-content h2 {
+    font-size: 1.5rem;
+    font-weight: 400;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.watamu-text-content p {
+    font-size: 0.95rem;
+    line-height: 1.8;
+    color: #555;
+    margin-bottom: 20px;
+    text-align: justify;
+}
+
+/* Stories Section */
+.watamu-stories-section {
+    border-top: 1px solid #eee;
+    /* Optional separator */
+    padding-top: 40px;
+}
+
+.watamu-stories-section h3 {
+    font-size: 1.5rem;
+    font-weight: 400;
+    margin-bottom: 30px;
+    color: #333;
+}
+
+.stories-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.story-card {
+    text-align: left;
+}
+
+.story-placeholder-image {
+    width: 100%;
+    aspect-ratio: 1;
+    /* Square */
+    background-color: #666;
+    /* Dark grey */
+    margin-bottom: 15px;
+}
+
+.story-card h4 {
+    font-size: 1.1rem;
+    font-weight: 400;
+    color: #333;
+    margin: 0;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .stories-grid {
+        grid-template-columns: 1fr;
+        /* Stack stories on mobile */
+        gap: 40px;
     }
 
-    .hero-center-content p {
-        font-size: 1rem;
+    .watamu-slideshow-placeholder {
+        height: 100dvh;
+        /* Match hero height on mobile */
+        min-height: 500px;
+    }
+
+    .watamu-header h1 {
+        font-size: 1.3rem;
     }
 }
