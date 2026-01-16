@@ -1,34 +1,51 @@
-.blog-page {
+/* Blog Page Redesign Styles */
+.blog-page-redesign {
     width: 100%;
     min-height: 100vh;
     background-color: #fff;
     color: #333;
+    padding-top: 100px;
+    /* Space for fixed navbar */
 }
 
-/* Replicating Hero.css specific for Blog to ensure isolation but same design */
-/* Replicating Hero.css specific for Blog to ensure isolation but same design */
-.blog-hero-custom {
-    height: 100vh;
-    width: 100%;
-    position: relative;
-    display: flex;
-    align-items: center;
-    /* Middle vertical */
-    justify-content: flex-start;
-    /* Left horizontal */
+.blog-container-redesign,
+.watamu-container-redesign {
+    max-width: 1200px;
+    /* Increased from 1000px for a more expansive look */
+    margin: 0 auto;
+    padding: 0 24px 60px;
+}
+
+/* Header */
+.blog-header {
+    margin-bottom: 40px;
     text-align: left;
-    color: #fff;
-    overflow: hidden;
-    padding-left: 20px;
-    /* Minimal spacing from left edge */
-    padding-right: 20px;
-    /* Ensure text doesn't touch right edge */
-    margin-bottom: 80px;
-    /* Spacing before content */
+    /* Explicitly left aligned */
 }
 
-/* Reuse or redeclare hero background styles to match Hero.css */
-.hero-background {
+.blog-header h1 {
+    font-family: var(--font-body);
+    /* Using body font for a cleaner, less "hero" look */
+    font-size: 1.5rem;
+    /* Average size */
+    font-weight: 400;
+    color: #333;
+    margin: 0;
+}
+
+/* Slideshow / Hero Image */
+.blog-hero-image {
+    width: 100%;
+    height: 100vh;
+    /* Full screen height */
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 60px;
+    background-color: #f0f0f0;
+    /* Fallback */
+}
+
+.blog-hero-background {
     position: absolute;
     top: 0;
     left: 0;
@@ -41,110 +58,400 @@
     z-index: 1;
 }
 
-.hero-background.active {
+.blog-hero-background.active {
     opacity: 1;
 }
 
-.hero-overlay {
+/* Text Content */
+.blog-text-content {
+    max-width: 800px;
+    margin-bottom: 80px;
+    margin-left: auto;
+    /* Push content to the right */
+    padding-left: 100px;
+    /* Add some padding from the edge */
+}
+
+.blog-text-content h2 {
+    font-size: 1.5rem;
+    font-weight: 400;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.blog-text-content p {
+    font-size: 0.95rem;
+    line-height: 1.8;
+    color: #555;
+    margin-bottom: 20px;
+    text-align: left;
+    /* Changed from justify for better mobile rendering */
+}
+
+/* Stories Section */
+.blog-stories-section {
+    border-top: 1px solid #eee;
+    /* Optional separator */
+    padding-top: 40px;
+}
+
+.blog-stories-section h3 {
+    font-size: 1.5rem;
+    font-weight: 400;
+    margin-bottom: 30px;
+    color: #333;
+}
+
+.stories-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.story-card {
+    text-align: left;
+}
+
+.story-image {
+    width: 100%;
+    aspect-ratio: 1;
+    /* Square */
+    object-fit: cover;
+    margin-bottom: 15px;
+    background-color: #f0f0f0;
+}
+
+.story-card h4 {
+    font-size: 1.1rem;
+    font-weight: 400;
+    color: #333;
+    margin: 0;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .blog-page-redesign {
+        padding-top: 80px;
+        /* Reduced space for navbar on mobile */
+    }
+
+    .blog-container-redesign {
+        padding: 0 16px 40px;
+    }
+
+    .blog-header {
+        margin-bottom: 20px;
+    }
+
+    .blog-header h1 {
+        font-size: 1.25rem;
+        line-height: 1.4;
+    }
+
+    .blog-hero-image {
+        height: 60vh;
+        /* Better balance on small screens */
+        min-height: 350px;
+        margin-bottom: 30px;
+    }
+
+    .blog-text-content h2 {
+        font-size: 1.3rem;
+        margin-bottom: 15px;
+    }
+
+    .blog-text-content p {
+        font-size: 0.9rem;
+        line-height: 1.7;
+        margin-bottom: 15px;
+    }
+
+    .blog-stories-section h3 {
+        font-size: 1.3rem;
+        margin-bottom: 20px;
+    }
+
+    .stories-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .story-card h4 {
+        font-size: 1.05rem;
+    }
+}
+
+/* Section Divider between Blog and Watamu */
+.section-divider {
+    height: 80px;
+    background-color: transparent;
+}
+
+/* Watamu Section Styles */
+.watamu-container-redesign {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 24px 60px;
+}
+
+.watamu-header {
+    margin-bottom: 40px;
+    text-align: left;
+}
+
+.watamu-header h1 {
+    font-family: var(--font-body);
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: #333;
+    margin: 0;
+}
+
+.watamu-hero-image {
+    width: 100%;
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 60px;
+    background-color: #f0f0f0;
+}
+
+.watamu-hero-background {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.4);
-    z-index: 2;
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    transition: opacity 1.5s ease-in-out;
+    z-index: 1;
 }
 
-.hero-content {
-    position: relative;
-    z-index: 3;
-    animation: fadeIn 1s ease-out;
-    padding: 0;
-    /* Remove internal padding to align strictly left */
+.watamu-hero-background.active {
+    opacity: 1;
+}
+
+.watamu-text-content {
     max-width: 800px;
-    /* Keep typical width but let it sit left */
+    margin-bottom: 80px;
+    margin-left: auto;
+    /* Push content to the right */
+    padding-left: 100px;
+    /* Add some padding from the edge */
 }
 
-/* Matching Hero.css typography */
-.hero-title {
-    font-size: 2rem;
-    /* Reduced from 3rem */
-    margin-bottom: var(--spacing-md);
-    line-height: 1.2;
-    font-family: var(--font-heading);
-    letter-spacing: 0.05em;
+.watamu-text-content h2 {
+    font-size: 1.5rem;
+    font-weight: 400;
+    margin-bottom: 20px;
+    color: #333;
 }
 
-.hero-subtitle {
-    font-size: 1.2rem;
-    margin-bottom: var(--spacing-xl);
-    font-weight: 300;
-    letter-spacing: 0.1em;
-    font-family: var(--font-body);
+.watamu-text-content p {
+    font-size: 0.95rem;
+    line-height: 1.8;
+    color: #555;
+    margin-bottom: 20px;
+    text-align: left;
 }
 
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+.watamu-stories-section {
+    border-top: 1px solid #eee;
+    padding-top: 40px;
 }
 
-/* Blog Placeholder Image */
-.blog-placeholder-image {
-    width: 100%;
-    height: 100%;
-    min-height: 400px;
-    /* Match typical image height */
-    background-color: #f5f5f5;
-    border: 1px solid #e0e0e0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
+.watamu-stories-section h3 {
+    font-size: 1.5rem;
+    font-weight: 400;
+    margin-bottom: 30px;
+    color: #333;
+    text-align: left;
 }
 
-.blog-placeholder-image::after {
-    content: "";
-    /* Empty content for now as requested */
-    color: #ccc;
-    font-size: 0.9rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
+/* Specific 3-column grid for Watamu section to fill width with 3 items */
+.watamu-stories-section .stories-grid {
+    grid-template-columns: repeat(3, 1fr);
 }
 
-/* Mobile Responsiveness for Hero */
+/* Center both stories grids - Resetting for specific section if needed, 
+   but user wants left-aligned look like screenshot for titles now */
+.blog-stories-section .stories-grid,
+.watamu-stories-section .stories-grid {
+    margin: 0;
+    max-width: 100%;
+}
+
+/* Enhanced Mobile Responsiveness */
 @media (max-width: 768px) {
-    .blog-hero-custom {
-        height: 100dvh;
-        min-height: 500px;
+    .blog-page-redesign {
+        padding-top: 80px;
     }
 
-    .hero-title {
-        font-size: 1.8rem;
-        /* Reduced for mobile */
+    /* Blog Section Mobile */
+    .blog-container-redesign {
+        padding: 0 16px 40px;
+    }
+
+    .blog-header {
+        margin-bottom: 20px;
+    }
+
+    .blog-header h1 {
+        font-size: 1.25rem;
+        line-height: 1.4;
+    }
+
+    .blog-hero-image {
+        height: 60vh;
+        min-height: 350px;
+        margin-bottom: 30px;
+    }
+
+    .blog-text-content {
+        margin-left: 0;
+        padding-left: 0;
+        margin-bottom: 40px;
+    }
+
+    .blog-text-content h2 {
+        font-size: 1.2rem;
         margin-bottom: 15px;
     }
 
-    .hero-subtitle {
-        font-size: 1rem;
+    .blog-text-content p {
+        font-size: 0.9rem;
+        line-height: 1.7;
+        margin-bottom: 15px;
+    }
+
+    .blog-stories-section {
+        padding-top: 30px;
+    }
+
+    .blog-stories-section h3 {
+        font-size: 1.2rem;
+        margin-bottom: 20px;
+    }
+
+    .stories-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
+
+    .story-card h4 {
+        font-size: 0.95rem;
+    }
+
+    /* Section Divider Mobile */
+    .section-divider {
+        height: 40px;
+    }
+
+    /* Watamu Section Mobile */
+    .watamu-container-redesign {
+        padding: 0 16px 40px;
+    }
+
+    .watamu-header {
+        margin-bottom: 20px;
+    }
+
+    .watamu-header h1 {
+        font-size: 1.25rem;
+        line-height: 1.4;
+    }
+
+    .watamu-hero-image {
+        height: 60vh;
+        min-height: 350px;
         margin-bottom: 30px;
-        letter-spacing: 0.15em;
+    }
+
+    .watamu-text-content {
+        margin-bottom: 40px;
+        margin-left: 0;
+        padding-left: 0;
+    }
+
+    .watamu-text-content h2 {
+        font-size: 1.2rem;
+        margin-bottom: 15px;
+    }
+
+    .watamu-text-content p {
+        font-size: 0.9rem;
+        line-height: 1.7;
+        margin-bottom: 15px;
+    }
+
+    .watamu-stories-section {
+        padding-top: 30px;
+    }
+
+    .blog-stories-section h3,
+    .watamu-stories-section h3 {
+        font-size: 1.2rem;
+        margin-bottom: 20px;
+        text-align: left;
+    }
+
+    .blog-stories-section,
+    .watamu-stories-section {
+        text-align: left;
+    }
+
+    .blog-stories-section .stories-grid,
+    .watamu-stories-section .stories-grid {
+        justify-items: start;
     }
 }
 
+/* Extra small screens optimization */
 @media (max-width: 480px) {
-    .hero-title {
-        font-size: 1.5rem;
-        /* Further reduced for small screens */
+
+    .blog-header h1,
+    .watamu-header h1 {
+        font-size: 1.1rem;
     }
 
-    .hero-subtitle {
+    .blog-text-content h2,
+    .watamu-text-content h2 {
+        font-size: 1.1rem;
+    }
+
+    .blog-text-content p,
+    .watamu-text-content p {
+        font-size: 0.85rem;
+        line-height: 1.65;
+    }
+
+    .blog-stories-section h3,
+    .watamu-stories-section h3 {
+        font-size: 1.1rem;
+    }
+
+    .stories-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .story-card h4 {
         font-size: 0.9rem;
+    }
+
+    .story-image {
+        margin-bottom: 10px;
+    }
+
+    .blog-hero-image,
+    .watamu-hero-image {
+        height: 50vh;
+        min-height: 300px;
+    }
+
+    .section-divider {
+        height: 30px;
     }
 }
