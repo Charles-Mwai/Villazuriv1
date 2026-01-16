@@ -47,16 +47,13 @@ const Blog = () => {
                 {/* 1. Dolphin Watching */}
                 <div className="grid-row">
                     <div className="grid-image">
-                        <div className="blog-placeholder-image"></div>
+                        <img src="/ty-tomlinson-TZAHcS2a9wY-unsplash.jpg" alt="Dolphin Watching" loading="lazy" />
                     </div>
                     <div className="grid-content">
                         <RevealOnScroll>
                             <h3>Dolphin Watching</h3>
                             <p>
-                                Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.
-                            </p>
-                            <p>
-                                Qt enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur?
+                                Watch playful dolphins glide through Watamu’s warm waters, where early morning boat trips offer a chance to see these graceful creatures swimming freely in their natural habitat. Guided by experienced locals, you’ll enjoy a calm, respectful encounter surrounded by turquoise seas, gentle ocean breezes, and the quiet beauty that makes Watamu feel truly special.
                             </p>
                         </RevealOnScroll>
                     </div>
@@ -65,7 +62,7 @@ const Blog = () => {
                 {/* 2. Dhow Cruise (Reverse) */}
                 <div className="grid-row reverse">
                     <div className="grid-image">
-                        <div className="blog-placeholder-image"></div>
+                        <img src="/prolific-ke-sxViCE1d2Cw-unsplash.jpg" alt="Dhow Cruise" loading="lazy" />
                     </div>
                     <div className="grid-content">
                         <RevealOnScroll>
@@ -83,7 +80,7 @@ const Blog = () => {
                 {/* 3. Dining */}
                 <div className="grid-row">
                     <div className="grid-image">
-                        <div className="blog-placeholder-image"></div>
+                        <img src="/tomi-saputra-kIXNJ5PETyM-unsplash.jpg" alt="Dining" loading="lazy" />
                     </div>
                     <div className="grid-content">
                         <RevealOnScroll>
@@ -101,7 +98,7 @@ const Blog = () => {
                 {/* 4. Marine Park (Reverse) */}
                 <div className="grid-row reverse">
                     <div className="grid-image">
-                        <div className="blog-placeholder-image"></div>
+                        <img src="/milos-prelevic-U0R6cck6V9U-unsplash.jpg" alt="Marine Park" loading="lazy" />
                     </div>
                     <div className="grid-content">
                         <RevealOnScroll>

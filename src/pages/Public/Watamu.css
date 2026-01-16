@@ -12,8 +12,11 @@
     max-width: 1000px;
     /* Constrain width for a cleaner look */
     margin: 0 auto;
-    padding: 0 20px 80px;
+    padding: 0 24px 60px;
+    /* Increased side padding slightly, reduced bottom */
 }
+
+
 
 /* Header */
 .watamu-header {
@@ -37,20 +40,31 @@
     width: 100%;
     height: 100vh;
     /* Full screen height */
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    margin-bottom: 60px;
     position: relative;
-    /* Optional: Add slight overlay if text is added later */
+    overflow: hidden;
+    margin-bottom: 60px;
+    background-color: #f0f0f0;
+    /* Fallback */
 }
 
-@media (max-width: 768px) {
-    .watamu-hero-image {
-        height: 100dvh;
-        min-height: 500px;
-    }
+.watamu-hero-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    transition: opacity 1.5s ease-in-out;
+    z-index: 1;
 }
+
+.watamu-hero-background.active {
+    opacity: 1;
+}
+
+
 
 /* Text Content */
 .watamu-text-content {
@@ -71,7 +85,8 @@
     line-height: 1.8;
     color: #555;
     margin-bottom: 20px;
-    text-align: justify;
+    text-align: left;
+    /* Changed from justify for better mobile rendering */
 }
 
 /* Stories Section */
@@ -98,13 +113,13 @@
     text-align: left;
 }
 
-.story-placeholder-image {
+.story-image {
     width: 100%;
     aspect-ratio: 1;
     /* Square */
-    background-color: #666;
-    /* Dark grey */
+    object-fit: cover;
     margin-bottom: 15px;
+    background-color: #f0f0f0;
 }
 
 .story-card h4 {
@@ -116,19 +131,53 @@
 
 /* Mobile Responsiveness */
 @media (max-width: 768px) {
-    .stories-grid {
-        grid-template-columns: 1fr;
-        /* Stack stories on mobile */
-        gap: 40px;
+    .watamu-page-redesign {
+        padding-top: 80px;
+        /* Reduced space for navbar on mobile */
     }
 
-    .watamu-slideshow-placeholder {
-        height: 100dvh;
-        /* Match hero height on mobile */
-        min-height: 500px;
+    .watamu-container-redesign {
+        padding: 0 16px 40px;
+    }
+
+    .watamu-header {
+        margin-bottom: 20px;
     }
 
     .watamu-header h1 {
+        font-size: 1.25rem;
+        line-height: 1.4;
+    }
+
+    .watamu-hero-image {
+        height: 60vh;
+        /* Better balance on small screens */
+        min-height: 350px;
+        margin-bottom: 30px;
+    }
+
+    .watamu-text-content h2 {
         font-size: 1.3rem;
+        margin-bottom: 15px;
+    }
+
+    .watamu-text-content p {
+        font-size: 0.9rem;
+        line-height: 1.7;
+        margin-bottom: 15px;
+    }
+
+    .watamu-stories-section h3 {
+        font-size: 1.3rem;
+        margin-bottom: 20px;
+    }
+
+    .stories-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .story-card h4 {
+        font-size: 1.05rem;
     }
 }

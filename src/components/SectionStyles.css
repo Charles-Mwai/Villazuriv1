@@ -33,7 +33,8 @@
     display: flex;
     flex-direction: column;
     /* Default to column for mobile */
-    margin-bottom: var(--spacing-xl);
+    margin-bottom: var(--spacing-lg);
+    /* Reduced from xl for mobile */
 }
 
 /* Base styles / Mobile Defaults */
@@ -51,7 +52,7 @@
 }
 
 .grid-content {
-    padding: 40px 20px;
+    padding: var(--spacing-lg) var(--spacing-md);
     /* More comfortable usage on mobile */
     display: flex;
     flex-direction: column;
@@ -107,6 +108,8 @@
         min-height: 500px;
         height: auto;
         /* Flexible height to prevent overlap */
+        margin-bottom: var(--spacing-xl);
+        /* Restore larger margin on desktop */
     }
 
     .grid-row.reverse {

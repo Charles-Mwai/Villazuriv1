@@ -1,12 +1,28 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
 import RevealOnScroll from '../../components/RevealOnScroll';
 import './Watamu.css';
 
+const watamuImages = [
+    '/watamu/abdul-noor-cGOVWwGKmwM-unsplash.jpg',
+    '/watamu/andrew-molo-hdzYmowUDJY-unsplash.jpg',
+    '/watamu/john-mukiibi-elijah-dOaiQnOPO60-unsplash.jpg',
+    '/watamu/timothy-k-5KBI2j3UDR0-unsplash.jpg',
+    '/watamu/wexor-tmg-L-2p8fapOA8-unsplash.jpg'
+];
+
 const Watamu = () => {
+    const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
     useEffect(() => {
         window.scrollTo(0, 0);
+
+        const interval = setInterval(() => {
+            setCurrentImageIndex((prevIndex) => (prevIndex + 1) % watamuImages.length);
+        }, 5000);
+
+        return () => clearInterval(interval);
     }, []);
 
     return (
@@ -19,9 +35,15 @@ const Watamu = () => {
                     <h1>Read all about Watamu Life</h1>
                 </header>
 
-                {/* Slideshow Placeholder */}
-                <section className="watamu-hero-image" style={{ backgroundImage: `url("/beautiful-view-of-the-caribbean-beach-during-summe-2026-01-07-23-50-25-utc.jpg")` }}>
-                    {/* Image is background, content removed as per design preference (clean image) or add minimal text if needed */}
+                {/* Slideshow Hero Section */}
+                <section className="watamu-hero-image">
+                    {watamuImages.map((img, index) => (
+                        <div
+                            key={index}
+                            className={`watamu-hero-background ${index === currentImageIndex ? 'active' : ''}`}
+                            style={{ backgroundImage: `url("${img}")` }}
+                        />
+                    ))}
                 </section>
 
                 {/* Main Content Section */}
@@ -49,15 +71,15 @@ const Watamu = () => {
                         <h3>Read more stories</h3>
                         <div className="stories-grid">
                             <div className="story-card">
-                                <div className="story-placeholder-image"></div>
+                                <img src="/watamu/dimitry-b-gO3uzl86USU-unsplash.jpg" alt="Watamu Living" className="story-image" loading="lazy" />
                                 <h4>Watamu Living</h4>
                             </div>
                             <div className="story-card">
-                                <div className="story-placeholder-image"></div>
+                                <img src="/watamu/abner-abiu-castillo-diaz-N5ByCirHVqw-unsplash.jpg" alt="Solo Tripping" className="story-image" loading="lazy" />
                                 <h4>Solo Tripping</h4>
                             </div>
                             <div className="story-card">
-                                <div className="story-placeholder-image"></div>
+                                <img src="/watamu/maximus-beaumont-v30ztCrmzQg-unsplash.jpg" alt="Dining Experience" className="story-image" loading="lazy" />
                                 <h4>Dining Experience</h4>
                             </div>
                         </div>
