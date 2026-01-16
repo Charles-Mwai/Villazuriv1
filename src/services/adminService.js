@@ -167,3 +167,62 @@ export const getBookingStats = async () => {
         throw error;
     }
 };
+
+/**
+ * Get all pricing rules
+ * @returns {Promise<Array>}
+ */
+export const getPricingRules = async () => {
+    try {
+        const { data, error } = await supabase
+            .from('pricing')
+            .select('*')
+            .order('start_date', { ascending: true });
+
+        if (error) throw error;
+        return data || [];
+    } catch (error) {
+        console.error('Error fetching pricing rules:', error);
+        throw error;
+    }
+};
+
+/**
+ * Create or update a pricing rule
+ * @param {Object} rule 
+ * @returns {Promise<Object>}
+ */
+export const upsertPricingRule = async (rule) => {
+    try {
+        const { data, error } = await supabase
+            .from('pricing')
+            .upsert([rule])
+            .select()
+            .single();
+
+        if (error) throw error;
+        return data;
+    } catch (error) {
+        console.error('Error saving pricing rule:', error);
+        throw error;
+    }
+};
+
+/**
+ * Delete a pricing rule
+ * @param {string} id 
+ * @returns {Promise<void>}
+ */
+export const deletePricingRule = async (id) => {
+    try {
+        const { error } = await supabase
+            .from('pricing')
+            .delete()
+            .eq('id', id);
+
+        if (error) throw error;
+    } catch (error) {
+        console.error('Error deleting pricing rule:', error);
+        throw error;
+    }
+};

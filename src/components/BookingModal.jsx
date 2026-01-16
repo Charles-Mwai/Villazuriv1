@@ -5,7 +5,7 @@ import './BookingModal.css';
 
 import CustomCalendar from './CustomCalendar';
 import { calculateTotalCost, validateBookingDates } from '../utils/bookingLogic';
-import { checkAvailability, createBooking } from '../services/bookingService';
+import { checkAvailability, createBooking, getAllPricingRules } from '../services/bookingService';
 
 const BookingModal = ({ isOpen, onClose }) => {
     const navigate = useNavigate();
@@ -15,6 +15,7 @@ const BookingModal = ({ isOpen, onClose }) => {
     const [submitting, setSubmitting] = useState(false);
     const [isValidating, setIsValidating] = useState(false);
     const [isAvailable, setIsAvailable] = useState(true);
+    const [pricingRules, setPricingRules] = useState([]);
     const [formData, setFormData] = useState({
         arrivalDate: '',
         nights: '',
@@ -26,6 +27,18 @@ const BookingModal = ({ isOpen, onClose }) => {
     });
 
     useEffect(() => {
+        const fetchRules = async () => {
+            try {
+                const rules = await getAllPricingRules();
+                setPricingRules(rules);
+            } catch (err) {
+                console.error("Failed to fetch pricing rules:", err);
+            }
+        };
+        fetchRules();
+    }, []);
+
+    useEffect(() => {
         const updateCostAndValidate = async () => {
             if (formData.arrivalDate && formData.nights && formData.nights !== '30+') {
                 const start = new Date(formData.arrivalDate);
@@ -33,8 +46,8 @@ const BookingModal = ({ isOpen, onClose }) => {
                 const end = new Date(start);
                 end.setDate(start.getDate() + nightsCount);
 
-                // Update Cost
-                const cost = calculateTotalCost(start, end);
+                // Update Cost - Pass pricingRules to the utility
+                const cost = calculateTotalCost(start, end, pricingRules);
                 setTotalCost(cost);
 
                 // Validate Availability
@@ -64,7 +77,7 @@ const BookingModal = ({ isOpen, onClose }) => {
         };
 
         updateCostAndValidate();
-    }, [formData.arrivalDate, formData.nights]);
+    }, [formData.arrivalDate, formData.nights, pricingRules]);
 
     if (!isOpen) return null;
 

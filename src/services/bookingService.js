@@ -139,3 +139,22 @@ export const updateBookingStatus = async (bookingId, status) => {
         throw error;
     }
 };
+
+/**
+ * Get all pricing rules for cost calculation
+ * @returns {Promise<Array>}
+ */
+export const getAllPricingRules = async () => {
+    try {
+        const { data, error } = await supabase
+            .from('pricing')
+            .select('*')
+            .order('start_date', { ascending: true });
+
+        if (error) throw error;
+        return data || [];
+    } catch (error) {
+        console.error('Error fetching pricing rules:', error);
+        return [];
+    }
+};

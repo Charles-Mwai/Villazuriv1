@@ -51,12 +51,13 @@ const isPeakSeason = (date) => {
 };
 
 /**
- * Calculates total cost based on seasonal rates day-by-day.
+ * Calculates total cost based on dynamic pricing rules or seasonal defaults.
  * @param {Date} startDate 
  * @param {Date} endDate 
+ * @param {Array} pricingRules - Optional array of custom pricing rules from DB
  * @returns {number} Total cost
  */
-export const calculateTotalCost = (startDate, endDate) => {
+export const calculateTotalCost = (startDate, endDate, pricingRules = []) => {
     let totalCost = 0;
     let currentDate = new Date(startDate);
     const end = new Date(endDate);
@@ -69,10 +70,22 @@ export const calculateTotalCost = (startDate, endDate) => {
 
     // Iterate through each night
     while (currentDate < end) {
-        if (isPeakSeason(currentDate)) {
-            totalCost += RATES.PEAK;
+        const dateStr = currentDate.toISOString().split('T')[0];
+
+        // 1. Check for custom pricing rules first
+        const applicableRule = pricingRules.find(rule =>
+            dateStr >= rule.start_date && dateStr <= rule.end_date
+        );
+
+        if (applicableRule) {
+            totalCost += parseFloat(applicableRule.rate);
         } else {
-            totalCost += RATES.OFF_PEAK;
+            // 2. Fallback to legacy seasonal logic if no specific rule matches
+            if (isPeakSeason(currentDate)) {
+                totalCost += RATES.PEAK;
+            } else {
+                totalCost += RATES.OFF_PEAK;
+            }
         }
 
         // Move to next day

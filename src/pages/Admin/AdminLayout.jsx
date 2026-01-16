@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
-import { LayoutDashboard, List, Calendar, LogOut, Search, Bell, Settings, User, Home, Menu, X } from 'lucide-react';
+import { LayoutDashboard, List, Calendar, LogOut, Search, Bell, Settings, User, Home, Menu, X, DollarSign } from 'lucide-react';
 import './AdminLayout.css';
 
 const AdminLayout = () => {
@@ -12,6 +12,7 @@ const AdminLayout = () => {
         { path: '/admin/dashboard', label: 'Dashboard', icon: LayoutDashboard },
         { path: '/admin/bookings', label: 'Bookings', icon: List },
         { path: '/admin/calendar', label: 'Calendar', icon: Calendar },
+        { path: '/admin/pricing', label: 'Pricing', icon: DollarSign },
     ];
 
     const handleLogout = () => {

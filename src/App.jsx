@@ -24,6 +24,7 @@ import Dashboard from './pages/Admin/Dashboard';
 import BookingsList from './pages/Admin/BookingsList';
 import BookingDetail from './pages/Admin/BookingDetail';
 import CalendarView from './pages/Admin/CalendarView';
+import Pricing from './pages/Admin/Pricing';
 import ProtectedRoute from './components/Admin/ProtectedRoute';
 
 // Public landing page layout
@@ -67,6 +68,7 @@ function App() {
                         <Route path="bookings" element={<BookingsList />} />
                         <Route path="bookings/:id" element={<BookingDetail />} />
                         <Route path="calendar" element={<CalendarView />} />
+                        <Route path="pricing" element={<Pricing />} />
                     </Route>
 
                     {/* Catch all */}
