@@ -14,6 +14,7 @@ import WatamuFeature from './components/WatamuFeature';
 
 import Blog from './pages/Public/Blog';
 import ExperiencePage from './pages/Public/ExperiencePage';
+import Terms from './pages/Public/Terms';
 import ExperienceTeaser from './components/ExperienceTeaser';
 
 // Admin pages
@@ -48,6 +49,7 @@ function App() {
                     <Route path="/watamu" element={<Watamu />} />
                     <Route path="/experience" element={<ExperiencePage />} />
                     <Route path="/blog" element={<Blog />} />
+                    <Route path="/terms" element={<Terms />} />
                     <Route path="/checkout" element={<Checkout />} />
 
                     {/* Admin routes */}

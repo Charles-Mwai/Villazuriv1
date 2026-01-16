@@ -17,6 +17,9 @@ const Footer = () => {
             </div>
             <div className="footer-bottom">
                 <p>&copy; {new Date().getFullYear()} Villa Zuri. All rights reserved.</p>
+                <div className="footer-links" style={{ marginTop: '10px' }}>
+                    <a href="/terms" style={{ fontSize: '0.8rem', opacity: '0.8', textDecoration: 'underline' }}>Terms & Conditions</a>
+                </div>
             </div>
         </footer>
     );
