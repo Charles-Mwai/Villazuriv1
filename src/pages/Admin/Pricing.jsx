@@ -7,6 +7,7 @@ const Pricing = () => {
     const [rules, setRules] = useState([]);
     const [loading, setLoading] = useState(true);
     const [submitting, setSubmitting] = useState(false);
+    const [error, setError] = useState(null); // Added diagnostic error state
     const [newRule, setNewRule] = useState({
         start_date: '',
         end_date: '',
@@ -21,10 +22,14 @@ const Pricing = () => {
     const fetchRules = async () => {
         try {
             setLoading(true);
+            setError(null);
+            console.log('--- DIAGNOSTIC: Fetching pricing rules... ---');
             const data = await getPricingRules();
+            console.log('--- DIAGNOSTIC: Rules received:', data);
             setRules(data);
-        } catch (error) {
-            console.error('Failed to fetch pricing rules:', error);
+        } catch (err) {
+            console.error('--- DIAGNOSTIC ERROR: Failed to fetch rules:', err);
+            setError('Database connection error. Please check your Supabase setup and RLS policies.');
         } finally {
             setLoading(false);
         }
@@ -44,16 +49,18 @@ const Pricing = () => {
 
         try {
             setSubmitting(true);
+            console.log('--- DIAGNOSTIC: Saving pricing rule:', newRule);
             await upsertPricingRule({
                 ...newRule,
                 rate: parseFloat(newRule.rate)
             });
+            console.log('--- DIAGNOSTIC: Save successful ---');
             setNewRule({ start_date: '', end_date: '', rate: '', label: '' });
             await fetchRules();
             alert('Pricing rule saved successfully');
-        } catch (error) {
-            console.error('Failed to save rule:', error);
-            alert('Failed to save pricing rule');
+        } catch (err) {
+            console.error('--- DIAGNOSTIC ERROR: Failed to save rule:', err);
+            alert(`Failed to save: ${err.message || 'Unknown error'}. Check browser console for details.`);
         } finally {
             setSubmitting(false);
         }
@@ -85,6 +92,12 @@ const Pricing = () => {
 
     return (
         <div className="pricing-page">
+            {error && (
+                <div className="diagnostic-error-banner">
+                    <Info size={20} />
+                    <span><strong>System Alert:</strong> {error}</span>
+                </div>
+            )}
             <div className="pricing-grid">
                 {/* Add New Rule Section */}
                 <div className="pricing-card add-rule-card">

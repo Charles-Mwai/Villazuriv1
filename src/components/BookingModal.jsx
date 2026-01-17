@@ -29,10 +29,12 @@ const BookingModal = ({ isOpen, onClose }) => {
     useEffect(() => {
         const fetchRules = async () => {
             try {
+                console.log('--- DIAGNOSTIC: BookingModal fetching pricing rules... ---');
                 const rules = await getAllPricingRules();
+                console.log(`--- DIAGNOSTIC: BookingModal received ${rules.length} rules ---`);
                 setPricingRules(rules);
             } catch (err) {
-                console.error("Failed to fetch pricing rules:", err);
+                console.error("--- DIAGNOSTIC ERROR: BookingModal failed to fetch pricing rules:", err);
             }
         };
         fetchRules();
