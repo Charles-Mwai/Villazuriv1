@@ -20,7 +20,11 @@ CREATE INDEX IF NOT EXISTS idx_pricing_dates ON pricing(start_date, end_date);
 -- 3. Enable Row Level Security
 ALTER TABLE pricing ENABLE ROW LEVEL SECURITY;
 
--- 4. Set up Policies
+-- 4. Set up Policies (CLEAN SLATE)
+-- We drop existing policies first to ensure no conflicts
+DROP POLICY IF EXISTS "Public can view pricing" ON pricing;
+DROP POLICY IF EXISTS "Anyone can manage pricing" ON pricing;
+DROP POLICY IF EXISTS "Admins can manage pricing" ON pricing;
 
 -- Policy: Everyone can view pricing (needed for guest booking cost calculation)
 CREATE POLICY "Public can view pricing" ON pricing
@@ -28,12 +32,12 @@ CREATE POLICY "Public can view pricing" ON pricing
   TO anon, authenticated
   USING (true);
 
--- Policy: Everyone can manage pricing (Update this to authenticated for production)
--- Since the current admin panel uses custom password auth instead of Supabase Auth,
--- we allow the 'anon' role (public) to manage pricing for now.
+-- Policy: Everyone can manage pricing 
+-- For now, we allow the 'anon' role (public) to manage pricing because the 
+-- admin panel uses a custom password check rather than Supabase Auth.
 CREATE POLICY "Anyone can manage pricing" ON pricing
-  FOR ALL
-  TO anon
+  FOR ALL 
+  TO anon, authenticated
   USING (true)
   WITH CHECK (true);
 
