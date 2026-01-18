@@ -49,13 +49,8 @@ const Blog = () => {
             <Navbar />
 
             <div className="blog-container-redesign">
-                {/* Header Section */}
-                <header className="blog-header">
-                    <h1>What To do While You Stay With Us</h1>
-                </header>
-
                 {/* Slideshow Hero Section */}
-                <section className="blog-hero-image">
+                <section className="blog-hero">
                     {allActivityImages.map((img, index) => (
                         <div
                             key={index}
@@ -63,6 +58,10 @@ const Blog = () => {
                             style={{ backgroundImage: `url("${img}")` }}
                         />
                     ))}
+                    <div className="blog-hero-overlay"></div>
+                    <div className="blog-hero-content">
+                        <h1>What To do While You Stay With Us</h1>
+                    </div>
                 </section>
 
                 {/* Main Content Section */}
@@ -105,13 +104,8 @@ const Blog = () => {
 
             {/* Watamu Section */}
             <div className="watamu-container-redesign">
-                {/* Header Section */}
-                <header className="watamu-header">
-                    <h1>Read all about Watamu Life</h1>
-                </header>
-
                 {/* Slideshow Hero Section */}
-                <section className="watamu-hero-image">
+                <section className="watamu-hero">
                     {watamuImages.map((img, index) => (
                         <div
                             key={index}
@@ -119,6 +113,10 @@ const Blog = () => {
                             style={{ backgroundImage: `url("${img}")` }}
                         />
                     ))}
+                    <div className="watamu-hero-overlay"></div>
+                    <div className="watamu-hero-content">
+                        <h1>Read all about Watamu Life</h1>
+                    </div>
                 </section>
 
                 {/* Main Content Section */}
