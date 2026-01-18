@@ -9,6 +9,7 @@ import { checkAvailability, createBooking, getAllPricingRules } from '../service
 
 const BookingModal = ({ isOpen, onClose }) => {
     const navigate = useNavigate();
+    const [step, setStep] = useState(1);
     const [calendarOpen, setCalendarOpen] = useState(false);
     const [totalCost, setTotalCost] = useState(0);
     const [error, setError] = useState('');
@@ -23,7 +24,9 @@ const BookingModal = ({ isOpen, onClose }) => {
         guests: '',
         name: '',
         email: '',
-        phone: ''
+        phone: '',
+        services: [],
+        activities: []
     });
 
     useEffect(() => {
@@ -140,7 +143,9 @@ const BookingModal = ({ isOpen, onClose }) => {
                     guestEmail: formData.email,
                     guestPhone: formData.phone,
                     datesFlexible: formData.flexible === 'yes',
-                    totalCost: totalCost
+                    totalCost: totalCost,
+                    services: formData.services,
+                    activities: formData.activities
                 };
 
                 const createdBooking = await createBooking(bookingData);
@@ -150,7 +155,11 @@ const BookingModal = ({ isOpen, onClose }) => {
                 // Navigate to checkout with booking details
                 navigate('/checkout', {
                     state: {
-                        booking: createdBooking,
+                        booking: {
+                            ...createdBooking,
+                            services: formData.services,
+                            activities: formData.activities
+                        },
                         totalCost: totalCost
                     }
                 });
@@ -174,6 +183,32 @@ const BookingModal = ({ isOpen, onClose }) => {
         }));
     };
 
+    const toggleSelection = (type, item) => {
+        setFormData(prev => ({
+            ...prev,
+            [type]: prev[type].includes(item)
+                ? prev[type].filter(i => i !== item)
+                : [...prev[type], item]
+        }));
+    };
+
+    const handleNextStep = (e) => {
+        e.preventDefault();
+        setError('');
+
+        if (!formData.arrivalDate || !formData.nights || !formData.phone || !formData.email) {
+            setError("Please fill in all required fields");
+            return;
+        }
+
+        if (!isAvailable) {
+            setError("Selected dates are not available.");
+            return;
+        }
+
+        setStep(2);
+    };
+
     return (
         <div className="booking-modal-overlay">
             <div className="booking-modal-content">
@@ -181,171 +216,219 @@ const BookingModal = ({ isOpen, onClose }) => {
                     <button className="modal-close-icon" onClick={onClose}>
                         <X size={32} strokeWidth={1} />
                     </button>
-                    <h2 className="modal-title">Traveller Enquiry</h2>
+                    <h2 className="modal-title">
+                        {step === 1 ? 'Traveller Enquiry' : 'Customise Your Stay'}
+                    </h2>
                 </div>
 
-                <form onSubmit={handleSubmit} className="booking-form">
-                    <div className="form-row">
-                        <div className="form-group half-width" style={{ position: 'relative' }}>
-                            <label htmlFor="arrivalDate">When will you be arriving?*</label>
-                            <div
-                                className="custom-select-wrapper"
-                                onClick={(e) => {
-                                    e.stopPropagation();
-                                    setCalendarOpen(!calendarOpen);
-                                }}
-                            >
+                {step === 1 ? (
+                    <form onSubmit={handleNextStep} className="booking-form">
+                        <div className="form-row">
+                            <div className="form-group half-width" style={{ position: 'relative' }}>
+                                <label htmlFor="arrivalDate">When will you be arriving?*</label>
+                                <div
+                                    className="custom-select-wrapper"
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        setCalendarOpen(!calendarOpen);
+                                    }}
+                                >
+                                    <input
+                                        type="text"
+                                        id="arrivalDate"
+                                        name="arrivalDate"
+                                        readOnly
+                                        required
+                                        value={formData.arrivalDate}
+                                        className={`underlined-input ${!formData.arrivalDate ? 'is-placeholder' : ''}`}
+                                        style={{ cursor: 'pointer' }}
+                                    />
+                                    <ChevronDown className="custom-select-icon" size={20} strokeWidth={1.5} />
+                                </div>
+                                {calendarOpen && (
+                                    <CustomCalendar
+                                        selectedDate={formData.arrivalDate}
+                                        nights={formData.nights}
+                                        onDateSelect={(date) => {
+                                            setFormData(prev => ({ ...prev, arrivalDate: date }));
+                                        }}
+                                        onClose={() => setCalendarOpen(false)}
+                                    />
+                                )}
+                            </div>
+
+                            <div className="form-group half-width">
+                                <label htmlFor="nights">How Many Nights?*</label>
+                                <div className="custom-select-wrapper">
+                                    <select
+                                        id="nights"
+                                        name="nights"
+                                        required
+                                        value={formData.nights}
+                                        onChange={handleChange}
+                                        className={`underlined-input ${!formData.nights ? 'is-placeholder' : ''}`}
+                                    >
+                                        <option value="" disabled>Please select</option>
+                                        {Array.from({ length: 28 }, (_, i) => i + 3).map(num => (
+                                            <option key={num} value={num}>{num}</option>
+                                        ))}
+                                        <option value="30+">30+</option>
+                                    </select>
+                                    <ChevronDown className="custom-select-icon" size={20} strokeWidth={1.5} />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="form-row">
+                            <div className="form-group half-width">
+                                <label htmlFor="guests">Number of People</label>
+                                <div className="custom-select-wrapper">
+                                    <select
+                                        id="guests"
+                                        name="guests"
+                                        value={formData.guests}
+                                        onChange={handleChange}
+                                        className={`underlined-input ${!formData.guests ? 'is-placeholder' : ''}`}
+                                        style={{ cursor: 'pointer' }}
+                                    >
+                                        <option value="" disabled>Please select</option>
+                                        {Array.from({ length: 15 }, (_, i) => i + 1).map(num => (
+                                            <option key={num} value={num}>{num}</option>
+                                        ))}
+                                    </select>
+                                    <ChevronDown className="custom-select-icon" size={20} strokeWidth={1.5} />
+                                </div>
+                            </div>
+
+                            <div className="form-group half-width">
+                                <label>Are your dates flexible?*</label>
+                                <div className="checkbox-group">
+                                    <div className="checkbox-option" onClick={(e) => { e.preventDefault(); handleFlexibleChange('yes'); }}>
+                                        <div className={`custom-checkbox ${formData.flexible === 'yes' ? 'checked' : ''}`}>
+                                            {formData.flexible === 'yes' && <div className="checkmark"></div>}
+                                        </div>
+                                        <span>Yes</span>
+                                    </div>
+                                    <div className="checkbox-option" onClick={(e) => { e.preventDefault(); handleFlexibleChange('no'); }}>
+                                        <div className={`custom-checkbox ${formData.flexible === 'no' ? 'checked' : ''}`}>
+                                            {formData.flexible === 'no' && <div className="checkmark"></div>}
+                                        </div>
+                                        <span>No</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="form-row">
+                            <div className="form-group half-width">
+                                <label htmlFor="name">Name</label>
                                 <input
                                     type="text"
-                                    id="arrivalDate"
-                                    name="arrivalDate"
-                                    readOnly
-                                    required
-                                    value={formData.arrivalDate}
-                                    className={`underlined-input ${!formData.arrivalDate ? 'is-placeholder' : ''}`}
-                                    placeholder="Please select"
-                                    style={{ cursor: 'pointer' }}
-                                />
-                                <ChevronDown className="custom-select-icon" size={20} strokeWidth={1.5} />
-                            </div>
-                            {calendarOpen && (
-                                <CustomCalendar
-                                    selectedDate={formData.arrivalDate}
-                                    nights={formData.nights}
-                                    onDateSelect={(date) => {
-                                        setFormData(prev => ({ ...prev, arrivalDate: date }));
-                                    }}
-                                    onClose={() => setCalendarOpen(false)}
-                                />
-                            )}
-                        </div>
-
-                        <div className="form-group half-width">
-                            <label htmlFor="nights">How Many Nights?*</label>
-                            <select
-                                id="nights"
-                                name="nights"
-                                required
-                                value={formData.nights}
-                                onChange={handleChange}
-                                className={`underlined-input ${!formData.nights ? 'is-placeholder' : ''}`}
-                            >
-                                <option value="" disabled>Please select</option>
-                                {Array.from({ length: 28 }, (_, i) => i + 3).map(num => (
-                                    <option key={num} value={num}>{num}</option>
-                                ))}
-                                <option value="30+">30+</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div className="form-row">
-                        <div className="form-group half-width">
-                            <label htmlFor="guests">Number of People</label>
-                            <div className="custom-select-wrapper">
-                                <select
-                                    id="guests"
-                                    name="guests"
-                                    value={formData.guests}
+                                    id="name"
+                                    name="name"
+                                    value={formData.name}
                                     onChange={handleChange}
-                                    className={`underlined-input ${!formData.guests ? 'is-placeholder' : ''}`}
-                                    style={{ cursor: 'pointer' }}
-                                >
-                                    <option value="" disabled>Please select</option>
-                                    {Array.from({ length: 15 }, (_, i) => i + 1).map(num => (
-                                        <option key={num} value={num}>{num}</option>
-                                    ))}
-                                </select>
-                                <ChevronDown className="custom-select-icon" size={20} strokeWidth={1.5} />
+                                    className="underlined-input"
+                                />
+                            </div>
+                            <div className="form-group half-width">
+                                <label htmlFor="phone">Phone number*</label>
+                                <input
+                                    type="tel"
+                                    id="phone"
+                                    name="phone"
+                                    required
+                                    value={formData.phone}
+                                    onChange={handleChange}
+                                    className="underlined-input"
+                                />
                             </div>
                         </div>
 
-                        <div className="form-group half-width">
-                            <label>Are your dates flexible?*</label>
-                            <div className="checkbox-group">
-                                <label className="checkbox-option">
-                                    <div
-                                        className={`custom-checkbox ${formData.flexible === 'yes' ? 'checked' : ''}`}
-                                        onClick={() => handleFlexibleChange('yes')}
-                                    >
-                                        {formData.flexible === 'yes' && <div className="checkmark"></div>}
-                                    </div>
-                                    <span>Yes</span>
-                                </label>
-                                <label className="checkbox-option">
-                                    <div
-                                        className={`custom-checkbox ${formData.flexible === 'no' ? 'checked' : ''}`}
-                                        onClick={() => handleFlexibleChange('no')}
-                                    >
-                                        {formData.flexible === 'no' && <div className="checkmark"></div>}
-                                    </div>
-                                    <span>No</span>
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="form-row">
-                        <div className="form-group half-width">
-                            <label htmlFor="name">Name</label>
+                        <div className="form-group">
+                            <label htmlFor="email">Email address*</label>
                             <input
-                                type="text"
-                                id="name"
-                                name="name"
-                                value={formData.name}
-                                onChange={handleChange}
-                                className="underlined-input"
-                                placeholder=" "
-                            />
-                        </div>
-                        <div className="form-group half-width">
-                            <label htmlFor="phone">Phone number*</label>
-                            <input
-                                type="tel"
-                                id="phone"
-                                name="phone"
+                                type="email"
+                                id="email"
+                                name="email"
                                 required
-                                value={formData.phone}
+                                value={formData.email}
                                 onChange={handleChange}
                                 className="underlined-input"
-                                placeholder=" "
                             />
                         </div>
-                    </div>
 
-                    <div className="form-group">
-                        <label htmlFor="email">Email address*</label>
-                        <input
-                            type="email"
-                            id="email"
-                            name="email"
-                            required
-                            value={formData.email}
-                            onChange={handleChange}
-                            className="underlined-input"
-                            placeholder=" "
-                        />
-                    </div>
+                        {totalCost > 0 && (
+                            <div className="total-cost-display">
+                                <span>Total:</span>
+                                <span className="cost-amount">${totalCost.toLocaleString()}</span>
+                            </div>
+                        )}
 
-                    {totalCost > 0 && (
-                        <div className="total-cost-display">
-                            <span>Total:</span>
-                            <span className="cost-amount">${totalCost.toLocaleString()}</span>
+                        {error && <div className="error-message">{error}</div>}
+
+                        <div className="form-actions">
+                            <button
+                                type="submit"
+                                className="submit-booking-btn"
+                                disabled={isValidating || !isAvailable}
+                            >
+                                {isValidating ? 'CHECKING...' : 'CONTINUE'}
+                            </button>
                         </div>
-                    )}
+                    </form>
+                ) : (
+                    <form onSubmit={handleSubmit} className="booking-form">
+                        <div className="checklist-container">
+                            <div className="checklist-section">
+                                <h3 className="checklist-group-title">Services</h3>
+                                <div className="checklist-grid">
+                                    {['Chef', 'Concierge', 'Airport Pickup', 'Driver', 'Turndown Service'].map(service => (
+                                        <label key={service} className="checkbox-option" onClick={(e) => { e.preventDefault(); toggleSelection('services', service); }}>
+                                            <div className={`custom-checkbox ${formData.services.includes(service) ? 'checked' : ''}`}>
+                                                {formData.services.includes(service) && <div className="checkmark"></div>}
+                                            </div>
+                                            <span>{service}</span>
+                                        </label>
+                                    ))}
+                                </div>
+                            </div>
 
-                    {error && <div className="error-message">{error}</div>}
+                            <div className="checklist-section">
+                                <h3 className="checklist-group-title">Activities</h3>
+                                <div className="checklist-grid">
+                                    {['Dolphin Watching', 'Dhow Cruise', 'Beach Dining', 'Marine Park'].map(activity => (
+                                        <label key={activity} className="checkbox-option" onClick={(e) => { e.preventDefault(); toggleSelection('activities', activity); }}>
+                                            <div className={`custom-checkbox ${formData.activities.includes(activity) ? 'checked' : ''}`}>
+                                                {formData.activities.includes(activity) && <div className="checkmark"></div>}
+                                            </div>
+                                            <span>{activity}</span>
+                                        </label>
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
 
-                    <div className="form-actions">
-                        <button
-                            type="submit"
-                            className="submit-booking-btn"
-                            disabled={submitting || isValidating || !isAvailable}
-                        >
-                            {submitting ? 'PROCESSING...' : isValidating ? 'CHECKING...' : 'CONTINUE'}
-                        </button>
-                    </div>
-                </form>
+                        {error && <div className="error-message">{error}</div>}
+
+                        <div className="form-actions multi-step-footer">
+                            <button
+                                type="button"
+                                className="back-btn"
+                                onClick={() => setStep(1)}
+                            >
+                                BACK
+                            </button>
+                            <button
+                                type="submit"
+                                className="submit-booking-btn"
+                                disabled={submitting}
+                            >
+                                {submitting ? 'PROCESSING...' : 'CONTINUE'}
+                            </button>
+                        </div>
+                    </form>
+                )}
             </div>
         </div>
     );

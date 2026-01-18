@@ -21,6 +21,10 @@ CREATE TABLE IF NOT EXISTS bookings (
   -- Pricing
   total_cost DECIMAL(10, 2) NOT NULL,
   
+  -- Add-ons (Added for multi-step booking)
+  services TEXT[] DEFAULT '{}',
+  activities TEXT[] DEFAULT '{}',
+
   -- Status tracking
   status VARCHAR(50) DEFAULT 'pending',
   -- Status values: 'pending', 'confirmed', 'paid', 'cancelled'

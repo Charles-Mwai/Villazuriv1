@@ -104,6 +104,8 @@ export const createBooking = async (bookingData) => {
                 guest_phone: bookingData.guestPhone,
                 dates_flexible: bookingData.datesFlexible,
                 total_cost: bookingData.totalCost,
+                services: bookingData.services || [],
+                activities: bookingData.activities || [],
                 status: 'pending' // Will be updated to 'confirmed' after payment
             }])
             .select()

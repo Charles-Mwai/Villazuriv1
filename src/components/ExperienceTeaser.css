@@ -3,9 +3,10 @@
     max-width: 1200px;
     height: 450px;
     margin: var(--spacing-xl) auto;
-    background-color: #eeeeee;
-    border: 1px solid #e0e0e0;
-    /* More visible placeholder color */
+    background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.4)), url('/beautiful-view-of-the-caribbean-beach-during-summe-2026-01-07-23-50-25-utc.jpg');
+    background-size: cover;
+    background-position: center;
+    border: none;
     position: relative;
     display: flex;
     justify-content: flex-start;
@@ -21,10 +22,11 @@
 
 .teaser-content {
     text-align: left;
-    color: var(--color-primary);
+    color: #fff;
     margin-bottom: var(--spacing-md);
     margin-left: var(--spacing-md);
     padding-left: 0;
+    z-index: 2;
 }
 
 .teaser-content h2 {
@@ -34,15 +36,16 @@
     letter-spacing: 0.1em;
     margin-bottom: 1rem;
     font-weight: 400;
-    color: var(--color-primary);
+    color: #fff;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .teaser-button {
     display: inline-block;
     padding: 10px 30px;
     background-color: transparent;
-    border: 1px solid var(--color-primary);
-    color: var(--color-primary);
+    border: 1px solid #fff;
+    color: #fff;
     font-family: var(--font-body);
     text-transform: uppercase;
     letter-spacing: 0.1em;
@@ -53,7 +56,7 @@
 
 .teaser-button:hover {
     background-color: #fff;
-    color: var(--color-primary);
+    color: #000;
 }
 
 @media (max-width: 768px) {

@@ -61,10 +61,11 @@
     font-family: var(--font-body);
     color: #1a1a1a;
     text-align: center;
-    font-size: 1.6rem;
-    font-weight: 300;
+    font-size: 1.4rem;
+    font-weight: 400;
     letter-spacing: 0.05em;
-    text-transform: uppercase;
+    text-transform: none;
+    /* Match screenshot case */
 }
 
 /* Form Layout */
@@ -88,43 +89,59 @@
 
 label {
     font-family: var(--font-body);
-    font-size: 0.85rem;
-    color: #888;
-    margin-bottom: 8px;
-    font-weight: 400;
-    letter-spacing: 0.02em;
+    font-size: 0.95rem;
+    color: #333;
+    /* Slightly darker to match screenshot */
+    margin-bottom: 12px;
+    font-weight: 300;
+    letter-spacing: 0.01em;
 }
 
 /* Inputs - Underlined Style */
 .underlined-input {
     width: 100%;
-    padding: 12px 0;
-    border: none;
-    border-bottom: 1px solid #eee;
-    background-color: transparent;
+    height: 40px;
+    /* Explicit height to ensure consistency */
+    padding: 0;
+    border-top: none !important;
+    border-left: none !important;
+    border-right: none !important;
+    border-bottom: 1px solid #1a1a1a !important;
+    /* Continuous straight line */
+    background: transparent !important;
     font-family: var(--font-body);
     font-size: 1rem;
     color: #000;
-    border-radius: 0;
-    transition: border-color 0.3s;
-    appearance: none;
-    -webkit-appearance: none;
+    border-radius: 0 !important;
+    transition: border-bottom-color 0.3s;
+    appearance: none !important;
+    -webkit-appearance: none !important;
+    box-shadow: none !important;
+    outline: none !important;
+    margin: 0;
 }
 
 .underlined-input:focus {
-    outline: none;
-    border-bottom-color: var(--color-primary);
+    border-bottom-width: 2px !important;
+    /* Subtle emphasis on focus */
+}
+
+/* Remove colored background on autofill */
+.underlined-input:-webkit-autofill,
+.underlined-input:-webkit-autofill:hover,
+.underlined-input:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0px 1000px white inset !important;
 }
 
 .underlined-input::placeholder {
-    color: #ccc;
+    color: #dfdfdf;
 }
 
 .underlined-input.is-placeholder {
-    color: #ccc;
+    color: #dfdfdf;
 }
 
-/* Custom Select Icon */
+/* Custom Select Icon Adjustment */
 .custom-select-wrapper {
     position: relative;
     display: flex;
@@ -142,41 +159,46 @@ label {
 /* Checkbox Style for "Flexible" */
 .checkbox-group {
     display: flex;
-    gap: 30px;
-    align-items: center;
+    gap: 25px;
+    align-items: flex-start;
     padding-top: 5px;
 }
 
 .checkbox-option {
     display: flex;
+    flex-direction: column;
+    /* Box above text */
     align-items: center;
     cursor: pointer;
-    gap: 12px;
-    font-size: 0.9rem;
-    color: #555;
+    gap: 8px;
+    font-size: 0.85rem;
+    color: #333;
 }
 
 .custom-checkbox {
-    width: 22px;
-    height: 22px;
-    border: 1px solid #ddd;
+    width: 28px;
+    /* Slightly larger like in screenshot */
+    height: 28px;
+    border: 1px solid #eee;
     display: flex;
     align-items: center;
     justify-content: center;
     transition: all 0.2s;
     background-color: #fff;
-    border-radius: 2px;
+    border-radius: 0;
+    /* Square like in screenshot */
 }
 
 .custom-checkbox.checked {
-    border-color: var(--color-primary);
-    background-color: var(--color-primary);
+    border-color: #eee;
+    background-color: transparent;
 }
 
 .checkmark {
-    width: 8px;
-    height: 8px;
-    background-color: #fff;
+    width: 12px;
+    height: 12px;
+    background-color: var(--color-primary);
+    /* Use primary color for fill */
 }
 
 /* Total Cost Display */
@@ -222,18 +244,26 @@ label {
 .submit-booking-btn {
     width: 100%;
     /* Full width on mobile */
-    background: var(--color-primary);
-    color: #fff;
-    border: none;
-    padding: 16px;
+    min-width: 0;
+    /* Remove min-width for mobile */
+    background: transparent;
+    /* Default ghost style like screenshot */
+    color: #0c1c38;
+    border: 1px solid #0c1c38;
+    padding: 16px 20px;
     font-family: var(--font-body);
-    font-size: 0.9rem;
+    font-size: 1rem;
     font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: 0.2em;
+    letter-spacing: 0.25em;
     cursor: pointer;
     transition: all 0.3s ease;
     border-radius: 4px;
+}
+
+.submit-booking-btn:hover:not(:disabled) {
+    background-color: #0c1c38;
+    color: #fff;
 }
 
 .submit-booking-btn:disabled {
@@ -268,15 +298,107 @@ label {
 
     .submit-booking-btn {
         width: auto;
-        padding: 14px 60px;
+        min-width: 280px;
         background: transparent;
-        color: var(--color-primary);
-        border: 1px solid var(--color-primary);
+        color: #0c1c38;
+        border: 1px solid #0c1c38;
+        padding: 16px 60px;
     }
 
     .submit-booking-btn:hover {
-        background-color: var(--color-primary);
+        background-color: #0c1c38;
         color: #fff;
+    }
+
+    .multi-step-footer {
+        justify-content: space-between;
+    }
+}
+
+/* Checklist and Multi-step Styles */
+.checklist-container {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.checklist-group-title {
+    font-family: var(--font-body);
+    font-size: 1.1rem;
+    color: #1a1a1a;
+    margin-bottom: 20px;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+}
+
+.checklist-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.checklist-grid .checkbox-option {
+    flex-direction: row;
+    /* Checkbox next to text */
+    align-items: center;
+    justify-content: flex-start;
+    gap: 15px;
+    font-size: 0.9rem;
+    /* Slightly larger for better mobile readability */
+    width: 100%;
+    padding: 4px 0;
+    /* More tap area */
+}
+
+.multi-step-footer {
+    display: flex;
+    flex-direction: column-reverse;
+    /* Stack CONTINUE on top of BACK on mobile */
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.back-btn {
+    flex: 1;
+    background: transparent;
+    border: 1px solid #ddd;
+    color: #666;
+    padding: 16px;
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: 4px;
+}
+
+.back-btn:hover {
+    border-color: #1a1a1a;
+    color: #1a1a1a;
+}
+
+@media (min-width: 768px) {
+    .multi-step-footer {
+        flex-direction: row;
+        gap: 20px;
+        justify-content: space-between;
+    }
+
+    .back-btn {
+        flex: 0 0 auto;
+        padding: 14px 40px;
+        border: none;
+        color: #999;
+    }
+
+    .back-btn:hover {
+        background-color: #f9f9f9;
+        color: #333;
     }
 }
 
