@@ -131,7 +131,8 @@
     background-color: #fff;
 }
 
-.calendar-cell.booked {
+.calendar-cell.booked,
+.calendar-cell.past {
     color: #eee;
     cursor: not-allowed !important;
     background-color: #fafafa;

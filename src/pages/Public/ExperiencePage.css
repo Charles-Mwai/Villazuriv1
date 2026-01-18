@@ -157,17 +157,52 @@
     transform: scale(1.03);
 }
 
-/* Responsive Design */
+/* Integrated Gallery specific overrides */
+.integrated-gallery.gallery-split-layout {
+    padding-top: 0;
+    margin-top: var(--spacing-xl);
+    padding-bottom: var(--spacing-xl);
+}
+
 @media (max-width: 900px) {
-    .experience-hero h1 {
-        font-size: 2.5rem;
+    .integrated-gallery.gallery-split-layout {
+        margin-top: var(--spacing-lg);
+        padding-bottom: var(--spacing-lg);
+        gap: 60px;
+        /* Better separation between masonry and sidebar tabs */
+    }
+}
+
+/* Responsive Design */
+
+@media (max-width: 900px) {
+    .experience-hero {
+        height: 70vh;
+    }
+
+    .experience-intro {
+        padding: 60px 20px;
+    }
+
+    .intro-text h2 {
+        font-size: 1.75rem;
+        margin-bottom: 25px;
+    }
+
+    .intro-text p {
+        font-size: 1rem;
+        line-height: 1.7;
+    }
+
+    .content-split-section {
+        padding: 40px 0;
     }
 
     .split-container,
     .split-container.reverse-layout {
         flex-direction: column-reverse;
-        /* Image on top, text on bottom for mobile standard */
-        gap: 40px;
+        /* Image on top, text on bottom */
+        gap: 30px;
     }
 
     /* Ensure image is first on mobile for visual flow */
@@ -177,22 +212,45 @@
 
     .split-content {
         max-width: 100%;
-        text-align: center !important;
-        /* Center text on mobile */
+        text-align: left !important;
+        /* Keep left alignment for premium feel */
     }
 
-    .split-content h3::after {
-        left: 50%;
-        transform: translateX(-50%);
-        right: auto;
+    .split-content h3 {
+        font-size: 1.5rem;
+        margin-bottom: 15px;
+    }
+
+    .split-content p {
+        font-size: 0.95rem;
+        line-height: 1.6;
+        margin-bottom: 20px;
     }
 
     .split-image {
-        height: 350px;
+        height: 300px;
         width: 100%;
+        /* Full width edge-to-edge on small mobile looks premium */
+        margin-left: -20px;
+        margin-right: -20px;
+        width: calc(100% + 40px);
+    }
+}
+
+@media (max-width: 480px) {
+    .experience-hero {
+        height: 60vh;
+    }
+
+    .experience-intro {
+        padding: 40px 20px;
     }
 
     .intro-text h2 {
-        font-size: 2rem;
+        font-size: 1.5rem;
+    }
+
+    .split-image {
+        height: 250px;
     }
 }

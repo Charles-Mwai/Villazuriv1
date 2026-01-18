@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './SectionStyles.css';
 import RevealOnScroll from './RevealOnScroll';
+import Slideshow from './Slideshow';
 
 const interiorImages = [
     '/Interior pics/IMG_5518-cmpr.jpg',
@@ -21,43 +22,11 @@ const outdoorImages = [
 ];
 
 const VillaDetails = () => {
-    const [currentImageIndex, setCurrentImageIndex] = useState(0);
-    const [currentExteriorIndex, setCurrentExteriorIndex] = useState(0);
-    const [currentOutdoorIndex, setCurrentOutdoorIndex] = useState(0);
-
-    const nextImage = () => {
-        setCurrentImageIndex((prevIndex) => (prevIndex + 1) % interiorImages.length);
-    };
-
-    const nextExteriorImage = () => {
-        setCurrentExteriorIndex((prevIndex) => (prevIndex + 1) % exteriorImages.length);
-    };
-
-    const nextOutdoorImage = () => {
-        setCurrentOutdoorIndex((prevIndex) => (prevIndex + 1) % outdoorImages.length);
-    };
-
     return (
         <section id="villa" className="villa-details">
             <div className="grid-row">
-                <div className="grid-image carousel-container">
-                    <RevealOnScroll>
-                        <img
-                            src={interiorImages[currentImageIndex]}
-                            alt={`Elegant Interior ${currentImageIndex + 1}`}
-                            className="carousel-image"
-                        />
-                    </RevealOnScroll>
-                    <button
-                        className="carousel-arrow"
-                        onClick={nextImage}
-                        aria-label="Next image"
-                        type="button"
-                    >
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                            <path d="M5 12h14M12 5l7 7-7 7" />
-                        </svg>
-                    </button>
+                <div className="grid-image">
+                    <Slideshow images={interiorImages} interval={5000} />
                 </div>
                 <div className="grid-content">
                     <RevealOnScroll>
@@ -72,24 +41,8 @@ const VillaDetails = () => {
             </div>
 
             <div className="grid-row reverse">
-                <div className="grid-image carousel-container">
-                    <RevealOnScroll>
-                        <img
-                            src={exteriorImages[currentExteriorIndex]}
-                            alt={`Exterior Oasis ${currentExteriorIndex + 1}`}
-                            className="carousel-image"
-                        />
-                    </RevealOnScroll>
-                    <button
-                        className="carousel-arrow"
-                        onClick={nextExteriorImage}
-                        aria-label="Next image"
-                        type="button"
-                    >
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                            <path d="M5 12h14M12 5l7 7-7 7" />
-                        </svg>
-                    </button>
+                <div className="grid-image">
+                    <Slideshow images={exteriorImages} interval={5000} />
                 </div>
                 <div className="grid-content">
                     <RevealOnScroll>
@@ -104,24 +57,8 @@ const VillaDetails = () => {
             </div>
 
             <div className="grid-row">
-                <div className="grid-image carousel-container">
-                    <RevealOnScroll>
-                        <img
-                            src={outdoorImages[currentOutdoorIndex]}
-                            alt={`Relaxation ${currentOutdoorIndex + 1}`}
-                            className="carousel-image"
-                        />
-                    </RevealOnScroll>
-                    <button
-                        className="carousel-arrow"
-                        onClick={nextOutdoorImage}
-                        aria-label="Next image"
-                        type="button"
-                    >
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                            <path d="M5 12h14M12 5l7 7-7 7" />
-                        </svg>
-                    </button>
+                <div className="grid-image">
+                    <Slideshow images={outdoorImages} interval={5000} />
                 </div>
                 <div className="grid-content">
                     <RevealOnScroll>

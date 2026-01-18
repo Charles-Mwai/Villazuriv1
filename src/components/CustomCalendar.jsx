@@ -130,8 +130,8 @@ const CustomCalendar = ({ selectedDate, onDateSelect, onClose, nights }) => {
     };
 
     const handleDateClick = (dayObj) => {
-        // Don't allow selection of booked dates
-        if (isDateBooked(dayObj.date)) {
+        // Don't allow selection of booked or past dates
+        if (isDateBooked(dayObj.date) || isPastDate(dayObj.date)) {
             return;
         }
 
@@ -155,6 +155,14 @@ const CustomCalendar = ({ selectedDate, onDateSelect, onClose, nights }) => {
         return date.getDate() === today.getDate() &&
             date.getMonth() === today.getMonth() &&
             date.getFullYear() === today.getFullYear();
+    };
+
+    const isPastDate = (date) => {
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        const checkDate = new Date(date);
+        checkDate.setHours(0, 0, 0, 0);
+        return checkDate < today;
     };
 
     const getRangeClass = (date) => {
@@ -268,6 +276,9 @@ const CustomCalendar = ({ selectedDate, onDateSelect, onClose, nights }) => {
             <div className="calendar-grid">
                 {generateCalendarDays().map((dayObj, index) => {
                     const isBooked = isDateBooked(dayObj.date);
+                    const isPast = isPastDate(dayObj.date);
+                    const isDisabled = isBooked || isPast;
+
                     return (
                         <div
                             key={index}
@@ -275,9 +286,10 @@ const CustomCalendar = ({ selectedDate, onDateSelect, onClose, nights }) => {
                                        ${isSelected(dayObj.date) ? 'selected' : ''} 
                                        ${isToday(dayObj.date) ? 'today' : ''}
                                        ${isBooked ? 'booked' : ''}
+                                       ${isPast ? 'past' : ''}
                                        ${getRangeClass(dayObj.date)}`}
-                            onClick={() => !isBooked && handleDateClick(dayObj)}
-                            style={{ cursor: isBooked ? 'not-allowed' : 'pointer' }}
+                            onClick={() => !isDisabled && handleDateClick(dayObj)}
+                            style={{ cursor: isDisabled ? 'not-allowed' : 'pointer' }}
                         >
                             <span>{dayObj.day}</span>
                         </div>

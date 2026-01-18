@@ -122,10 +122,11 @@
 }
 
 .story-card h4 {
-    font-size: 1.1rem;
+    font-size: 1rem;
     font-weight: 400;
     color: #333;
     margin: 0;
+    text-transform: none;
 }
 
 /* Mobile Responsiveness */
@@ -341,7 +342,7 @@
     }
 
     .story-card h4 {
-        font-size: 0.95rem;
+        font-size: 0.85rem;
     }
 
     /* Section Divider Mobile */

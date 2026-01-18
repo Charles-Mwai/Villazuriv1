@@ -194,7 +194,8 @@ const ExperiencePage = () => {
             </div>
 
             {/* Gallery Section - Copied from FullGallery */}
-            <div className="gallery-split-layout container" style={{ paddingBottom: 'var(--spacing-xl)', marginTop: 'var(--spacing-xl)' }}>
+            <div className="gallery-split-layout integrated-gallery container">
+
                 {/* Left Sticky Sidebar */}
                 <aside className="gallery-sidebar" style={{ paddingTop: '0' }}>
                     <RevealOnScroll>

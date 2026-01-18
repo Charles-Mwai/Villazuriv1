@@ -17,6 +17,7 @@ import ExperiencePage from './pages/Public/ExperiencePage';
 import Terms from './pages/Public/Terms';
 import ExperienceTeaser from './components/ExperienceTeaser';
 import Activities from './components/Activities';
+import ActivityDetailPage from './pages/Public/ActivityDetailPage';
 
 
 // Admin pages
@@ -55,6 +56,8 @@ function App() {
                     <Route path="/blog" element={<Blog />} />
                     <Route path="/terms" element={<Terms />} />
                     <Route path="/checkout" element={<Checkout />} />
+                    <Route path="/activities/:id" element={<ActivityDetailPage />} />
+
 
                     {/* Admin routes */}
                     <Route path="/admin/login" element={<Login />} />

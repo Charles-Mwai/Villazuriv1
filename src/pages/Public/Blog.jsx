@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { activitiesData } from '../../data/activitiesData';
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
 import RevealOnScroll from '../../components/RevealOnScroll';
 import '../../components/SectionStyles.css';
 import './Blog.css';
+
 
 const allActivityImages = [
     '/second activities/WhatsApp Image 2026-01-08 at 12.54.00.jpg',
@@ -86,22 +89,12 @@ const Blog = () => {
                     <RevealOnScroll>
                         <h3>Activities you might like</h3>
                         <div className="stories-grid">
-                            <div className="story-card">
-                                <img src="/ty-tomlinson-TZAHcS2a9wY-unsplash.jpg" alt="Dolphin Watching" className="story-image" loading="lazy" />
-                                <h4>Dolphin Watching</h4>
-                            </div>
-                            <div className="story-card">
-                                <img src="/prolific-ke-sxViCE1d2Cw-unsplash.jpg" alt="Dhow Cruise" className="story-image" loading="lazy" />
-                                <h4>Dhow Cruise</h4>
-                            </div>
-                            <div className="story-card">
-                                <img src="/milos-prelevic-U0R6cck6V9U-unsplash.jpg" alt="Marine Park" className="story-image" loading="lazy" />
-                                <h4>Marine Park</h4>
-                            </div>
-                            <div className="story-card">
-                                <img src="/watamu/maximus-beaumont-v30ztCrmzQg-unsplash.jpg" alt="Beach Dining" className="story-image" loading="lazy" />
-                                <h4>Beach Dining</h4>
-                            </div>
+                            {activitiesData.map((activity) => (
+                                <Link key={activity.id} to={`/activities/${activity.id}`} className="story-card" style={{ textDecoration: 'none', color: 'inherit' }}>
+                                    <img src={activity.image} alt={activity.title} className="story-image" loading="lazy" />
+                                    <h4>{activity.title}</h4>
+                                </Link>
+                            ))}
                         </div>
                     </RevealOnScroll>
                 </section>

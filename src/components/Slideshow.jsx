@@ -22,7 +22,7 @@ const Slideshow = ({ images, interval = 4000 }) => {
                 <div
                     key={index}
                     className={`slide ${index === currentIndex ? 'active' : ''}`}
-                    style={{ backgroundImage: `url(${img})` }}
+                    style={{ backgroundImage: `url("${img}")` }}
                     aria-label={`Slide ${index + 1}`}
                 />
             ))}
