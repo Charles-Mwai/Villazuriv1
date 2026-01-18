@@ -34,7 +34,7 @@ const Hero = () => {
             <div className="container hero-content">
                 <h1 className="hero-title">Your Private Coastal Sanctuary</h1>
                 <p className="hero-subtitle">Welcome to Watamu</p>
-                <Link to="/gallery" className="cta-button">Explore</Link>
+                <Link to="/gallery" className="cta-button">Gallery</Link>
             </div>
         </section>
     );

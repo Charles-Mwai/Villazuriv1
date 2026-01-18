@@ -16,6 +16,8 @@ import Blog from './pages/Public/Blog';
 import ExperiencePage from './pages/Public/ExperiencePage';
 import Terms from './pages/Public/Terms';
 import ExperienceTeaser from './components/ExperienceTeaser';
+import Activities from './components/Activities';
+
 
 // Admin pages
 import Login from './pages/Admin/Login';
@@ -34,6 +36,7 @@ const PublicLayout = () => (
         <Hero />
         <VillaDetails />
         <ExperienceTeaser />
+        <Activities />
         <WatamuFeature />
         <Footer />
     </>

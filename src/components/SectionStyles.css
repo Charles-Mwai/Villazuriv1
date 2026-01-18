@@ -27,14 +27,24 @@
 .villa-details {
     width: 100%;
     background-color: #fff;
+    margin-top: var(--spacing-xl);
+}
+
+@media (max-width: 768px) {
+    .villa-details {
+        margin-top: var(--spacing-lg);
+    }
 }
 
 .grid-row {
     display: flex;
     flex-direction: column;
-    /* Default to column for mobile */
-    margin-bottom: var(--spacing-lg);
-    /* Reduced from xl for mobile */
+    margin-bottom: var(--spacing-xl);
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 var(--spacing-md);
+    gap: var(--spacing-lg);
 }
 
 /* Base styles / Mobile Defaults */
@@ -52,14 +62,22 @@
 }
 
 .grid-content {
-    padding: var(--spacing-lg) var(--spacing-md);
-    /* More comfortable usage on mobile */
+    padding: var(--spacing-md) 0;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    background-color: #fff;
+    background-color: transparent;
     text-align: center;
-    /* Center text on mobile for better balance */
+}
+
+@media (max-width: 768px) {
+    .grid-content {
+        padding: var(--spacing-sm) 0 var(--spacing-md);
+    }
+
+    .grid-content h3 {
+        font-size: 1.5rem;
+    }
 }
 
 .grid-content h3 {
@@ -105,29 +123,25 @@
 @media (min-width: 768px) {
     .grid-row {
         flex-direction: row;
-        min-height: 500px;
-        height: auto;
-        /* Flexible height to prevent overlap */
-        margin-bottom: var(--spacing-xl);
-        /* Restore larger margin on desktop */
+        align-items: center;
+        gap: 60px;
+        padding: 40px var(--spacing-md);
     }
 
     .grid-row.reverse {
         flex-direction: row-reverse;
     }
 
-    .grid-image,
-    .grid-content {
+    .grid-image {
         flex: 1;
-        width: 50%;
-        height: auto;
-        /* Reset mobile fixed height */
+        height: 500px;
     }
 
     .grid-content {
-        padding: 0 var(--spacing-xl);
+        flex: 1;
+        max-width: 500px;
+        padding: 0;
         text-align: left;
-        /* Return to left alignment for desktop */
     }
 
     .grid-content h3 {

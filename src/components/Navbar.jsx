@@ -60,7 +60,7 @@ const Navbar = () => {
             <div className={`menu-overlay ${isOpen ? 'active' : ''}`}>
                 <ul className="overlay-links">
                     <li><button className="overlay-home-btn" onClick={handleHomeClick}>Home</button></li>
-                    <li><Link to="/experience" onClick={toggleMenu}>Experience</Link></li>
+                    <li><Link to="/experience" onClick={toggleMenu}>Our Story</Link></li>
                     <li><Link to="/gallery" onClick={toggleMenu}>Gallery</Link></li>
                     <li><Link to="/watamu" onClick={toggleMenu}>Watamu</Link></li>
                     <li><Link to="/blog" onClick={toggleMenu}>Activities</Link></li>

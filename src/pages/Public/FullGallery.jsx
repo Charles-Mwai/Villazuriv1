@@ -115,14 +115,6 @@ const FullGallery = () => {
                         <li>Airstrip transfers</li>
                     </ul>
                 );
-            case 'excludes':
-                return (
-                    <ul className="details-list">
-                        <li>Champagne & Premium spirits</li>
-                        <li>Deep sea fishing</li>
-                        <li>Spa treatments</li>
-                    </ul>
-                );
             default:
                 return null;
         }
@@ -149,12 +141,7 @@ const FullGallery = () => {
                             >
                                 INCLUDES
                             </button>
-                            <button
-                                className={`tab-btn ${activeTab === 'excludes' ? 'active' : ''}`}
-                                onClick={() => setActiveTab('excludes')}
-                            >
-                                EXCLUDES
-                            </button>
+
                         </div>
 
                         <div className="tab-content">

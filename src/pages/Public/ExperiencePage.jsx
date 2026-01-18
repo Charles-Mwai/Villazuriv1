@@ -1,14 +1,121 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
+import { X, ChevronLeft, ChevronRight, Maximize2 } from 'lucide-react';
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
 import RevealOnScroll from '../../components/RevealOnScroll';
 import Slideshow from '../../components/Slideshow';
+import { useBooking } from '../../context/BookingContext';
 import './ExperiencePage.css';
+import '../Public/FullGallery.css';
 
 const ExperiencePage = () => {
+    const [images, setImages] = useState([]);
+    const [lightboxOpen, setLightboxOpen] = useState(false);
+    const [currentImageIndex, setCurrentImageIndex] = useState(0);
+    const { isBookingOpen, openBooking, closeBooking } = useBooking();
+    const [activeTab, setActiveTab] = useState('amenities');
+
+    // Swipe handlers
+    const [touchStart, setTouchStart] = useState(null);
+    const [touchEnd, setTouchEnd] = useState(null);
+    const minSwipeDistance = 50;
+
+    const onTouchStart = (e) => {
+        setTouchEnd(null);
+        setTouchStart(e.targetTouches[0].clientX);
+    };
+
+    const onTouchMove = (e) => setTouchEnd(e.targetTouches[0].clientX);
+
+    const onTouchEnd = () => {
+        if (!touchStart || !touchEnd) return;
+        const distance = touchStart - touchEnd;
+        const isLeftSwipe = distance > minSwipeDistance;
+        const isRightSwipe = distance < -minSwipeDistance;
+
+        if (isLeftSwipe) {
+            nextImage();
+        } else if (isRightSwipe) {
+            prevImage();
+        }
+    };
+
     useEffect(() => {
+        const masonryImages = [
+            { src: 'IMG_3819.jpg', size: 'big' },
+            { src: 'IMG_5485-cmpr.jpg', size: 'tall' },
+            { src: 'IMG_5503-cmpr.jpeg', size: 'normal' },
+            { src: 'IMG_5507.jpg', size: 'wide' },
+            { src: 'IMG_5514-cmpr.jpeg', size: 'normal' },
+            { src: 'IMG_5518.jpg', size: 'tall' },
+            { src: 'IMG_5525-cmpr.jpeg', size: 'normal' },
+            { src: 'IMG_5535.jpg', size: 'wide' },
+            { src: 'IMG_5539.jpg', size: 'normal' },
+            { src: 'IMG_5545-cmpr.jpeg', size: 'big' },
+            { src: 'IMG_5565.jpg', size: 'tall' },
+            { src: 'WhatsApp Image 2026-01-07 at 13.16.51 (1).jpg', size: 'wide' }
+        ];
+        setImages(masonryImages);
         window.scrollTo(0, 0);
     }, []);
+
+    const openLightbox = (index) => {
+        setCurrentImageIndex(index);
+        setLightboxOpen(true);
+        document.body.style.overflow = 'hidden';
+    };
+
+    const closeLightbox = () => {
+        setLightboxOpen(false);
+        document.body.style.overflow = 'auto';
+    };
+
+    const nextImage = () => {
+        setCurrentImageIndex((prev) => (prev + 1) % images.length);
+    };
+
+    const prevImage = () => {
+        setCurrentImageIndex((prev) => (prev - 1 + images.length) % images.length);
+    };
+
+    useEffect(() => {
+        const handleKeyDown = (e) => {
+            if (!lightboxOpen) return;
+            if (e.key === 'Escape') closeLightbox();
+            if (e.key === 'ArrowRight') nextImage();
+            if (e.key === 'ArrowLeft') prevImage();
+        };
+        window.addEventListener('keydown', handleKeyDown);
+        return () => window.removeEventListener('keydown', handleKeyDown);
+    }, [lightboxOpen, images.length]);
+
+    const renderTabContent = () => {
+        switch (activeTab) {
+            case 'amenities':
+                return (
+                    <ul className="details-list">
+                        <li>Swimming Pool</li>
+                        <li>24-hour Butler Service</li>
+                        <li>Private Garden</li>
+                        <li>Air-conditioning</li>
+                        <li>Mosquito nets</li>
+                        <li>Safe and minibar</li>
+                        <li>Wireless Internet Access</li>
+                    </ul>
+                );
+            case 'includes':
+                return (
+                    <ul className="details-list">
+                        <li>Full board accommodation</li>
+                        <li>Soft drinks, beers, wines</li>
+                        <li>Laundry service</li>
+                        <li>Airstrip transfers</li>
+                    </ul>
+                );
+            default:
+                return null;
+        }
+    };
 
     return (
         <div className="experience-page">
@@ -25,12 +132,12 @@ const ExperiencePage = () => {
             <section className="experience-intro container">
                 <RevealOnScroll>
                     <div className="intro-text">
-                        <h2>The Villa Zuri Experience</h2>
+                        <h2>Our Story</h2>
                         <p>
-                            Villa Zuri offers a private, relaxed coastal escape in Watamu, where comfort and understated luxury come together. Your stay is thoughtfully personalized, with tailored dining, inclusive meals and drinks, and attentive service that makes everything feel effortless.
+                            Villa Zuri was created as a peaceful retreat where guests can slow down, feel at home, and experience the natural beauty of Watamu. Inspired by the rhythm of the coast and the warmth of Swahili hospitality, our villa blends comfort, privacy, and thoughtful design in a setting that invites rest and connection.
                         </p>
                         <p>
-                            Whether you choose to unwind at the villa or explore Watamu’s marine life and coastal activities, every moment is designed to feel easy, personal, and memorable—leaving you feeling truly at home.
+                            What began as a simple love for the ocean and coastal living has grown into a place where friends, families, and travelers can unwind, explore, and create lasting memories. At Villa Zuri, every stay is about ease, calm, and feeling truly welcome.
                         </p>
                     </div>
                 </RevealOnScroll>
@@ -69,7 +176,7 @@ const ExperiencePage = () => {
                 <section className="content-split-section reverse-mobile">
                     <div className="container split-container reverse-layout">
                         <RevealOnScroll>
-                            <div className="split-content text-right">
+                            <div className="split-content text-left">
                                 <h3>Service</h3>
                                 <p>
                                     Along with the dedicated Villa Zuri team, we offer the highest standard of privacy and concierge service. Expect a sophisticated yet discreet 24/7 presence of staff and bespoke in-villa experiences such as romantic dinners, sundowners, and curated cuisine experiences.
@@ -86,7 +193,102 @@ const ExperiencePage = () => {
                 </section>
             </div>
 
+            {/* Gallery Section - Copied from FullGallery */}
+            <div className="gallery-split-layout container" style={{ paddingBottom: 'var(--spacing-xl)', marginTop: 'var(--spacing-xl)' }}>
+                {/* Left Sticky Sidebar */}
+                <aside className="gallery-sidebar" style={{ paddingTop: '0' }}>
+                    <RevealOnScroll>
+                        <div className="tabs-nav">
+                            <button
+                                className={`tab-btn ${activeTab === 'amenities' ? 'active' : ''}`}
+                                onClick={() => setActiveTab('amenities')}
+                            >
+                                AMENITIES
+                            </button>
+                            <button
+                                className={`tab-btn ${activeTab === 'includes' ? 'active' : ''}`}
+                                onClick={() => setActiveTab('includes')}
+                            >
+                                INCLUDES
+                            </button>
+
+                        </div>
+
+                        <div className="tab-content">
+                            {renderTabContent()}
+                        </div>
+
+                        <div className="sidebar-cta">
+                            <button className="book-link-btn" onClick={openBooking}>BOOK</button>
+                        </div>
+                    </RevealOnScroll>
+                </aside>
+
+                {/* Right Scrollable Content */}
+                <main className="gallery-main-content">
+                    <section className="gallery-masonry-section">
+                        <div className="masonry-grid">
+                            {images.map((image, index) => (
+                                <RevealOnScroll key={`masonry-${image.src}-${index}`}>
+                                    <div
+                                        className={`masonry-item ${image.size}`}
+                                        role="button"
+                                        tabIndex={0}
+                                        onClick={() => openLightbox(index)}
+                                        onKeyDown={(e) => e.key === 'Enter' && openLightbox(index)}
+                                    >
+                                        <img
+                                            src={`/Bento Grid/${image.src}`}
+                                            alt={`Villa view ${index + 1}`}
+                                            loading="lazy"
+                                        />
+                                        <div className="masonry-overlay">
+                                            <Maximize2 size={24} color="#fff" strokeWidth={1.5} />
+                                        </div>
+                                    </div>
+                                </RevealOnScroll>
+                            ))}
+                        </div>
+                    </section>
+                </main>
+            </div>
+
             <Footer />
+
+            {/* Lightbox Overlay */}
+            {lightboxOpen && images.length > 0 && (
+                <div className="lightbox-overlay" onClick={closeLightbox}>
+                    <button className="lightbox-close" onClick={closeLightbox}>
+                        <X size={32} />
+                    </button>
+
+                    <button className="lightbox-nav lightbox-prev" onClick={(e) => { e.stopPropagation(); prevImage(); }}>
+                        <ChevronLeft size={40} />
+                    </button>
+
+                    <div
+                        className="lightbox-content"
+                        onClick={(e) => e.stopPropagation()}
+                        onTouchStart={onTouchStart}
+                        onTouchMove={onTouchMove}
+                        onTouchEnd={onTouchEnd}
+                    >
+                        <img
+                            src={`/Bento Grid/${images[currentImageIndex].src}`}
+                            alt="Villa bento view"
+                            className="lightbox-main-img"
+                            draggable="false"
+                        />
+                        <div className="lightbox-footer">
+                            <span className="image-counter">{currentImageIndex + 1} / {images.length}</span>
+                        </div>
+                    </div>
+
+                    <button className="lightbox-nav lightbox-next" onClick={(e) => { e.stopPropagation(); nextImage(); }}>
+                        <ChevronRight size={40} />
+                    </button>
+                </div>
+            )}
         </div>
     );
 };
