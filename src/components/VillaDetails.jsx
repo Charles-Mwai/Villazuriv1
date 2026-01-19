@@ -32,9 +32,7 @@ const VillaDetails = () => {
                     <RevealOnScroll>
                         <h3>Living</h3>
                         <p>
-                            Awake to the sound of the ocean in our masterfully designed suites.
-                            Detailed with locally sourced furniture and high-end linens,
-                            every room frames the turquoise horizon.
+                            The villa features three bedrooms and three bathrooms, including a living room with a sofa bed. Family rooms provide ample space for relaxation, while amenities such as air-conditioning, a fully equipped kitchen, and a washing machine ensure a comfortable stay.
                         </p>
                     </RevealOnScroll>
                 </div>
@@ -48,9 +46,7 @@ const VillaDetails = () => {
                     <RevealOnScroll>
                         <h3>Play</h3>
                         <p>
-                            The centerpiece of Villa Zuri is your Swimming Pool,
-                            seemingly merging with the Indian Ocean. Relax on the sun deck
-                            with a cocktail in hand, surrounded by lush tropical gardens.
+                            Villa Zuri at Papa Remo in Watamu offers a private beach area, a lush garden, and a spacious terrace. Guests can relax by the year-round outdoor swimming pool and enjoy free WiFi throughout the property.
                         </p>
                     </RevealOnScroll>
                 </div>

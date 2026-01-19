@@ -134,10 +134,10 @@ const ExperiencePage = () => {
                     <div className="intro-text">
                         <h2>Our Story</h2>
                         <p>
-                            Villa Zuri was created as a peaceful retreat where guests can slow down, feel at home, and experience the natural beauty of Watamu. Inspired by the rhythm of the coast and the warmth of Swahili hospitality, our villa blends comfort, privacy, and thoughtful design in a setting that invites rest and connection.
+                            Villa Zuri is a superior 3-bedroom all ensuite villa located within the serene Papa Remo Village in Watamu, Kenya. With a stunning interior designed by the legendary Orietta Mosca,the villa features the largest private well manicured garden within a secure gated community surrounded with lush greenery. The villa offers a calm, secure, and family friendly environment perfect for relaxing and reconnecting with nature. Ideal for families or small groups seeking comfort, privacy and peaceful coastal gateway or play. The villa offers guests access to the famous Papa Remo private beach as well as the magical Seven Islands Beach.
                         </p>
                         <p>
-                            What began as a simple love for the ocean and coastal living has grown into a place where friends, families, and travelers can unwind, explore, and create lasting memories. At Villa Zuri, every stay is about ease, calm, and feeling truly welcome.
+                            The location is positioned as the most sought after within Watamu considering its centrality to most of the major tourist attractions including various restaurants and hotels eg Tamu Restaurant, Ocean Sports ,amazing Seven Islands, Papa Remo Beach known for its white sands and amazing parties. For nature lovers, there is the nature trails, a snake park, sun set viewing locations like Litchaus etc
                         </p>
                     </div>
                 </RevealOnScroll>
