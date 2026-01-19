@@ -18,6 +18,8 @@ import Terms from './pages/Public/Terms';
 import ExperienceTeaser from './components/ExperienceTeaser';
 import Activities from './components/Activities';
 import ActivityDetailPage from './pages/Public/ActivityDetailPage';
+import PrivacyPolicy from './pages/Public/PrivacyPolicy';
+import CookieConsent from './components/CookieConsent';
 
 
 // Admin pages
@@ -55,6 +57,7 @@ function App() {
                     <Route path="/experience" element={<ExperiencePage />} />
                     <Route path="/blog" element={<Blog />} />
                     <Route path="/terms" element={<Terms />} />
+                    <Route path="/privacy" element={<PrivacyPolicy />} />
                     <Route path="/checkout" element={<Checkout />} />
                     <Route path="/activities/:id" element={<ActivityDetailPage />} />
 
@@ -80,6 +83,7 @@ function App() {
                     {/* Catch all */}
                     <Route path="*" element={<Navigate to="/" replace />} />
                 </Routes>
+                <CookieConsent />
             </BrowserRouter>
         </BookingProvider>
     );

@@ -127,6 +127,55 @@ export default async function handler(request, response) {
         }
 
         const data = await brevoResponse.json();
+
+        // 6. Admin Notification Email
+        const ADMIN_EMAIL = process.env.ADMIN_RECEIVING_EMAIL || SENDER_EMAIL; // Fallback to sender if not set
+
+        await fetch('https://api.brevo.com/v3/smtp/email', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'api-key': BREVO_API_KEY
+            },
+            body: JSON.stringify({
+                sender: { name: 'Villa Zuri System', email: SENDER_EMAIL },
+                to: [{ email: ADMIN_EMAIL, name: 'Villa Zuri Admin' }],
+                subject: `NEW BOOKING: ${dbBooking.guest_name} - ${new Date(dbBooking.check_in).toLocaleDateString()}`,
+                htmlContent: `
+                    <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: 0 auto; border: 2px solid #0A2342; padding: 20px;">
+                        <h2 style="color: #0A2342; border-bottom: 2px solid #D4AF37; padding-bottom: 10px;">New Booking Received</h2>
+                        <p>A new booking has been confirmed on the website.</p>
+                        
+                        <div style="background-color: #f4f4f4; padding: 15px; border-radius: 5px; margin: 20px 0;">
+                            <h3 style="margin-top: 0; color: #0A2342;">Guest Information</h3>
+                            <p><strong>Name:</strong> ${dbBooking.guest_name}</p>
+                            <p><strong>Email:</strong> ${dbBooking.guest_email}</p>
+                            <p><strong>Phone:</strong> ${dbBooking.guest_phone || 'Not provided'}</p>
+                        </div>
+
+                        <div style="background-color: #f9f9f9; padding: 15px; border-radius: 5px; margin: 20px 0;">
+                            <h3 style="margin-top: 0; color: #0A2342;">Stay Details</h3>
+                            <p><strong>Check-in:</strong> ${dbBooking.check_in}</p>
+                            <p><strong>Check-out:</strong> ${dbBooking.check_out}</p>
+                            <p><strong>Nights:</strong> ${dbBooking.nights}</p>
+                            <p><strong>Guests:</strong> ${dbBooking.guests}</p>
+                            <p><strong>Dates Flexible:</strong> ${dbBooking.dates_flexible ? 'Yes' : 'No'}</p>
+                            <p><strong>Total Paid/Cost:</strong> $${parseFloat(dbBooking.total_cost).toLocaleString()}</p>
+                        </div>
+                        
+                        <div style="background-color: #fff9e6; padding: 15px; border-radius: 5px; margin: 20px 0; border: 1px solid #ffeeba;">
+                             <h3 style="margin-top: 0; color: #856404;">Services & Activities</h3>
+                             <p><strong>Services:</strong> ${dbBooking.services?.length > 0 ? dbBooking.services.join(', ') : 'None'}</p>
+                             <p><strong>Activities:</strong> ${dbBooking.activities?.length > 0 ? dbBooking.activities.join(', ') : 'None'}</p>
+                        </div>
+
+                        <p><a href="https://villazuri.com/admin/bookings/${dbBooking.id}" style="display: inline-block; padding: 10px 20px; background-color: #0A2342; color: white; text-decoration: none; border-radius: 5px;">View in Admin Dashboard</a></p>
+                    </div>
+                `
+            })
+        }).catch(err => console.error('Failed to send admin notification:', err));
+
         return response.status(200).json({ success: true, messageId: data.messageId });
 
     } catch (error) {
