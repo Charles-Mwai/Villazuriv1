@@ -29,22 +29,22 @@ const Watamu = () => {
         <div className="watamu-page-redesign">
             <Navbar />
 
-            <div className="watamu-container-redesign">
-                {/* Header Section */}
-                <header className="watamu-header">
-                    <h1>Read all about Watamu Life</h1>
-                </header>
+            <section className="hero">
+                {watamuImages.map((img, index) => (
+                    <div
+                        key={index}
+                        className={`hero-background ${index === currentImageIndex ? 'active' : ''}`}
+                        style={{ backgroundImage: `url("${img}")` }}
+                    />
+                ))}
+                <div className="hero-overlay"></div>
+                <div className="container hero-content">
+                    <h1 className="hero-title">Read all about Watamu Life</h1>
+                    <p className="hero-subtitle">Coastal Living at its Finest</p>
+                </div>
+            </section>
 
-                {/* Slideshow Hero Section */}
-                <section className="watamu-hero-image">
-                    {watamuImages.map((img, index) => (
-                        <div
-                            key={index}
-                            className={`watamu-hero-background ${index === currentImageIndex ? 'active' : ''}`}
-                            style={{ backgroundImage: `url("${img}")` }}
-                        />
-                    ))}
-                </section>
+            <div className="watamu-container-redesign">
 
                 {/* Main Content Section */}
                 <section className="watamu-text-content">

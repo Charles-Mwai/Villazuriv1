@@ -379,6 +379,9 @@ const BookingModal = ({ isOpen, onClose }) => {
                     </form>
                 ) : (
                     <form onSubmit={handleSubmit} className="booking-form">
+                        <p className="step-instruction-text">
+                            would you like us to organise the following extra services? Prices will be shared after confirmation.
+                        </p>
                         <div className="checklist-container">
                             <div className="checklist-section">
                                 <h3 className="checklist-group-title">Services</h3>

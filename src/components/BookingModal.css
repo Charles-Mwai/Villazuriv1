@@ -134,11 +134,11 @@ label {
 }
 
 .underlined-input::placeholder {
-    color: #dfdfdf;
+    color: #999;
 }
 
 .underlined-input.is-placeholder {
-    color: #dfdfdf;
+    color: #999;
 }
 
 /* Custom Select Icon Adjustment */
@@ -271,6 +271,18 @@ label {
     cursor: not-allowed;
 }
 
+.step-instruction-text {
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    color: #666;
+    line-height: 1.6;
+    margin: 0 auto 25px;
+    text-align: center;
+    font-weight: 300;
+    max-width: 400px;
+    padding: 0 10px;
+}
+
 @media (min-width: 768px) {
     .booking-modal-overlay {
         padding: 40px;
@@ -308,10 +320,6 @@ label {
     .submit-booking-btn:hover {
         background-color: #0c1c38;
         color: #fff;
-    }
-
-    .multi-step-footer {
-        justify-content: space-between;
     }
 }
 

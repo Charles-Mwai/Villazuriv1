@@ -1,53 +1,30 @@
-/* Watamu Page Redesign Styles */
 .watamu-page-redesign {
     width: 100%;
     min-height: 100vh;
     background-color: #fff;
     color: #333;
-    padding-top: 100px;
-    /* Space for fixed navbar */
 }
 
 .watamu-container-redesign {
     max-width: 1000px;
-    /* Constrain width for a cleaner look */
-    margin: 0 auto;
-    padding: 0 24px 60px;
-    /* Increased side padding slightly, reduced bottom */
+    margin: 40px auto 0;
+    padding: 60px 24px;
 }
 
-
-
-/* Header */
-.watamu-header {
-    margin-bottom: 40px;
-    text-align: left;
-    /* Explicitly left aligned */
-}
-
-.watamu-header h1 {
-    font-family: var(--font-body);
-    /* Using body font for a cleaner, less "hero" look if desired, or use heading */
-    font-size: 1.5rem;
-    /* Average size */
-    font-weight: 400;
-    color: #333;
-    margin: 0;
-}
-
-/* Slideshow / Hero Image */
-.watamu-hero-image {
-    width: 100%;
+/* Hero Section Parity with Homepage */
+.hero {
     height: 100vh;
-    /* Full screen height */
+    width: 100%;
     position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #fff;
     overflow: hidden;
-    margin-bottom: 60px;
-    background-color: #f0f0f0;
-    /* Fallback */
 }
 
-.watamu-hero-background {
+.hero-background {
     position: absolute;
     top: 0;
     left: 0;
@@ -60,16 +37,55 @@
     z-index: 1;
 }
 
-.watamu-hero-background.active {
+.hero-background.active {
     opacity: 1;
 }
 
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    z-index: 2;
+}
 
+.hero-content {
+    position: relative;
+    z-index: 3;
+    animation: fadeIn 1s ease-out;
+}
+
+.hero-title {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    line-height: 1.2;
+    font-family: var(--font-heading);
+}
+
+.hero-subtitle {
+    font-size: 1.2rem;
+    margin-bottom: 40px;
+    font-weight: 300;
+    letter-spacing: 0.1em;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
 
 /* Text Content */
 .watamu-text-content {
     max-width: 800px;
-    /* margin: 0 auto 60px;  Removed centering margin to align left if needed, or keep centered? The image shows text column. */
     margin-bottom: 80px;
 }
 
@@ -86,13 +102,11 @@
     color: #555;
     margin-bottom: 20px;
     text-align: left;
-    /* Changed from justify for better mobile rendering */
 }
 
 /* Stories Section */
 .watamu-stories-section {
     border-top: 1px solid #eee;
-    /* Optional separator */
     padding-top: 40px;
 }
 
@@ -116,7 +130,6 @@
 .story-image {
     width: 100%;
     aspect-ratio: 1;
-    /* Square */
     object-fit: cover;
     margin-bottom: 15px;
     background-color: #f0f0f0;
@@ -131,29 +144,30 @@
 
 /* Mobile Responsiveness */
 @media (max-width: 768px) {
-    .watamu-page-redesign {
-        padding-top: 80px;
-        /* Reduced space for navbar on mobile */
+    .hero {
+        height: 100dvh;
+        min-height: 500px;
+    }
+
+    .hero-content {
+        width: 90%;
+        padding: 0 20px;
+    }
+
+    .hero-title {
+        font-size: 2.5rem;
+        margin-bottom: 15px;
+    }
+
+    .hero-subtitle {
+        font-size: 1rem;
+        margin-bottom: 30px;
+        letter-spacing: 0.15em;
     }
 
     .watamu-container-redesign {
-        padding: 0 16px 40px;
-    }
-
-    .watamu-header {
-        margin-bottom: 20px;
-    }
-
-    .watamu-header h1 {
-        font-size: 1.25rem;
-        line-height: 1.4;
-    }
-
-    .watamu-hero-image {
-        height: 60vh;
-        /* Better balance on small screens */
-        min-height: 350px;
-        margin-bottom: 30px;
+        padding: 40px 16px;
+        margin-top: 0;
     }
 
     .watamu-text-content h2 {
@@ -179,5 +193,15 @@
 
     .story-card h4 {
         font-size: 1.05rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-title {
+        font-size: 2rem;
+    }
+
+    .hero-subtitle {
+        font-size: 0.9rem;
     }
 }
