@@ -1,3 +1,10 @@
+@font-face {
+  font-family: 'Faktum Test';
+  src: url('/Rene Bieder - Faktum Test Regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+}
+
 :root {
   /* Color Palette */
   --color-primary: #042B17;
@@ -12,7 +19,7 @@
 
   /* Typography */
   --font-heading: 'Times New Roman', Times, serif;
-  --font-body: 'Gotham', 'Montserrat', sans-serif;
+  --font-body: 'Faktum Test', 'Inter', 'Montserrat', sans-serif;
 
   /* Spacing */
   --spacing-sm: 8px;

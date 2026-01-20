@@ -88,3 +88,4 @@ const total = calculateTotalCost(arrivalDate, checkoutDate, pricingRules);
 console.log("");
 console.log(`FINAL TOTAL COST: $${total}`);
 console.log(`EXPECTED TOTAL (5 nights * $298): $${5 * 298}`);
+// force deploy
