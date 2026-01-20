@@ -41,17 +41,33 @@
 }
 
 .logo {
-    font-family: var(--font-heading);
-    font-size: 1.1rem;
-    /* Smaller on mobile */
-    font-weight: 500;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
     z-index: 1001;
     position: relative;
-    text-align: center;
-    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     text-decoration: none;
+}
+
+.logo-img {
+    height: 32px;
+    width: 120px;
+    /* Approximate width to maintain aspect ratio */
+    display: block;
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    background-color: var(--color-accent);
+    -webkit-mask-image: url('/Artboard 1 copy 3@2x.png');
+    mask-image: url('/Artboard 1 copy 3@2x.png');
+    -webkit-mask-size: contain;
+    mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+}
+
+.navbar.scrolled .logo-img {
+    height: 28px;
 }
 
 .book-button {
@@ -237,8 +253,14 @@
         padding: 15px 0;
     }
 
-    .logo {
-        font-size: 2rem;
+    .logo-img {
+        height: 70px;
+        width: 250px;
+        /* Adjusting for desktop scale */
+    }
+
+    .navbar.scrolled .logo-img {
+        height: 50px;
     }
 
     .book-button {

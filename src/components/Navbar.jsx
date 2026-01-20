@@ -51,7 +51,9 @@ const Navbar = () => {
                         <span></span>
                     </div>
 
-                    <Link to="/" className="logo" onClick={() => window.scrollTo(0, 0)}>Villa Zuri</Link>
+                    <Link to="/" className="logo" onClick={() => window.scrollTo(0, 0)}>
+                        <div className="logo-img" aria-label="Villa Zuri"></div>
+                    </Link>
 
                     <button className="book-button" onClick={handleBookingClick}>BOOK</button>
                 </div>

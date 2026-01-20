@@ -3,7 +3,7 @@
     bottom: 2rem;
     right: 2rem;
     left: 2rem;
-    background: rgba(10, 35, 66, 0.95);
+    background: rgba(4, 43, 23, 0.95);
     backdrop-filter: blur(10px);
     color: white;
     padding: 1.5rem 2rem;
@@ -47,7 +47,7 @@
 
 .accept-cookies-btn {
     background: #D4AF37;
-    color: #0A2342;
+    color: #042B17;
     border: none;
     padding: 0.6rem 2rem;
     border-radius: 4px;

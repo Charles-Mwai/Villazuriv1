@@ -140,7 +140,7 @@
 
 /* Range Highlighting */
 .calendar-cell.range-mid {
-    background-color: rgba(10, 35, 66, 0.1);
+    background-color: rgba(4, 43, 23, 0.1);
     /* Light version of primary */
     color: var(--color-primary);
     border-radius: 0;

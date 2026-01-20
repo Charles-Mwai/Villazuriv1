@@ -3,7 +3,7 @@
    ======================================== */
 
 :root {
-    --villa-ocean-blue: #0A2342;
+    --villa-ocean-blue: #042B17;
     --villa-gold: #D4AF37;
     --villa-white: #FFFFFF;
     --villa-light-bg: #F5F5F5;
@@ -106,7 +106,7 @@
     background: var(--villa-ocean-blue);
     color: var(--villa-white);
     border-color: var(--villa-ocean-blue);
-    box-shadow: 0 4px 8px rgba(10, 35, 66, 0.2);
+    box-shadow: 0 4px 8px rgba(4, 43, 23, 0.2);
 }
 
 /* ========================================

@@ -51,7 +51,7 @@
 
 .intro-text h2 {
     font-size: 2.5rem;
-    color: #0A2342;
+    color: var(--color-primary);
     /* Deep Blue from palette */
     margin-bottom: 40px;
     font-weight: 500;
@@ -66,7 +66,7 @@
 
 .intro-highlight {
     font-style: italic;
-    color: #0A2342 !important;
+    color: var(--color-primary) !important;
     font-weight: 500;
     margin-top: 40px;
 }
@@ -102,7 +102,7 @@
 
 .split-content h3 {
     font-size: 2rem;
-    color: #0A2342;
+    color: var(--color-primary);
     margin-bottom: 25px;
     position: relative;
     display: inline-block;
@@ -125,7 +125,7 @@
 
 .explore-link {
     display: inline-block;
-    color: #0A2342;
+    color: var(--color-primary);
     font-size: 0.9rem;
     font-weight: 600;
     letter-spacing: 1px;
