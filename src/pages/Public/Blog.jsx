@@ -60,15 +60,17 @@ const Blog = () => {
                     ))}
                     <div className="blog-hero-overlay"></div>
                     <div className="blog-hero-content">
-                        <h1>What To do While You Stay With Us</h1>
+                        <h1>More about Watamu</h1>
+                        <p className="blog-hero-subtitle">Explore beyond your stay with us.</p>
                     </div>
                 </section>
 
                 {/* Main Content Section */}
                 <section className="blog-text-content">
                     <RevealOnScroll>
-                        <h2>Discover Watamu's Coastal Wonders</h2>
-                        <p>
+                        <h2 className="blog-section-title">Dolphin Watching</h2>
+                        <p className="blog-section-subtitle">Watch playful dolphins glide through Watamu warm water.</p>
+                        <p className="justified-text">
                             Watch playful dolphins glide through Watamu's warm waters, where early morning boat trips offer a chance to see these graceful creatures swimming freely in their natural habitat. Guided by experienced locals, you'll enjoy a calm, respectful encounter surrounded by turquoise seas, gentle ocean breezes, and the quiet beauty that makes Watamu feel truly special.
                         </p>
                         <p>
@@ -89,10 +91,18 @@ const Blog = () => {
                         <h3>Activities you might like</h3>
                         <div className="stories-grid">
                             {activitiesData.map((activity) => (
-                                <Link key={activity.id} to={`/activities/${activity.id}`} className="story-card" style={{ textDecoration: 'none', color: 'inherit' }}>
-                                    <img src={activity.image} alt={activity.title} className="story-image" loading="lazy" />
-                                    <h4>{activity.title}</h4>
-                                </Link>
+                                <div key={activity.id} className="story-card">
+                                    <Link to={`/activities/${activity.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+                                        <img src={activity.image} alt={activity.title} className="story-image" loading="lazy" />
+                                        <h4>{activity.title}</h4>
+                                    </Link>
+                                    <p className="feature-description">{activity.description}</p>
+                                    <Link to={`/activities/${activity.id}`} className="feature-arrow">
+                                        <svg width="120" height="20" viewBox="0 0 120 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M0 10H118M118 10L110 3M118 10L110 17" stroke="currentColor" strokeWidth="1.5" />
+                                        </svg>
+                                    </Link>
+                                </div>
                             ))}
                         </div>
                     </RevealOnScroll>
@@ -146,14 +156,32 @@ const Blog = () => {
                             <div className="story-card">
                                 <img src="/watamu/dimitry-b-gO3uzl86USU-unsplash.jpg" alt="Watamu Living" className="story-image" loading="lazy" />
                                 <h4>Watamu Living</h4>
+                                <p className="feature-description">Experience the vibrant culture and laid-back lifestyle of Watamu.</p>
+                                <Link to="#" className="feature-arrow">
+                                    <svg width="120" height="20" viewBox="0 0 120 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M0 10H118M118 10L110 3M118 10L110 17" stroke="currentColor" strokeWidth="1.5" />
+                                    </svg>
+                                </Link>
                             </div>
                             <div className="story-card">
                                 <img src="/watamu/abner-abiu-castillo-diaz-N5ByCirHVqw-unsplash.jpg" alt="Solo Tripping" className="story-image" loading="lazy" />
                                 <h4>Solo Tripping</h4>
+                                <p className="feature-description">Discover the freedom of exploring Watamu's hidden gems on your own.</p>
+                                <Link to="#" className="feature-arrow">
+                                    <svg width="120" height="20" viewBox="0 0 120 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M0 10H118M118 10L110 3M118 10L110 17" stroke="currentColor" strokeWidth="1.5" />
+                                    </svg>
+                                </Link>
                             </div>
                             <div className="story-card">
                                 <img src="/watamu/maximus-beaumont-v30ztCrmzQg-unsplash.jpg" alt="Dining Experience" className="story-image" loading="lazy" />
                                 <h4>Dining Experience</h4>
+                                <p className="feature-description">Savor the exquisite flavors of fresh seafood and local cuisine.</p>
+                                <Link to="#" className="feature-arrow">
+                                    <svg width="120" height="20" viewBox="0 0 120 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M0 10H118M118 10L110 3M118 10L110 17" stroke="currentColor" strokeWidth="1.5" />
+                                    </svg>
+                                </Link>
                             </div>
                         </div>
                     </RevealOnScroll>

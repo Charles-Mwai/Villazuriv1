@@ -273,6 +273,27 @@
     margin: 0 auto;
 }
 
+.feature-arrow {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    width: 100%;
+    color: var(--color-primary);
+    /* Sets currentColor for SVG */
+    transition: transform 0.3s ease;
+}
+
+.feature-arrow:hover {
+    transform: translateX(5px);
+    /* Subtle hover effect */
+}
+
+.feature-arrow svg path {
+    stroke: currentColor;
+    /* Inherit form parent */
+    stroke-width: 1.5px;
+}
+
 @media (min-width: 1024px) {
     .features-grid {
         grid-template-columns: repeat(4, 1fr);

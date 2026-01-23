@@ -1,4 +1,18 @@
 @font-face {
+  font-family: 'Cantata One';
+  src: url('/CantataOne-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Myriad Pro';
+  src: url('/MyriadPro-Regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
   font-family: 'Faktum Test';
   src: url('/Rene Bieder - Faktum Test Regular.otf') format('opentype');
   font-weight: 400;
@@ -18,8 +32,9 @@
   --color-bg-light: #FFFFFF;
 
   /* Typography */
-  --font-heading: 'Times New Roman', Times, serif;
-  --font-body: 'Faktum Test', 'Inter', 'Montserrat', sans-serif;
+  --font-heading: 'Cantata One', serif;
+  --font-body: 'Myriad Pro', 'Inter', 'Montserrat', sans-serif;
+  --font-subhead: 'Faktum Test', sans-serif;
 
   /* Spacing */
   --spacing-sm: 8px;

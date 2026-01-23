@@ -43,6 +43,9 @@ const Navbar = () => {
 
     return (
         <>
+            <div className={`announcement-bar ${scrolled ? 'scrolled' : ''}`}>
+                Enjoy 50% off during low season!
+            </div>
             <nav className={`navbar ${scrolled ? 'scrolled' : ''} ${isOpen ? 'menu-open' : ''}`}>
                 <div className="container navbar-container">
                     <div className={`menu-trigger custom-hamburger ${isOpen ? 'active' : ''}`} onClick={toggleMenu}>

@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { X, ChevronLeft, ChevronRight, Maximize2 } from 'lucide-react';
+import { X, ChevronLeft, ChevronRight, Maximize2, MapPin } from 'lucide-react';
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
 import RevealOnScroll from '../../components/RevealOnScroll';
 import Slideshow from '../../components/Slideshow';
+import LocationMap from '../../components/LocationMap';
 import { useBooking } from '../../context/BookingContext';
 import './ExperiencePage.css';
 import '../Public/FullGallery.css';
@@ -133,15 +134,17 @@ const ExperiencePage = () => {
                 <RevealOnScroll>
                     <div className="intro-text">
                         <h2>Our Story</h2>
-                        <p>
+                        <p className="subhead-text">A journey of luxury and serenity</p>
+                        <p className="justified-text">
                             Villa Zuri is a superior 3-bedroom all ensuite villa located within the serene Papa Remo Village in Watamu, Kenya. With a stunning interior designed by the legendary Orietta Mosca,the villa features the largest private well manicured garden within a secure gated community surrounded with lush greenery. The villa offers a calm, secure, and family friendly environment perfect for relaxing and reconnecting with nature. Ideal for families or small groups seeking comfort, privacy and peaceful coastal gateway or play. The villa offers guests access to the famous Papa Remo private beach as well as the magical Seven Islands Beach.
                         </p>
-                        <p>
+                        <p className="justified-text">
                             The location is positioned as the most sought after within Watamu considering its centrality to most of the major tourist attractions including various restaurants and hotels eg Tamu Restaurant, Ocean Sports ,amazing Seven Islands, Papa Remo Beach known for its white sands and amazing parties. For nature lovers, there is the nature trails, a snake park, sun set viewing locations like Litchaus etc
                         </p>
                     </div>
                 </RevealOnScroll>
             </section>
+
 
             {/* Zig-Zag Sections */}
             <div className="experience-sections">
@@ -253,6 +256,22 @@ const ExperiencePage = () => {
                     </section>
                 </main>
             </div>
+
+            {/* Location Section */}
+            <section className="experience-location-section">
+                <div className="container">
+                    <RevealOnScroll>
+                        <div className="location-header text-center">
+                            <MapPin size={32} className="location-icon" />
+                            <h2>Location</h2>
+                            <p>Find us in the heart of Watamu</p>
+                        </div>
+                    </RevealOnScroll>
+                    <div className="location-map-wrapper">
+                        <LocationMap center={{ lat: -3.3533, lng: 40.0158 }} zoom={15} />
+                    </div>
+                </div>
+            </section>
 
             <Footer />
 

@@ -89,11 +89,20 @@
     margin-bottom: 80px;
 }
 
-.watamu-text-content h2 {
-    font-size: 1.5rem;
-    font-weight: 400;
-    margin-bottom: 20px;
-    color: #333;
+.watamu-text-content .watamu-section-title {
+    font-size: 2.5rem;
+    font-weight: 500;
+    margin-bottom: 10px;
+    color: var(--color-primary);
+    font-family: var(--font-heading);
+}
+
+.watamu-text-content .watamu-section-subtitle {
+    font-family: var(--font-subhead);
+    font-size: 1.2rem;
+    color: #666;
+    margin-bottom: 30px;
+    font-weight: 300;
 }
 
 .watamu-text-content p {

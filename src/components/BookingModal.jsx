@@ -212,13 +212,14 @@ const BookingModal = ({ isOpen, onClose }) => {
     return (
         <div className="booking-modal-overlay">
             <div className="booking-modal-content">
-                <div className="modal-header">
+                <div className="modal-header-banner">
                     <button className="modal-close-icon" onClick={onClose}>
                         <X size={32} strokeWidth={1} />
                     </button>
-                    <h2 className="modal-title">
-                        {step === 1 ? 'Traveller Enquiry' : 'Customise Your Stay'}
-                    </h2>
+                    <div className="header-text-container">
+                        <h2 className="modal-title">Travel Enquiry</h2>
+                        <p className="modal-subtitle">Book your stay with us</p>
+                    </div>
                 </div>
 
                 {step === 1 ? (

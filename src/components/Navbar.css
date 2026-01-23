@@ -1,14 +1,42 @@
 /* Navbar.css - Mobile First Design */
 
-.navbar {
+.announcement-bar {
     position: fixed;
     top: 0;
+    left: 0;
+    width: 100%;
+    background-color: var(--color-accent);
+    color: var(--color-text-dark);
+    text-align: left;
+    padding: 8px 20px;
+    /* Added horizontal padding */
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    font-weight: 500;
+    z-index: 1100;
+    /* Higher than navbar */
+    letter-spacing: 0.02em;
+}
+
+.navbar {
+    position: fixed;
+    top: 36px;
+    /* Height of announcement bar */
     left: 0;
     width: 100%;
     z-index: 1000;
     transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
     padding: 20px 0;
     color: #fff;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    /* Subtle separation or hairline */
+    border-top: 1px solid var(--color-accent);
+    /* Gold hairline as per request */
+}
+
+.navbar.scrolled {
+    top: 0;
+    /* Move to top when scrolled if you want the bar to disappear, or keep it */
 }
 
 /* Scrolled State */
@@ -16,6 +44,13 @@
     background-color: var(--color-primary);
     padding: 12px 0;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    border-top: none;
+    /* Hide hairline when scrolled */
+}
+
+.announcement-bar.scrolled {
+    transform: translateY(-100%);
+    transition: transform 0.4s ease;
 }
 
 /* Menu Open State */
@@ -55,7 +90,7 @@
     /* Approximate width to maintain aspect ratio */
     display: block;
     transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-    background-color: var(--color-accent);
+    background-color: #fff;
     -webkit-mask-image: url('/Artboard 1 copy 3@2x.png');
     mask-image: url('/Artboard 1 copy 3@2x.png');
     -webkit-mask-size: contain;
@@ -88,9 +123,9 @@
 }
 
 .book-button:hover {
-    background-color: #fff;
-    color: var(--color-primary);
-    border-color: #fff;
+    background-color: var(--color-accent);
+    color: #fff;
+    border-color: var(--color-accent);
 }
 
 /* Custom Hamburger Menu Trigger */

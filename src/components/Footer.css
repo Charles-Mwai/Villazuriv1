@@ -19,7 +19,7 @@
 }
 
 .footer-logo-main {
-    height: 90px;
+    height: 60px;
     width: auto;
     filter: brightness(0) invert(1);
     /* Make it white for visibility */
@@ -63,7 +63,8 @@
 }
 
 .gold-thick {
-    height: 2px;
+    height: 1px;
+    opacity: 0.5;
 }
 
 .gold-thin {

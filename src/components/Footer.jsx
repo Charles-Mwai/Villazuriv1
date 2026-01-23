@@ -15,16 +15,8 @@ const Footer = () => {
                     <div className="footer-links-grid">
                         <div className="footer-links-col">
                             <ul>
-                                <li><a href="/terms">Terms and Conditions</a></li>
-                                <li><a href="/privacy">Privacy Notice</a></li>
-                                <li><a href="/terms">Terms of Service</a></li>
-                            </ul>
-                        </div>
-                        <div className="footer-links-col">
-                            <ul>
-                                <li><a href="/experience">About us</a></li>
-                                <li><a href="https://booking.com" target="_blank" rel="noopener noreferrer">About Booking.com</a></li>
-                                <li><a href="/experience">How We Work</a></li>
+                                <li><a href="/terms">Terms & Conditions</a></li>
+                                <li><a href="/privacy">Privacy Policy</a></li>
                             </ul>
                         </div>
                     </div>

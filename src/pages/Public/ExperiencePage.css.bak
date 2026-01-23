@@ -269,12 +269,23 @@
     text-align: justify;
     text-justify: inter-word;
     margin-bottom: 25px;
-    font-size: 0.95rem;
-    /* Match homepage font size */
-    hyphens: auto;
-    -webkit-hyphens: auto;
 }
 
+/* Settings Header */
+.settings-header {
+    padding: 60px 0 20px;
+}
+
+.settings-header .section-title {
+    margin-bottom: 10px;
+}
+
+.settings-header .section-subtitle {
+    font-family: var(--font-subhead);
+    font-size: 1.2rem;
+    color: #666;
+    font-weight: 300;
+}
 
 /* Location Section */
 .experience-location-section {
@@ -323,4 +334,5 @@
     .location-map-wrapper {
         height: 350px;
     }
+}
 }

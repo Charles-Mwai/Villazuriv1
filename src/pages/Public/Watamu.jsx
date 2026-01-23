@@ -49,7 +49,8 @@ const Watamu = () => {
                 {/* Main Content Section */}
                 <section className="watamu-text-content">
                     <RevealOnScroll>
-                        <h2>Villazuri, Watamu — Where Coastal Luxury Meets Endless Experiences</h2>
+                        <h2 className="watamu-section-title">Villazuri, Watamu</h2>
+                        <p className="watamu-section-subtitle">Where Coastal Luxury Meets Endless Experiences</p>
                         <p>
                             Set along Kenya’s Indian Ocean coastline, Villazuri is a refined retreat in the heart of Watamu, offering privacy, comfort, and effortless access to one of the coast’s most enchanting destinations. Surrounded by natural beauty, Swahili heritage, and the soothing rhythm of the ocean, it’s the perfect place to unwind while staying close to unforgettable experiences.
                         </p>

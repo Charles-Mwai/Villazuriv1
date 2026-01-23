@@ -29,8 +29,8 @@
     margin-bottom: 80px;
     display: flex;
     align-items: center;
-    justify-content: flex-start;
-    /* Middle Left alignment */
+    justify-content: center;
+    /* Center alignment */
     color: #fff;
 }
 
@@ -69,25 +69,34 @@
     position: relative;
     z-index: 3;
     padding: 0 20px;
-    /* Reduced to 20px for absolute extreme alignment */
     max-width: 100%;
-    /* Allow it to span more if needed */
     width: 100%;
     animation: heroFadeIn 1s ease-out;
+    text-align: center;
+    /* Center text within container */
 }
 
 .blog-hero-content h1,
 .watamu-hero-content h1 {
     font-family: var(--font-heading);
-    font-size: 1.8rem;
-    /* Significantly reduced from 3.5rem */
+    font-size: 3rem;
     line-height: 1.2;
-    margin: 0;
+    margin-bottom: 15px;
     font-weight: 400;
     color: #fff;
-    text-align: left;
+    text-align: center;
+    /* Center h1 text */
     text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
     letter-spacing: 0.05em;
+}
+
+.blog-hero-content .blog-hero-subtitle,
+.watamu-hero-content .watamu-hero-subtitle {
+    font-size: 1.2rem;
+    color: #fff;
+    font-family: var(--font-subhead);
+    opacity: 0.9;
+    letter-spacing: 0.1em;
 }
 
 @keyframes heroFadeIn {
@@ -112,11 +121,21 @@
     /* Add some padding from the edge */
 }
 
-.blog-text-content h2 {
-    font-size: 1.5rem;
-    font-weight: 400;
-    margin-bottom: 20px;
-    color: #333;
+.blog-text-content .blog-section-title,
+.watamu-text-content .watamu-section-title {
+    font-size: 2.5rem;
+    font-weight: 500;
+    margin-bottom: 10px;
+    color: var(--color-primary);
+}
+
+.blog-text-content .blog-section-subtitle,
+.watamu-text-content .watamu-section-subtitle {
+    font-family: var(--font-subhead);
+    font-size: 1.2rem;
+    color: #666;
+    margin-bottom: 30px;
+    font-weight: 300;
 }
 
 .blog-text-content p {
@@ -149,7 +168,8 @@
 }
 
 .story-card {
-    text-align: left;
+    text-align: center;
+    /* Match homepage activities style */
 }
 
 .story-image {
@@ -245,11 +265,19 @@
     /* Add some padding from the edge */
 }
 
-.watamu-text-content h2 {
-    font-size: 1.5rem;
-    font-weight: 400;
-    margin-bottom: 20px;
-    color: #333;
+.watamu-text-content .watamu-section-title {
+    font-size: 2.5rem;
+    font-weight: 500;
+    margin-bottom: 10px;
+    color: var(--color-primary);
+}
+
+.watamu-text-content .watamu-section-subtitle {
+    font-family: var(--font-subhead);
+    font-size: 1.2rem;
+    color: #666;
+    margin-bottom: 30px;
+    font-weight: 300;
 }
 
 .watamu-text-content p {
