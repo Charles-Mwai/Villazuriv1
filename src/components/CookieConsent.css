@@ -3,14 +3,14 @@
     bottom: 2rem;
     right: 2rem;
     left: 2rem;
-    background: rgba(4, 43, 23, 0.95);
+    background: rgba(136, 167, 64, 0.95);
     backdrop-filter: blur(10px);
     color: white;
     padding: 1.5rem 2rem;
     border-radius: 12px;
     z-index: 9999;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-    border: 1px solid rgba(212, 175, 55, 0.2);
+    border: 1px solid rgba(239, 88, 61, 0.2);
     max-width: 500px;
     margin-left: auto;
     animation: slideUp 0.5s ease-out;
@@ -30,7 +30,7 @@
 }
 
 .cookie-policy-link {
-    color: #D4AF37;
+    color: #EF583D;
     text-decoration: underline;
     margin-left: 0.5rem;
     transition: color 0.3s ease;
@@ -46,8 +46,8 @@
 }
 
 .accept-cookies-btn {
-    background: #D4AF37;
-    color: #042B17;
+    background: #EF583D;
+    color: white;
     border: none;
     padding: 0.6rem 2rem;
     border-radius: 4px;
