@@ -223,7 +223,7 @@
 .activities-subheading {
     font-size: 1.75rem;
     font-family: var(--font-heading);
-    color: var(--color-primary);
+    color: var(--color-text-dark);
     margin-bottom: var(--spacing-md);
     text-align: left;
 }
