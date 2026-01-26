@@ -14,9 +14,8 @@ export default async function handler(request, response) {
     // 2. Origin / Security Validation (beefing up security)
     const origin = request.headers.origin;
     const allowedOrigins = [
-        'http://localhost:5173',
-        'https://villazurimvp.vercel.app/', // Update with actual production URL
-        'https://villazuri.com'
+        'https://villazurimvp.vercel.app', // Keep vercel app for testing/fallback if needed, or remove if strictly switching. User asked to CHANGE. I will keep localhost and the new one.
+        'https://villazuri.co.ke'
     ];
 
     if (process.env.NODE_ENV === 'production' && (!origin || !allowedOrigins.includes(origin))) {
@@ -113,7 +112,7 @@ export default async function handler(request, response) {
                         
                         <div style="font-size: 12px; color: #999; margin-top: 40px; text-align: center; border-top: 1px solid #eee; padding-top: 10px;">
                             Villa Zuri, Watamu, Kenya<br>
-                            <a href="https://villazuri.com" style="color: #D4AF37; text-decoration: none;">www.villazuri.com</a>
+                            <a href="https://villazuri.co.ke" style="color: #D4AF37; text-decoration: none;">www.villazuri.co.ke</a>
                         </div>
                     </div>
                 `
@@ -170,7 +169,7 @@ export default async function handler(request, response) {
                              <p><strong>Activities:</strong> ${dbBooking.activities?.length > 0 ? dbBooking.activities.join(', ') : 'None'}</p>
                         </div>
 
-                        <p><a href="https://villazuri.com/admin/bookings/${dbBooking.id}" style="display: inline-block; padding: 10px 20px; background-color: #0A2342; color: white; text-decoration: none; border-radius: 5px;">View in Admin Dashboard</a></p>
+                        <p><a href="https://villazuri.co.ke/admin/bookings/${dbBooking.id}" style="display: inline-block; padding: 10px 20px; background-color: #0A2342; color: white; text-decoration: none; border-radius: 5px;">View in Admin Dashboard</a></p>
                     </div>
                 `
             })
