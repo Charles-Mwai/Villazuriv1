@@ -59,6 +59,8 @@
     /* Higher than menu-overlay */
     background: transparent !important;
     box-shadow: none !important;
+    pointer-events: none;
+    /* Let clicks pass through to overlay */
 }
 
 .navbar.menu-open .logo,
@@ -140,6 +142,8 @@
     z-index: 2001;
     /* Above overlay */
     transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    pointer-events: auto;
+    /* Ensure hamburger remains clickable */
 }
 
 .custom-hamburger span {
