@@ -22,7 +22,7 @@ const MarqueeGallery = () => {
                 <div className="marquee-track">
                     {marqueeImages.map((img, idx) => (
                         <div key={`${img}-${idx}`} className="marquee-item">
-                            <img src={`/villa pics/${img}`} alt="Villa highlights" />
+                            <img src={`/villa pics/${img}`} alt={`Villa Zuri interior and exterior highlight ${idx + 1}`} />
                         </div>
                     ))}
                 </div>

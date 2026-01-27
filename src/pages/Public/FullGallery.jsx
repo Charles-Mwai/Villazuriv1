@@ -169,7 +169,7 @@ const FullGallery = () => {
                                     >
                                         <img
                                             src={`/Bento Grid/${image.src}`}
-                                            alt={`Villa view ${index + 1}`}
+                                            alt={`Villa Zuri gallery view ${index + 1} - ${image.size} perspective`}
                                             loading="lazy"
                                         />
                                         <div className="masonry-overlay">
@@ -204,7 +204,7 @@ const FullGallery = () => {
                     >
                         <img
                             src={`/Bento Grid/${images[currentImageIndex].src}`}
-                            alt="Villa bento view"
+                            alt={`Villa Zuri detailed view ${currentImageIndex + 1}`}
                             className="lightbox-main-img"
                             draggable="false"
                         />

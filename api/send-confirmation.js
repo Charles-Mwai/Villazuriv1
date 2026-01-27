@@ -14,8 +14,9 @@ export default async function handler(request, response) {
     // 2. Origin / Security Validation (beefing up security)
     const origin = request.headers.origin;
     const allowedOrigins = [
-        'https://villazurimvp.vercel.app', // Keep vercel app for testing/fallback if needed, or remove if strictly switching. User asked to CHANGE. I will keep localhost and the new one.
-        'https://villazuri.co.ke'
+        'https://villazurimvp.vercel.app',
+        'https://villazuri.co.ke',
+        'https://www.villazuri.co.ke'
     ];
 
     if (process.env.NODE_ENV === 'production' && (!origin || !allowedOrigins.includes(origin))) {

@@ -42,8 +42,7 @@ const Footer = () => {
                 <div className="footer-bottom-info">
                     <p className="copyright">&copy; 2012 - {new Date().getFullYear()} Villa Zuri, Inc. All rights reserved.</p>
                     <div className="contact-info">
-                        <span>info: stay@villazuri.co.ke
-                        </span>
+                        <span>info: stay@villazuri.co.ke</span>
                         <span className="divider-pipe">|</span>
                         <span>Tel: +254 700 000 000</span>
                     </div>

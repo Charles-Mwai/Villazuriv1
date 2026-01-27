@@ -60,8 +60,7 @@ const PrivacyPolicy = () => {
 
                             <div className="privacy-block">
                                 <h3>6. Your Rights</h3>
-                                <p>Depending on your location, you may have the right to access, correct, or delete your personal data. To exercise these rights, please contact us at info@villazuri.co.ke
-                                    .</p>
+                                <p>Depending on your location, you may have the right to access, correct, or delete your personal data. To exercise these rights, please contact us at info@villazuri.co.ke.</p>
                             </div>
 
                             <div className="privacy-block">
@@ -72,8 +71,7 @@ const PrivacyPolicy = () => {
                             <div className="privacy-block">
                                 <h3>8. Contact Us</h3>
                                 <p>If you have any questions about this Privacy Policy, please contact us at:</p>
-                                <p>Email: info@villazuri.co.ke
-                                </p>
+                                <p>Email: info@villazuri.co.ke</p>
                                 <p>Villa Zuri, Watamu, Kenya</p>
                             </div>
                         </div>

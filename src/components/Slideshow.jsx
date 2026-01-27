@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './Slideshow.css';
 
-const Slideshow = ({ images, interval = 4000 }) => {
+const Slideshow = ({ images, interval = 4000, ariaLabel = "Image slideshow" }) => {
     const [currentIndex, setCurrentIndex] = useState(0);
 
     useEffect(() => {
@@ -17,13 +17,14 @@ const Slideshow = ({ images, interval = 4000 }) => {
     if (!images || images.length === 0) return null;
 
     return (
-        <div className="slideshow-container">
+        <div className="slideshow-container" aria-label={ariaLabel}>
             {images.map((img, index) => (
                 <div
                     key={index}
                     className={`slide ${index === currentIndex ? 'active' : ''}`}
                     style={{ backgroundImage: `url("${img}")` }}
-                    aria-label={`Slide ${index + 1}`}
+                    aria-label={`${ariaLabel} - view ${index + 1}`}
+                    role="img"
                 />
             ))}
         </div>

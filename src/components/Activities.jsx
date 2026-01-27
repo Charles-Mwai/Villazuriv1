@@ -16,7 +16,7 @@ const Activities = () => {
                         <div key={item.id} className="feature-item">
                             <Link to={`/activities/${item.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
                                 <div className="feature-image-wrapper">
-                                    <img src={item.image} alt={item.title} className="feature-image" />
+                                    <img src={item.image} alt={`Villa Zuri Activity: ${item.title}`} className="feature-image" loading="lazy" />
                                 </div>
                                 <h4>{item.title}</h4>
                             </Link>

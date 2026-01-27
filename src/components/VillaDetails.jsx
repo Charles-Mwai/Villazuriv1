@@ -26,7 +26,7 @@ const VillaDetails = () => {
         <section id="villa" className="villa-details">
             <div className="grid-row">
                 <div className="grid-image">
-                    <Slideshow images={interiorImages} interval={5000} />
+                    <Slideshow images={interiorImages} interval={5000} ariaLabel="Villa Zuri interior living spaces" />
                 </div>
                 <div className="grid-content">
                     <RevealOnScroll>
@@ -40,7 +40,7 @@ const VillaDetails = () => {
 
             <div className="grid-row reverse">
                 <div className="grid-image">
-                    <Slideshow images={exteriorImages} interval={5000} />
+                    <Slideshow images={exteriorImages} interval={5000} ariaLabel="Villa Zuri exterior and gardens" />
                 </div>
                 <div className="grid-content">
                     <RevealOnScroll>
@@ -54,7 +54,7 @@ const VillaDetails = () => {
 
             <div className="grid-row">
                 <div className="grid-image">
-                    <Slideshow images={outdoorImages} interval={5000} />
+                    <Slideshow images={outdoorImages} interval={5000} ariaLabel="Villa Zuri outdoor pool and beach areas" />
                 </div>
                 <div className="grid-content">
                     <RevealOnScroll>
@@ -62,7 +62,7 @@ const VillaDetails = () => {
                         <p>
                             Experience the harmony of nature and luxury. Our outdoor spaces are designed to provide
                             the perfect balance of relaxation and adventure. Whether you wish to bask in the sun
-                            or enjoy a quiet evening breeze, the Relaxation await you.
+                            or enjoy a quiet evening breeze, tranquility awaits you at Villa Zuri.
                         </p>
                     </RevealOnScroll>
                 </div>

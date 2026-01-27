@@ -9,6 +9,19 @@ const Login = () => {
     const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
+        const attempts = parseInt(localStorage.getItem('admin_login_attempts') || '0');
+        if (attempts >= 5) {
+            const lastAttempt = parseInt(localStorage.getItem('admin_last_attempt') || '0');
+            const now = new Date().getTime();
+            if (now - lastAttempt < 300000) { // 5 minute lockout
+                setError('Too many failed attempts. Please try again in 5 minutes.');
+                setLoading(false);
+                return;
+            } else {
+                localStorage.setItem('admin_login_attempts', '0');
+            }
+        }
+
         e.preventDefault();
         setError('');
         setLoading(true);
@@ -32,9 +45,14 @@ const Login = () => {
 
                 if (password === devPassword) {
                     localStorage.setItem('admin_authenticated', 'true');
+                    localStorage.setItem('admin_token', 'dev-token');
                     localStorage.setItem('admin_login_time', new Date().getTime().toString());
+                    localStorage.setItem('admin_login_attempts', '0');
                     navigate('/admin/dashboard');
                 } else {
+                    const newAttempts = attempts + 1;
+                    localStorage.setItem('admin_login_attempts', newAttempts.toString());
+                    localStorage.setItem('admin_last_attempt', new Date().getTime().toString());
                     setError('Invalid password');
                     setPassword('');
                 }
@@ -44,11 +62,16 @@ const Login = () => {
             const data = await response.json();
 
             if (data.valid) {
-                // Store authentication state
+                // Store authentication state and token
                 localStorage.setItem('admin_authenticated', 'true');
+                localStorage.setItem('admin_token', data.token);
                 localStorage.setItem('admin_login_time', new Date().getTime().toString());
+                localStorage.setItem('admin_login_attempts', '0');
                 navigate('/admin/dashboard');
             } else {
+                const newAttempts = attempts + 1;
+                localStorage.setItem('admin_login_attempts', newAttempts.toString());
+                localStorage.setItem('admin_last_attempt', new Date().getTime().toString());
                 setError(data.error || 'Invalid password');
                 setPassword('');
             }
