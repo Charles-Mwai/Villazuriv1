@@ -1,25 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { CreditCard, Lock, CheckCircle } from 'lucide-react';
+import { CreditCard, Lock, CheckCircle, ShieldCheck } from 'lucide-react';
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
-import { sendBookingConfirmation } from '../../services/emailService';
 import './Checkout.css';
 
 const Checkout = () => {
     const location = useLocation();
     const navigate = useNavigate();
-    const [processing, setProcessing] = useState(false);
-    const [completed, setCompleted] = useState(false);
-    const [emailStatus, setEmailStatus] = useState('idle'); // idle, sending, sent, failed
-
-    // Dummy state for payment form
-    const [paymentData, setPaymentData] = useState({
-        cardName: '',
-        cardNumber: '',
-        expiry: '',
-        cvc: ''
-    });
 
     const bookingData = location.state?.booking;
     const totalCost = location.state?.totalCost;
@@ -30,59 +18,13 @@ const Checkout = () => {
         }
     }, [bookingData, navigate]);
 
-    const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        setPaymentData(prev => ({
-            ...prev,
-            [name]: value
-        }));
-    };
-
-    const handlePayment = (e) => {
-        e.preventDefault();
-        setProcessing(true);
-
-        // Simulate payment processing delay
-        setTimeout(async () => {
-            setProcessing(false);
-            setCompleted(true);
-
-            // Send confirmation email
-            console.log('Payment successful, sending confirmation email...');
-            setEmailStatus('sending');
-            try {
-                const result = await sendBookingConfirmation(bookingData, totalCost);
-                if (result.success) {
-                    setEmailStatus('sent');
-                } else {
-                    setEmailStatus('failed');
-                }
-            } catch (error) {
-                console.error('Auto-email notification failed:', error);
-                setEmailStatus('failed');
-            }
-        }, 2000);
+    const handlePesapalPayment = () => {
+        // Redirecting directly to the PesaPal Store as requested
+        // This provides a reliable, pre-configured payment page
+        window.location.href = "https://store.pesapal.com/villazuri";
     };
 
     if (!bookingData) return null;
-
-    if (completed) {
-        return (
-            <div className="checkout-page">
-                <Navbar />
-                <div className="checkout-container container">
-                    <div className="success-message">
-                        <CheckCircle size={64} color="#4CAF50" />
-                        <h1>Booking Confirmed!</h1>
-                        <p>Thank you, {bookingData.guest_name}. Your reservation has been secured.</p>
-                        <p className="order-id">Booking ID: #{bookingData.id.slice(0, 8)}</p>
-                        <button className="return-home-btn" onClick={() => navigate('/')}>Return to Home</button>
-                    </div>
-                </div>
-                <Footer />
-            </div>
-        );
-    }
 
     return (
         <div className="checkout-page">
@@ -113,78 +55,37 @@ const Checkout = () => {
                         </div>
                     </div>
 
-                    {/* Payment Form */}
+                    {/* Pesapal CTA */}
                     <div className="payment-form-panel">
                         <div className="panel-header">
-                            <h2>Secure Payment</h2>
+                            <h2>Payment Method</h2>
                             <div className="secure-badge">
                                 <Lock size={16} />
-                                <span>SSL Encrypted</span>
+                                <span>Secure Checkout</span>
                             </div>
                         </div>
 
-                        <form onSubmit={handlePayment} className="payment-form">
-                            <div className="form-group">
-                                <label>Name on Card</label>
-                                <input
-                                    type="text"
-                                    name="cardName"
-                                    required
-                                    placeholder="J. Smith"
-                                    value={paymentData.cardName}
-                                    onChange={handleInputChange}
-                                    className="checkout-input"
-                                />
+                        <div className="pesapal-checkout-content">
+                            <p className="payment-intro">
+                                We use <strong>Pesapal</strong> to process your payment securely.
+                                You can pay using Mobile Money (M-Pesa, Airtel Money), Visa, or Mastercard.
+                            </p>
+
+                            <div className="payment-methods-icons">
+                                <img src="/pesapal-logos.png" alt="M-Pesa, Visa, Mastercard" className="payment-logos" />
                             </div>
 
-                            <div className="form-group">
-                                <label>Card Number</label>
-                                <div className="card-input-wrapper">
-                                    <CreditCard className="card-icon" size={20} />
-                                    <input
-                                        type="text"
-                                        name="cardNumber"
-                                        required
-                                        placeholder="0000 0000 0000 0000"
-                                        value={paymentData.cardNumber}
-                                        onChange={handleInputChange}
-                                        className="checkout-input with-icon"
-                                        maxLength={19}
-                                    />
-                                </div>
+                            <div className="payment-action-container">
+                                <button onClick={handlePesapalPayment} className="pay-now-btn">
+                                    Pay
+                                </button>
                             </div>
 
-                            <div className="form-row">
-                                <div className="form-group half">
-                                    <label>Expiry Date</label>
-                                    <input
-                                        type="text"
-                                        name="expiry"
-                                        required
-                                        placeholder="MM/YY"
-                                        className="checkout-input"
-                                        maxLength={5}
-                                    />
-                                </div>
-                                <div className="form-group half">
-                                    <label>CVC</label>
-                                    <input
-                                        type="text"
-                                        name="cvc"
-                                        required
-                                        placeholder="123"
-                                        className="checkout-input"
-                                        maxLength={3}
-                                    />
-                                </div>
+                            <div className="security-assurance">
+                                <ShieldCheck size={20} color="#0A4D2A" />
+                                <span>Your payment is handled on Pesapal's secure servers. Villa Zuri does not store your card details.</span>
                             </div>
-
-                            <button type="submit" className="pay-now-btn" disabled={processing}>
-                                {processing ? 'Processing...' : `Pay $${totalCost?.toLocaleString()}`}
-                            </button>
-
-                            <p className="payment-dummy-note">This is a secure dummy checkout. No real charge will be made.</p>
-                        </form>
+                        </div>
                     </div>
                 </div>
             </div>

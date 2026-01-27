@@ -9,6 +9,7 @@ import MarqueeGallery from './components/MarqueeGallery';
 import Watamu from './pages/Public/Watamu';
 import FullGallery from './pages/Public/FullGallery';
 import Checkout from './pages/Public/Checkout';
+import Confirmation from './pages/Public/Confirmation';
 import Footer from './components/Footer';
 import WatamuFeature from './components/WatamuFeature';
 
@@ -59,6 +60,7 @@ function App() {
                     <Route path="/terms" element={<Terms />} />
                     <Route path="/privacy" element={<PrivacyPolicy />} />
                     <Route path="/checkout" element={<Checkout />} />
+                    <Route path="/checkout/confirmation" element={<Confirmation />} />
                     <Route path="/activities/:id" element={<ActivityDetailPage />} />
 
 

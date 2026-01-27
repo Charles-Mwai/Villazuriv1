@@ -29,15 +29,33 @@ CREATE TABLE IF NOT EXISTS bookings (
   status VARCHAR(50) DEFAULT 'pending',
   -- Status values: 'pending', 'confirmed', 'paid', 'cancelled'
   
-  -- Payment info (for future Pesapal integration)
+  -- Payment info (for Pesapal integration)
   payment_id VARCHAR(255),
   payment_status VARCHAR(50),
+  payment_method VARCHAR(50),
   
+  -- Audit
+  updated_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()),
+
   -- Constraints
   CONSTRAINT valid_dates CHECK (check_out > check_in),
   CONSTRAINT valid_nights CHECK (nights > 0),
   CONSTRAINT valid_guests CHECK (guests > 0 AND guests <= 15)
 );
+
+-- Trigger for updated_at
+CREATE OR REPLACE FUNCTION update_updated_at_column()
+RETURNS TRIGGER AS $$
+BEGIN
+    NEW.updated_at = timezone('utc'::text, now());
+    RETURN NEW;
+END;
+$$ language 'plpgsql';
+
+CREATE TRIGGER update_bookings_updated_at
+    BEFORE UPDATE ON bookings
+    FOR EACH ROW
+    EXECUTE PROCEDURE update_updated_at_column();
 
 -- Create indexes for better query performance
 CREATE INDEX IF NOT EXISTS idx_bookings_dates ON bookings(check_in, check_out);
