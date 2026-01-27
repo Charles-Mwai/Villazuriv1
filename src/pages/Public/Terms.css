@@ -30,7 +30,7 @@
     font-family: var(--font-heading);
     letter-spacing: 0.1em;
     text-align: center;
-    color: var(--color-primary);
+    color: #042B17;
     margin: 30px 0 20px;
     /* Reduced margin */
 }
@@ -52,7 +52,7 @@
     /* Slightly smaller */
     margin-bottom: 12px;
     /* Reduced from 20px */
-    color: var(--color-primary);
+    color: #042B17;
     border-bottom: 1px solid rgba(4, 43, 23, 0.1);
     padding-bottom: 8px;
 }

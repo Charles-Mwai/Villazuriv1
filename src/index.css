@@ -98,6 +98,19 @@ img {
   padding: 0 var(--spacing-md);
 }
 
+/* Force heading colors for text containers */
+h2:not(.text-white):not(.hero-title),
+h3:not(.text-white):not(.hero-title),
+.grid-content h3,
+.watamu-text-content h2,
+.blog-text-content h2,
+.privacy-text-container h3,
+.terms-text-container h3,
+.features-section h2,
+.features-section h3 {
+  color: #042B17 !important;
+}
+
 .luxury-text {
   font-family: var(--font-heading);
   letter-spacing: 0.05em;
