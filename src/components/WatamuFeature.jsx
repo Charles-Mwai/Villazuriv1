@@ -8,7 +8,7 @@ const WatamuFeature = () => {
         <section className="watamu-feature">
             <RevealOnScroll>
                 <div className="watamu-feature-content">
-                    <h3>Watamu Beach</h3>
+                    <h3 className="text-white">Watamu Beach</h3>
                     <Link to="/watamu" className="watamu-explore-btn">EXPLORE</Link>
                 </div>
             </RevealOnScroll>
