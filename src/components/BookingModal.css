@@ -16,7 +16,7 @@
     align-items: center;
     /* Center on mobile too for better viewing */
     z-index: 3000;
-    padding: 20px;
+    padding: 15px;
     animation: fadeIn 0.3s ease-out forwards;
 }
 
@@ -73,7 +73,7 @@
 .modal-title {
     font-family: var(--font-heading);
     color: #fff;
-    font-size: 2.2rem;
+    font-size: 1.8rem;
     font-weight: 400;
     letter-spacing: 0.02em;
     margin: 0;
@@ -91,9 +91,9 @@
 .booking-form {
     display: flex;
     flex-direction: column;
-    gap: 30px;
-    padding: 40px 30px;
-    /* Added padding here for the content */
+    gap: 25px;
+    padding: 30px 20px;
+    /* Reduced padding for compact mobile view */
 }
 
 .form-row {

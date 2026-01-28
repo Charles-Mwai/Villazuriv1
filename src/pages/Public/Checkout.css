@@ -347,25 +347,89 @@
 /* Mobile Optimizations */
 @media (max-width: 767px) {
     .checkout-page {
-        padding-top: 80px;
+        padding-top: 90px;
     }
 
     .checkout-container {
-        padding: 20px 15px 60px;
+        padding: 15px 15px 40px;
     }
 
     .booking-summary-panel,
-    .payment-form-panel,
+    .payment-form-panel {
+        padding: 25px 18px;
+        border-radius: 12px;
+    }
+
+    .booking-summary-panel h2,
+    .panel-header h2 {
+        font-size: 1.3rem;
+        margin-bottom: 20px;
+    }
+
+    .summary-row {
+        font-size: 0.95rem;
+    }
+
+    .summary-row.total {
+        font-size: 1.25rem;
+    }
+
     .success-message-wrapper {
-        padding: 25px 20px;
+        padding: 40px 20px;
+        border-radius: 16px;
+        margin: 20px auto;
     }
 
     .success-message h1 {
-        font-size: 2rem;
+        font-size: 1.8rem;
+    }
+
+    .success-message p {
+        font-size: 0.95rem;
+        padding: 0 5px;
+    }
+
+    .icon-circle {
+        width: 80px;
+        height: 80px;
+    }
+
+    .booking-ref-box {
+        padding: 12px 20px;
     }
 
     .pay-now-btn {
         padding: 16px;
-        font-size: 1rem;
+        font-size: 0.95rem;
+        letter-spacing: 0.2em;
+        /* Less aggressive letter spacing on small screens */
+    }
+
+    .return-home-btn {
+        width: 100%;
+        justify-content: center;
+        padding: 14px 20px;
+        font-size: 0.95rem;
+    }
+
+    .secure-badge {
+        padding: 4px 10px;
+        font-size: 0.7rem;
+    }
+
+    .panel-header {
+        margin-bottom: 25px;
+    }
+}
+
+/* Very Small Devices */
+@media (max-width: 380px) {
+    .success-message h1 {
+        font-size: 1.6rem;
+    }
+
+    .booking-summary-panel,
+    .payment-form-panel {
+        padding: 20px 15px;
     }
 }
