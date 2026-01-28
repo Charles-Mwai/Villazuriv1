@@ -196,26 +196,28 @@
 }
 
 .pay-now-btn {
-    background-color: #042B17;
-    color: #fff;
-    border: none;
-    padding: 20px 60px;
-    font-size: 1.2rem;
+    width: 100%;
+    min-width: 0;
+    background: transparent;
+    color: #0c1c38;
+    border: 1px solid #0c1c38;
+    padding: 18px 20px;
+    font-family: var(--font-body);
+    font-size: 1.1rem;
     font-weight: 500;
-    border-radius: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
     cursor: pointer;
     transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-    text-transform: uppercase;
-    letter-spacing: 0.15em;
-    width: auto;
-    min-width: 250px;
-    box-shadow: 0 4px 15px rgba(4, 43, 23, 0.15);
+    border-radius: 0;
 }
 
 .pay-now-btn:hover {
-    background-color: #0a4d2a;
+    background-color: var(--color-accent);
+    border-color: var(--color-accent);
+    color: #fff;
     transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(4, 43, 23, 0.25);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 }
 
 /* Success State & Confirmation */
