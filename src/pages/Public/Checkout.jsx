@@ -1,28 +1,73 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { CreditCard, Lock, CheckCircle, ShieldCheck } from 'lucide-react';
+import { CreditCard, Lock, CheckCircle, ShieldCheck, Loader } from 'lucide-react';
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
 import './Checkout.css';
+import { getBookingById } from '../../services/bookingService';
 
 const Checkout = () => {
     const location = useLocation();
     const navigate = useNavigate();
 
-    const bookingData = location.state?.booking;
-    const totalCost = location.state?.totalCost;
+    const [bookingData, setBookingData] = useState(location.state?.booking);
+    const [totalCost, setTotalCost] = useState(location.state?.totalCost);
+    const [isLoading, setIsLoading] = useState(false);
+    const [fetchError, setFetchError] = useState(false);
 
     useEffect(() => {
-        if (!bookingData) {
-            navigate('/');
-        }
-    }, [bookingData, navigate]);
+        const recoverBooking = async () => {
+            const stateBookingId = location.state?.bookingId;
+
+            if (!bookingData && stateBookingId) {
+                try {
+                    setIsLoading(true);
+                    const recovered = await getBookingById(stateBookingId);
+                    if (recovered) {
+                        setBookingData(recovered);
+                        setTotalCost(recovered.total_cost);
+                    } else {
+                        setFetchError(true);
+                    }
+                } catch (err) {
+                    console.error('Failed to recover booking:', err);
+                    setFetchError(true);
+                } finally {
+                    setIsLoading(false);
+                }
+            } else if (!bookingData && !stateBookingId) {
+                navigate('/');
+            }
+        };
+
+        recoverBooking();
+    }, [bookingData, location.state, navigate]);
 
     const handlePesapalPayment = () => {
         // Redirecting directly to the PesaPal Store as requested
         // This provides a reliable, pre-configured payment page
         window.location.href = "https://store.pesapal.com/villazuri";
     };
+
+    if (isLoading) {
+        return (
+            <div className="checkout-page">
+                <Navbar />
+                <div className="checkout-container container" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '60vh' }}>
+                    <div className="loader-container">
+                        <Loader size={48} className="spinner-icon" color="#0A4D2A" />
+                        <p style={{ marginTop: '20px', color: '#666' }}>Loading your booking details...</p>
+                    </div>
+                </div>
+                <Footer />
+            </div>
+        );
+    }
+
+    if (fetchError) {
+        navigate('/');
+        return null;
+    }
 
     if (!bookingData) return null;
 

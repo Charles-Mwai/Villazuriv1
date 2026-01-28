@@ -11,17 +11,25 @@ export default async function handler(request, response) {
         return response.status(405).json({ error: 'Method not allowed' });
     }
 
-    // 2. Origin / Security Validation (beefing up security)
+    // 2. Security Validation (Double protection)
     const origin = request.headers.origin;
+    const internalSecret = request.headers['x-internal-secret'];
+    const expectedSecret = process.env.INTERNAL_API_SECRET;
+
+    // Check if it is an internal secure call first
+    const isInternalCall = internalSecret && internalSecret === expectedSecret;
+
     const allowedOrigins = [
         'https://villazurimvp.vercel.app',
         'https://villazuri.co.ke',
         'https://www.villazuri.co.ke'
     ];
 
-    if (process.env.NODE_ENV === 'production' && (!origin || !allowedOrigins.includes(origin))) {
-        console.warn('Unauthorized origin attempt:', origin);
-        return response.status(403).json({ error: 'Forbidden: Unauthorized origin' });
+    if (process.env.NODE_ENV === 'production') {
+        if (!isInternalCall && (!origin || !allowedOrigins.includes(origin))) {
+            console.warn('Unauthorized access attempt on send-confirmation:', { origin, isInternalCall });
+            return response.status(403).json({ error: 'Forbidden: Unauthorized access' });
+        }
     }
 
     // 3. Data Sanitization & Extraction

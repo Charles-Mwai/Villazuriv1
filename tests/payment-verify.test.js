@@ -37,6 +37,8 @@ describe('PesaPal Payment Verification API', () => {
         process.env.PESAPAL_CONSUMER_SECRET = 'test-secret';
         process.env.SUPABASE_URL = 'https://test.supabase.co';
         process.env.SUPABASE_SERVICE_ROLE_KEY = 'test-role-key';
+        process.env.INTERNAL_API_SECRET = 'test-internal-secret';
+        process.env.NODE_ENV = 'test'; // Ensure it's not production during tests
     });
 
     it('should confirm booking when PesaPal returns Completed', async () => {
@@ -119,7 +121,8 @@ describe('PesaPal Payment Verification API', () => {
 
         const req = {
             method: 'GET',
-            query: { trackingId: 'track-123', merchantRef: 'booking-123' }
+            query: { trackingId: 'track-123', merchantRef: 'booking-123' },
+            headers: {}
         };
 
         const res = {

@@ -16,9 +16,23 @@ export default async function handler(request, response) {
         return response.status(400).json({ error: 'Missing trackingId or merchantRef' });
     }
 
+    // 2. Security Validation (Origin check)
+    const origin = request.headers.origin;
+    const allowedOrigins = [
+        'https://villazurimvp.vercel.app',
+        'https://villazuri.co.ke',
+        'https://www.villazuri.co.ke'
+    ];
+
+    if (process.env.NODE_ENV === 'production' && (!origin || !allowedOrigins.includes(origin))) {
+        console.warn('Unauthorized origin attempt on verify-payment:', origin);
+        return response.status(403).json({ error: 'Forbidden: Unauthorized origin' });
+    }
+
     const PESA_KEY = process.env.PESAPAL_CONSUMER_KEY;
     const PESA_SECRET = process.env.PESAPAL_CONSUMER_SECRET;
     const PESA_BASE_URL = process.env.PESAPAL_BASE_URL || 'https://pay.pesapal.com/v3';
+    const INTERNAL_SECRET = process.env.INTERNAL_API_SECRET;
 
     try {
         // 1. Get Authentication Token from PesaPal
@@ -103,7 +117,10 @@ export default async function handler(request, response) {
             try {
                 await fetch(`${baseUrl}/api/send-confirmation`, {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'x-internal-secret': INTERNAL_SECRET
+                    },
                     body: JSON.stringify({ booking, totalCost: booking.total_cost })
                 });
             } catch (emailErr) {
