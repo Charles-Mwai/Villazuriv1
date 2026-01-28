@@ -4,30 +4,53 @@ import { CheckCircle, XCircle, Loader, ArrowRight } from 'lucide-react';
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
 import './Checkout.css'; // Reuse checkout styles
+import { getBookingById } from '../../services/bookingService';
+import { sendBookingConfirmation } from '../../services/emailService';
 
 const Confirmation = () => {
     const [searchParams] = useSearchParams();
     const navigate = useNavigate();
     const [status, setStatus] = useState('verifying'); // verifying, success, failed
     const [bookingId, setBookingId] = useState(null);
+    const [isLoading, setIsLoading] = useState(true);
 
-    const trackingId = searchParams.get('OrderTrackingId');
-    const merchantRef = searchParams.get('OrderReference') || searchParams.get('bookingId');
+    const trackingId = searchParams.get('OrderTrackingId') || searchParams.get('pesapal_transaction_tracking_id');
+    const merchantRef = searchParams.get('OrderReference') || searchParams.get('pesapal_merchant_reference') || searchParams.get('bookingId');
 
     useEffect(() => {
-        if (merchantRef) {
-            setBookingId(merchantRef);
-        }
+        const verifyPayment = async () => {
+            if (!merchantRef || !trackingId) {
+                // If we don't have tracking info, we can't verify
+                if (!merchantRef) navigate('/');
+                else setStatus('failed');
+                return;
+            }
 
-        if (trackingId) {
-            setStatus('success');
-        } else if (!merchantRef) {
-            navigate('/');
-        } else {
+            setBookingId(merchantRef);
             setStatus('verifying');
-            const timer = setTimeout(() => setStatus('success'), 2000);
-            return () => clearTimeout(timer);
-        }
+            setIsLoading(true);
+
+            try {
+                // Call the secure server-side verification API
+                const response = await fetch(`/api/pesapal/verify-payment?trackingId=${trackingId}&merchantRef=${merchantRef}`);
+                const result = await response.json();
+
+                if (result.success && result.status === 'Completed') {
+                    setStatus('success');
+                } else if (result.status === 'Pending') {
+                    setStatus('pending');
+                } else {
+                    setStatus('failed');
+                }
+            } catch (error) {
+                console.error('Payment verification failed:', error);
+                setStatus('failed');
+            } finally {
+                setIsLoading(false);
+            }
+        };
+
+        verifyPayment();
     }, [trackingId, merchantRef, navigate]);
 
     return (
@@ -43,6 +66,19 @@ const Confirmation = () => {
                                 </div>
                                 <h1>Verifying Payment</h1>
                                 <p>We are confirming your transaction with Pesapal. This usually takes just a few seconds. Please stay on this page.</p>
+                            </div>
+                        )}
+
+                        {status === 'pending' && (
+                            <div className="status-pending">
+                                <div className="loader-container">
+                                    <Loader size={48} className="spinner-icon" color="#D4AF37" />
+                                </div>
+                                <h1>Payment Processing</h1>
+                                <p>Your payment is currently being processed by Pesapal. We will update your booking status once confirmation is received.</p>
+                                <button className="return-home-btn" onClick={() => navigate('/')}>
+                                    Return to Home <ArrowRight size={18} />
+                                </button>
                             </div>
                         )}
 

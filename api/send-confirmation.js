@@ -56,7 +56,7 @@ export default async function handler(request, response) {
 
         // 5. Brevo API Integration
         const BREVO_API_KEY = process.env.BREVO_API_KEY;
-        const SENDER_EMAIL = process.env.BREVO_SENDER_EMAIL;
+        const SENDER_EMAIL = process.env.BREVO_SENDER_EMAIL || 'bookings@villazuri.co.ke';
         const SENDER_NAME = 'Villa Zuri Reservations';
 
         if (!BREVO_API_KEY || !SENDER_EMAIL) {
@@ -129,7 +129,7 @@ export default async function handler(request, response) {
         const data = await brevoResponse.json();
 
         // 6. Admin Notification Email
-        const ADMIN_EMAIL = process.env.ADMIN_RECEIVING_EMAIL || SENDER_EMAIL; // Fallback to sender if not set
+        const ADMIN_EMAIL = process.env.ADMIN_RECEIVING_EMAIL || 'admin@villazuri.co.ke';
 
         await fetch('https://api.brevo.com/v3/smtp/email', {
             method: 'POST',

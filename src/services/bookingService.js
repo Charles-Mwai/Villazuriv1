@@ -160,3 +160,23 @@ export const getAllPricingRules = async () => {
         return [];
     }
 };
+/**
+ * Get single booking by ID
+ * @param {string} bookingId 
+ * @returns {Promise<Object>}
+ */
+export const getBookingById = async (bookingId) => {
+    try {
+        const { data, error } = await supabase
+            .from('bookings')
+            .select('*')
+            .eq('id', bookingId)
+            .single();
+
+        if (error) throw error;
+        return data;
+    } catch (error) {
+        console.error('Error fetching booking:', error);
+        throw error;
+    }
+};
