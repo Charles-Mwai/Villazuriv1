@@ -7,8 +7,8 @@
  */
 
 const RATES = {
-    PEAK: 600,
-    OFF_PEAK: 400
+    PEAK: 5,
+    OFF_PEAK: 5
 };
 
 /**
