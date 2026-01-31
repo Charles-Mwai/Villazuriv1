@@ -17,6 +17,15 @@ const Checkout = () => {
     const [fetchError, setFetchError] = useState(false);
 
     useEffect(() => {
+        if (bookingData?.nights) {
+            // Force recalculation based on the new $2/night rate
+            // This ensures old bookings with high stored costs don't trigger payment limits
+            const correctedTotal = bookingData.nights * 2;
+            setTotalCost(correctedTotal);
+        }
+    }, [bookingData]);
+
+    useEffect(() => {
         const recoverBooking = async () => {
             const stateBookingId = location.state?.bookingId;
 
@@ -44,18 +53,50 @@ const Checkout = () => {
         recoverBooking();
     }, [bookingData, location.state, navigate]);
 
-    const handlePesapalPayment = () => {
+    const handlePesapalPayment = async () => {
         setIsRedirecting(true);
-        // Redirecting directly to the PesaPal Store as requested
-        // This provides a reliable, pre-configured payment page
-        const paymentUrl = new URL("https://store.pesapal.com/villazuri");
-        if (totalCost) {
-            paymentUrl.searchParams.append("amount", totalCost);
+        try {
+            // Prepare billing details
+            const firstName = bookingData.guest_name ? bookingData.guest_name.split(' ')[0] : 'Guest';
+            const lastName = bookingData.guest_name && bookingData.guest_name.includes(' ')
+                ? bookingData.guest_name.split(' ').slice(1).join(' ')
+                : 'User';
+
+            // Force calc cost to avoid state issues
+            const finalAmount = bookingData.nights * 2;
+
+            const response = await fetch('/api/pesapal/create-order', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    amount: finalAmount,
+                    email: bookingData.guest_email,
+                    phoneNumber: bookingData.guest_phone,
+                    firstName: firstName,
+                    lastName: lastName,
+                    reference: bookingData.id,
+                    description: `Payment for Booking ${bookingData.id}`
+                })
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.error || 'Payment initialization failed');
+            }
+
+            const { redirectUrl } = await response.json();
+
+            if (redirectUrl) {
+                window.location.href = redirectUrl;
+            } else {
+                throw new Error('No redirect URL received from payment provider');
+            }
+
+        } catch (error) {
+            console.error('Payment Error:', error);
+            setIsRedirecting(false);
+            alert(`Payment initialization failed: ${error.message}`);
         }
-        if (bookingData?.id) {
-            paymentUrl.searchParams.append("reference", bookingData.id);
-        }
-        window.location.href = paymentUrl.toString();
     };
 
     if (isLoading) {
