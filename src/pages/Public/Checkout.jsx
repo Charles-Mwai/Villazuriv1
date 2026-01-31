@@ -13,6 +13,7 @@ const Checkout = () => {
     const [bookingData, setBookingData] = useState(location.state?.booking);
     const [totalCost, setTotalCost] = useState(location.state?.totalCost);
     const [isLoading, setIsLoading] = useState(false);
+    const [isRedirecting, setIsRedirecting] = useState(false);
     const [fetchError, setFetchError] = useState(false);
 
     useEffect(() => {
@@ -44,9 +45,17 @@ const Checkout = () => {
     }, [bookingData, location.state, navigate]);
 
     const handlePesapalPayment = () => {
+        setIsRedirecting(true);
         // Redirecting directly to the PesaPal Store as requested
         // This provides a reliable, pre-configured payment page
-        window.location.href = "https://store.pesapal.com/villazuri";
+        const paymentUrl = new URL("https://store.pesapal.com/villazuri");
+        if (totalCost) {
+            paymentUrl.searchParams.append("amount", totalCost);
+        }
+        if (bookingData?.id) {
+            paymentUrl.searchParams.append("reference", bookingData.id);
+        }
+        window.location.href = paymentUrl.toString();
     };
 
     if (isLoading) {
@@ -121,8 +130,17 @@ const Checkout = () => {
                             </div>
 
                             <div className="payment-action-container">
-                                <button onClick={handlePesapalPayment} className="pay-now-btn">
-                                    Pay
+                                <button
+                                    onClick={handlePesapalPayment}
+                                    className="pay-now-btn"
+                                    disabled={isRedirecting}
+                                >
+                                    {isRedirecting ? (
+                                        <>
+                                            <Loader size={18} className="spinner-icon" style={{ marginRight: '10px' }} />
+                                            Redirecting...
+                                        </>
+                                    ) : 'Pay'}
                                 </button>
                             </div>
 
