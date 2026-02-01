@@ -91,7 +91,7 @@ export const calculateTotalCost = (startDate, endDate, pricingRules = []) => {
         // if (applicableRule) {
         //     totalCost += parseFloat(applicableRule.rate);
         // } else {
-        totalCost += 2; // Fixed rate of $2 (Reduced to bypass 1000 KES limit)
+        totalCost += 1; // Fixed rate of $1 (Reduced to bypass 1000 KES limit)
         // }
 
         // Move to next day

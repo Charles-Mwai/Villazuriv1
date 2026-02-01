@@ -20,7 +20,7 @@ const Checkout = () => {
         if (bookingData?.nights) {
             // Force recalculation based on the new $2/night rate
             // This ensures old bookings with high stored costs don't trigger payment limits
-            const correctedTotal = bookingData.nights * 2;
+            const correctedTotal = bookingData.nights * 1;
             setTotalCost(correctedTotal);
         }
     }, [bookingData]);
@@ -63,7 +63,7 @@ const Checkout = () => {
                 : 'User';
 
             // Force calc cost to avoid state issues
-            const finalAmount = bookingData.nights * 2;
+            const finalAmount = bookingData.nights * 1;
 
             const response = await fetch('/api/pesapal/create-order', {
                 method: 'POST',
