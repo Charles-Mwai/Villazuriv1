@@ -30,7 +30,7 @@ const VillaDetails = () => {
                 </div>
                 <div className="grid-content">
                     <RevealOnScroll>
-                        <h3 style={{ color: '#0A4D2A' }}>Living</h3>
+                        <h3 style={{ color: '#264D52' }}>Living</h3>
                         <p>
                             The villa features three bedrooms and three bathrooms, including a living room with a sofa bed. Family rooms provide ample space for relaxation, while amenities such as air-conditioning, a fully equipped kitchen, and a washing machine ensure a comfortable stay.
                         </p>
@@ -44,7 +44,7 @@ const VillaDetails = () => {
                 </div>
                 <div className="grid-content">
                     <RevealOnScroll>
-                        <h3 style={{ color: '#0A4D2A' }}>Play</h3>
+                        <h3 style={{ color: '#264D52' }}>Play</h3>
                         <p>
                             Villa Zuri at Papa Remo in Watamu offers a private beach area, a lush garden, and a spacious terrace. Guests can relax by the year-round outdoor swimming pool and enjoy free WiFi throughout the property.
                         </p>
@@ -58,7 +58,7 @@ const VillaDetails = () => {
                 </div>
                 <div className="grid-content">
                     <RevealOnScroll>
-                        <h3 style={{ color: '#0A4D2A' }}>Relaxation</h3>
+                        <h3 style={{ color: '#264D52' }}>Relaxation</h3>
                         <p>
                             Experience the harmony of nature and luxury. Our outdoor spaces are designed to provide
                             the perfect balance of relaxation and adventure. Whether you wish to bask in the sun

@@ -7,9 +7,9 @@ const Activities = () => {
     return (
         <div className="features-section">
             <div className="container">
-                <Link to="/blog" style={{ textDecoration: 'none', color: '#0A4D2A' }}>
-                    <h2 className="section-title" style={{ color: '#0A4D2A', textAlign: 'left', marginBottom: '5px', fontSize: '1.5rem', textTransform: 'none' }}>Wait, there is more!</h2>
-                    <h3 className="activities-subheading" style={{ color: '#0A4D2A', fontSize: '1.2rem', fontWeight: '400' }}>Things to do while you stay with us</h3>
+                <Link to="/blog" style={{ textDecoration: 'none', color: '#264D52' }}>
+                    <h2 className="section-title" style={{ color: '#264D52', textAlign: 'left', marginBottom: '5px', fontSize: '1.5rem', textTransform: 'none' }}>Wait, there is more!</h2>
+                    <h3 className="activities-subheading" style={{ color: '#264D52', fontSize: '1.2rem', fontWeight: '400' }}>Things to do while you stay with us</h3>
                 </Link>
                 <div className="features-grid">
                     {activitiesData.map((item) => (

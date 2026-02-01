@@ -62,7 +62,7 @@ const Confirmation = () => {
                         {status === 'verifying' && (
                             <div className="status-verifying">
                                 <div className="loader-container">
-                                    <Loader size={48} className="spinner-icon" color="#0A4D2A" />
+                                    <Loader size={48} className="spinner-icon" color="#264D52" />
                                 </div>
                                 <h1>Verifying Payment</h1>
                                 <p>We are confirming your transaction with Pesapal. This usually takes just a few seconds. Please stay on this page.</p>
@@ -85,7 +85,7 @@ const Confirmation = () => {
                         {status === 'success' && (
                             <div className="status-success">
                                 <div className="icon-circle">
-                                    <CheckCircle size={64} color="#0A4D2A" />
+                                    <CheckCircle size={64} color="#264D52" />
                                 </div>
                                 <h1>Booking Confirmed</h1>
                                 <p>Thank you for choosing <strong>Villa Zuri</strong>. Your payment has been received and your reservation is now secured.</p>

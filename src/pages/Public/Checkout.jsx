@@ -105,7 +105,7 @@ const Checkout = () => {
                 <Navbar />
                 <div className="checkout-container container" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '60vh' }}>
                     <div className="loader-container">
-                        <Loader size={48} className="spinner-icon" color="#0A4D2A" />
+                        <Loader size={48} className="spinner-icon" color="#264D52" />
                         <p style={{ marginTop: '20px', color: '#666' }}>Loading your booking details...</p>
                     </div>
                 </div>
@@ -186,7 +186,7 @@ const Checkout = () => {
                             </div>
 
                             <div className="security-assurance">
-                                <ShieldCheck size={20} color="#0A4D2A" />
+                                <ShieldCheck size={20} color="#264D52" />
                                 <span>Your payment is handled on Pesapal's secure servers. Villa Zuri does not store your card details.</span>
                             </div>
                         </div>
