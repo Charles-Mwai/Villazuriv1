@@ -7,7 +7,7 @@
     width: 100%;
     background-color: #D8C0AA;
     color: var(--color-text-dark);
-    text-align: left;
+    text-align: center;
     padding: 8px 20px;
     /* Added horizontal padding */
     font-family: var(--font-body);
