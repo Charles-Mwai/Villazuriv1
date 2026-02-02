@@ -82,7 +82,7 @@ export default async function handler(request, response) {
 
         // 3. Update Supabase based on status
         const supabase = createClient(
-            process.env.SUPABASE_URL,
+            process.env.SUPABASE_URL || process.env.VITE_SUPABASE_URL,
             process.env.SUPABASE_SERVICE_ROLE_KEY
         );
 
