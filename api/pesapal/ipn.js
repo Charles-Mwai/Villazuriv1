@@ -5,15 +5,13 @@
  */
 
 export default async function handler(request, response) {
-    // Log all incoming requests for debugging
-    console.log('IPN Request received:', {
-        method: request.method,
-        query: request.query,
-        headers: {
-            'user-agent': request.headers['user-agent'],
-            'x-forwarded-for': request.headers['x-forwarded-for']
-        }
-    });
+    // 1. Log incoming requests (Only in development)
+    if (process.env.NODE_ENV !== 'production') {
+        console.log('IPN Request received:', {
+            method: request.method,
+            query: request.query
+        });
+    }
 
     // 1. Method Validation - Pesapal uses GET for IPN callbacks
     if (request.method !== 'GET') {
@@ -40,7 +38,7 @@ export default async function handler(request, response) {
     try {
         // 3. Call verify-payment internally to process the payment
         // Construct the full URL for the verify-payment endpoint
-        const protocol = request.headers['x-forwarded-proto'] || 'https';
+        const protocol = request.headers['x-forwarded-proto'] || (process.env.NODE_ENV === 'production' ? 'https' : 'http');
         const host = request.headers.host;
         const baseUrl = `${protocol}://${host}`;
 

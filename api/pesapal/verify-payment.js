@@ -45,9 +45,12 @@ export default async function handler(request, response) {
         const transactionData = { payment_status_description: null };
         let paymentStatus = null;
 
-        // 3. Get Transaction Status (Bypass if simulation)
-        if (request.query.simulation === 'true' && isInternalCall) {
-            console.log('Simulation mode active. Bypassing PesaPal status check.');
+        // 3. Get Transaction Status (Bypass if simulation is explicitly allowed)
+        const allowSimulation = process.env.ALLOW_PAYMENT_SIMULATION === 'true';
+        if (request.query.simulation === 'true' && isInternalCall && allowSimulation) {
+            if (process.env.NODE_ENV !== 'production') {
+                console.log('Simulation mode active. Bypassing PesaPal status check.');
+            }
             paymentStatus = 'Completed';
             transactionData.payment_method = 'Simulation';
         } else {
@@ -143,7 +146,7 @@ export default async function handler(request, response) {
             // Since this is a serverless function calling another on the same domain, 
             // we use the full URL or a relative one if the environment allows.
             // On Vercel, we can try to trigger it via fetch.
-            const protocol = request.headers['x-forwarded-proto'] || 'http';
+            const protocol = request.headers['x-forwarded-proto'] || (process.env.NODE_ENV === 'production' ? 'https' : 'http');
             const host = request.headers.host;
             const baseUrl = `${protocol}://${host}`;
 

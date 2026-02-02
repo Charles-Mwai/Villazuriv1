@@ -36,9 +36,9 @@ export default async function handler(request, response) {
 
         // 2. Submit Order
         // Dynamic callback URL construction
-        const protocol = request.headers['x-forwarded-proto'] || 'http';
+        const protocol = request.headers['x-forwarded-proto'] || (process.env.NODE_ENV === 'production' ? 'https' : 'http');
         const host = request.headers.host;
-        const callbackUrl = `${protocol}://${host}/checkout/confirmation`; // This page will handle the IPN or query params
+        const callbackUrl = `${protocol}://${host}/checkout/confirmation`;
 
         // Notification ID is optional but recommended if you have an IPN set up. 
         // For now, we will rely on the redirect callback.
