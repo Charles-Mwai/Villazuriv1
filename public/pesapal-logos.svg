@@ -1,0 +1,24 @@
+<svg width="240" height="40" viewBox="0 0 240 40" xmlns="http://www.w3.org/2000/svg">
+  <!-- Clean Background -->
+  <rect width="240" height="40" fill="transparent" />
+  
+  <!-- M-Pesa Concept -->
+  <g transform="translate(10, 5)">
+    <rect width="65" height="30" rx="4" fill="#00AA44" />
+    <text x="32.5" y="20" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="white" text-anchor="middle">M-PESA</text>
+    <path d="M5 25 L60 25" stroke="#EE2222" stroke-width="2" />
+  </g>
+  
+  <!-- Visa Concept -->
+  <g transform="translate(90, 5)">
+    <text x="35" y="22" font-family="Arial, sans-serif" font-size="16" font-style="italic" font-weight="900" fill="#1A1F71" text-anchor="middle">VISA</text>
+    <path d="M10 25 L60 25" stroke="#F7B600" stroke-width="2" />
+  </g>
+  
+  <!-- Mastercard Concept -->
+  <g transform="translate(170, 5)">
+    <circle cx="15" cy="15" r="12" fill="#EB001B" opacity="0.8" />
+    <circle cx="25" cy="15" r="12" fill="#F79E1B" opacity="0.8" />
+    <text x="20" y="35" font-family="Arial, sans-serif" font-size="8" font-weight="bold" fill="#333" text-anchor="middle">mastercard</text>
+  </g>
+</svg>

@@ -167,7 +167,7 @@ const Checkout = () => {
                             </p>
 
                             <div className="payment-methods-icons">
-                                <img src="/pesapal-logos.png" alt="M-Pesa, Visa, Mastercard" className="payment-logos" />
+                                <img src="/pesapal-logos.svg" alt="M-Pesa, Visa, Mastercard" className="payment-logos" />
                             </div>
 
                             <div className="payment-action-container">
