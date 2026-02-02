@@ -210,13 +210,13 @@ const BookingModal = ({ isOpen, onClose }) => {
     return (
         <div className="booking-modal-overlay">
             <div className="booking-modal-content">
-                <div className="modal-header-banner">
+                <div className="modal-header-banner" style={{ backgroundColor: '#264D52', padding: '60px 20px 40px' }}>
                     <button className="modal-close-icon" onClick={onClose}>
                         <X size={32} strokeWidth={1} />
                     </button>
                     <div className="header-text-container">
-                        <h2 className="modal-title">Travel Enquiry</h2>
-                        <p className="modal-subtitle">Book your stay with us</p>
+                        <h2 className="modal-title text-white" style={{ color: '#FFFFFF' }}>Travel Enquiry</h2>
+                        <p className="modal-subtitle" style={{ color: '#FFFFFF' }}>Book your stay with us</p>
                     </div>
                 </div>
 

@@ -72,8 +72,9 @@
 }
 
 .cta-button:hover {
-    background-color: #fff;
-    color: var(--color-primary);
+    background-color: var(--color-accent);
+    color: #fff;
+    border-color: var(--color-accent);
 }
 
 @keyframes fadeIn {

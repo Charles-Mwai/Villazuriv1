@@ -1,4 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { storiesData } from '../../data/storiesData';
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
 import RevealOnScroll from '../../components/RevealOnScroll';
@@ -71,18 +73,14 @@ const Watamu = () => {
                     <RevealOnScroll>
                         <h3>Read more stories</h3>
                         <div className="stories-grid">
-                            <div className="story-card">
-                                <img src="/watamu/dimitry-b-gO3uzl86USU-unsplash.jpg" alt="Watamu Living" className="story-image" loading="lazy" />
-                                <h4>Watamu Living</h4>
-                            </div>
-                            <div className="story-card">
-                                <img src="/watamu/abner-abiu-castillo-diaz-N5ByCirHVqw-unsplash.jpg" alt="Solo Tripping" className="story-image" loading="lazy" />
-                                <h4>Solo Tripping</h4>
-                            </div>
-                            <div className="story-card">
-                                <img src="/watamu/maximus-beaumont-v30ztCrmzQg-unsplash.jpg" alt="Dining Experience" className="story-image" loading="lazy" />
-                                <h4>Dining Experience</h4>
-                            </div>
+                            {storiesData.map((story) => (
+                                <div key={story.id} className="story-card">
+                                    <Link to={`/stories/${story.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+                                        <img src={story.image} alt={story.title} className="story-image" loading="lazy" />
+                                        <h4>{story.title}</h4>
+                                    </Link>
+                                </div>
+                            ))}
                         </div>
                     </RevealOnScroll>
                 </section>

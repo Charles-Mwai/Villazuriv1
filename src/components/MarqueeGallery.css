@@ -94,8 +94,9 @@
     }
 
     .view-all-gallery-btn:hover {
-        background-color: var(--color-primary);
+        background-color: var(--color-accent);
         color: #fff;
+        border-color: var(--color-accent);
     }
 
     @keyframes scrollMarquee {

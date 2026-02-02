@@ -19,6 +19,7 @@ import Terms from './pages/Public/Terms';
 import ExperienceTeaser from './components/ExperienceTeaser';
 import Activities from './components/Activities';
 import ActivityDetailPage from './pages/Public/ActivityDetailPage';
+import StoryDetailPage from './pages/Public/StoryDetailPage';
 import PrivacyPolicy from './pages/Public/PrivacyPolicy';
 import CookieConsent from './components/CookieConsent';
 
@@ -62,6 +63,7 @@ function App() {
                     <Route path="/checkout" element={<Checkout />} />
                     <Route path="/checkout/confirmation" element={<Confirmation />} />
                     <Route path="/activities/:id" element={<ActivityDetailPage />} />
+                    <Route path="/stories/:id" element={<StoryDetailPage />} />
 
 
                     {/* Admin routes */}
