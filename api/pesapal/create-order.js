@@ -49,7 +49,7 @@ export default async function handler(request, response) {
             amount: parseFloat(amount),
             description: description || `Booking ${reference}`,
             callback_url: callbackUrl,
-            notification_id: "7eb20d54-4b80-48b4-aa99-dac9f061bd70",
+            notification_id: process.env.PESAPAL_IPN_ID || "7eb20d54-4b80-48b4-aa99-dac9f061bd70",
             billing_address: {
                 email_address: email,
                 phone_number: phoneNumber || "",

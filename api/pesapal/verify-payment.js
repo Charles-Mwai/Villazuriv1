@@ -16,17 +16,24 @@ export default async function handler(request, response) {
         return response.status(400).json({ error: 'Missing trackingId or merchantRef' });
     }
 
-    // 2. Security Validation (Origin check)
+    // 2. Security Validation (Origin check or Internal Secret)
     const origin = request.headers.origin;
+    const internalSecret = request.headers['x-internal-secret'];
+    const expectedSecret = process.env.INTERNAL_API_SECRET;
+
+    const isInternalCall = internalSecret && internalSecret === expectedSecret;
+
     const allowedOrigins = [
         'https://villazurimvp.vercel.app',
         'https://villazuri.co.ke',
         'https://www.villazuri.co.ke'
     ];
 
-    if (process.env.NODE_ENV === 'production' && (!origin || !allowedOrigins.includes(origin))) {
-        console.warn('Unauthorized origin attempt on verify-payment:', origin);
-        return response.status(403).json({ error: 'Forbidden: Unauthorized origin' });
+    if (process.env.NODE_ENV === 'production') {
+        if (!isInternalCall && (!origin || !allowedOrigins.includes(origin))) {
+            console.warn('Unauthorized origin attempt on verify-payment:', { origin, isInternalCall });
+            return response.status(403).json({ error: 'Forbidden: Unauthorized origin' });
+        }
     }
 
     const PESA_KEY = process.env.PESAPAL_CONSUMER_KEY;
@@ -91,6 +98,16 @@ export default async function handler(request, response) {
         }
 
         if (paymentStatus === 'Completed') {
+            // IDEMPOTENCY CHECK: Only process if the current status is 'pending'
+            if (booking.status === 'confirmed' || booking.status === 'paid') {
+                console.log(`Booking ${merchantRef} is already ${booking.status}. Skipping duplicate processing.`);
+                return response.status(200).json({
+                    success: true,
+                    status: booking.status,
+                    message: `Payment already processed. Booking is ${booking.status}.`
+                });
+            }
+
             // Update status to confirmed
             const { error: updateError } = await supabase
                 .from('bookings')

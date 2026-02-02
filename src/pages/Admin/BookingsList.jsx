@@ -89,7 +89,7 @@ const BookingsList = () => {
                             onClick={() => handleStatusFilter(status)}
                             className={`filter-btn ${filters.status === status ? 'active' : ''}`}
                         >
-                            {status.charAt(0).toUpperCase() + status.slice(1)}
+                            {status === 'confirmed' ? 'Booked' : status.charAt(0).toUpperCase() + status.slice(1)}
                         </button>
                     ))}
                 </div>

@@ -19,7 +19,7 @@ const StatusBadge = ({ status }) => {
 
     return (
         <span className={`status-badge ${getStatusClass()}`}>
-            {status}
+            {status === 'confirmed' ? 'booked' : status}
         </span>
     );
 };
