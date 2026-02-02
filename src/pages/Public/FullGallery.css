@@ -460,6 +460,15 @@
     opacity: 1;
 }
 
+.masonry-overlay.video-overlay {
+    opacity: 1;
+    background: transparent;
+}
+
+.masonry-item:hover .masonry-overlay.video-overlay {
+    background: rgba(0, 0, 0, 0.4);
+}
+
 /* Tablet - 2 Columns */
 @media (min-width: 600px) {
     .masonry-grid {

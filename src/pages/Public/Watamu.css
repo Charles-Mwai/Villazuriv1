@@ -7,8 +7,8 @@
 
 .watamu-container-redesign {
     max-width: 1000px;
-    margin: 140px auto 0;
-    padding: 60px 24px;
+    margin: 180px auto 0;
+    padding: 100px 24px 60px;
 }
 
 /* Hero Section Parity with Homepage */
@@ -175,8 +175,8 @@
     }
 
     .watamu-container-redesign {
-        padding: 40px 16px;
-        margin-top: 0;
+        padding: 80px 16px 40px;
+        margin-top: 40px;
     }
 
     .watamu-text-content h2 {

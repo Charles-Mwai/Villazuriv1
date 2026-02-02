@@ -252,8 +252,8 @@
 .watamu-container-redesign {
     max-width: 1200px;
     /* Match blog */
-    margin: 0 auto;
-    padding: 0 0 60px;
+    margin: 40px auto 0;
+    padding: 60px 0 60px;
 }
 
 .watamu-text-content {
@@ -390,7 +390,7 @@
 
     /* Watamu Section Mobile */
     .watamu-container-redesign {
-        padding: 0 16px 40px;
+        padding: 60px 16px 40px;
     }
 
     .watamu-text-content {

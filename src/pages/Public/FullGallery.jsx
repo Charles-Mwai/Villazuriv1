@@ -11,9 +11,9 @@ import './FullGallery.css';
 const FullGallery = () => {
     const [images, setImages] = useState([]);
     const [videos, setVideos] = useState([]);
+    const [allMedia, setAllMedia] = useState([]);
     const [lightboxOpen, setLightboxOpen] = useState(false);
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
-    const [currentMedia, setCurrentMedia] = useState(null);
     const { openBooking } = useBooking();
 
     // Swipe handlers
@@ -58,19 +58,20 @@ const FullGallery = () => {
             { src: 'IMG_5565.jpg', size: 'tall', type: 'image' },
             { src: 'WhatsApp Image 2026-01-07 at 13.16.51 (1).jpg', size: 'wide', type: 'image' }
         ];
-        setImages(masonryImages);
 
         const masonryVideos = [
             { src: 'WhatsApp Video 2026-02-01 at 18.14.15.mp4', size: 'wide', type: 'video' },
             { src: 'WhatsApp Video 2026-02-01 at 18.14.16.mp4', size: 'normal', type: 'video' },
             { src: 'WhatsApp Video 2026-02-04.mp4', size: 'normal', type: 'video' }
         ];
+
+        setImages(masonryImages);
         setVideos(masonryVideos);
+        setAllMedia([...masonryImages, ...masonryVideos]);
         window.scrollTo(0, 0);
     }, []);
 
-    const openLightbox = (media, index) => {
-        setCurrentMedia(media);
+    const openLightbox = (index) => {
         setCurrentImageIndex(index);
         setLightboxOpen(true);
         document.body.style.overflow = 'hidden';
@@ -82,15 +83,11 @@ const FullGallery = () => {
     };
 
     const nextImage = () => {
-        if (!currentMedia) return;
-        const mediaArray = currentMedia.type === 'image' ? images : videos;
-        setCurrentImageIndex((prev) => (prev + 1) % mediaArray.length);
+        setCurrentImageIndex((prev) => (prev + 1) % allMedia.length);
     };
 
     const prevImage = () => {
-        if (!currentMedia) return;
-        const mediaArray = currentMedia.type === 'image' ? images : videos;
-        setCurrentImageIndex((prev) => (prev - 1 + mediaArray.length) % mediaArray.length);
+        setCurrentImageIndex((prev) => (prev - 1 + allMedia.length) % allMedia.length);
     };
 
     useEffect(() => {
@@ -178,8 +175,8 @@ const FullGallery = () => {
                                         className={`masonry-item ${image.size}`}
                                         role="button"
                                         tabIndex={0}
-                                        onClick={() => openLightbox(image, index)}
-                                        onKeyDown={(e) => e.key === 'Enter' && openLightbox(image, index)}
+                                        onClick={() => openLightbox(index)}
+                                        onKeyDown={(e) => e.key === 'Enter' && openLightbox(index)}
                                     >
                                         <img
                                             src={`/Bento Grid/${image.src}`}
@@ -205,8 +202,8 @@ const FullGallery = () => {
                                         className={`masonry-item ${video.size}`}
                                         role="button"
                                         tabIndex={0}
-                                        onClick={() => openLightbox(video, index)}
-                                        onKeyDown={(e) => e.key === 'Enter' && openLightbox(video, index)}
+                                        onClick={() => openLightbox(images.length + index)}
+                                        onKeyDown={(e) => e.key === 'Enter' && openLightbox(images.length + index)}
                                     >
                                         <video
                                             src={`/Videos/${video.src}`}
@@ -216,7 +213,7 @@ const FullGallery = () => {
                                             playsInline
                                             style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
                                         />
-                                        <div className="masonry-overlay">
+                                        <div className="masonry-overlay video-overlay">
                                             <Play size={32} color="#fff" strokeWidth={1.5} fill="#fff" />
                                         </div>
                                     </div>
@@ -246,16 +243,16 @@ const FullGallery = () => {
                         onTouchMove={onTouchMove}
                         onTouchEnd={onTouchEnd}
                     >
-                        {currentMedia && currentMedia.type === 'image' ? (
+                        {allMedia[currentImageIndex]?.type === 'image' ? (
                             <img
-                                src={`/Bento Grid/${images[currentImageIndex]?.src}`}
+                                src={`/Bento Grid/${allMedia[currentImageIndex]?.src}`}
                                 alt={`Villa Zuri detailed view ${currentImageIndex + 1}`}
                                 className="lightbox-main-img"
                                 draggable="false"
                             />
-                        ) : currentMedia && currentMedia.type === 'video' ? (
+                        ) : allMedia[currentImageIndex]?.type === 'video' ? (
                             <video
-                                src={`/Videos/${videos[currentImageIndex]?.src}`}
+                                src={`/Videos/${allMedia[currentImageIndex]?.src}`}
                                 className="lightbox-main-img"
                                 controls
                                 autoPlay
@@ -264,7 +261,7 @@ const FullGallery = () => {
                         ) : null}
                         <div className="lightbox-footer">
                             <span className="image-counter">
-                                {currentImageIndex + 1} / {currentMedia?.type === 'image' ? images.length : videos.length}
+                                {currentImageIndex + 1} / {allMedia.length}
                             </span>
                         </div>
                     </div>
