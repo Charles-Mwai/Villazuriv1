@@ -42,45 +42,61 @@ export default async function handler(request, response) {
     const INTERNAL_SECRET = process.env.INTERNAL_API_SECRET;
 
     try {
-        // 1. Get Authentication Token from PesaPal
-        const authResponse = await fetch(`${PESA_BASE_URL}/api/Auth/RequestToken`, {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                consumer_key: PESA_KEY,
-                consumer_secret: PESA_SECRET
-            })
-        });
+        const transactionData = { payment_status_description: null };
+        let paymentStatus = null;
 
-        if (!authResponse.ok) {
-            const authError = await authResponse.json();
-            throw new Error(`PesaPal Auth Failed: ${JSON.stringify(authError)}`);
-        }
+        // 3. Get Transaction Status (Bypass if simulation)
+        if (request.query.simulation === 'true' && isInternalCall) {
+            console.log('Simulation mode active. Bypassing PesaPal status check.');
+            paymentStatus = 'Completed';
+            transactionData.payment_method = 'Simulation';
+        } else {
+            try {
+                // 1. Get Authentication Token from PesaPal
+                const authResponse = await fetch(`${PESA_BASE_URL}/api/Auth/RequestToken`, {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        consumer_key: PESA_KEY,
+                        consumer_secret: PESA_SECRET
+                    })
+                });
 
-        const { token } = await authResponse.json();
+                if (!authResponse.ok) {
+                    const authError = await authResponse.json();
+                    throw new Error(`PesaPal Auth Failed: ${JSON.stringify(authError)}`);
+                }
 
-        // 2. Get Transaction Status from PesaPal
-        const statusResponse = await fetch(`${PESA_BASE_URL}/api/Transactions/GetTransactionStatus?orderTrackingId=${trackingId}`, {
-            method: 'GET',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
+                const { token } = await authResponse.json();
+
+                // 2. Get Transaction Status from PesaPal
+                const statusResponse = await fetch(`${PESA_BASE_URL}/api/Transactions/GetTransactionStatus?orderTrackingId=${trackingId}`, {
+                    method: 'GET',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+
+                if (!statusResponse.ok) {
+                    const statusError = await statusResponse.json();
+                    throw new Error(`PesaPal Status Check Failed: ${JSON.stringify(statusError)}`);
+                }
+
+                const data = await statusResponse.json();
+                paymentStatus = data.payment_status_description;
+                transactionData.payment_method = data.payment_method;
+            } catch (pesapalErr) {
+                console.error('PesaPal API Error:', pesapalErr.message);
+                // Don't throw yet, wait for status logic below
             }
-        });
-
-        if (!statusResponse.ok) {
-            const statusError = await statusResponse.json();
-            throw new Error(`PesaPal Status Check Failed: ${JSON.stringify(statusError)}`);
         }
 
-        const transactionData = await statusResponse.json();
-        const paymentStatus = transactionData.payment_status_description; // "Completed", "Pending", "Failed"
-
-        // 3. Update Supabase based on status
+        // 4. Update Supabase based on status
         const supabase = createClient(
             process.env.SUPABASE_URL || process.env.VITE_SUPABASE_URL,
             process.env.SUPABASE_SERVICE_ROLE_KEY

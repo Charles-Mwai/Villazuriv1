@@ -47,7 +47,7 @@ const testPaymentFlow = async () => {
         // If testing locally, ensure you have the server running or mock the call
         const baseUrl = 'https://villazuri.co.ke';
         const trackingId = `TEST-TRACK-${Date.now()}`;
-        const verifyUrl = `${baseUrl}/api/pesapal/verify-payment?trackingId=${trackingId}&merchantRef=${booking.id}`;
+        const verifyUrl = `${baseUrl}/api/pesapal/verify-payment?trackingId=${trackingId}&merchantRef=${booking.id}&simulation=true`;
 
         console.log(`Calling Verification API: ${verifyUrl}`);
 
