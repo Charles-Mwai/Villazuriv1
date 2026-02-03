@@ -1,7 +1,8 @@
 .checkout-page {
     background-color: #fdfdfd;
     min-height: 100vh;
-    padding-top: 120px;
+    padding-top: 160px;
+    /* Increased to clear fixed navbar + announcement bar */
     background-image: radial-gradient(circle at 10% 20%, rgba(10, 77, 42, 0.03) 0%, rgba(255, 255, 255, 0) 100%);
 }
 
@@ -347,7 +348,8 @@
 /* Mobile Optimizations */
 @media (max-width: 767px) {
     .checkout-page {
-        padding-top: 90px;
+        padding-top: 130px;
+        /* Increased for mobile navbar + bar */
     }
 
     .checkout-container {
@@ -377,7 +379,8 @@
     .success-message-wrapper {
         padding: 40px 20px;
         border-radius: 16px;
-        margin: 20px auto;
+        margin: 20px auto 60px;
+        /* Added bottom margin to clear footer */
     }
 
     .success-message h1 {
