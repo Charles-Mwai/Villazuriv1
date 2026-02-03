@@ -221,17 +221,13 @@
 }
 
 .activities-subheading {
-    font-size: 1.75rem;
-    font-family: var(--font-heading);
-    color: #264D52 !important;
+    font-size: 0.95rem;
+    font-family: var(--font-body);
+    color: #666;
     margin-bottom: var(--spacing-md);
     text-align: left;
-}
-
-@media (min-width: 768px) {
-    .activities-subheading {
-        font-size: 2rem;
-    }
+    font-weight: 300;
+    line-height: 1.6;
 }
 
 .feature-item {

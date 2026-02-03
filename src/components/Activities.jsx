@@ -9,7 +9,7 @@ const Activities = () => {
             <div className="container">
                 <Link to="/blog" style={{ textDecoration: 'none', color: '#264D52' }}>
                     <h2 className="section-title" style={{ color: '#264D52', textAlign: 'left', marginBottom: '15px', fontSize: '1.75rem', textTransform: 'none', fontWeight: '400', letterSpacing: 'normal' }}>Wait, there is more!</h2>
-                    <h3 className="activities-subheading" style={{ color: '#666', fontSize: '0.95rem', fontWeight: '300', lineHeight: '1.6', fontFamily: 'var(--font-body)' }}>Things to do while you stay with us</h3>
+                    <h3 className="activities-subheading">Things to do while you stay with us</h3>
                 </Link>
                 <div className="features-grid">
                     {activitiesData.map((item) => (
