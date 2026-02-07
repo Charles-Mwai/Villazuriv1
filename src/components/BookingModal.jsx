@@ -291,7 +291,7 @@ const BookingModal = ({ isOpen, onClose }) => {
                                         style={{ cursor: 'pointer' }}
                                     >
                                         <option value="" disabled>Please select</option>
-                                        {Array.from({ length: 15 }, (_, i) => i + 1).map(num => (
+                                        {Array.from({ length: 6 }, (_, i) => i + 1).map(num => (
                                             <option key={num} value={num}>{num}</option>
                                         ))}
                                     </select>

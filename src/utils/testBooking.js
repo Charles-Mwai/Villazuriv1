@@ -8,26 +8,27 @@ const logTest = (name, result, expected) => {
 };
 
 const runTests = () => {
-    console.log("--- Starting Booking Logic Verification ($5/night) ---");
+    console.log("--- Starting Booking Logic Verification ($400/$600) ---");
 
     // 1. COST CALCULATION TESTS
     console.log("\n[Cost Calculation]");
 
-    // Off-Peak Test (March 1 - March 4 = 3 nights @ 5 = 15)
+    // Off-Peak Test (March 1 - March 4 = 3 nights @ 400 = 1200)
     const offPeakCost = calculateTotalCost('2026-03-01', '2026-03-04');
-    logTest("Off-Peak (3 nights)", offPeakCost, 15);
+    logTest("Off-Peak (3 nights)", offPeakCost, 1200);
 
-    // Peak Test (Dec 20 - Dec 22 = 2 nights @ 5 = 10)
+    // Peak Test (Dec 20 - Dec 22 = 2 nights @ 600 = 1200)
     const peakCost = calculateTotalCost('2026-12-20', '2026-12-22');
-    logTest("Peak (Dec) (2 nights)", peakCost, 10);
+    logTest("Peak (Dec) (2 nights)", peakCost, 1200);
 
-    // New Peak Test (July 1 - July 4 = 3 nights @ 5 = 15)
+    // New Peak Test (July 1 - July 4 = 3 nights @ 600 = 1800)
     const newPeakCost = calculateTotalCost('2026-07-01', '2026-07-04');
-    logTest("Peak (July) (3 nights)", newPeakCost, 15);
+    logTest("Peak (July) (3 nights)", newPeakCost, 1800);
 
-    // Crossover Test (Sept 29 - Oct 2 = 3 nights @ 5 = 15)
+    // Crossover Test (Sept 29 - Oct 2 = 3 nights: 2 nights off-peak, 1 night peak)
+    // Sept 29 (off), Sept 30 (off), Oct 1 (peak) = 400 + 400 + 600 = 1400
     const crossoverCost = calculateTotalCost('2026-09-29', '2026-10-02');
-    logTest("Crossover (Season Change)", crossoverCost, 15);
+    logTest("Crossover (Season Change)", crossoverCost, 1400);
 
 
     // 2. AVAILABILITY TESTS

@@ -6,8 +6,8 @@
  */
 
 const RATES = {
-    PEAK: 5,
-    OFF_PEAK: 5
+    PEAK: 600,
+    OFF_PEAK: 400
 };
 
 /**
@@ -81,18 +81,17 @@ export const calculateTotalCost = (startDate, endDate, pricingRules = []) => {
 
     // Iterate through each night
     while (currentDate < end) {
-        // Enforcing strict $5 rate as per user request, ignoring any database rules
-        // const dateStr = toLocalYYYYMMDD(currentDate);
+        const dateStr = toLocalYYYYMMDD(currentDate);
 
-        // const applicableRule = pricingRules.find(rule =>
-        //     dateStr >= rule.start_date && dateStr <= rule.end_date
-        // );
+        const applicableRule = pricingRules.find(rule =>
+            dateStr >= rule.start_date && dateStr <= rule.end_date
+        );
 
-        // if (applicableRule) {
-        //     totalCost += parseFloat(applicableRule.rate);
-        // } else {
-        totalCost += 1; // Fixed rate of $1 (Reduced to bypass 1000 KES limit)
-        // }
+        if (applicableRule) {
+            totalCost += parseFloat(applicableRule.rate);
+        } else {
+            totalCost += isPeakSeason(currentDate) ? RATES.PEAK : RATES.OFF_PEAK;
+        }
 
         // Move to next day
         currentDate.setDate(currentDate.getDate() + 1);
