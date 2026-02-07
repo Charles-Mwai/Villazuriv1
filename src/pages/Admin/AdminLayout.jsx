@@ -13,6 +13,7 @@ const AdminLayout = () => {
         { path: '/admin/bookings', label: 'Bookings', icon: List },
         { path: '/admin/calendar', label: 'Calendar', icon: Calendar },
         { path: '/admin/pricing', label: 'Pricing', icon: DollarSign },
+        { path: '/admin/analytics', label: 'Analytics', icon: TrendingUp },
     ];
 
     const handleLogout = () => {
@@ -120,6 +121,8 @@ const AdminLayout = () => {
                             {location.pathname === '/admin/dashboard' && 'Welcome!'}
                             {location.pathname === '/admin/bookings' && 'All Bookings'}
                             {location.pathname === '/admin/calendar' && 'Calendar View'}
+                            {location.pathname === '/admin/pricing' && 'Pricing Rules'}
+                            {location.pathname === '/admin/analytics' && 'Analytics'}
                             {location.pathname.includes('/admin/bookings/') && 'Booking Details'}
                         </h2>
                         <div className="breadcrumbs">
@@ -128,6 +131,8 @@ const AdminLayout = () => {
                                 {location.pathname === '/admin/dashboard' && ' Dashboard'}
                                 {location.pathname === '/admin/bookings' && ' Bookings'}
                                 {location.pathname === '/admin/calendar' && ' Calendar'}
+                                {location.pathname === '/admin/pricing' && ' Pricing'}
+                                {location.pathname === '/admin/analytics' && ' Analytics'}
                                 {location.pathname.includes('/admin/bookings/') && ' Booking Details'}
                             </span>
                         </div>
