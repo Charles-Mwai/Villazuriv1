@@ -5,12 +5,20 @@ import './MarqueeGallery.css';
 const MarqueeGallery = () => {
     const navigate = useNavigate();
 
-    // A selection of highlight images for the marquee
+    // A selection of highlight images for the marquee — sourced from the current Archive (3) gallery
     const highlightImages = [
-        'IMG_5485-cmpr.jpg', 'IMG_5487-cmpr.jpg', 'IMG_5489-cmpr.jpg',
-        'IMG_5491-cmpr.jpg', 'IMG_5494-cmpr.jpg', 'IMG_5496-cmpr.jpg',
-        'IMG_5500-cmpr.jpg', 'IMG_5503-cmpr.jpg', 'IMG_5506-cmpr.jpg',
-        'IMG_5511-cmpr.jpg', 'IMG_5517-cmpr.jpg', 'IMG_5521-cmpr.jpg'
+        '/Archive (3)/LIVING/IMG_9204.jpg',
+        '/Archive (3)/LIVING/IMG_9349.jpg',
+        '/Archive (3)/BEDROOM/IMG_9244.jpg',
+        '/Archive (3)/BEDROOM/IMG_9341.jpg',
+        '/Archive (3)/BATHROOM/IMG_9334.jpg',
+        '/Archive (3)/BATHROOM/IMG_9336.jpg',
+        '/Archive (3)/KITCHEN/IMG_9211.jpg',
+        '/Archive (3)/KITCHEN/IMG_9301.jpg',
+        '/Archive (3)/TERRACE/IMG_9383.jpg',
+        '/Archive (3)/TERRACE/IMG_9399.jpg',
+        '/Archive (3)/GREEN/DJI_0671.jpg',
+        '/Archive (3)/DECOR/IMG_9408.jpg',
     ];
 
     // Double the images for seamless infinite scroll
@@ -22,7 +30,7 @@ const MarqueeGallery = () => {
                 <div className="marquee-track">
                     {marqueeImages.map((img, idx) => (
                         <div key={`${img}-${idx}`} className="marquee-item">
-                            <img src={`/villa pics/${img}`} alt={`Villa Zuri interior and exterior highlight ${idx + 1}`} />
+                            <img src={img} alt={`Villa Zuri interior and exterior highlight ${idx + 1}`} />
                         </div>
                     ))}
                 </div>

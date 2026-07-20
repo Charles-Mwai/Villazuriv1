@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { X, ChevronLeft, ChevronRight, Maximize2, MapPin } from 'lucide-react';
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
@@ -9,12 +9,84 @@ import { useBooking } from '../../context/BookingContext';
 import './ExperiencePage.css';
 import '../Public/FullGallery.css';
 
+// Gallery sections matching FullGallery.jsx — always kept in sync
+const gallerySections = [
+    {
+        label: 'Living Room',
+        images: [
+            { src: '/Archive (3)/LIVING/IMG_9204.jpg', size: 'big' },
+            { src: '/Archive (3)/LIVING/IMG_9206.jpg', size: 'tall' },
+            { src: '/Archive (3)/LIVING/IMG_9210.jpg', size: 'normal' },
+            { src: '/Archive (3)/LIVING/IMG_9349.jpg', size: 'wide' },
+        ]
+    },
+    {
+        label: 'Bedroom',
+        images: [
+            { src: '/Archive (3)/BEDROOM/IMG_9244.jpg', size: 'wide' },
+            { src: '/Archive (3)/BEDROOM/IMG_9250.jpg', size: 'tall' },
+            { src: '/Archive (3)/BEDROOM/IMG_9340.jpg', size: 'normal' },
+            { src: '/Archive (3)/BEDROOM/IMG_9341.jpg', size: 'big' },
+        ]
+    },
+    {
+        label: 'Bathroom',
+        images: [
+            { src: '/Archive (3)/BATHROOM/IMG_9239.jpg', size: 'tall' },
+            { src: '/Archive (3)/BATHROOM/IMG_9311.jpg', size: 'normal' },
+            { src: '/Archive (3)/BATHROOM/IMG_9334.jpg', size: 'wide' },
+            { src: '/Archive (3)/BATHROOM/IMG_9336.jpg', size: 'big' },
+        ]
+    },
+    {
+        label: 'Kitchen',
+        images: [
+            { src: '/Archive (3)/KITCHEN/IMG_9211.jpg', size: 'big' },
+            { src: '/Archive (3)/KITCHEN/IMG_9292.jpg', size: 'normal' },
+            { src: '/Archive (3)/KITCHEN/IMG_9300.jpg', size: 'tall' },
+            { src: '/Archive (3)/KITCHEN/IMG_9301.jpg', size: 'wide' },
+        ]
+    },
+    {
+        label: 'Terrace',
+        images: [
+            { src: '/Archive (3)/TERRACE/IMG_5541-cmpr.jpg', size: 'wide' },
+            { src: '/Archive (3)/TERRACE/IMG_9383.jpg', size: 'big' },
+            { src: '/Archive (3)/TERRACE/IMG_9389.jpg', size: 'tall' },
+            { src: '/Archive (3)/TERRACE/IMG_9399.jpg', size: 'normal' },
+        ]
+    },
+    {
+        label: 'Green',
+        images: [
+            { src: '/Archive (3)/GREEN/DJI_0671.jpg', size: 'big' },
+            { src: '/Archive (3)/GREEN/IMG_9226.jpg', size: 'tall' },
+            { src: '/Archive (3)/GREEN/IMG_9359.jpg', size: 'wide' },
+            { src: '/Archive (3)/GREEN/IMG_9362.jpg', size: 'normal' },
+        ]
+    },
+    {
+        label: 'Decor',
+        images: [
+            { src: '/Archive (3)/DECOR/IMG_9231.jpg', size: 'normal' },
+            { src: '/Archive (3)/DECOR/IMG_9235.jpg', size: 'wide' },
+            { src: '/Archive (3)/DECOR/IMG_9295.jpg', size: 'tall' },
+            { src: '/Archive (3)/DECOR/IMG_9408.jpg', size: 'big' },
+        ]
+    },
+];
+
 const ExperiencePage = () => {
-    const [images, setImages] = useState([]);
     const [lightboxOpen, setLightboxOpen] = useState(false);
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
     const { isBookingOpen, openBooking, closeBooking } = useBooking();
     const [activeTab, setActiveTab] = useState('amenities');
+
+    // Flatten all images across all sections into a single list for lightbox
+    const allImages = useMemo(() =>
+        gallerySections.flatMap(section =>
+            section.images.map(img => ({ ...img, label: section.label }))
+        ), []);
 
     // Swipe handlers
     const [touchStart, setTouchStart] = useState(null);
@@ -42,26 +114,11 @@ const ExperiencePage = () => {
     };
 
     useEffect(() => {
-        const masonryImages = [
-            { src: 'IMG_3819.jpg', size: 'big' },
-            { src: 'IMG_5485-cmpr.jpg', size: 'tall' },
-            { src: 'IMG_5503-cmpr.jpeg', size: 'normal' },
-            { src: 'IMG_5507.jpg', size: 'wide' },
-            { src: 'IMG_5514-cmpr.jpeg', size: 'normal' },
-            { src: 'IMG_5518.jpg', size: 'tall' },
-            { src: 'IMG_5525-cmpr.jpeg', size: 'normal' },
-            { src: 'IMG_5535.jpg', size: 'wide' },
-            { src: 'IMG_5539.jpg', size: 'normal' },
-            { src: 'IMG_5545-cmpr.jpeg', size: 'big' },
-            { src: 'IMG_5565.jpg', size: 'tall' },
-            { src: 'WhatsApp Image 2026-01-07 at 13.16.51 (1).jpg', size: 'wide' }
-        ];
-        setImages(masonryImages);
         window.scrollTo(0, 0);
     }, []);
 
-    const openLightbox = (index) => {
-        setCurrentImageIndex(index);
+    const openLightbox = (globalIndex) => {
+        setCurrentImageIndex(globalIndex);
         setLightboxOpen(true);
         document.body.style.overflow = 'hidden';
     };
@@ -72,11 +129,11 @@ const ExperiencePage = () => {
     };
 
     const nextImage = () => {
-        setCurrentImageIndex((prev) => (prev + 1) % images.length);
+        setCurrentImageIndex((prev) => (prev + 1) % allImages.length);
     };
 
     const prevImage = () => {
-        setCurrentImageIndex((prev) => (prev - 1 + images.length) % images.length);
+        setCurrentImageIndex((prev) => (prev - 1 + allImages.length) % allImages.length);
     };
 
     useEffect(() => {
@@ -88,7 +145,7 @@ const ExperiencePage = () => {
         };
         window.addEventListener('keydown', handleKeyDown);
         return () => window.removeEventListener('keydown', handleKeyDown);
-    }, [lightboxOpen, images.length]);
+    }, [lightboxOpen, allImages.length]);
 
     const renderTabContent = () => {
         switch (activeTab) {
@@ -196,7 +253,7 @@ const ExperiencePage = () => {
                 </section>
             </div>
 
-            {/* Gallery Section - Copied from FullGallery */}
+            {/* Gallery Section - Synced with FullGallery */}
             <div className="gallery-split-layout integrated-gallery container">
 
                 {/* Left Sticky Sidebar */}
@@ -215,7 +272,6 @@ const ExperiencePage = () => {
                             >
                                 INCLUDES
                             </button>
-
                         </div>
 
                         <div className="tab-content">
@@ -230,30 +286,45 @@ const ExperiencePage = () => {
 
                 {/* Right Scrollable Content */}
                 <main className="gallery-main-content">
-                    <section className="gallery-masonry-section">
-                        <div className="masonry-grid">
-                            {images.map((image, index) => (
-                                <RevealOnScroll key={`masonry-${image.src}-${index}`}>
-                                    <div
-                                        className={`masonry-item ${image.size}`}
-                                        role="button"
-                                        tabIndex={0}
-                                        onClick={() => openLightbox(index)}
-                                        onKeyDown={(e) => e.key === 'Enter' && openLightbox(index)}
-                                    >
-                                        <img
-                                            src={`/Bento Grid/${image.src}`}
-                                            alt={`Villa view ${index + 1}`}
-                                            loading="lazy"
-                                        />
-                                        <div className="masonry-overlay">
-                                            <Maximize2 size={24} color="#fff" strokeWidth={1.5} />
-                                        </div>
+                    {(() => {
+                        let runningIndex = 0;
+                        return gallerySections.map((section) => {
+                            const sectionStartIndex = runningIndex;
+                            runningIndex += section.images.length;
+                            return (
+                                <section className="gallery-category-section" key={section.label}>
+                                    <RevealOnScroll>
+                                        <h2 className="gallery-section-title">{section.label}</h2>
+                                    </RevealOnScroll>
+                                    <div className="masonry-grid">
+                                        {section.images.map((image, imgIndex) => {
+                                            const globalIdx = sectionStartIndex + imgIndex;
+                                            return (
+                                                <RevealOnScroll key={`${section.label}-${imgIndex}`}>
+                                                    <div
+                                                        className={`masonry-item ${image.size}`}
+                                                        role="button"
+                                                        tabIndex={0}
+                                                        onClick={() => openLightbox(globalIdx)}
+                                                        onKeyDown={(e) => e.key === 'Enter' && openLightbox(globalIdx)}
+                                                    >
+                                                        <img
+                                                            src={image.src}
+                                                            alt={`Villa Zuri ${section.label} - view ${imgIndex + 1}`}
+                                                            loading="lazy"
+                                                        />
+                                                        <div className="masonry-overlay">
+                                                            <Maximize2 size={24} color="#fff" strokeWidth={1.5} />
+                                                        </div>
+                                                    </div>
+                                                </RevealOnScroll>
+                                            );
+                                        })}
                                     </div>
-                                </RevealOnScroll>
-                            ))}
-                        </div>
-                    </section>
+                                </section>
+                            );
+                        });
+                    })()}
                 </main>
             </div>
 
@@ -276,7 +347,7 @@ const ExperiencePage = () => {
             <Footer />
 
             {/* Lightbox Overlay */}
-            {lightboxOpen && images.length > 0 && (
+            {lightboxOpen && allImages.length > 0 && (
                 <div className="lightbox-overlay" onClick={closeLightbox}>
                     <button className="lightbox-close" onClick={closeLightbox}>
                         <X size={32} />
@@ -294,13 +365,13 @@ const ExperiencePage = () => {
                         onTouchEnd={onTouchEnd}
                     >
                         <img
-                            src={`/Bento Grid/${images[currentImageIndex].src}`}
-                            alt="Villa bento view"
+                            src={allImages[currentImageIndex].src}
+                            alt={`Villa Zuri ${allImages[currentImageIndex].label} - detailed view`}
                             className="lightbox-main-img"
                             draggable="false"
                         />
                         <div className="lightbox-footer">
-                            <span className="image-counter">{currentImageIndex + 1} / {images.length}</span>
+                            <span className="image-counter">{currentImageIndex + 1} / {allImages.length}</span>
                         </div>
                     </div>
 
