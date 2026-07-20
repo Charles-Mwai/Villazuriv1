@@ -1,154 +1,101 @@
-import React, { useMemo } from 'react';
-import { GoogleMap, useJsApiLoader, Marker } from '@react-google-maps/api';
+import React from 'react';
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import L from 'leaflet';
+import 'leaflet/dist/leaflet.css';
 
-const containerStyle = {
-    width: '100%',
-    height: '100%',
-};
+// Fix Leaflet's broken default icon paths when bundled with Vite
+delete L.Icon.Default.prototype._getIconUrl;
+L.Icon.Default.mergeOptions({
+    iconRetinaUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png',
+    iconUrl:       'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
+    shadowUrl:     'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
+});
 
-// Luxury B&W / Minimalist Map Style
-const defaultMapOptions = {
-    disableDefaultUI: true,
-    zoomControl: true,
-    styles: [
-        {
-            "elementType": "geometry",
-            "stylers": [{ "color": "#f5f5f5" }]
-        },
-        {
-            "elementType": "labels.icon",
-            "stylers": [{ "visibility": "off" }]
-        },
-        {
-            "elementType": "labels.text.fill",
-            "stylers": [{ "color": "#616161" }]
-        },
-        {
-            "elementType": "labels.text.stroke",
-            "stylers": [{ "color": "#f5f5f5" }]
-        },
-        {
-            "featureType": "administrative.land_parcel",
-            "elementType": "labels.text.fill",
-            "stylers": [{ "color": "#bdbdbd" }]
-        },
-        {
-            "featureType": "poi",
-            "elementType": "geometry",
-            "stylers": [{ "color": "#eeeeee" }]
-        },
-        {
-            "featureType": "poi",
-            "elementType": "labels.text.fill",
-            "stylers": [{ "color": "#757575" }]
-        },
-        {
-            "featureType": "poi.park",
-            "elementType": "geometry",
-            "stylers": [{ "color": "#e5e5e5" }]
-        },
-        {
-            "featureType": "poi.park",
-            "elementType": "labels.text.fill",
-            "stylers": [{ "color": "#9e9e9e" }]
-        },
-        {
-            "featureType": "road",
-            "elementType": "geometry",
-            "stylers": [{ "color": "#ffffff" }]
-        },
-        {
-            "featureType": "road.arterial",
-            "elementType": "labels.text.fill",
-            "stylers": [{ "color": "#757575" }]
-        },
-        {
-            "featureType": "road.highway",
-            "elementType": "geometry",
-            "stylers": [{ "color": "#dadada" }]
-        },
-        {
-            "featureType": "road.highway",
-            "elementType": "labels.text.fill",
-            "stylers": [{ "color": "#616161" }]
-        },
-        {
-            "featureType": "road.local",
-            "elementType": "labels.text.fill",
-            "stylers": [{ "color": "#9e9e9e" }]
-        },
-        {
-            "featureType": "transit.line",
-            "elementType": "geometry",
-            "stylers": [{ "color": "#e5e5e5" }]
-        },
-        {
-            "featureType": "transit.station",
-            "elementType": "geometry",
-            "stylers": [{ "color": "#eeeeee" }]
-        },
-        {
-            "featureType": "water",
-            "elementType": "geometry",
-            "stylers": [{ "color": "#c9c9c9" }]
-        },
-        {
-            "featureType": "water",
-            "elementType": "labels.text.fill",
-            "stylers": [{ "color": "#9e9e9e" }]
-        }
-    ]
-};
+// Custom elegant pin for Villa Zuri
+const villaIcon = L.divIcon({
+    className: '',
+    html: `
+        <div style="
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            filter: drop-shadow(0 4px 12px rgba(0,0,0,0.35));
+        ">
+            <div style="
+                background: #1a1a1a;
+                color: #c8a96e;
+                font-family: 'Cantata One', Georgia, serif;
+                font-size: 11px;
+                font-weight: 600;
+                letter-spacing: 0.08em;
+                white-space: nowrap;
+                padding: 5px 10px;
+                border-radius: 4px;
+                box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+                border: 1px solid #c8a96e55;
+            ">VILLA ZURI</div>
+            <div style="
+                width: 2px;
+                height: 10px;
+                background: #1a1a1a;
+            "></div>
+            <div style="
+                width: 10px;
+                height: 10px;
+                background: #c8a96e;
+                border-radius: 50%;
+                border: 2px solid #1a1a1a;
+            "></div>
+        </div>
+    `,
+    iconAnchor: [40, 48],
+    popupAnchor: [0, -50],
+});
 
-const LocationMap = ({ center, zoom = 14 }) => {
-    // Falls back to a placeholder loading state if no key is present ultimately
-    // But we need to supply *some* string to avoid immediate crash if env is missing
-    const apiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY || "";
-
-    const { isLoaded, loadError } = useJsApiLoader({
-        id: 'google-map-script',
-        googleMapsApiKey: apiKey
-    });
-
-    const options = useMemo(() => defaultMapOptions, []);
-
-    if (loadError) {
-        return (
-            <div style={{
-                width: '100%',
-                height: '100%',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                background: '#eee',
-                color: '#666',
-                fontFamily: 'sans-serif',
-                textAlign: 'center',
-                padding: '20px'
-            }}>
-                <div>
-                    <p>Map cannot be loaded right now.</p>
-                    <small>Check API Key configuration.</small>
-                </div>
-            </div>
-        );
-    }
-
-    if (!isLoaded) {
-        return (
-            <div style={{ width: '100%', height: '100%', background: '#eee' }} />
-        );
-    }
-
+const LocationMap = ({ center, zoom = 15 }) => {
     return (
-        <GoogleMap
-            mapContainerStyle={containerStyle}
-            center={center}
+        <MapContainer
+            center={[center.lat, center.lng]}
             zoom={zoom}
-            options={options}
+            style={{ width: '100%', height: '100%', borderRadius: 'inherit' }}
+            zoomControl={true}
+            scrollWheelZoom={false}
+            attributionControl={true}
         >
-            <Marker position={center} title="Villa Zuri" />
-        </GoogleMap>
+            {/* OpenStreetMap tile layer — free, no API key */}
+            <TileLayer
+                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                attribution='&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a> contributors'
+                maxZoom={19}
+            />
+
+            <Marker position={[center.lat, center.lng]} icon={villaIcon}>
+                <Popup>
+                    <div style={{
+                        fontFamily: "'Cantata One', Georgia, serif",
+                        textAlign: 'center',
+                        padding: '4px 2px',
+                        minWidth: '140px',
+                    }}>
+                        <strong style={{ fontSize: '13px', color: '#1a1a1a', display: 'block', marginBottom: '4px' }}>
+                            Villa Zuri
+                        </strong>
+                        <span style={{ fontSize: '11px', color: '#666', lineHeight: '1.5' }}>
+                            Papa Remo Village<br />Watamu, Kenya
+                        </span>
+                        <br />
+                        <a
+                            href="https://www.openstreetmap.org/?mlat=-3.3533&mlon=40.0158#map=15/-3.3533/40.0158"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            style={{ fontSize: '11px', color: '#c8a96e', marginTop: '6px', display: 'inline-block' }}
+                        >
+                            Open in Maps ↗
+                        </a>
+                    </div>
+                </Popup>
+            </Marker>
+        </MapContainer>
     );
 };
 
