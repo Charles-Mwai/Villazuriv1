@@ -6,11 +6,16 @@ const Hero = () => {
     const [currentImageIndex, setCurrentImageIndex] = React.useState(0);
 
     const images = [
-        "/villa pics/IMG_5490-cmpr.jpg",
-        "/villa pics/IMG_5491-cmpr.jpg",
-        "/WhatsApp Image 2026-01-08 at 12.21.13.jpeg",
-        "/villa pics/IMG_5541-cmpr.jpg",
-        "/villa pics/WhatsApp Image 2026-01-07 at 13.16.51.jpg"
+        "/HERO/DJI_0669.jpg",
+        "/HERO/DJI_0674.jpg",
+        "/HERO/DJI_0689.jpg",
+        "/HERO/DJI_0690.jpg",
+        "/HERO/IMG_9215.jpg",
+        "/HERO/IMG_9217.jpg",
+        "/HERO/IMG_9224.jpg",
+        "/HERO/IMG_9229.jpg",
+        "/HERO/IMG_9282.jpg",
+        "/HERO/IMG_9371.jpg"
     ];
 
     React.useEffect(() => {

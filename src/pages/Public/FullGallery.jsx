@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { X, ChevronLeft, ChevronRight, Maximize2, Play } from 'lucide-react';
 import RevealOnScroll from '../../components/RevealOnScroll';
 import Navbar from '../../components/Navbar';
@@ -6,73 +6,118 @@ import Footer from '../../components/Footer';
 import { useBooking } from '../../context/BookingContext';
 import './FullGallery.css';
 
+const gallerySections = [
+    {
+        label: 'Living Room',
+        images: [
+            { src: '/Archive (3)/LIVING/IMG_9204.jpg', size: 'big' },
+            { src: '/Archive (3)/LIVING/IMG_9206.jpg', size: 'tall' },
+            { src: '/Archive (3)/LIVING/IMG_9210.jpg', size: 'normal' },
+            { src: '/Archive (3)/LIVING/IMG_9349.jpg', size: 'wide' },
+        ]
+    },
+    {
+        label: 'Bedroom',
+        images: [
+            { src: '/Archive (3)/BEDROOM/IMG_9244.jpg', size: 'wide' },
+            { src: '/Archive (3)/BEDROOM/IMG_9250.jpg', size: 'tall' },
+            { src: '/Archive (3)/BEDROOM/IMG_9340.jpg', size: 'normal' },
+            { src: '/Archive (3)/BEDROOM/IMG_9341.jpg', size: 'big' },
+        ]
+    },
+    {
+        label: 'Bathroom',
+        images: [
+            { src: '/Archive (3)/BATHROOM/IMG_9239.jpg', size: 'tall' },
+            { src: '/Archive (3)/BATHROOM/IMG_9311.jpg', size: 'normal' },
+            { src: '/Archive (3)/BATHROOM/IMG_9334.jpg', size: 'wide' },
+            { src: '/Archive (3)/BATHROOM/IMG_9336.jpg', size: 'big' },
+        ]
+    },
+    {
+        label: 'Kitchen',
+        images: [
+            { src: '/Archive (3)/KITCHEN/IMG_9211.jpg', size: 'big' },
+            { src: '/Archive (3)/KITCHEN/IMG_9292.jpg', size: 'normal' },
+            { src: '/Archive (3)/KITCHEN/IMG_9300.jpg', size: 'tall' },
+            { src: '/Archive (3)/KITCHEN/IMG_9301.jpg', size: 'wide' },
+        ]
+    },
+    {
+        label: 'Terrace',
+        images: [
+            { src: '/Archive (3)/TERRACE/IMG_5541-cmpr.jpg', size: 'wide' },
+            { src: '/Archive (3)/TERRACE/IMG_9383.jpg', size: 'big' },
+            { src: '/Archive (3)/TERRACE/IMG_9389.jpg', size: 'tall' },
+            { src: '/Archive (3)/TERRACE/IMG_9399.jpg', size: 'normal' },
+        ]
+    },
+    {
+        label: 'Green',
+        images: [
+            { src: '/Archive (3)/GREEN/DJI_0671.jpg', size: 'big' },
+            { src: '/Archive (3)/GREEN/IMG_9226.jpg', size: 'tall' },
+            { src: '/Archive (3)/GREEN/IMG_9359.jpg', size: 'wide' },
+            { src: '/Archive (3)/GREEN/IMG_9362.jpg', size: 'normal' },
+        ]
+    },
+    {
+        label: 'Decor',
+        images: [
+            { src: '/Archive (3)/DECOR/IMG_9231.jpg', size: 'normal' },
+            { src: '/Archive (3)/DECOR/IMG_9235.jpg', size: 'wide' },
+            { src: '/Archive (3)/DECOR/IMG_9295.jpg', size: 'tall' },
+            { src: '/Archive (3)/DECOR/IMG_9408.jpg', size: 'big' },
+        ]
+    },
+];
 
+const videos = [
+    { src: 'WhatsApp Video 2026-02-01 at 18.14.15.mp4', size: 'wide', type: 'video' },
+    { src: 'WhatsApp Video 2026-02-01 at 18.14.16.mp4', size: 'normal', type: 'video' },
+    { src: 'WhatsApp Video 2026-02-04.mp4', size: 'normal', type: 'video' },
+];
 
 const FullGallery = () => {
-    const [images, setImages] = useState([]);
-    const [videos, setVideos] = useState([]);
-    const [allMedia, setAllMedia] = useState([]);
     const [lightboxOpen, setLightboxOpen] = useState(false);
-    const [currentImageIndex, setCurrentImageIndex] = useState(0);
+    const [currentIndex, setCurrentIndex] = useState(0);
     const { openBooking } = useBooking();
 
     // Swipe handlers
     const [touchStart, setTouchStart] = useState(null);
     const [touchEnd, setTouchEnd] = useState(null);
-
-    // the required distance between touchStart and touchEnd to be considered a swipe
     const minSwipeDistance = 50;
 
     const onTouchStart = (e) => {
-        setTouchEnd(null); // otherwise the swipe is fired even with very small hacks
+        setTouchEnd(null);
         setTouchStart(e.targetTouches[0].clientX);
     };
-
     const onTouchMove = (e) => setTouchEnd(e.targetTouches[0].clientX);
-
     const onTouchEnd = () => {
         if (!touchStart || !touchEnd) return;
         const distance = touchStart - touchEnd;
-        const isLeftSwipe = distance > minSwipeDistance;
-        const isRightSwipe = distance < -minSwipeDistance;
-
-        if (isLeftSwipe) {
-            nextImage();
-        } else if (isRightSwipe) {
-            prevImage();
-        }
+        if (distance > minSwipeDistance) nextImage();
+        else if (distance < -minSwipeDistance) prevImage();
     };
 
+    // Flatten all images across all sections into a single list for lightbox
+    const allImages = useMemo(() =>
+        gallerySections.flatMap(section =>
+            section.images.map(img => ({ ...img, type: 'image' }))
+        ), []);
+
+    // Build a flat lightbox media list: all images then all videos
+    const allMedia = useMemo(() => [
+        ...allImages,
+        ...videos,
+    ], [allImages]);
+
     useEffect(() => {
-        const masonryImages = [
-            { src: 'IMG_3819.jpg', size: 'big', type: 'image' },       // 2x2 Feature
-            { src: 'IMG_5485-cmpr.jpg', size: 'tall', type: 'image' }, // 1x2 Vertical
-            { src: 'IMG_5503-cmpr.jpeg', size: 'normal', type: 'image' },
-            { src: 'IMG_5507.jpg', size: 'wide', type: 'image' },      // 2x1 Horizontal
-            { src: 'IMG_5514-cmpr.jpeg', size: 'normal', type: 'image' },
-            { src: 'IMG_5518.jpg', size: 'tall', type: 'image' },
-            { src: 'IMG_5525-cmpr.jpeg', size: 'normal', type: 'image' },
-            { src: 'IMG_5535.jpg', size: 'wide', type: 'image' },
-            { src: 'IMG_5539.jpg', size: 'normal', type: 'image' },
-            { src: 'IMG_5545-cmpr.jpeg', size: 'big', type: 'image' },  // 2x2 Feature
-            { src: 'IMG_5565.jpg', size: 'tall', type: 'image' },
-            { src: 'WhatsApp Image 2026-01-07 at 13.16.51 (1).jpg', size: 'wide', type: 'image' }
-        ];
-
-        const masonryVideos = [
-            { src: 'WhatsApp Video 2026-02-01 at 18.14.15.mp4', size: 'wide', type: 'video' },
-            { src: 'WhatsApp Video 2026-02-01 at 18.14.16.mp4', size: 'normal', type: 'video' },
-            { src: 'WhatsApp Video 2026-02-04.mp4', size: 'normal', type: 'video' }
-        ];
-
-        setImages(masonryImages);
-        setVideos(masonryVideos);
-        setAllMedia([...masonryImages, ...masonryVideos]);
         window.scrollTo(0, 0);
     }, []);
 
-    const openLightbox = (index) => {
-        setCurrentImageIndex(index);
+    const openLightbox = (globalIndex) => {
+        setCurrentIndex(globalIndex);
         setLightboxOpen(true);
         document.body.style.overflow = 'hidden';
     };
@@ -83,11 +128,11 @@ const FullGallery = () => {
     };
 
     const nextImage = () => {
-        setCurrentImageIndex((prev) => (prev + 1) % allMedia.length);
+        setCurrentIndex((prev) => (prev + 1) % allMedia.length);
     };
 
     const prevImage = () => {
-        setCurrentImageIndex((prev) => (prev - 1 + allMedia.length) % allMedia.length);
+        setCurrentIndex((prev) => (prev - 1 + allMedia.length) % allMedia.length);
     };
 
     useEffect(() => {
@@ -99,7 +144,7 @@ const FullGallery = () => {
         };
         window.addEventListener('keydown', handleKeyDown);
         return () => window.removeEventListener('keydown', handleKeyDown);
-    }, [lightboxOpen, images.length]);
+    }, [lightboxOpen, allMedia.length]);
 
     const [activeTab, setActiveTab] = useState('amenities');
 
@@ -131,6 +176,9 @@ const FullGallery = () => {
         }
     };
 
+    // Track running image count across sections for global index calculation
+    let runningIndex = 0;
+
     return (
         <div className="full-gallery-page">
             <Navbar />
@@ -152,7 +200,6 @@ const FullGallery = () => {
                             >
                                 INCLUDES
                             </button>
-
                         </div>
 
                         <div className="tab-content">
@@ -167,58 +214,75 @@ const FullGallery = () => {
 
                 {/* Right Scrollable Content */}
                 <main className="gallery-main-content">
-                    <section className="gallery-masonry-section">
-                        <div className="masonry-grid">
-                            {images.map((image, index) => (
-                                <RevealOnScroll key={`masonry-${image.src}-${index}`}>
-                                    <div
-                                        className={`masonry-item ${image.size}`}
-                                        role="button"
-                                        tabIndex={0}
-                                        onClick={() => openLightbox(index)}
-                                        onKeyDown={(e) => e.key === 'Enter' && openLightbox(index)}
-                                    >
-                                        <img
-                                            src={`/Bento Grid/${image.src}`}
-                                            alt={`Villa Zuri gallery view ${index + 1} - ${image.size} perspective`}
-                                            loading="lazy"
-                                        />
-                                        <div className="masonry-overlay">
-                                            <Maximize2 size={24} color="#fff" strokeWidth={1.5} />
-                                        </div>
-                                    </div>
+                    {gallerySections.map((section) => {
+                        const sectionStartIndex = runningIndex;
+                        runningIndex += section.images.length;
+
+                        return (
+                            <section className="gallery-category-section" key={section.label}>
+                                <RevealOnScroll>
+                                    <h2 className="gallery-section-title">{section.label}</h2>
                                 </RevealOnScroll>
-                            ))}
-                        </div>
-                    </section>
+                                <div className="masonry-grid">
+                                    {section.images.map((image, imgIndex) => {
+                                        const globalIdx = sectionStartIndex + imgIndex;
+                                        return (
+                                            <RevealOnScroll key={`${section.label}-${imgIndex}`}>
+                                                <div
+                                                    className={`masonry-item ${image.size}`}
+                                                    role="button"
+                                                    tabIndex={0}
+                                                    onClick={() => openLightbox(globalIdx)}
+                                                    onKeyDown={(e) => e.key === 'Enter' && openLightbox(globalIdx)}
+                                                >
+                                                    <img
+                                                        src={image.src}
+                                                        alt={`Villa Zuri ${section.label} - view ${imgIndex + 1}`}
+                                                        loading="lazy"
+                                                    />
+                                                    <div className="masonry-overlay">
+                                                        <Maximize2 size={24} color="#fff" strokeWidth={1.5} />
+                                                    </div>
+                                                </div>
+                                            </RevealOnScroll>
+                                        );
+                                    })}
+                                </div>
+                            </section>
+                        );
+                    })}
 
                     {/* Video Section */}
-                    <section className="gallery-masonry-section" style={{ marginTop: '50px' }}>
-
+                    <section className="gallery-category-section">
+                        <RevealOnScroll>
+                            <h2 className="gallery-section-title">Videos</h2>
+                        </RevealOnScroll>
                         <div className="masonry-grid">
-                            {videos.map((video, index) => (
-                                <RevealOnScroll key={`masonry-video-${video.src}-${index}`}>
-                                    <div
-                                        className={`masonry-item ${video.size}`}
-                                        role="button"
-                                        tabIndex={0}
-                                        onClick={() => openLightbox(images.length + index)}
-                                        onKeyDown={(e) => e.key === 'Enter' && openLightbox(images.length + index)}
-                                    >
-                                        <video
-                                            src={`/Videos/${video.src}`}
-                                            alt={`Villa Zuri video ${index + 1}`}
-                                            muted
-                                            loop
-                                            playsInline
-                                            style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
-                                        />
-                                        <div className="masonry-overlay video-overlay">
-                                            <Play size={32} color="#fff" strokeWidth={1.5} fill="#fff" />
+                            {videos.map((video, index) => {
+                                const globalIdx = allImages.length + index;
+                                return (
+                                    <RevealOnScroll key={`video-${index}`}>
+                                        <div
+                                            className={`masonry-item ${video.size}`}
+                                            role="button"
+                                            tabIndex={0}
+                                            onClick={() => openLightbox(globalIdx)}
+                                            onKeyDown={(e) => e.key === 'Enter' && openLightbox(globalIdx)}
+                                        >
+                                            <video
+                                                src={`/Videos/${video.src}`}
+                                                muted
+                                                loop
+                                                playsInline
+                                                style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+                                            />
+                                            <div className="masonry-overlay video-overlay">
+                                                <Play size={32} color="#fff" strokeWidth={1.5} fill="#fff" />
+                                            </div>
                                         </div>
-                                    </div>
-                                </RevealOnScroll>
-                            ))}
+                                    </RevealOnScroll>
+                                );
+                            })}
                         </div>
                     </section>
                 </main>
@@ -243,16 +307,16 @@ const FullGallery = () => {
                         onTouchMove={onTouchMove}
                         onTouchEnd={onTouchEnd}
                     >
-                        {allMedia[currentImageIndex]?.type === 'image' ? (
+                        {allMedia[currentIndex]?.type === 'image' ? (
                             <img
-                                src={`/Bento Grid/${allMedia[currentImageIndex]?.src}`}
-                                alt={`Villa Zuri detailed view ${currentImageIndex + 1}`}
+                                src={allMedia[currentIndex]?.src}
+                                alt={`Villa Zuri detailed view ${currentIndex + 1}`}
                                 className="lightbox-main-img"
                                 draggable="false"
                             />
-                        ) : allMedia[currentImageIndex]?.type === 'video' ? (
+                        ) : allMedia[currentIndex]?.type === 'video' ? (
                             <video
-                                src={`/Videos/${allMedia[currentImageIndex]?.src}`}
+                                src={`/Videos/${allMedia[currentIndex]?.src}`}
                                 className="lightbox-main-img"
                                 controls
                                 autoPlay
@@ -261,7 +325,7 @@ const FullGallery = () => {
                         ) : null}
                         <div className="lightbox-footer">
                             <span className="image-counter">
-                                {currentImageIndex + 1} / {allMedia.length}
+                                {currentIndex + 1} / {allMedia.length}
                             </span>
                         </div>
                     </div>

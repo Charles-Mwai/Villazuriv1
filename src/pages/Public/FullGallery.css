@@ -535,3 +535,38 @@
 
     /* Hide thumbnails on small mobile to save space */
 }
+
+/* Category Section Styling */
+.gallery-category-section {
+    margin-bottom: 70px;
+}
+
+.gallery-section-title {
+    font-family: var(--font-heading) !important;
+    font-size: 0.9rem;
+    font-weight: 400;
+    color: #1a1a1a !important;
+    letter-spacing: 0.02em;
+    text-transform: none;
+    margin-bottom: 24px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    position: relative;
+    line-height: 1.2;
+}
+
+@media (min-width: 1024px) {
+    .gallery-section-title {
+        font-size: 1.2rem;
+    }
+}
+
+.gallery-section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 40px;
+    height: 1px;
+    background-color: #1a1a1a;
+}
