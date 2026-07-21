@@ -93,9 +93,6 @@ const targets = [
 
     // ── Experience page service image ──
     { file: 'IMG_5515-cmpr.jpg', maxW: 1200, quality: 82 },
-
-    // ── Experience hero (set via CSS background-image in ExperiencePage.css) ──
-    { file: 'IMG_5552-cmpr.jpg', maxW: 1920, quality: 78 },
 ];
 
 let totalSavedKB = 0;
