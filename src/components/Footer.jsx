@@ -44,7 +44,7 @@ const Footer = () => {
                     <div className="contact-info">
                         <span>info: stay@villazuri.co.ke</span>
                         <span className="divider-pipe">|</span>
-                        <span>Tel: +254 700 000 000</span>
+                        <span>Tel: +254 722 727560</span>
                     </div>
                 </div>
             </div>
