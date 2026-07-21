@@ -570,3 +570,41 @@
     height: 1px;
     background-color: #1a1a1a;
 }
+
+/* Pool Coming Soon Placeholder */
+.masonry-item.pool-coming-soon {
+    background: linear-gradient(135deg, #0a1628 0%, #0d2240 40%, #0a3a5c 70%, #0d2240 100%);
+    cursor: default;
+    pointer-events: none;
+    position: relative;
+    overflow: hidden;
+    border-radius: 4px;
+}
+
+.masonry-item.pool-coming-soon::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 70%, rgba(14, 165, 233, 0.18) 0%, transparent 70%);
+    animation: poolPulse 3s ease-in-out infinite;
+}
+
+.masonry-item.pool-coming-soon::after {
+    content: '🏊 Photos Coming Soon';
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255, 255, 255, 0.55);
+    font-family: var(--font-body, sans-serif);
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+}
+
+@keyframes poolPulse {
+    0%, 100% { opacity: 0.5; transform: scale(1); }
+    50%       { opacity: 1;   transform: scale(1.08); }
+}

@@ -95,7 +95,7 @@ export default async function handler(request, response) {
                 transactionData.payment_method = data.payment_method;
             } catch (pesapalErr) {
                 console.error('PesaPal API Error:', pesapalErr.message);
-                // Don't throw yet, wait for status logic below
+                throw pesapalErr;
             }
         }
 

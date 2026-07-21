@@ -17,6 +17,8 @@ const MarqueeGallery = () => {
         '/Archive (3)/KITCHEN/IMG_9301.jpg',
         '/Archive (3)/TERRACE/IMG_9383.jpg',
         '/Archive (3)/TERRACE/IMG_9399.jpg',
+        '/Archive (3)/POOL/DJI_0673.jpg',
+        '/Archive (3)/POOL/IMG_9371.jpg',
         '/Archive (3)/GREEN/DJI_0671.jpg',
         '/Archive (3)/DECOR/IMG_9408.jpg',
     ];

@@ -4,21 +4,21 @@ import RevealOnScroll from './RevealOnScroll';
 import Slideshow from './Slideshow';
 
 const interiorImages = [
-    '/Interior pics/IMG_5518-cmpr.jpg',
-    '/Interior pics/IMG_5535.JPG',
-    '/Interior pics/IMG_5507.JPG'
+    '/hliving/IMG_9216.jpg',
+    '/hliving/IMG_9239.jpg',
+    '/hliving/IMG_9340.jpg'
 ];
 
 const exteriorImages = [
-    '/villa pics/IMG_5541-cmpr.jpg',
-    '/villa pics/IMG_5487-cmpr.jpg',
-    '/Exterior pics/IMG_3827-cmpr.jpg'
+    '/play/DJI_0689.jpg',
+    '/play/IMG_9359.jpg',
+    '/play/IMG_9371.jpg'
 ];
 
 const outdoorImages = [
-    '/WhatsApp Image 2026-01-08 at 12.18.55.jpg',
-    '/WhatsApp Image 2026-01-08 at 12.18.55.jpeg',
-    '/IMG_5552-cmpr.jpg'
+    '/relaxation/IMG_9359.jpg',
+    '/relaxation/IMG_9362.jpg',
+    '/relaxation/IMG_9418.jpg'
 ];
 
 const VillaDetails = () => {

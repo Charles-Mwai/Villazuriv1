@@ -53,6 +53,15 @@ const gallerySections = [
         ]
     },
     {
+        label: 'Pool',
+        images: [
+            { src: '/Archive (3)/POOL/DJI_0673.jpg', size: 'big' },
+            { src: '/Archive (3)/POOL/DJI_0674.jpg', size: 'wide' },
+            { src: '/Archive (3)/POOL/DJI_0689.jpg', size: 'tall' },
+            { src: '/Archive (3)/POOL/IMG_9371.jpg', size: 'normal' },
+        ]
+    },
+    {
         label: 'Green',
         images: [
             { src: '/Archive (3)/GREEN/DJI_0671.jpg', size: 'big' },
@@ -239,6 +248,14 @@ const FullGallery = () => {
                                                         src={image.src}
                                                         alt={`Villa Zuri ${section.label} - view ${imgIndex + 1}`}
                                                         loading="lazy"
+                                                        onError={(e) => {
+                                                            // Hide broken images gracefully (e.g. pool photos not yet uploaded)
+                                                            const wrapper = e.target.closest('.masonry-item');
+                                                            if (wrapper) {
+                                                                wrapper.classList.add('pool-coming-soon');
+                                                                e.target.style.display = 'none';
+                                                            }
+                                                        }}
                                                     />
                                                     <div className="masonry-overlay">
                                                         <Maximize2 size={24} color="#fff" strokeWidth={1.5} />

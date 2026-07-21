@@ -45,17 +45,35 @@ const targets = [
     { file: 'Archive (3)/DECOR/IMG_9295.jpg',       maxW: 1800, quality: 82 },
     { file: 'Archive (3)/DECOR/IMG_9408.jpg',       maxW: 1800, quality: 82 },
 
+    // ── Pool section ──
+    { file: 'Archive (3)/POOL/DJI_0673.jpg',        maxW: 1800, quality: 80 },
+    { file: 'Archive (3)/POOL/DJI_0674.jpg',        maxW: 1800, quality: 80 },
+    { file: 'Archive (3)/POOL/DJI_0689.jpg',        maxW: 1800, quality: 80 },
+    { file: 'Archive (3)/POOL/IMG_9371.jpg',        maxW: 1800, quality: 82 },
+
     // ── Hero slideshow (background-image, full-bleed) ──
-    { file: 'HERO/DJI_0669.jpg',   maxW: 1920, quality: 78 },
-    { file: 'HERO/DJI_0674.jpg',   maxW: 1920, quality: 78 },
-    { file: 'HERO/DJI_0689.jpg',   maxW: 1920, quality: 78 },
-    { file: 'HERO/DJI_0690.jpg',   maxW: 1920, quality: 78 },
-    { file: 'HERO/IMG_9215.jpg',   maxW: 1920, quality: 78 },
-    { file: 'HERO/IMG_9217.jpg',   maxW: 1920, quality: 78 },
-    { file: 'HERO/IMG_9224.jpg',   maxW: 1920, quality: 78 },
-    { file: 'HERO/IMG_9229.jpg',   maxW: 1920, quality: 78 },
-    { file: 'HERO/IMG_9282.jpg',   maxW: 1920, quality: 78 },
-    { file: 'HERO/IMG_9371.jpg',   maxW: 1920, quality: 78 },
+    { file: 'Archive (3)/HEROO/DJI_0674.jpg',   maxW: 1920, quality: 78 },
+    { file: 'Archive (3)/HEROO/DJI_0689.jpg',   maxW: 1920, quality: 78 },
+    { file: 'Archive (3)/HEROO/IMG_9215.jpg',   maxW: 1920, quality: 78 },
+    { file: 'Archive (3)/HEROO/IMG_9217.jpg',   maxW: 1920, quality: 78 },
+    { file: 'Archive (3)/HEROO/IMG_9224.jpg',   maxW: 1920, quality: 78 },
+    { file: 'Archive (3)/HEROO/IMG_9229.jpg',   maxW: 1920, quality: 78 },
+    { file: 'Archive (3)/HEROO/IMG_9282.jpg',   maxW: 1920, quality: 78 },
+
+    // ── Homepage Living section ──
+    { file: 'hliving/IMG_9216.jpg',             maxW: 1400, quality: 82 },
+    { file: 'hliving/IMG_9239.jpg',             maxW: 1400, quality: 82 },
+    { file: 'hliving/IMG_9340.jpg',             maxW: 1400, quality: 82 },
+
+    // ── Homepage Play section ──
+    { file: 'play/DJI_0689.jpg',                maxW: 1400, quality: 82 },
+    { file: 'play/IMG_9359.jpg',                maxW: 1400, quality: 82 },
+    { file: 'play/IMG_9371.jpg',                maxW: 1400, quality: 82 },
+
+    // ── Homepage Relaxation section ──
+    { file: 'relaxation/IMG_9359.jpg',          maxW: 1400, quality: 82 },
+    { file: 'relaxation/IMG_9362.jpg',          maxW: 1400, quality: 82 },
+    { file: 'relaxation/IMG_9418.jpg',          maxW: 1400, quality: 82 },
 
     // ── Activities section ──
     { file: 'Activities/activity-1.jpg', maxW: 1200, quality: 82 },
